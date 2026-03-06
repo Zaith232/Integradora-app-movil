@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "305627099576",
+    "firebase_url": "https://armonihz-8a162-default-rtdb.firebaseio.com",
+    "project_id": "armonihz-8a162",
+    "storage_bucket": "armonihz-8a162.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:305627099576:android:8836d4bcc3409effe75f4d",
+        "android_client_info": {
+          "package_name": "com.armonihz.app.movile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "305627099576-eo9l8tlnp7si63e26pmh32r5dog5lq9f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.armonihz.app.movile",
+            "certificate_hash": "812c1fc0c9b203999d9a3e3d4defd359df2ef2d6"
+          }
+        },
+        {
+          "client_id": "305627099576-f57j7faoo5hc53472i2ok4j44kfjfnvb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMY4ktqECHtxWRqHVOiRsmMeIBU7hipC4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "305627099576-34s477m0m810d2skkhvnvu6daf3lpfas.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

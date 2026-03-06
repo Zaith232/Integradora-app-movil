@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+
+    <!-- Marca -->
+    <color name="md_primary">#0D9488</color>
+    <color name="md_onPrimary">#FFFFFF</color>
+
+    <!-- Light -->
+    <color name="md_background">#F8FAFC</color>
+    <color name="md_surface">#FFFFFF</color>
+    <color name="md_onSurface">#1E293B</color>
+    <color name="md_onSurfaceVariant">#64748B</color>
+    <color name="md_outline">#E2E8F0</color>
+    <color name="md_error">#EF4444</color>
+    <color name="loader_scrim">#80000000</color>
+
+
+</resources>
