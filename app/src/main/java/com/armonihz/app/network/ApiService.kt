@@ -7,6 +7,8 @@ import com.armonihz.app.network.model.ClientProfileResponse
 import com.armonihz.app.network.model.UploadPhotoResponse
 import com.armonihz.app.network.model.GenericResponse
 import com.armonihz.app.network.model.DeletePhotoResponse
+import com.armonihz.app.network.model.EventRequest
+import com.armonihz.app.network.model.EventResponse
 import com.armonihz.app.network.model.ProfileResponse
 import com.armonihz.app.network.model.SyncGooglePhotoRequest
 
@@ -52,4 +54,17 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Body data: Map<String, String>
     ): Response<Unit>
+
+    // Añade esto a tu ApiService.kt
+
+    @POST("api/v1/client/events")
+    suspend fun createEvent(
+        @Header("Authorization") token: String,
+        @Body request: EventRequest
+    ): Response<GenericResponse>
+
+    @GET("api/v1/client/events")
+    suspend fun getMyEvents(
+        @Header("Authorization") token: String
+    ): Response<List<EventResponse>>
 }
