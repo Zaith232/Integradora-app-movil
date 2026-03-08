@@ -35,11 +35,28 @@ class MyEventsFragment : Fragment() {
 
         setupRecyclerView()
         setupListeners()
-        loadMyEvents() // ⬅️ Llamamos a la API al abrir la pantalla
+        loadMyEvents() // Llamamos a la API al abrir la pantalla
     }
 
     private fun setupRecyclerView() {
-        eventAdapter = EventAdapter(emptyList())
+        eventAdapter = EventAdapter(
+            eventsList = emptyList(),
+            onEventClick = { eventId ->
+                val fragment = EventProposalsFragment.newInstance(eventId)
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainer, fragment)
+                    .addToBackStack(null)
+                    .commit()
+            },
+            onEditClick = { event ->
+                val fragment = EditEventFragment.newInstance(event)
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainer, fragment)
+                    .addToBackStack(null)
+                    .commit()
+            }
+        )
+
         binding.rvEvents.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = eventAdapter
@@ -54,12 +71,19 @@ class MyEventsFragment : Fragment() {
         }
 
         user.getIdToken(true).addOnSuccessListener { result ->
+            // ⬅️ VALIDACIÓN: Evita crash si sales del fragmento rápido
+            if (!isAdded) return@addOnSuccessListener
+
             val token = "Bearer ${result.token}"
             val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
 
             lifecycleScope.launch {
                 try {
                     val response = api.getMyEvents(token)
+
+                    // ⬅️ VALIDACIÓN
+                    if (!isAdded) return@launch
+
                     if (response.isSuccessful && response.body() != null) {
                         eventAdapter.updateData(response.body()!!)
                     } else {
@@ -67,10 +91,14 @@ class MyEventsFragment : Fragment() {
                         Toast.makeText(context, "No se pudieron cargar los eventos", Toast.LENGTH_SHORT).show()
                     }
                 } catch (e: Exception) {
+                    // ⬅️ VALIDACIÓN
+                    if (!isAdded) return@launch
                     Log.e("API_ERROR", "Excepción: ${e.message}")
                 }
             }
         }.addOnFailureListener {
+            // ⬅️ VALIDACIÓN
+            if (!isAdded) return@addOnFailureListener
             Toast.makeText(context, "Error de autenticación", Toast.LENGTH_SHORT).show()
         }
     }

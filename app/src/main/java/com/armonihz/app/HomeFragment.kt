@@ -1,55 +1,124 @@
 package com.armonihz.app
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import androidx.cardview.widget.CardView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.armonihz.app.databinding.FragmentHomeBinding
+import com.armonihz.app.network.ApiService
+import com.armonihz.app.network.RetrofitClient
+import com.armonihz.app.network.model.MusicianProfileDetailResponse
+import com.armonihz.app.ui.adapters.MusicianAdapter
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
+
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
+
+    private lateinit var musicianAdapter: MusicianAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-        val cardMariachi = view.findViewById<CardView>(R.id.cardMariachi)
-        cardMariachi.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, MusicianProfileFragment())
-                .addToBackStack(null)
-                .commit()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setupRecyclerView()
+        setupNavigation()
+        loadMusiciansFromApi()
+    }
+
+    private fun setupRecyclerView() {
+        musicianAdapter = MusicianAdapter(
+            musiciansList = emptyList(),
+            onMusicianClick = { musicianId ->
+                val fragment = MusicianProfileFragment.newInstance(musicianId)
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainer, fragment)
+                    .addToBackStack(null)
+                    .commit()
+            }
+        )
+
+        binding.rvMusicians.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = musicianAdapter
         }
-        val searchInput = view.findViewById<EditText>(R.id.searchInput)
-        searchInput.setOnClickListener {
+    }
+
+    private fun loadMusiciansFromApi() {
+        val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
+
+        lifecycleScope.launch {
+            try {
+                // 1. Llamamos a la API (ahora devuelve un JsonObject genérico)
+                val response = api.getAllMusicians()
+
+                if (!isAdded) return@launch
+
+                if (response.isSuccessful && response.body() != null) {
+
+                    val jsonResponse = response.body()!!
+
+                    // 2. Extraemos el arreglo 'data' manualmente sorteando la paginación de Laravel
+                    // Entramos al primer "data" (objeto) y luego al segundo "data" (arreglo)
+                    val dataObject = jsonResponse.getAsJsonObject("data")
+                    val musiciansArray = dataObject.getAsJsonArray("data")
+
+                    // 3. Convertimos ese arreglo JSON a nuestra lista de Kotlin
+                    val gson = com.google.gson.Gson()
+                    val type = object : com.google.gson.reflect.TypeToken<List<MusicianProfileDetailResponse>>() {}.type
+                    val musiciansList: List<MusicianProfileDetailResponse> = gson.fromJson(musiciansArray, type)
+
+                    // 4. Actualizamos el adaptador
+                    musicianAdapter.updateData(musiciansList)
+
+                } else {
+                    Log.e("API_ERROR", "Error al cargar músicos: ${response.code()}")
+                    Toast.makeText(context, "No se pudieron cargar los músicos", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                if (!isAdded) return@launch
+                Log.e("API_ERROR", "Excepción: ${e.message}")
+                Toast.makeText(context, "Error de conexión", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun setupNavigation() {
+        binding.searchInput.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainer, ResultsFragment())
                 .addToBackStack(null)
                 .commit()
         }
 
-        view.findViewById<Button>(R.id.btnHome).setOnClickListener { }
-        view.findViewById<Button>(R.id.btnFavorite).setOnClickListener {
-            open(FavoritesFragment())
-        }
-        view.findViewById<Button>(R.id.btnProfile).setOnClickListener {
-            open(UserProfileFragment())
-        }
-        view.findViewById<Button>(R.id.btnEvent).setOnClickListener {
-            open(MyEventsFragment())
-        }
-
-        return view
+        binding.btnHome.setOnClickListener { }
+        binding.btnFavorite.setOnClickListener { open(FavoritesFragment()) }
+        binding.btnProfile.setOnClickListener { open(UserProfileFragment()) }
+        binding.btnEvent.setOnClickListener { open(MyEventsFragment()) }
     }
 
     private fun open(fragment: Fragment) {
         parentFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainer, fragment)
             .commit()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
