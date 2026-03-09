@@ -1,167 +1,208 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:colorBackground">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="24dp">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Editar Evento"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="?attr/colorOnSurface" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Actualiza la información de tu evento"
-            android:textSize="14sp"
-            android:textColor="?attr/colorOnSurfaceVariant"
-            android:layout_marginBottom="24dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Título"
-            android:textStyle="bold"
-            android:textColor="?attr/colorOnSurface"
-            android:layout_marginBottom="8dp"/>
-
-        <EditText
-            android:id="@+id/etTitulo"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="Nombre del evento"
-            android:paddingHorizontal="16dp"
-            android:background="@drawable/edittext_background"
-            android:textColor="?attr/colorOnSurface"
-            android:layout_marginBottom="16dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="¿Qué grupo buscas?"
-            android:textStyle="bold"
-            android:textColor="?attr/colorOnSurface"
-            android:layout_marginBottom="8dp"/>
+            android:orientation="vertical"
+            android:padding="24dp">
 
-        <Spinner
-            android:id="@+id/spinnerMusicType"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/edittext_background"
-            android:layout_marginBottom="16dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Fecha del evento"
-            android:textStyle="bold"
-            android:textColor="?attr/colorOnSurface"
-            android:layout_marginBottom="8dp"/>
+                <ImageView
+                    android:id="@+id/btnBackEditEvent"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@android:drawable/ic_menu_revert"
+                    app:tint="?attr/colorOnSurfaceVariant" />
 
-        <EditText
-            android:id="@+id/etFecha"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="Selecciona una fecha"
-            android:focusable="false"
-            android:clickable="true"
-            android:paddingHorizontal="16dp"
-            android:background="@drawable/edittext_background"
-            android:textColor="?attr/colorOnSurface"
-            android:layout_marginBottom="16dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="Editar Evento"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Duración del evento"
-            android:textStyle="bold"
-            android:textColor="?attr/colorOnSurface"
-            android:layout_marginBottom="8dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:text="Actualiza la información de tu evento"
+                android:textSize="14sp"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:layout_marginBottom="24dp"/>
 
-        <EditText
-            android:id="@+id/etDuracion"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="Ej. 7:30 a 10:00"
-            android:paddingHorizontal="16dp"
-            android:background="@drawable/edittext_background"
-            android:textColor="?attr/colorOnSurface"
-            android:layout_marginBottom="16dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Título"
+                android:textStyle="bold"
+                android:textColor="?attr/colorOnSurface"
+                android:layout_marginBottom="8dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ubicación del evento"
-            android:textStyle="bold"
-            android:textColor="?attr/colorOnSurface"
-            android:layout_marginBottom="8dp"/>
+            <EditText
+                android:id="@+id/etTitulo"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Nombre del evento"
+                android:paddingHorizontal="16dp"
+                android:background="@drawable/edittext_background"
+                android:textColor="?attr/colorOnSurface"
+                android:inputType="textCapSentences"
+                android:maxLength="50"
+                android:layout_marginBottom="16dp"/>
 
-        <EditText
-            android:id="@+id/etLocation"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="Ej. Tehuacán, Puebla"
-            android:paddingHorizontal="16dp"
-            android:background="@drawable/edittext_background"
-            android:textColor="?attr/colorOnSurface"
-            android:layout_marginBottom="16dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¿Qué grupo buscas?"
+                android:textStyle="bold"
+                android:textColor="?attr/colorOnSurface"
+                android:layout_marginBottom="8dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Descripción del evento"
-            android:textStyle="bold"
-            android:textColor="?attr/colorOnSurface"
-            android:layout_marginBottom="8dp"/>
+            <Spinner
+                android:id="@+id/spinnerMusicType"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/edittext_background"
+                android:layout_marginBottom="16dp"/>
 
-        <EditText
-            android:id="@+id/etDescription"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="Descripción"
-            android:paddingHorizontal="16dp"
-            android:background="@drawable/edittext_background"
-            android:textColor="?attr/colorOnSurface"
-            android:layout_marginBottom="16dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fecha del evento"
+                android:textStyle="bold"
+                android:textColor="?attr/colorOnSurface"
+                android:layout_marginBottom="8dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Presupuesto máximo"
-            android:textStyle="bold"
-            android:textColor="?attr/colorOnSurface"
-            android:layout_marginBottom="8dp"/>
+            <EditText
+                android:id="@+id/etFecha"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Selecciona una fecha"
+                android:focusable="false"
+                android:clickable="true"
+                android:paddingHorizontal="16dp"
+                android:background="@drawable/edittext_background"
+                android:textColor="?attr/colorOnSurface"
+                android:drawableEnd="@drawable/ic_calendar"
+                android:drawablePadding="8dp"
+                android:layout_marginBottom="16dp"/>
 
-        <EditText
-            android:id="@+id/etBudget"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="$ 0.00"
-            android:inputType="numberDecimal"
-            android:paddingHorizontal="16dp"
-            android:background="@drawable/edittext_background"
-            android:textColor="?attr/colorOnSurface"
-            android:layout_marginBottom="24dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Duración del evento"
+                android:textStyle="bold"
+                android:textColor="?attr/colorOnSurface"
+                android:layout_marginBottom="8dp"/>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnSaveEvent"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:text="Guardar Cambios"
-            android:textAllCaps="false"
-            android:textSize="16sp"
-            android:backgroundTint="?attr/colorPrimary"
-            app:cornerRadius="12dp" />
+            <EditText
+                android:id="@+id/etDuracion"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Ej. 14:00 a 19:00"
+                android:focusable="false"
+                android:clickable="true"
+                android:paddingHorizontal="16dp"
+                android:background="@drawable/edittext_background"
+                android:textColor="?attr/colorOnSurface"
+                android:drawableEnd="@drawable/ic_clock"
+                android:drawablePadding="8dp"
+                android:layout_marginBottom="16dp"/>
 
-    </LinearLayout>
-</ScrollView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ubicación del evento"
+                android:textStyle="bold"
+                android:textColor="?attr/colorOnSurface"
+                android:layout_marginBottom="8dp"/>
+
+            <AutoCompleteTextView
+                android:id="@+id/etLocation"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Ej. Tehuacán, Puebla"
+                android:paddingHorizontal="16dp"
+                android:background="@drawable/edittext_background"
+                android:textColor="?attr/colorOnSurface"
+                android:completionThreshold="1"
+                android:inputType="textCapWords"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Descripción del evento"
+                android:textStyle="bold"
+                android:textColor="?attr/colorOnSurface"
+                android:layout_marginBottom="8dp"/>
+
+            <EditText
+                android:id="@+id/etDescription"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Descripción"
+                android:paddingHorizontal="16dp"
+                android:background="@drawable/edittext_background"
+                android:textColor="?attr/colorOnSurface"
+                android:inputType="textCapSentences|textMultiLine"
+                android:maxLength="300"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Presupuesto máximo"
+                android:textStyle="bold"
+                android:textColor="?attr/colorOnSurface"
+                android:layout_marginBottom="8dp"/>
+
+            <EditText
+                android:id="@+id/etBudget"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="$ 0.00"
+                android:inputType="numberDecimal"
+                android:paddingHorizontal="16dp"
+                android:background="@drawable/edittext_background"
+                android:textColor="?attr/colorOnSurface"
+                android:layout_marginBottom="24dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSaveEvent"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="Guardar Cambios"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:backgroundTint="?attr/colorPrimary"
+                app:cornerRadius="12dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <include
+        android:id="@+id/loader"
+        layout="@layout/view_loader"
+        android:visibility="gone" />
+
+</FrameLayout>

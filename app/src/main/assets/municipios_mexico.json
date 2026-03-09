@@ -1,0 +1,9914 @@
+[
+  {
+    "municipio": "Aguascalientes",
+    "estado": "Aguascalientes"
+  },
+  {
+    "municipio": "Asientos",
+    "estado": "Aguascalientes"
+  },
+  {
+    "municipio": "Calvillo",
+    "estado": "Aguascalientes"
+  },
+  {
+    "municipio": "Cosío",
+    "estado": "Aguascalientes"
+  },
+  {
+    "municipio": "Jesús María",
+    "estado": "Aguascalientes"
+  },
+  {
+    "municipio": "Pabellón de Arteaga",
+    "estado": "Aguascalientes"
+  },
+  {
+    "municipio": "Rincón de Romos",
+    "estado": "Aguascalientes"
+  },
+  {
+    "municipio": "San José de Gracia",
+    "estado": "Aguascalientes"
+  },
+  {
+    "municipio": "Tepezalá",
+    "estado": "Aguascalientes"
+  },
+  {
+    "municipio": "El Llano",
+    "estado": "Aguascalientes"
+  },
+  {
+    "municipio": "San Francisco de los Romo",
+    "estado": "Aguascalientes"
+  },
+  {
+    "municipio": "Ensenada",
+    "estado": "Baja California"
+  },
+  {
+    "municipio": "Mexicali",
+    "estado": "Baja California"
+  },
+  {
+    "municipio": "Tecate",
+    "estado": "Baja California"
+  },
+  {
+    "municipio": "Tijuana",
+    "estado": "Baja California"
+  },
+  {
+    "municipio": "Playas de Rosarito",
+    "estado": "Baja California"
+  },
+  {
+    "municipio": "San Quintín",
+    "estado": "Baja California"
+  },
+  {
+    "municipio": "San Felipe",
+    "estado": "Baja California"
+  },
+  {
+    "municipio": "Comondú",
+    "estado": "Baja California Sur"
+  },
+  {
+    "municipio": "Mulegé",
+    "estado": "Baja California Sur"
+  },
+  {
+    "municipio": "La Paz",
+    "estado": "Baja California Sur"
+  },
+  {
+    "municipio": "Los Cabos",
+    "estado": "Baja California Sur"
+  },
+  {
+    "municipio": "Loreto",
+    "estado": "Baja California Sur"
+  },
+  {
+    "municipio": "Calkiní",
+    "estado": "Campeche"
+  },
+  {
+    "municipio": "Campeche",
+    "estado": "Campeche"
+  },
+  {
+    "municipio": "Carmen",
+    "estado": "Campeche"
+  },
+  {
+    "municipio": "Champotón",
+    "estado": "Campeche"
+  },
+  {
+    "municipio": "Hecelchakán",
+    "estado": "Campeche"
+  },
+  {
+    "municipio": "Hopelchén",
+    "estado": "Campeche"
+  },
+  {
+    "municipio": "Palizada",
+    "estado": "Campeche"
+  },
+  {
+    "municipio": "Tenabo",
+    "estado": "Campeche"
+  },
+  {
+    "municipio": "Escárcega",
+    "estado": "Campeche"
+  },
+  {
+    "municipio": "Calakmul",
+    "estado": "Campeche"
+  },
+  {
+    "municipio": "Candelaria",
+    "estado": "Campeche"
+  },
+  {
+    "municipio": "Seybaplaya",
+    "estado": "Campeche"
+  },
+  {
+    "municipio": "Dzitbalché",
+    "estado": "Campeche"
+  },
+  {
+    "municipio": "Abasolo",
+    "estado": "Coahuila de Zaragoza"
+  },
+  {
+    "municipio": "Acuña",
+    "estado": "Coahuila de Zaragoza"
+  },
+  {
+    "municipio": "Allende",
+    "estado": "Coahuila de Zaragoza"
+  },
+  {
+    "municipio": "Arteaga",
+    "estado": "Coahuila de Zaragoza"
+  },
+  {
+    "municipio": "Candela",
+    "estado": "Coahuila de Zaragoza"
+  },
+  {
+    "municipio": "Castaños",
+    "estado": "Coahuila de Zaragoza"
+  },
+  {
+    "municipio": "Cuatro Ciénegas",
+    "estado": "Coahuila de Zaragoza"
+  },
+  {
+    "municipio": "Escobedo",
+    "estado": "Coahuila de Zaragoza"
+  },
+  {
+    "municipio": "Francisco I. Madero",
+    "estado": "Coahuila de Zaragoza"
+  },
+  {
+    "municipio": "Frontera",
+    "estado": "Coahuila de Zaragoza"
+  },
+  {
+    "municipio": "General Cepeda",
+    "estado": "Coahuila de Zaragoza"
+  },
+  {
+    "municipio": "Guerrero",
+    "estado": "Coahuila de Zaragoza"
+  },
+  {
+    "municipio": "Hidalgo",
+    "estado": "Coahuila de Zaragoza"
+  },
+  {
+    "municipio": "Jiménez",
+    "estado": "Coahuila de Zaragoza"
+  },
+  {
+    "municipio": "Juárez",
+    "estado": "Coahuila de Zaragoza"
+  },
+  {
+    "municipio": "Lamadrid",
+    "estado": "Coahuila de Zaragoza"
+  },
+  {
+    "municipio": "Matamoros",
+    "estado": "Coahuila de Zaragoza"
+  },
+  {
+    "municipio": "Monclova",
+    "estado": "Coahuila de Zaragoza"
+  },
+  {
+    "municipio": "Morelos",
+    "estado": "Coahuila de Zaragoza"
+  },
+  {
+    "municipio": "Múzquiz",
+    "estado": "Coahuila de Zaragoza"
+  },
+  {
+    "municipio": "Nadadores",
+    "estado": "Coahuila de Zaragoza"
+  },
+  {
+    "municipio": "Nava",
+    "estado": "Coahuila de Zaragoza"
+  },
+  {
+    "municipio": "Ocampo",
+    "estado": "Coahuila de Zaragoza"
+  },
+  {
+    "municipio": "Parras",
+    "estado": "Coahuila de Zaragoza"
+  },
+  {
+    "municipio": "Piedras Negras",
+    "estado": "Coahuila de Zaragoza"
+  },
+  {
+    "municipio": "Progreso",
+    "estado": "Coahuila de Zaragoza"
+  },
+  {
+    "municipio": "Ramos Arizpe",
+    "estado": "Coahuila de Zaragoza"
+  },
+  {
+    "municipio": "Sabinas",
+    "estado": "Coahuila de Zaragoza"
+  },
+  {
+    "municipio": "Sacramento",
+    "estado": "Coahuila de Zaragoza"
+  },
+  {
+    "municipio": "Saltillo",
+    "estado": "Coahuila de Zaragoza"
+  },
+  {
+    "municipio": "San Buenaventura",
+    "estado": "Coahuila de Zaragoza"
+  },
+  {
+    "municipio": "San Juan de Sabinas",
+    "estado": "Coahuila de Zaragoza"
+  },
+  {
+    "municipio": "San Pedro",
+    "estado": "Coahuila de Zaragoza"
+  },
+  {
+    "municipio": "Sierra Mojada",
+    "estado": "Coahuila de Zaragoza"
+  },
+  {
+    "municipio": "Torreón",
+    "estado": "Coahuila de Zaragoza"
+  },
+  {
+    "municipio": "Viesca",
+    "estado": "Coahuila de Zaragoza"
+  },
+  {
+    "municipio": "Villa Unión",
+    "estado": "Coahuila de Zaragoza"
+  },
+  {
+    "municipio": "Zaragoza",
+    "estado": "Coahuila de Zaragoza"
+  },
+  {
+    "municipio": "Armería",
+    "estado": "Colima"
+  },
+  {
+    "municipio": "Colima",
+    "estado": "Colima"
+  },
+  {
+    "municipio": "Comala",
+    "estado": "Colima"
+  },
+  {
+    "municipio": "Coquimatlán",
+    "estado": "Colima"
+  },
+  {
+    "municipio": "Cuauhtémoc",
+    "estado": "Colima"
+  },
+  {
+    "municipio": "Ixtlahuacán",
+    "estado": "Colima"
+  },
+  {
+    "municipio": "Manzanillo",
+    "estado": "Colima"
+  },
+  {
+    "municipio": "Minatitlán",
+    "estado": "Colima"
+  },
+  {
+    "municipio": "Tecomán",
+    "estado": "Colima"
+  },
+  {
+    "municipio": "Villa de Álvarez",
+    "estado": "Colima"
+  },
+  {
+    "municipio": "Acacoyagua",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Acala",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Acapetahua",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Altamirano",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Amatán",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Amatenango de la Frontera",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Amatenango del Valle",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Ángel Albino Corzo",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Arriaga",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Bejucal de Ocampo",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Bella Vista",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Berriozábal",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Bochil",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "El Bosque",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Cacahoatán",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Catazajá",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Cintalapa de Figueroa",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Coapilla",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Comitán de Domínguez",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "La Concordia",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Copainalá",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Chalchihuitán",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Chamula",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Chanal",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Chapultenango",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Chenalhó",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Chiapa de Corzo",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Chiapilla",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Chicoasén",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Chicomuselo",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Chilón",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Escuintla",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Francisco León",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Frontera Comalapa",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Frontera Hidalgo",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "La Grandeza",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Huehuetán",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Huixtán",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Huitiupán",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Huixtla",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "La Independencia",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Ixhuatán",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Ixtacomitán",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Ixtapa",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Ixtapangajoya",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Jiquipilas",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Jitotol",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Juárez",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Larráinzar",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "La Libertad",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Mapastepec",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Las Margaritas",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Mazapa de Madero",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Mazatán",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Metapa",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Mitontic",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Motozintla",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Nicolás Ruíz",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Ocosingo",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Ocotepec",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Ocozocoautla de Espinosa",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Ostuacán",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Osumacinta",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Oxchuc",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Palenque",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Pantelhó",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Pantepec",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Pichucalco",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Pijijiapan",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "El Porvenir",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Villa Comaltitlán",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Pueblo Nuevo Solistahuacán",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Rayón",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Reforma",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Las Rosas",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Sabanilla",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Salto de Agua",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "San Cristóbal de las Casas",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "San Fernando",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Siltepec",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Simojovel",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Sitalá",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Socoltenango",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Solosuchiapa",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Soyaló",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Suchiapa",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Suchiate",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Sunuapa",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Tapachula",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Tapalapa",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Tapilula",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Tecpatán",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Tenejapa",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Teopisca",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Tila",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Tonalá",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Totolapa",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "La Trinitaria",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Tumbalá",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Tuxtla Gutiérrez",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Tuxtla Chico",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Tuzantán",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Tzimol",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Unión Juárez",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Venustiano Carranza",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Villa Corzo",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Villaflores",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Yajalón",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "San Lucas",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Zinacantán",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "San Juan Cancuc",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Aldama",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Benemérito de las Américas",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Maravilla Tenejapa",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Marqués de Comillas",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Montecristo de Guerrero",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "San Andrés Duraznal",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Santiago el Pinar",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Capitán Luis Ángel Vidal",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Rincón Chamula San Pedro",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "El Parral",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Emiliano Zapata",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Mezcalapa",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Honduras de la Sierra",
+    "estado": "Chiapas"
+  },
+  {
+    "municipio": "Ahumada",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Aldama",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Allende",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Aquiles Serdán",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Ascensión",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Bachíniva",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Balleza",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Batopilas de Manuel Gómez Morín",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Bocoyna",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Buenaventura",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Camargo",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Carichí",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Casas Grandes",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Coronado",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Coyame del Sotol",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "La Cruz",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Cuauhtémoc",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Cusihuiriachi",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Chihuahua",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Chínipas",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Delicias",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Dr. Belisario Domínguez",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Galeana",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Santa Isabel",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Gómez Farías",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Gran Morelos",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Guachochi",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Guadalupe",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Guadalupe y Calvo",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Guazapares",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Guerrero",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Hidalgo del Parral",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Huejotitán",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Ignacio Zaragoza",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Janos",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Jiménez",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Juárez",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Julimes",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "López",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Madera",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Maguarichi",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Manuel Benavides",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Matachí",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Matamoros",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Meoqui",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Morelos",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Moris",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Namiquipa",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Nonoava",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Nuevo Casas Grandes",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Ocampo",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Ojinaga",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Praxedis G. Guerrero",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Riva Palacio",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Rosales",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Valle del Rosario",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "San Francisco de Borja",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "San Francisco de Conchos",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "San Francisco del Oro",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Santa Bárbara",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Satevó",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Saucillo",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Temósachic",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "El Tule",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Urique",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Uruachi",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Valle de Zaragoza",
+    "estado": "Chihuahua"
+  },
+  {
+    "municipio": "Azcapotzalco",
+    "estado": "Ciudad de México"
+  },
+  {
+    "municipio": "Coyoacán",
+    "estado": "Ciudad de México"
+  },
+  {
+    "municipio": "Cuajimalpa de Morelos",
+    "estado": "Ciudad de México"
+  },
+  {
+    "municipio": "Gustavo A. Madero",
+    "estado": "Ciudad de México"
+  },
+  {
+    "municipio": "Iztacalco",
+    "estado": "Ciudad de México"
+  },
+  {
+    "municipio": "Iztapalapa",
+    "estado": "Ciudad de México"
+  },
+  {
+    "municipio": "La Magdalena Contreras",
+    "estado": "Ciudad de México"
+  },
+  {
+    "municipio": "Milpa Alta",
+    "estado": "Ciudad de México"
+  },
+  {
+    "municipio": "Álvaro Obregón",
+    "estado": "Ciudad de México"
+  },
+  {
+    "municipio": "Tláhuac",
+    "estado": "Ciudad de México"
+  },
+  {
+    "municipio": "Tlalpan",
+    "estado": "Ciudad de México"
+  },
+  {
+    "municipio": "Xochimilco",
+    "estado": "Ciudad de México"
+  },
+  {
+    "municipio": "Benito Juárez",
+    "estado": "Ciudad de México"
+  },
+  {
+    "municipio": "Cuauhtémoc",
+    "estado": "Ciudad de México"
+  },
+  {
+    "municipio": "Miguel Hidalgo",
+    "estado": "Ciudad de México"
+  },
+  {
+    "municipio": "Venustiano Carranza",
+    "estado": "Ciudad de México"
+  },
+  {
+    "municipio": "Canatlán",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "Canelas",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "Coneto de Comonfort",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "Cuencamé",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "Durango",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "General Simón Bolívar",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "Gómez Palacio",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "Guadalupe Victoria",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "Guanaceví",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "Hidalgo",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "Indé",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "Lerdo",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "Mapimí",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "Mezquital",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "Nazas",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "Nombre de Dios",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "Ocampo",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "El Oro",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "Otáez",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "Pánuco de Coronado",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "Peñón Blanco",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "Poanas",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "Pueblo Nuevo",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "Rodeo",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "San Bernardo",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "San Dimas",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "San Juan de Guadalupe",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "San Juan del Río",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "San Luis del Cordero",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "San Pedro del Gallo",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "Santa Clara",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "Santiago Papasquiaro",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "Súchil",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "Tamazula",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "Tepehuanes",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "Tlahualilo",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "Topia",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "Vicente Guerrero",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "Nuevo Ideal",
+    "estado": "Durango"
+  },
+  {
+    "municipio": "Abasolo",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Acámbaro",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "San Miguel de Allende",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Apaseo el Alto",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Apaseo el Grande",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Atarjea",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Celaya",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Manuel Doblado",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Comonfort",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Coroneo",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Cortazar",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Cuerámaro",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Doctor Mora",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Dolores Hidalgo Cuna de la Independencia Nacional",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Guanajuato",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Huanímaro",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Irapuato",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Jaral del Progreso",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Jerécuaro",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "León",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Moroleón",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Ocampo",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Pénjamo",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Pueblo Nuevo",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Purísima del Rincón",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Romita",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Salamanca",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Salvatierra",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "San Diego de la Unión",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "San Felipe",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "San Francisco del Rincón",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "San José de Iturbide",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "San Luis de la Paz",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Santa Catarina",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Santa Cruz de Juventino Rosas",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Santiago Maravatío",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Silao de la Victoria",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Tarandacuao",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Tarimoro",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Tierra Blanca",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Uriangato",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Valle de Santiago",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Victoria",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Villagrán",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Xichú",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Yuriria",
+    "estado": "Guanajuato"
+  },
+  {
+    "municipio": "Acapulco de Juárez",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Ahuacuotzingo",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Ajuchitlán del Progreso",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Alcozauca de Guerrero",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Alpoyeca",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Apaxtla de Castrejón",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Arcelia",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Atenango del Río",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Atlamajalcingo del Monte",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Atlixtac",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Atoyac de Álvarez",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Ayutla de los Libres",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Azoyú",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Benito Juárez",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Buenavista de Cuéllar",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Coahuayutla de José María Izazaga",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Cocula",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Copala",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Copalillo",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Copanatoyac",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Coyuca de Benítez",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Coyuca de Catalán",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Cuajinicuilapa",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Cualác",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Cuautepec",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Cuetzala del Progreso",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Cutzamala de Pinzón",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Chilapa de Álvarez",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Chilpancingo de los Bravo",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Florencio Villarreal",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "General Canuto A. Neri",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "General Heliodoro Castillo",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Huamuxtitlán",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Huitzuco de los Figueroa",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Iguala de la Independencia",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Igualapa",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Ixcateopan de Cuauhtémoc",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Zihuatanejo de Azueta",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Juan R. Escudero",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Leonardo Bravo",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Malinaltepec",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Mártir de Cuilapan",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Metlatónoc",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Mochitlán",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Olinalá",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Ometepec",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Pedro Ascencio Alquisiras",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Petatlán",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Pilcaya",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Pungarabato",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Quechultenango",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "San Luis Acatlán",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "San Marcos",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "San Miguel Totolapan",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Taxco de Alarcón",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Tecoanapa",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Técpan de Galeana",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Teloloapan",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Tepecoacuilco de Trujano",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Tetipac",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Tixtla de Guerrero",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Tlacoachistlahuaca",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Tlacoapa",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Tlalchapa",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Tlalixtaquilla de Maldonado",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Tlapa de Comonfort",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Tlapehuala",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "La Unión de Isidoro Montes de Oca",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Xalpatláhuac",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Xochihuehuetlán",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Xochistlahuaca",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Zapotitlán Tablas",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Zirándaro",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Zitlala",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Eduardo Neri",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Acatepec",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Marquelia",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Cochoapa el Grande",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "José Joaquín de Herrera",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Juchitán",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Iliatenco",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Las Vigas",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Ñuu Savi",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Santa Cruz del Rincón",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "San Nicolás",
+    "estado": "Guerrero"
+  },
+  {
+    "municipio": "Acatlán",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Acaxochitlán",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Actopan",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Agua Blanca de Iturbide",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Ajacuba",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Alfajayucan",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Almoloya",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Apan",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "El Arenal",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Atitalaquia",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Atlapexco",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Atotonilco el Grande",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Atotonilco de Tula",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Calnali",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Cardonal",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Cuautepec de Hinojosa",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Chapantongo",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Chapulhuacán",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Chilcuautla",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Eloxochitlán",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Emiliano Zapata",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Epazoyucan",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Francisco I. Madero",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Huasca de Ocampo",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Huautla",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Huazalingo",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Huehuetla",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Huejutla de Reyes",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Huichapan",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Ixmiquilpan",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Jacala de Ledezma",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Jaltocán",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Juárez Hidalgo",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Lolotla",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Metepec",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "San Agustín Metzquititlán",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Metztitlán",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Mineral del Chico",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Mineral del Monte",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "La Misión",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Mixquiahuala de Juárez",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Molango de Escamilla",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Nicolás Flores",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Nopala de Villagrán",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Omitlán de Juárez",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "San Felipe Orizatlán",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Pacula",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Pachuca de Soto",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Pisaflores",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Progreso de Obregón",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Mineral de la Reforma",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "San Agustín Tlaxiaca",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "San Bartolo Tutotepec",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "San Salvador",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Santiago de Anaya",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Santiago Tulantepec de Lugo Guerrero",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Singuilucan",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Tasquillo",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Tecozautla",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Tenango de Doria",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Tepeapulco",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Tepehuacán de Guerrero",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Tepeji del Río de Ocampo",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Tepetitlán",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Tetepango",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Villa de Tezontepec",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Tezontepec de Aldama",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Tianguistengo",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Tizayuca",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Tlahuelilpan",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Tlahuiltepa",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Tlanalapa",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Tlanchinol",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Tlaxcoapan",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Tolcayuca",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Tula de Allende",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Tulancingo de Bravo",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Xochiatipan",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Xochicoatlán",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Yahualica",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Zacualtipán de Ángeles",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Zapotlán de Juárez",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Zempoala",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Zimapán",
+    "estado": "Hidalgo"
+  },
+  {
+    "municipio": "Acatic",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Acatlán de Juárez",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Ahualulco de Mercado",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Amacueca",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Amatitán",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Ameca",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "San Juanito de Escobedo",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Arandas",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "El Arenal",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Atemajac de Brizuela",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Atengo",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Atenguillo",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Atotonilco el Alto",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Atoyac",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Autlán de Navarro",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Ayotlán",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Ayutla",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "La Barca",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Bolaños",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Cabo Corrientes",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Casimiro Castillo",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Cihuatlán",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Zapotlán el Grande",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Cocula",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Colotlán",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Concepción de Buenos Aires",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Cuautitlán de García Barragán",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Cuautla",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Cuquío",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Chapala",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Chimaltitán",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Chiquilistlán",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Degollado",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Ejutla",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Encarnación de Díaz",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Etzatlán",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "El Grullo",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Guachinango",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Guadalajara",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Hostotipaquillo",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Huejúcar",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Huejuquilla el Alto",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "La Huerta",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Ixtlahuacán de los Membrillos",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Ixtlahuacán del Río",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Jalostotitlán",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Jamay",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Jesús María",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Jilotlán de los Dolores",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Jocotepec",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Juanacatlán",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Juchitlán",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Lagos de Moreno",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "El Limón",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Magdalena",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Santa María del Oro",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "La Manzanilla de la Paz",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Mascota",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Mazamitla",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Mexticacán",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Mezquitic",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Mixtlán",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Ocotlán",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Ojuelos de Jalisco",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Pihuamo",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Poncitlán",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Puerto Vallarta",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Villa Purificación",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Quitupan",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "El Salto",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "San Cristóbal de la Barranca",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "San Diego de Alejandría",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "San Juan de los Lagos",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "San Julián",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "San Marcos",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "San Martín de Bolaños",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "San Martín Hidalgo",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "San Miguel el Alto",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Gómez Farías",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "San Sebastián del Oeste",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Santa María de los Ángeles",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Sayula",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Tala",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Talpa de Allende",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Tamazula de Gordiano",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Tapalpa",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Tecalitlán",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Tecolotlán",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Techaluta de Montenegro",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Tenamaxtlán",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Teocaltiche",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Teocuitatlán de Corona",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Tepatitlán de Morelos",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Tequila",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Teuchitlán",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Tizapán el Alto",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Tlajomulco de Zúñiga",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "San Pedro Tlaquepaque",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Tolimán",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Tomatlán",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Tonalá",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Tonaya",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Tonila",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Totatiche",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Tototlán",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Tuxcacuesco",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Tuxcueca",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Tuxpan",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Unión de San Antonio",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Unión de Tula",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Valle de Guadalupe",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Valle de Juárez",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "San Gabriel",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Villa Corona",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Villa Guerrero",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Villa Hidalgo",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Cañadas de Obregón",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Yahualica de González Gallo",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Zacoalco de Torres",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Zapopan",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Zapotiltic",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Zapotitlán de Vadillo",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Zapotlán del Rey",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Zapotlanejo",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "San Ignacio Cerro Gordo",
+    "estado": "Jalisco"
+  },
+  {
+    "municipio": "Acambay de Ruíz Castañeda",
+    "estado": "México"
+  },
+  {
+    "municipio": "Acolman",
+    "estado": "México"
+  },
+  {
+    "municipio": "Aculco",
+    "estado": "México"
+  },
+  {
+    "municipio": "Almoloya de Alquisiras",
+    "estado": "México"
+  },
+  {
+    "municipio": "Almoloya de Juárez",
+    "estado": "México"
+  },
+  {
+    "municipio": "Almoloya del Río",
+    "estado": "México"
+  },
+  {
+    "municipio": "Amanalco",
+    "estado": "México"
+  },
+  {
+    "municipio": "Amatepec",
+    "estado": "México"
+  },
+  {
+    "municipio": "Amecameca",
+    "estado": "México"
+  },
+  {
+    "municipio": "Apaxco",
+    "estado": "México"
+  },
+  {
+    "municipio": "Atenco",
+    "estado": "México"
+  },
+  {
+    "municipio": "Atizapán",
+    "estado": "México"
+  },
+  {
+    "municipio": "Atizapán de Zaragoza",
+    "estado": "México"
+  },
+  {
+    "municipio": "Atlacomulco",
+    "estado": "México"
+  },
+  {
+    "municipio": "Atlautla",
+    "estado": "México"
+  },
+  {
+    "municipio": "Axapusco",
+    "estado": "México"
+  },
+  {
+    "municipio": "Ayapango",
+    "estado": "México"
+  },
+  {
+    "municipio": "Calimaya",
+    "estado": "México"
+  },
+  {
+    "municipio": "Capulhuac",
+    "estado": "México"
+  },
+  {
+    "municipio": "Coacalco de Berriozábal",
+    "estado": "México"
+  },
+  {
+    "municipio": "Coatepec Harinas",
+    "estado": "México"
+  },
+  {
+    "municipio": "Cocotitlán",
+    "estado": "México"
+  },
+  {
+    "municipio": "Coyotepec",
+    "estado": "México"
+  },
+  {
+    "municipio": "Cuautitlán",
+    "estado": "México"
+  },
+  {
+    "municipio": "Chalco",
+    "estado": "México"
+  },
+  {
+    "municipio": "Chapa de Mota",
+    "estado": "México"
+  },
+  {
+    "municipio": "Chapultepec",
+    "estado": "México"
+  },
+  {
+    "municipio": "Chiautla",
+    "estado": "México"
+  },
+  {
+    "municipio": "Chicoloapan",
+    "estado": "México"
+  },
+  {
+    "municipio": "Chiconcuac",
+    "estado": "México"
+  },
+  {
+    "municipio": "Chimalhuacán",
+    "estado": "México"
+  },
+  {
+    "municipio": "Donato Guerra",
+    "estado": "México"
+  },
+  {
+    "municipio": "Ecatepec de Morelos",
+    "estado": "México"
+  },
+  {
+    "municipio": "Ecatzingo",
+    "estado": "México"
+  },
+  {
+    "municipio": "Huehuetoca",
+    "estado": "México"
+  },
+  {
+    "municipio": "Hueypoxtla",
+    "estado": "México"
+  },
+  {
+    "municipio": "Huixquilucan",
+    "estado": "México"
+  },
+  {
+    "municipio": "Isidro Fabela",
+    "estado": "México"
+  },
+  {
+    "municipio": "Ixtapaluca",
+    "estado": "México"
+  },
+  {
+    "municipio": "Ixtapan de la Sal",
+    "estado": "México"
+  },
+  {
+    "municipio": "Ixtapan del Oro",
+    "estado": "México"
+  },
+  {
+    "municipio": "Ixtlahuaca",
+    "estado": "México"
+  },
+  {
+    "municipio": "Xalatlaco",
+    "estado": "México"
+  },
+  {
+    "municipio": "Jaltenco",
+    "estado": "México"
+  },
+  {
+    "municipio": "Jilotepec",
+    "estado": "México"
+  },
+  {
+    "municipio": "Jilotzingo",
+    "estado": "México"
+  },
+  {
+    "municipio": "Jiquipilco",
+    "estado": "México"
+  },
+  {
+    "municipio": "Jocotitlán",
+    "estado": "México"
+  },
+  {
+    "municipio": "Joquicingo",
+    "estado": "México"
+  },
+  {
+    "municipio": "Juchitepec",
+    "estado": "México"
+  },
+  {
+    "municipio": "Lerma",
+    "estado": "México"
+  },
+  {
+    "municipio": "Malinalco",
+    "estado": "México"
+  },
+  {
+    "municipio": "Melchor Ocampo",
+    "estado": "México"
+  },
+  {
+    "municipio": "Metepec",
+    "estado": "México"
+  },
+  {
+    "municipio": "Mexicaltzingo",
+    "estado": "México"
+  },
+  {
+    "municipio": "Morelos",
+    "estado": "México"
+  },
+  {
+    "municipio": "Naucalpan de Juárez",
+    "estado": "México"
+  },
+  {
+    "municipio": "Nezahualcóyotl",
+    "estado": "México"
+  },
+  {
+    "municipio": "Nextlalpan",
+    "estado": "México"
+  },
+  {
+    "municipio": "Nicolás Romero",
+    "estado": "México"
+  },
+  {
+    "municipio": "Nopaltepec",
+    "estado": "México"
+  },
+  {
+    "municipio": "Ocoyoacac",
+    "estado": "México"
+  },
+  {
+    "municipio": "Ocuilan",
+    "estado": "México"
+  },
+  {
+    "municipio": "El Oro",
+    "estado": "México"
+  },
+  {
+    "municipio": "Otumba",
+    "estado": "México"
+  },
+  {
+    "municipio": "Otzoloapan",
+    "estado": "México"
+  },
+  {
+    "municipio": "Otzolotepec",
+    "estado": "México"
+  },
+  {
+    "municipio": "Ozumba",
+    "estado": "México"
+  },
+  {
+    "municipio": "Papalotla",
+    "estado": "México"
+  },
+  {
+    "municipio": "La Paz",
+    "estado": "México"
+  },
+  {
+    "municipio": "Polotitlán",
+    "estado": "México"
+  },
+  {
+    "municipio": "Rayón",
+    "estado": "México"
+  },
+  {
+    "municipio": "San Antonio la Isla",
+    "estado": "México"
+  },
+  {
+    "municipio": "San Felipe del Progreso",
+    "estado": "México"
+  },
+  {
+    "municipio": "San Martín de las Pirámides",
+    "estado": "México"
+  },
+  {
+    "municipio": "San Mateo Atenco",
+    "estado": "México"
+  },
+  {
+    "municipio": "San Simón de Guerrero",
+    "estado": "México"
+  },
+  {
+    "municipio": "Santo Tomás",
+    "estado": "México"
+  },
+  {
+    "municipio": "Soyaniquilpan de Juárez",
+    "estado": "México"
+  },
+  {
+    "municipio": "Sultepec",
+    "estado": "México"
+  },
+  {
+    "municipio": "Tecámac",
+    "estado": "México"
+  },
+  {
+    "municipio": "Tejupilco",
+    "estado": "México"
+  },
+  {
+    "municipio": "Temamatla",
+    "estado": "México"
+  },
+  {
+    "municipio": "Temascalapa",
+    "estado": "México"
+  },
+  {
+    "municipio": "Temascalcingo",
+    "estado": "México"
+  },
+  {
+    "municipio": "Temascaltepec",
+    "estado": "México"
+  },
+  {
+    "municipio": "Temoaya",
+    "estado": "México"
+  },
+  {
+    "municipio": "Tenancingo",
+    "estado": "México"
+  },
+  {
+    "municipio": "Tenango del Aire",
+    "estado": "México"
+  },
+  {
+    "municipio": "Tenango del Valle",
+    "estado": "México"
+  },
+  {
+    "municipio": "Teoloyucan",
+    "estado": "México"
+  },
+  {
+    "municipio": "Teotihuacán",
+    "estado": "México"
+  },
+  {
+    "municipio": "Tepetlaoxtoc",
+    "estado": "México"
+  },
+  {
+    "municipio": "Tepetlixpa",
+    "estado": "México"
+  },
+  {
+    "municipio": "Tepotzotlán",
+    "estado": "México"
+  },
+  {
+    "municipio": "Tequixquiac",
+    "estado": "México"
+  },
+  {
+    "municipio": "Texcaltitlán",
+    "estado": "México"
+  },
+  {
+    "municipio": "Texcalyacac",
+    "estado": "México"
+  },
+  {
+    "municipio": "Texcoco",
+    "estado": "México"
+  },
+  {
+    "municipio": "Tezoyuca",
+    "estado": "México"
+  },
+  {
+    "municipio": "Tianguistenco",
+    "estado": "México"
+  },
+  {
+    "municipio": "Timilpan",
+    "estado": "México"
+  },
+  {
+    "municipio": "Tlalmanalco",
+    "estado": "México"
+  },
+  {
+    "municipio": "Tlalnepantla de Baz",
+    "estado": "México"
+  },
+  {
+    "municipio": "Tlatlaya",
+    "estado": "México"
+  },
+  {
+    "municipio": "Toluca",
+    "estado": "México"
+  },
+  {
+    "municipio": "Tonatico",
+    "estado": "México"
+  },
+  {
+    "municipio": "Tultepec",
+    "estado": "México"
+  },
+  {
+    "municipio": "Tultitlán",
+    "estado": "México"
+  },
+  {
+    "municipio": "Valle de Bravo",
+    "estado": "México"
+  },
+  {
+    "municipio": "Villa de Allende",
+    "estado": "México"
+  },
+  {
+    "municipio": "Villa del Carbón",
+    "estado": "México"
+  },
+  {
+    "municipio": "Villa Guerrero",
+    "estado": "México"
+  },
+  {
+    "municipio": "Villa Victoria",
+    "estado": "México"
+  },
+  {
+    "municipio": "Xonacatlán",
+    "estado": "México"
+  },
+  {
+    "municipio": "Zacazonapan",
+    "estado": "México"
+  },
+  {
+    "municipio": "Zacualpan",
+    "estado": "México"
+  },
+  {
+    "municipio": "Zinacantepec",
+    "estado": "México"
+  },
+  {
+    "municipio": "Zumpahuacán",
+    "estado": "México"
+  },
+  {
+    "municipio": "Zumpango",
+    "estado": "México"
+  },
+  {
+    "municipio": "Cuautitlán Izcalli",
+    "estado": "México"
+  },
+  {
+    "municipio": "Valle de Chalco Solidaridad",
+    "estado": "México"
+  },
+  {
+    "municipio": "Luvianos",
+    "estado": "México"
+  },
+  {
+    "municipio": "San José del Rincón",
+    "estado": "México"
+  },
+  {
+    "municipio": "Tonanitla",
+    "estado": "México"
+  },
+  {
+    "municipio": "Acuitzio",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Aguililla",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Álvaro Obregón",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Angamacutiro",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Angangueo",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Apatzingán",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Aporo",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Aquila",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Ario",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Arteaga",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Briseñas",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Buenavista",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Carácuaro",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Coahuayana",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Coalcomán de Vázquez Pallares",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Coeneo",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Contepec",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Copándaro",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Cotija",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Cuitzeo",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Charapan",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Charo",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Chavinda",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Cherán",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Chilchota",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Chinicuila",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Chucándiro",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Churintzio",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Churumuco",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Ecuandureo",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Epitacio Huerta",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Erongarícuaro",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Gabriel Zamora",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Hidalgo",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "La Huacana",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Huandacareo",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Huaniqueo",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Huetamo",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Huiramba",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Indaparapeo",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Irimbo",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Ixtlán",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Jacona",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Jiménez",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Jiquilpan",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Juárez",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Jungapeo",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Lagunillas",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Madero",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Maravatío",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Marcos Castellanos",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Lázaro Cárdenas",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Morelia",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Morelos",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Múgica",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Nahuatzen",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Nocupétaro",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Nuevo Parangaricutiro",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Nuevo Urecho",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Numarán",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Ocampo",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Pajacuarán",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Panindícuaro",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Parácuaro",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Paracho",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Pátzcuaro",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Penjamillo",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Peribán",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "La Piedad",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Purépero",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Puruándiro",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Queréndaro",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Quiroga",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Cojumatlán de Régules",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Los Reyes",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Sahuayo",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "San Lucas",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Santa Ana Maya",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Salvador Escalante",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Senguio",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Susupuato",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Tacámbaro",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Tancítaro",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Tangamandapio",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Tangancícuaro",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Tanhuato",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Taretan",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Tarímbaro",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Tepalcatepec",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Tingambato",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Tingüindín",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Tiquicheo de Nicolás Romero",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Tlalpujahua",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Tlazazalca",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Tocumbo",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Tumbiscatío",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Turicato",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Tuxpan",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Tuzantla",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Tzintzuntzan",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Tzitzio",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Uruapan",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Venustiano Carranza",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Villamar",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Vista Hermosa",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Yurécuaro",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Zacapu",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Zamora",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Zináparo",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Zinapécuaro",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Ziracuaretiro",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Zitácuaro",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "José Sixto Verduzco",
+    "estado": "Michoacán de Ocampo"
+  },
+  {
+    "municipio": "Amacuzac",
+    "estado": "Morelos"
+  },
+  {
+    "municipio": "Atlatlahucan",
+    "estado": "Morelos"
+  },
+  {
+    "municipio": "Axochiapan",
+    "estado": "Morelos"
+  },
+  {
+    "municipio": "Ayala",
+    "estado": "Morelos"
+  },
+  {
+    "municipio": "Coatlán del Río",
+    "estado": "Morelos"
+  },
+  {
+    "municipio": "Cuautla",
+    "estado": "Morelos"
+  },
+  {
+    "municipio": "Cuernavaca",
+    "estado": "Morelos"
+  },
+  {
+    "municipio": "Emiliano Zapata",
+    "estado": "Morelos"
+  },
+  {
+    "municipio": "Huitzilac",
+    "estado": "Morelos"
+  },
+  {
+    "municipio": "Jantetelco",
+    "estado": "Morelos"
+  },
+  {
+    "municipio": "Jiutepec",
+    "estado": "Morelos"
+  },
+  {
+    "municipio": "Jojutla",
+    "estado": "Morelos"
+  },
+  {
+    "municipio": "Jonacatepec de Leandro Valle",
+    "estado": "Morelos"
+  },
+  {
+    "municipio": "Mazatepec",
+    "estado": "Morelos"
+  },
+  {
+    "municipio": "Miacatlán",
+    "estado": "Morelos"
+  },
+  {
+    "municipio": "Ocuituco",
+    "estado": "Morelos"
+  },
+  {
+    "municipio": "Puente de Ixtla",
+    "estado": "Morelos"
+  },
+  {
+    "municipio": "Temixco",
+    "estado": "Morelos"
+  },
+  {
+    "municipio": "Tepalcingo",
+    "estado": "Morelos"
+  },
+  {
+    "municipio": "Tepoztlán",
+    "estado": "Morelos"
+  },
+  {
+    "municipio": "Tetecala",
+    "estado": "Morelos"
+  },
+  {
+    "municipio": "Tetela del Volcán",
+    "estado": "Morelos"
+  },
+  {
+    "municipio": "Tlalnepantla",
+    "estado": "Morelos"
+  },
+  {
+    "municipio": "Tlaltizapán de Zapata",
+    "estado": "Morelos"
+  },
+  {
+    "municipio": "Tlaquiltenango",
+    "estado": "Morelos"
+  },
+  {
+    "municipio": "Tlayacapan",
+    "estado": "Morelos"
+  },
+  {
+    "municipio": "Totolapan",
+    "estado": "Morelos"
+  },
+  {
+    "municipio": "Xochitepec",
+    "estado": "Morelos"
+  },
+  {
+    "municipio": "Yautepec",
+    "estado": "Morelos"
+  },
+  {
+    "municipio": "Yecapixtla",
+    "estado": "Morelos"
+  },
+  {
+    "municipio": "Zacatepec",
+    "estado": "Morelos"
+  },
+  {
+    "municipio": "Zacualpan de Amilpas",
+    "estado": "Morelos"
+  },
+  {
+    "municipio": "Temoac",
+    "estado": "Morelos"
+  },
+  {
+    "municipio": "Coatetelco",
+    "estado": "Morelos"
+  },
+  {
+    "municipio": "Xoxocotla",
+    "estado": "Morelos"
+  },
+  {
+    "municipio": "Hueyapan",
+    "estado": "Morelos"
+  },
+  {
+    "municipio": "Acaponeta",
+    "estado": "Nayarit"
+  },
+  {
+    "municipio": "Ahuacatlán",
+    "estado": "Nayarit"
+  },
+  {
+    "municipio": "Amatlán de Cañas",
+    "estado": "Nayarit"
+  },
+  {
+    "municipio": "Compostela",
+    "estado": "Nayarit"
+  },
+  {
+    "municipio": "Huajicori",
+    "estado": "Nayarit"
+  },
+  {
+    "municipio": "Ixtlán del Río",
+    "estado": "Nayarit"
+  },
+  {
+    "municipio": "Jala",
+    "estado": "Nayarit"
+  },
+  {
+    "municipio": "Xalisco",
+    "estado": "Nayarit"
+  },
+  {
+    "municipio": "Del Nayar",
+    "estado": "Nayarit"
+  },
+  {
+    "municipio": "Rosamorada",
+    "estado": "Nayarit"
+  },
+  {
+    "municipio": "Ruíz",
+    "estado": "Nayarit"
+  },
+  {
+    "municipio": "San Blas",
+    "estado": "Nayarit"
+  },
+  {
+    "municipio": "San Pedro Lagunillas",
+    "estado": "Nayarit"
+  },
+  {
+    "municipio": "Santa María del Oro",
+    "estado": "Nayarit"
+  },
+  {
+    "municipio": "Santiago Ixcuintla",
+    "estado": "Nayarit"
+  },
+  {
+    "municipio": "Tecuala",
+    "estado": "Nayarit"
+  },
+  {
+    "municipio": "Tepic",
+    "estado": "Nayarit"
+  },
+  {
+    "municipio": "Tuxpan",
+    "estado": "Nayarit"
+  },
+  {
+    "municipio": "La Yesca",
+    "estado": "Nayarit"
+  },
+  {
+    "municipio": "Bahía de Banderas",
+    "estado": "Nayarit"
+  },
+  {
+    "municipio": "Abasolo",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Agualeguas",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Los Aldamas",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Allende",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Anáhuac",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Apodaca",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Aramberri",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Bustamante",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Cadereyta Jiménez",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "El Carmen",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Cerralvo",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Ciénega de Flores",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "China",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Doctor Arroyo",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Doctor Coss",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Doctor González",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Galeana",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "García",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "San Pedro Garza García",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "General Bravo",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "General Escobedo",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "General Terán",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "General Treviño",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "General Zaragoza",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "General Zuazua",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Guadalupe",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Los Herreras",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Higueras",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Hualahuises",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Iturbide",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Juárez",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Lampazos de Naranjo",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Linares",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Marín",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Melchor Ocampo",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Mier y Noriega",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Mina",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Montemorelos",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Monterrey",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Parás",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Pesquería",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Los Ramones",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Rayones",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Sabinas Hidalgo",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Salinas Victoria",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "San Nicolás de los Garza",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Hidalgo",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Santa Catarina",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Santiago",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Vallecillo",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Villaldama",
+    "estado": "Nuevo León"
+  },
+  {
+    "municipio": "Abejones",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Acatlán de Pérez Figueroa",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Asunción Cacalotepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Asunción Cuyotepeji",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Asunción Ixtaltepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Asunción Nochixtlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Asunción Ocotlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Asunción Tlacolulita",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Ayotzintepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "El Barrio de la Soledad",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Calihualá",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Candelaria Loxicha",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Ciénega de Zimatlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Ciudad Ixtepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Coatecas Altas",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Coicoyán de las Flores",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "La Compañía",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Concepción Buenavista",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Concepción Pápalo",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Constancia del Rosario",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Cosolapa",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Cosoltepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Cuilápam de Guerrero",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Cuyamecalco Villa de Zaragoza",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Chahuites",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Chalcatongo de Hidalgo",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Chiquihuitlán de Benito Juárez",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Heroica Ciudad de Ejutla de Crespo",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Eloxochitlán de Flores Magón",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "El Espinal",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Tamazulápam del Espíritu Santo",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Fresnillo de Trujano",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Guadalupe Etla",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Guadalupe de Ramírez",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Guelatao de Juárez",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Guevea de Humboldt",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Mesones Hidalgo",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Villa Hidalgo Yalálag",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Heroica Ciudad de Huajuapan de León",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Huautepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Huautla de Jiménez",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Ixtlán de Juárez",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Heroica Ciudad de Juchitán de Zaragoza",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Loma Bonita",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Magdalena Apasco",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Magdalena Jaltepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Magdalena Jicotlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Magdalena Mixtepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Magdalena Ocotlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Magdalena Peñasco",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Magdalena Teitipac",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Magdalena Tequisistlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Magdalena Tlacotepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Magdalena Zahuatlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Mariscala de Juárez",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Mártires de Tacubaya",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Matías Romero Avendaño",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Mazatlán Villa de Flores",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Heroica Ciudad de Miahuatlán de Porfirio Díaz",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Mixistlán de la Reforma",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Monjas",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Natividad",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Nazareno Etla",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Nejapa de Madero",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Ixpantepec Nieves",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Niltepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Oaxaca de Juárez",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Ocotlán de Morelos",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "La Pe",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Pinotepa de Don Luis",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Pluma Hidalgo",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San José del Progreso",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Putla Villa de Guerrero",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Catarina Quioquitani",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Reforma de Pineda",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "La Reforma",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Reyes Etla",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Rojas de Cuauhtémoc",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Salina Cruz",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Agustín Amatengo",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Agustín Atenango",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Agustín Chayuco",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Agustín de las Juntas",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Agustín Etla",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Agustín Loxicha",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Agustín Tlacotepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Agustín Yatareni",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Andrés Cabecera Nueva",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Andrés Dinicuiti",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Andrés Huaxpaltepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Andrés Huayápam",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Andrés Ixtlahuaca",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Andrés Lagunas",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Andrés Nuxiño",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Andrés Paxtlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Andrés Sinaxtla",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Andrés Solaga",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Andrés Teotilálpam",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Andrés Tepetlapa",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Andrés Yaá",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Andrés Zabache",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Andrés Zautla",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Antonino Castillo Velasco",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Antonino el Alto",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Antonino Monte Verde",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Antonio Acutla",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Antonio de la Cal",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Antonio Huitepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Antonio Nanahuatípam",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Antonio Sinicahua",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Antonio Tepetlapa",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Baltazar Chichicápam",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Baltazar Loxicha",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Baltazar Yatzachi el Bajo",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Bartolo Coyotepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Bartolomé Ayautla",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Bartolomé Loxicha",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Bartolomé Quialana",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Bartolomé Yucuañe",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Bartolomé Zoogocho",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Bartolo Soyaltepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Bartolo Yautepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Bernardo Mixtepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Heroica Villa de San Blas Atempa",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Carlos Yautepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Cristóbal Amatlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Cristóbal Amoltepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Cristóbal Lachirioag",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Cristóbal Suchixtlahuaca",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Dionisio del Mar",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Dionisio Ocotepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Dionisio Ocotlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Esteban Atatlahuca",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Felipe Jalapa de Díaz",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Felipe Tejalápam",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Felipe Usila",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Francisco Cahuacuá",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Francisco Cajonos",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Francisco Chapulapa",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Francisco Chindúa",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Francisco del Mar",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Francisco Huehuetlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Francisco Ixhuatán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Francisco Jaltepetongo",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Francisco Lachigoló",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Francisco Logueche",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Francisco Nuxaño",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Francisco Ozolotepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Francisco Sola",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Francisco Telixtlahuaca",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Francisco Teopan",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Francisco Tlapancingo",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Gabriel Mixtepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Ildefonso Amatlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Ildefonso Sola",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Ildefonso Villa Alta",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Jacinto Amilpas",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Jacinto Tlacotepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Jerónimo Coatlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Jerónimo Silacayoapilla",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Jerónimo Sosola",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Jerónimo Taviche",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Jerónimo Tecóatl",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Jorge Nuchita",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San José Ayuquila",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San José Chiltepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San José del Peñasco",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San José Estancia Grande",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San José Independencia",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San José Lachiguiri",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San José Tenango",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Achiutla",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Atepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Ánimas Trujano",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Bautista Atatlahuca",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Bautista Coixtlahuaca",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Bautista Cuicatlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Bautista Guelache",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Bautista Jayacatlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Bautista Lo de Soto",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Bautista Suchitepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Bautista Tlacoatzintepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Bautista Tlachichilco",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Bautista Tuxtepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Cacahuatepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Cieneguilla",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Coatzóspam",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Colorado",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Comaltepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Cotzocón",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Chicomezúchil",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Chilateca",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan del Estado",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan del Río",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Diuxi",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Evangelista Analco",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Guelavía",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Guichicovi",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Ihualtepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Juquila Mixes",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Juquila Vijanos",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Lachao",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Lachigalla",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Lajarcia",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Lalana",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan de los Cués",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Mazatlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Mixtepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Mixtepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Ñumí",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Ozolotepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Petlapa",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Quiahije",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Quiotepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Sayultepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Tabaá",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Tamazola",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Teita",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Teitipac",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Tepeuxila",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Teposcolula",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Yaeé",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Yatzona",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Yucuita",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Lorenzo",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Lorenzo Albarradas",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Lorenzo Cacaotepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Lorenzo Cuaunecuiltitla",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Lorenzo Texmelúcan",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Lorenzo Victoria",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Lucas Camotlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Lucas Ojitlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Lucas Quiaviní",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Lucas Zoquiápam",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Luis Amatlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Marcial Ozolotepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Marcos Arteaga",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Heroico San Martín de los Cansecos",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Martín Huamelúlpam",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Martín Itunyoso",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Martín Lachilá",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Martín Peras",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Martín Tilcajete",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Martín Toxpalan",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Martín Zacatepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Mateo Cajonos",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Capulálpam de Méndez",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Mateo del Mar",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Mateo Yoloxochitlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Mateo Etlatongo",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Mateo Nejápam",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Mateo Peñasco",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Mateo Piñas",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Mateo Río Hondo",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Mateo Sindihui",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Mateo Tlapiltepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Melchor Betaza",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Miguel Achiutla",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Miguel Ahuehuetitlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Miguel Aloápam",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Miguel Amatitlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Miguel Amatlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Miguel Coatlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Miguel Chicahua",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Miguel Chimalapa",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Miguel del Puerto",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Miguel del Río",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Miguel Ejutla",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Miguel el Grande",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Miguel Huautla",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Miguel Mixtepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Miguel Panixtlahuaca",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Miguel Peras",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Miguel Piedras",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Miguel Quetzaltepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Miguel Santa Flor",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Villa Sola de Vega",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Miguel Soyaltepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Miguel Suchixtepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Villa Talea de Castro",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Miguel Tecomatlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Miguel Tenango",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Miguel Tequixtepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Miguel Tilquiápam",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Miguel Tlacamama",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Miguel Tlacotepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Miguel Tulancingo",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Miguel Yotao",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Nicolás",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Nicolás Hidalgo",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pablo Coatlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pablo Cuatro Venados",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pablo Etla",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pablo Huitzo",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pablo Huixtepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pablo Macuiltianguis",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pablo Tijaltepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pablo Villa de Mitla",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pablo Yaganiza",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro Amuzgos",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro Apóstol",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro Atoyac",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro Cajonos",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro Coxcaltepec Cántaros",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro Comitancillo",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro el Alto",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro Huamelula",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro Huilotepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro Ixcatlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro Ixtlahuaca",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro Jaltepetongo",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro Jicayán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro Jocotipac",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro Juchatengo",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro Mártir",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro Mártir Quiechapa",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro Mártir Yucuxaco",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro Mixtepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro Mixtepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro Molinos",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro Nopala",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro Ocopetatillo",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro Ocotepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro Pochutla",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro Quiatoni",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro Sochiápam",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro Tapanatepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro Taviche",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro Teozacoalco",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro Teutila",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro Tidaá",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro Topiltepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro Totolápam",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Villa de Tututepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro Yaneri",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro Yólox",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro y San Pablo Ayutla",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Villa de Etla",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro y San Pablo Teposcolula",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro y San Pablo Tequixtepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Pedro Yucunama",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Raymundo Jalpan",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Sebastián Abasolo",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Sebastián Coatlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Sebastián Ixcapa",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Sebastián Nicananduta",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Sebastián Río Hondo",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Sebastián Tecomaxtlahuaca",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Sebastián Teitipac",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Sebastián Tutla",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Simón Almolongas",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Simón Zahuatlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Ana",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Ana Ateixtlahuaca",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Ana Cuauhtémoc",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Ana del Valle",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Ana Tavela",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Ana Tlapacoyan",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Ana Yareni",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Ana Zegache",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Catalina Quierí",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Catarina Cuixtla",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Catarina Ixtepeji",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Catarina Juquila",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Catarina Lachatao",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Catarina Loxicha",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Catarina Mechoacán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Catarina Minas",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Catarina Quiané",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Catarina Tayata",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Catarina Ticuá",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Catarina Yosonotú",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Catarina Zapoquila",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Cruz Acatepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Cruz Amilpas",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Cruz de Bravo",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Cruz Itundujia",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Cruz Mixtepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Cruz Nundaco",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Cruz Papalutla",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Cruz Tacache de Mina",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Cruz Tacahua",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Cruz Tayata",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Cruz Xitla",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Cruz Xoxocotlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Cruz Zenzontepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Gertrudis",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Inés del Monte",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Inés Yatzeche",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Lucía del Camino",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Lucía Miahuatlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Lucía Monteverde",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Lucía Ocotlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Alotepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Apazco",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María la Asunción",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Heroica Ciudad de Tlaxiaco",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Ayoquezco de Aldama",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Atzompa",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Camotlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Colotepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Cortijo",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Coyotepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Chachoápam",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Villa de Chilapa de Díaz",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Chilchotla",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Chimalapa",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María del Rosario",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María del Tule",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Ecatepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Guelacé",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Guienagati",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Huatulco",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Huazolotitlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Ipalapa",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Ixcatlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Jacatepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Jalapa del Marqués",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Jaltianguis",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Lachixío",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Mixtequilla",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Nativitas",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Nduayaco",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Ozolotepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Pápalo",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Peñoles",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Petapa",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Quiegolani",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Sola",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Tataltepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Tecomavaca",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Temaxcalapa",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Temaxcaltepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Teopoxco",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Tepantlali",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Texcatitlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Tlahuitoltepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Tlalixtac",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Tonameca",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Totolapilla",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Xadani",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Yalina",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Yavesía",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Yolotepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Yosoyúa",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Yucuhiti",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Zacatepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Zaniza",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa María Zoquitlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Amoltepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Apoala",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Apóstol",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Astata",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Atitlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Ayuquililla",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Cacaloxtepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Camotlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Comaltepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Villa de Santiago Chazumba",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Choápam",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago del Río",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Huajolotitlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Huauclilla",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Ihuitlán Plumas",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Ixcuintepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Ixtayutla",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Jamiltepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Jocotepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Juxtlahuaca",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Lachiguiri",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Lalopa",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Laollaga",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Laxopa",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Llano Grande",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Matatlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Miltepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Minas",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Nacaltepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Nejapilla",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Nundiche",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Nuyoó",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Pinotepa Nacional",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Suchilquitongo",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Tamazola",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Tapextla",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Villa Tejúpam de la Unión",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Tenango",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Tepetlapa",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Tetepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Texcalcingo",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Textitlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Tilantongo",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Tillo",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Tlazoyaltepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Xanica",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Xiacuí",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Yaitepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Yaveo",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Yolomécatl",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Yosondúa",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Yucuyachi",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Zacatepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santiago Zoochila",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Nuevo Zoquiápam",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santo Domingo Ingenio",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santo Domingo Albarradas",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santo Domingo Armenta",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santo Domingo Chihuitán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santo Domingo de Morelos",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santo Domingo Ixcatlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santo Domingo Nuxaá",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santo Domingo Ozolotepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santo Domingo Petapa",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santo Domingo Roayaga",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santo Domingo Tehuantepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santo Domingo Teojomulco",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santo Domingo Tepuxtepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santo Domingo Tlatayápam",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santo Domingo Tomaltepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santo Domingo Tonalá",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santo Domingo Tonaltepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santo Domingo Xagacía",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santo Domingo Yanhuitlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santo Domingo Yodohino",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santo Domingo Zanatepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santos Reyes Nopala",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santos Reyes Pápalo",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santos Reyes Tepejillo",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santos Reyes Yucuná",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santo Tomás Jalieza",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santo Tomás Mazaltepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santo Tomás Ocotepec",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santo Tomás Tamazulapan",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Vicente Coatlán",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Vicente Lachixío",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Vicente Nuñú",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Silacayoápam",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Sitio de Xitlapehua",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Soledad Etla",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Villa de Tamazulápam del Progreso",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Tanetze de Zaragoza",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Taniche",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Tataltepec de Valdés",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Teococuilco de Marcos Pérez",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Teotitlán de Flores Magón",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Teotitlán del Valle",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Teotongo",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Tepelmeme Villa de Morelos",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Heroica Villa Tezoatlán de Segura y Luna, Cuna de la Independencia de Oaxaca",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Jerónimo Tlacochahuaya",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Tlacolula de Matamoros",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Tlacotepec Plumas",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Tlalixtac de Cabrera",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Totontepec Villa de Morelos",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Trinidad Zaachila",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "La Trinidad Vista Hermosa",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Unión Hidalgo",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Valerio Trujano",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Juan Bautista Valle Nacional",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Villa Díaz Ordaz",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Yaxe",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Magdalena Yodocono de Porfirio Díaz",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Yogana",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Yutanduchi de Guerrero",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Villa de Zaachila",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "San Mateo Yucutindoo",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Zapotitlán Lagunas",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Zapotitlán Palmas",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Santa Inés de Zaragoza",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Zimatlán de Álvarez",
+    "estado": "Oaxaca"
+  },
+  {
+    "municipio": "Acajete",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Acateno",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Acatlán",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Acatzingo",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Acteopan",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Ahuacatlán",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Ahuatlán",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Ahuazotepec",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Ahuehuetitla",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Ajalpan",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Albino Zertuche",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Aljojuca",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Altepexi",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Amixtlán",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Amozoc",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Aquixtla",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Atempan",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Atexcal",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Atlixco",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Atoyatempan",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Atzala",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Atzitzihuacán",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Atzitzintla",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Axutla",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Ayotoxco de Guerrero",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Calpan",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Caltepec",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Camocuautla",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Caxhuacan",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Coatepec",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Coatzingo",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Cohetzala",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Cohuecan",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Coronango",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Coxcatlán",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Coyomeapan",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Coyotepec",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Cuapiaxtla de Madero",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Cuautempan",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Cuautinchán",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Cuautlancingo",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Cuayuca de Andrade",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Cuetzalan del Progreso",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Cuyoaco",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Chalchicomula de Sesma",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Chapulco",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Chiautla",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Chiautzingo",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Chiconcuautla",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Chichiquila",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Chietla",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Chigmecatitlán",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Chignahuapan",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Chignautla",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Chila",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Chila de la Sal",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Honey",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Chilchotla",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Chinantla",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Domingo Arenas",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Eloxochitlán",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Epatlán",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Esperanza",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Francisco Z. Mena",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "General Felipe Ángeles",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Guadalupe",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Guadalupe Victoria",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Hermenegildo Galeana",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Huaquechula",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Huatlatlauca",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Huauchinango",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Huehuetla",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Huehuetlán el Chico",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Huejotzingo",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Hueyapan",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Hueytamalco",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Hueytlalpan",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Huitzilan de Serdán",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Huitziltepec",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Atlequizayan",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Ixcamilpa de Guerrero",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Ixcaquixtla",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Ixtacamaxtitlán",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Ixtepec",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Izúcar de Matamoros",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Jalpan",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Jolalpan",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Jonotla",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Jopala",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Juan C. Bonilla",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Juan Galindo",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Juan N. Méndez",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Lafragua",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Libres",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "La Magdalena Tlatlauquitepec",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Mazapiltepec de Juárez",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Mixtla",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Molcaxac",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Cañada Morelos",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Naupan",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Nauzontla",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Nealtican",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Nicolás Bravo",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Nopalucan",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Ocotepec",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Ocoyucan",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Olintla",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Oriental",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Pahuatlán",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Palmar de Bravo",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Pantepec",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Petlalcingo",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Piaxtla",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Puebla",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Quecholac",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Quimixtlán",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Rafael Lara Grajales",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Los Reyes de Juárez",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "San Andrés Cholula",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "San Antonio Cañada",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "San Diego la Mesa Tochimiltzingo",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "San Felipe Teotlalcingo",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "San Felipe Tepatlán",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "San Gabriel Chilac",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "San Gregorio Atzompa",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "San Jerónimo Tecuanipan",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "San Jerónimo Xayacatlán",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "San José Chiapa",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "San José Miahuatlán",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "San Juan Atenco",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "San Juan Atzompa",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "San Martín Texmelucan",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "San Martín Totoltepec",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "San Matías Tlalancaleca",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "San Miguel Ixitlán",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "San Miguel Xoxtla",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "San Nicolás Buenos Aires",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "San Nicolás de los Ranchos",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "San Pablo Anicano",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "San Pedro Cholula",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "San Pedro Yeloixtlahuaca",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "San Salvador el Seco",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "San Salvador el Verde",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "San Salvador Huixcolotla",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "San Sebastián Tlacotepec",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Santa Catarina Tlaltempan",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Santa Inés Ahuatempan",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Santa Isabel Cholula",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Santiago Miahuatlán",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Huehuetlán el Grande",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Santo Tomás Hueyotlipan",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Soltepec",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Tecali de Herrera",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Tecamachalco",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Tecomatlán",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Tehuacán",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Tehuitzingo",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Tenampulco",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Teopantlán",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Teotlalco",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Tepanco de López",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Tepango de Rodríguez",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Tepatlaxco de Hidalgo",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Tepeaca",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Tepemaxalco",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Tepeojuma",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Tepetzintla",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Tepexco",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Tepexi de Rodríguez",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Tepeyahualco",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Tepeyahualco de Cuauhtémoc",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Tetela de Ocampo",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Teteles de Ávila Castillo",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Teziutlán",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Tianguismanalco",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Tilapa",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Tlacotepec de Benito Juárez",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Tlacuilotepec",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Tlachichuca",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Tlahuapan",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Tlaltenango",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Tlanepantla",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Tlaola",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Tlapacoya",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Tlapanalá",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Tlatlauquitepec",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Tlaxco",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Tochimilco",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Tochtepec",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Totoltepec de Guerrero",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Tulcingo",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Tuzamapan de Galeana",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Tzicatlacoyan",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Venustiano Carranza",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Vicente Guerrero",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Xayacatlán de Bravo",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Xicotepec",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Xicotlán",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Xiutetelco",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Xochiapulco",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Xochiltepec",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Xochitlán de Vicente Suárez",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Xochitlán Todos Santos",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Yaonáhuac",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Yehualtepec",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Zacapala",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Zacapoaxtla",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Zacatlán",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Zapotitlán",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Zapotitlán de Méndez",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Zaragoza",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Zautla",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Zihuateutla",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Zinacatepec",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Zongozotla",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Zoquiapan",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Zoquitlán",
+    "estado": "Puebla"
+  },
+  {
+    "municipio": "Amealco de Bonfil",
+    "estado": "Querétaro"
+  },
+  {
+    "municipio": "Pinal de Amoles",
+    "estado": "Querétaro"
+  },
+  {
+    "municipio": "Arroyo Seco",
+    "estado": "Querétaro"
+  },
+  {
+    "municipio": "Cadereyta de Montes",
+    "estado": "Querétaro"
+  },
+  {
+    "municipio": "Colón",
+    "estado": "Querétaro"
+  },
+  {
+    "municipio": "Corregidora",
+    "estado": "Querétaro"
+  },
+  {
+    "municipio": "Ezequiel Montes",
+    "estado": "Querétaro"
+  },
+  {
+    "municipio": "Huimilpan",
+    "estado": "Querétaro"
+  },
+  {
+    "municipio": "Jalpan de Serra",
+    "estado": "Querétaro"
+  },
+  {
+    "municipio": "Landa de Matamoros",
+    "estado": "Querétaro"
+  },
+  {
+    "municipio": "El Marqués",
+    "estado": "Querétaro"
+  },
+  {
+    "municipio": "Pedro Escobedo",
+    "estado": "Querétaro"
+  },
+  {
+    "municipio": "Peñamiller",
+    "estado": "Querétaro"
+  },
+  {
+    "municipio": "Querétaro",
+    "estado": "Querétaro"
+  },
+  {
+    "municipio": "San Joaquín",
+    "estado": "Querétaro"
+  },
+  {
+    "municipio": "San Juan del Río",
+    "estado": "Querétaro"
+  },
+  {
+    "municipio": "Tequisquiapan",
+    "estado": "Querétaro"
+  },
+  {
+    "municipio": "Tolimán",
+    "estado": "Querétaro"
+  },
+  {
+    "municipio": "Cozumel",
+    "estado": "Quintana Roo"
+  },
+  {
+    "municipio": "Felipe Carrillo Puerto",
+    "estado": "Quintana Roo"
+  },
+  {
+    "municipio": "Isla Mujeres",
+    "estado": "Quintana Roo"
+  },
+  {
+    "municipio": "Othón P. Blanco",
+    "estado": "Quintana Roo"
+  },
+  {
+    "municipio": "Benito Juárez",
+    "estado": "Quintana Roo"
+  },
+  {
+    "municipio": "José María Morelos",
+    "estado": "Quintana Roo"
+  },
+  {
+    "municipio": "Lázaro Cárdenas",
+    "estado": "Quintana Roo"
+  },
+  {
+    "municipio": "Playa del Carmen",
+    "estado": "Quintana Roo"
+  },
+  {
+    "municipio": "Tulum",
+    "estado": "Quintana Roo"
+  },
+  {
+    "municipio": "Bacalar",
+    "estado": "Quintana Roo"
+  },
+  {
+    "municipio": "Puerto Morelos",
+    "estado": "Quintana Roo"
+  },
+  {
+    "municipio": "Ahualulco del Sonido 13",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Alaquines",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Aquismón",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Armadillo de los Infante",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Cárdenas",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Catorce",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Cedral",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Cerritos",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Cerro de San Pedro",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Ciudad del Maíz",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Ciudad Fernández",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Tancanhuitz",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Ciudad Valles",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Coxcatlán",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Charcas",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Ebano",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Guadalcázar",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Huehuetlán",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Lagunillas",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Matehuala",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Mexquitic de Carmona",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Moctezuma",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Rayón",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Rioverde",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Salinas",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "San Antonio",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "San Ciro de Acosta",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "San Luis Potosí",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "San Martín Chalchicuautla",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "San Nicolás Tolentino",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Santa Catarina",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Santa María del Río",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Santo Domingo",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "San Vicente Tancuayalab",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Soledad de Graciano Sánchez",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Tamasopo",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Tamazunchale",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Tampacán",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Tampamolón Corona",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Tamuín",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Tanlajás",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Tanquián de Escobedo",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Tierra Nueva",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Vanegas",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Venado",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Villa de Arriaga",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Villa de Guadalupe",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Villa de la Paz",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Villa de Ramos",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Villa de Reyes",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Villa Hidalgo",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Villa Juárez",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Axtla de Terrazas",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Xilitla",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Zaragoza",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Villa de Arista",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Matlapa",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "El Naranjo",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Villa de Pozos",
+    "estado": "San Luis Potosí"
+  },
+  {
+    "municipio": "Ahome",
+    "estado": "Sinaloa"
+  },
+  {
+    "municipio": "Angostura",
+    "estado": "Sinaloa"
+  },
+  {
+    "municipio": "Badiraguato",
+    "estado": "Sinaloa"
+  },
+  {
+    "municipio": "Concordia",
+    "estado": "Sinaloa"
+  },
+  {
+    "municipio": "Cosalá",
+    "estado": "Sinaloa"
+  },
+  {
+    "municipio": "Culiacán",
+    "estado": "Sinaloa"
+  },
+  {
+    "municipio": "Choix",
+    "estado": "Sinaloa"
+  },
+  {
+    "municipio": "Elota",
+    "estado": "Sinaloa"
+  },
+  {
+    "municipio": "Escuinapa",
+    "estado": "Sinaloa"
+  },
+  {
+    "municipio": "El Fuerte",
+    "estado": "Sinaloa"
+  },
+  {
+    "municipio": "Guasave",
+    "estado": "Sinaloa"
+  },
+  {
+    "municipio": "Mazatlán",
+    "estado": "Sinaloa"
+  },
+  {
+    "municipio": "Mocorito",
+    "estado": "Sinaloa"
+  },
+  {
+    "municipio": "Rosario",
+    "estado": "Sinaloa"
+  },
+  {
+    "municipio": "Salvador Alvarado",
+    "estado": "Sinaloa"
+  },
+  {
+    "municipio": "San Ignacio",
+    "estado": "Sinaloa"
+  },
+  {
+    "municipio": "Sinaloa",
+    "estado": "Sinaloa"
+  },
+  {
+    "municipio": "Navolato",
+    "estado": "Sinaloa"
+  },
+  {
+    "municipio": "Eldorado",
+    "estado": "Sinaloa"
+  },
+  {
+    "municipio": "Juan José Ríos",
+    "estado": "Sinaloa"
+  },
+  {
+    "municipio": "Aconchi",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Agua Prieta",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Álamos",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Altar",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Arivechi",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Arizpe",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Atil",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Bacadéhuachi",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Bacanora",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Bacerac",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Bacoachi",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Bácum",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Banámichi",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Baviácora",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Bavispe",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Benjamín Hill",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Caborca",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Cajeme",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Cananea",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Carbó",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "La Colorada",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Cucurpe",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Cumpas",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Divisaderos",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Empalme",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Etchojoa",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Fronteras",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Granados",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Guaymas",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Hermosillo",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Huachinera",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Huásabas",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Huatabampo",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Huépac",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Imuris",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Magdalena",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Mazatán",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Moctezuma",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Naco",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Nácori Chico",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Nacozari de García",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Navojoa",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Nogales",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Ónavas",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Opodepe",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Oquitoa",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Pitiquito",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Puerto Peñasco",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Quiriego",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Rayón",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Rosario",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Sahuaripa",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "San Felipe de Jesús",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "San Javier",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "San Luis Río Colorado",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "San Miguel de Horcasitas",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "San Pedro de la Cueva",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Santa Ana",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Santa Cruz",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Sáric",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Soyopa",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Suaqui Grande",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Tepache",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Trincheras",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Tubutama",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Ures",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Villa Hidalgo",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Villa Pesqueira",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Yécora",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "General Plutarco Elías Calles",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Benito Juárez",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "San Ignacio Río Muerto",
+    "estado": "Sonora"
+  },
+  {
+    "municipio": "Balancán",
+    "estado": "Tabasco"
+  },
+  {
+    "municipio": "Cárdenas",
+    "estado": "Tabasco"
+  },
+  {
+    "municipio": "Centla",
+    "estado": "Tabasco"
+  },
+  {
+    "municipio": "Centro",
+    "estado": "Tabasco"
+  },
+  {
+    "municipio": "Comalcalco",
+    "estado": "Tabasco"
+  },
+  {
+    "municipio": "Cunduacán",
+    "estado": "Tabasco"
+  },
+  {
+    "municipio": "Emiliano Zapata",
+    "estado": "Tabasco"
+  },
+  {
+    "municipio": "Huimanguillo",
+    "estado": "Tabasco"
+  },
+  {
+    "municipio": "Jalapa",
+    "estado": "Tabasco"
+  },
+  {
+    "municipio": "Jalpa de Méndez",
+    "estado": "Tabasco"
+  },
+  {
+    "municipio": "Jonuta",
+    "estado": "Tabasco"
+  },
+  {
+    "municipio": "Macuspana",
+    "estado": "Tabasco"
+  },
+  {
+    "municipio": "Nacajuca",
+    "estado": "Tabasco"
+  },
+  {
+    "municipio": "Paraíso",
+    "estado": "Tabasco"
+  },
+  {
+    "municipio": "Tacotalpa",
+    "estado": "Tabasco"
+  },
+  {
+    "municipio": "Teapa",
+    "estado": "Tabasco"
+  },
+  {
+    "municipio": "Tenosique",
+    "estado": "Tabasco"
+  },
+  {
+    "municipio": "Abasolo",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "Aldama",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "Altamira",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "Antiguo Morelos",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "Burgos",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "Bustamante",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "Camargo",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "Casas",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "Ciudad Madero",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "Cruillas",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "Gómez Farías",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "González",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "Güémez",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "Guerrero",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "Gustavo Díaz Ordaz",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "Hidalgo",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "Jaumave",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "Jiménez",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "Llera",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "Mainero",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "El Mante",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "Matamoros",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "Méndez",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "Mier",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "Miguel Alemán",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "Miquihuana",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "Nuevo Laredo",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "Nuevo Morelos",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "Ocampo",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "Padilla",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "Palmillas",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "Reynosa",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "Río Bravo",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "San Carlos",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "San Fernando",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "San Nicolás",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "Soto la Marina",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "Tampico",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "Tula",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "Valle Hermoso",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "Victoria",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "Villagrán",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "Xicoténcatl",
+    "estado": "Tamaulipas"
+  },
+  {
+    "municipio": "Amaxac de Guerrero",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Apetatitlán de Antonio Carvajal",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Atlangatepec",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Atltzayanca",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Apizaco",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Calpulalpan",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "El Carmen Tequexquitla",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Cuapiaxtla",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Cuaxomulco",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Chiautempan",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Muñoz de Domingo Arenas",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Españita",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Huamantla",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Hueyotlipan",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Ixtacuixtla de Mariano Matamoros",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Ixtenco",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Mazatecochco de José María Morelos",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Contla de Juan Cuamatzi",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Tepetitla de Lardizábal",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Sanctórum de Lázaro Cárdenas",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Nanacamilpa de Mariano Arista",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Acuamanala de Miguel Hidalgo",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Natívitas",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Panotla",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "San Pablo del Monte",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Santa Cruz Tlaxcala",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Tenancingo",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Teolocholco",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Tepeyanco",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Terrenate",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Tetla de la Solidaridad",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Tetlatlahuca",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Tlaxcala",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Tlaxco",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Tocatlán",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Totolac",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Ziltlaltépec de Trinidad Sánchez Santos",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Tzompantepec",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Xaloztoc",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Xaltocan",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Papalotla de Xicohténcatl",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Xicohtzinco",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Yauhquemehcan",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Zacatelco",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Benito Juárez",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Emiliano Zapata",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Lázaro Cárdenas",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "La Magdalena Tlaltelulco",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "San Damián Texóloc",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "San Francisco Tetlanohcan",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "San Jerónimo Zacualpan",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "San José Teacalco",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "San Juan Huactzinco",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "San Lorenzo Axocomanitla",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "San Lucas Tecopilco",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Santa Ana Nopalucan",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Santa Apolonia Teacalco",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Santa Catarina Ayometla",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Santa Cruz Quilehtla",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Santa Isabel Xiloxoxtla",
+    "estado": "Tlaxcala"
+  },
+  {
+    "municipio": "Acajete",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Acatlán",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Acayucan",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Actopan",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Acula",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Acultzingo",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Camarón de Tejeda",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Alpatláhuac",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Alto Lucero de Gutiérrez Barrios",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Altotonga",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Alvarado",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Amatitlán",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Naranjos Amatlán",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Amatlán de los Reyes",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Angel R. Cabada",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "La Antigua",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Apazapan",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Aquila",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Astacinga",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Atlahuilco",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Atoyac",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Atzacan",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Atzalan",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Tlaltetela",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Ayahualulco",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Banderilla",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Benito Juárez",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Boca del Río",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Calcahualco",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Camerino Z. Mendoza",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Carrillo Puerto",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Catemaco",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Cazones de Herrera",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Cerro Azul",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Citlaltépetl",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Coacoatzintla",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Coahuitlán",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Coatepec",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Coatzacoalcos",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Coatzintla",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Coetzala",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Colipa",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Comapa",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Córdoba",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Cosamaloapan de Carpio",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Cosautlán de Carvajal",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Coscomatepec",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Cosoleacaque",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Cotaxtla",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Coxquihui",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Coyutla",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Cuichapa",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Cuitláhuac",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Chacaltianguis",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Chalma",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Chiconamel",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Chiconquiaco",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Chicontepec",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Chinameca",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Chinampa de Gorostiza",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Las Choapas",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Chocamán",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Chontla",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Chumatlán",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Emiliano Zapata",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Espinal",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Filomeno Mata",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Fortín",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Gutiérrez Zamora",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Hidalgotitlán",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Huatusco",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Huayacocotla",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Hueyapan de Ocampo",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Huiloapan de Cuauhtémoc",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Ignacio de la Llave",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Ilamatlán",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Isla",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Ixcatepec",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Ixhuacán de los Reyes",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Ixhuatlán del Café",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Ixhuatlancillo",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Ixhuatlán del Sureste",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Ixhuatlán de Madero",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Ixmatlahuacan",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Ixtaczoquitlán",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Jalacingo",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Xalapa",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Jalcomulco",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Jáltipan",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Jamapa",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Jesús Carranza",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Xico",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Jilotepec",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Juan Rodríguez Clara",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Juchique de Ferrer",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Landero y Coss",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Lerdo de Tejada",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Magdalena",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Maltrata",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Manlio Fabio Altamirano",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Mariano Escobedo",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Martínez de la Torre",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Mecatlán",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Mecayapan",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Medellín de Bravo",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Miahuatlán",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Las Minas",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Minatitlán",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Misantla",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Mixtla de Altamirano",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Moloacán",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Naolinco",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Naranjal",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Nautla",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Nogales",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Oluta",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Omealca",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Orizaba",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Otatitlán",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Oteapan",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Ozuluama de Mascareñas",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Pajapan",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Pánuco",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Papantla",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Paso del Macho",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Paso de Ovejas",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "La Perla",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Perote",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Platón Sánchez",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Playa Vicente",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Poza Rica de Hidalgo",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Las Vigas de Ramírez",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Pueblo Viejo",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Puente Nacional",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Rafael Delgado",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Rafael Lucio",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Los Reyes",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Río Blanco",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Saltabarranca",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "San Andrés Tenejapan",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "San Andrés Tuxtla",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "San Juan Evangelista",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Santiago Tuxtla",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Sayula de Alemán",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Soconusco",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Sochiapa",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Soledad Atzompa",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Soledad de Doblado",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Soteapan",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Tamalín",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Tamiahua",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Tampico Alto",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Tancoco",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Tantima",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Tantoyuca",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Tatatila",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Castillo de Teayo",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Tecolutla",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Tehuipango",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Álamo Temapache",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Tempoal",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Tenampa",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Tenochtitlán",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Teocelo",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Tepatlaxco",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Tepetlán",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Tepetzintla",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Tequila",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "José Azueta",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Texcatepec",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Texhuacán",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Texistepec",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Tezonapa",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Tierra Blanca",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Tihuatlán",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Tlacojalpan",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Tlacolulan",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Tlacotalpan",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Tlacotepec de Mejía",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Tlachichilco",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Tlalixcoyan",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Tlalnelhuayocan",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Tlapacoyan",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Tlaquilpa",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Tlilapan",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Tomatlán",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Tonayán",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Totutla",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Tuxpan",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Tuxtilla",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Ursulo Galván",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Vega de Alatorre",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Veracruz",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Villa Aldama",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Xoxocotla",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Yanga",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Yecuatla",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Zacualpan",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Zaragoza",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Zentla",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Zongolica",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Zontecomatlán de López y Fuentes",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Zozocolco de Hidalgo",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Agua Dulce",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "El Higo",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Nanchital de Lázaro Cárdenas del Río",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Tres Valles",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Carlos A. Carrillo",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Tatahuicapan de Juárez",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Uxpanapa",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "San Rafael",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Santiago Sochiapan",
+    "estado": "Veracruz de Ignacio de la Llave"
+  },
+  {
+    "municipio": "Abalá",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Acanceh",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Akil",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Baca",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Bokobá",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Buctzotz",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Cacalchén",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Calotmul",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Cansahcab",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Cantamayec",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Celestún",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Cenotillo",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Conkal",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Cuncunul",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Cuzamá",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Chacsinkín",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Chankom",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Chapab",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Chemax",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Chicxulub Pueblo",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Chichimilá",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Chikindzonot",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Chocholá",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Chumayel",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Dzan",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Dzemul",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Dzidzantún",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Dzilam de Bravo",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Dzilam González",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Dzitás",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Dzoncauich",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Espita",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Halachó",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Hocabá",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Hoctún",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Homún",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Huhí",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Hunucmá",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Ixil",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Izamal",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Kanasín",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Kantunil",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Kaua",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Kinchil",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Kopomá",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Mama",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Maní",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Maxcanú",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Mayapán",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Mérida",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Mocochá",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Motul",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Muna",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Muxupip",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Opichén",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Oxkutzcab",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Panabá",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Peto",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Progreso",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Quintana Roo",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Río Lagartos",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Sacalum",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Samahil",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Sanahcat",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "San Felipe",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Santa Elena",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Seyé",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Sinanché",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Sotuta",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Sucilá",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Sudzal",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Suma",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Tahdziú",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Tahmek",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Teabo",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Tecoh",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Tekal de Venegas",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Tekantó",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Tekax",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Tekit",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Tekom",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Telchac Pueblo",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Telchac Puerto",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Temax",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Temozón",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Tepakán",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Tetiz",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Teya",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Ticul",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Timucuy",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Tinum",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Tixcacalcupul",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Tixkokob",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Tixméhuac",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Tixpéhual",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Tizimín",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Tunkás",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Tzucacab",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Uayma",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Ucú",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Umán",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Valladolid",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Xocchel",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Yaxcabá",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Yaxkukul",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Yobaín",
+    "estado": "Yucatán"
+  },
+  {
+    "municipio": "Apozol",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Apulco",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Atolinga",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Benito Juárez",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Calera",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Cañitas de Felipe Pescador",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Concepción del Oro",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Cuauhtémoc",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Chalchihuites",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Fresnillo",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Trinidad García de la Cadena",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Genaro Codina",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "General Enrique Estrada",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "General Francisco R. Murguía",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "El Plateado de Joaquín Amaro",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "General Pánfilo Natera",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Guadalupe",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Huanusco",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Jalpa",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Jerez",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Jiménez del Teul",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Juan Aldama",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Juchipila",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Loreto",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Luis Moya",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Mazapil",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Melchor Ocampo",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Mezquital del Oro",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Miguel Auza",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Momax",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Monte Escobedo",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Morelos",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Moyahua de Estrada",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Nochistlán de Mejía",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Noria de Ángeles",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Ojocaliente",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Pánuco",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Pinos",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Río Grande",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Sain Alto",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "El Salvador",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Sombrerete",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Susticacán",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Tabasco",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Tepechitlán",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Tepetongo",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Teúl de González Ortega",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Tlaltenango de Sánchez Román",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Valparaíso",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Vetagrande",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Villa de Cos",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Villa García",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Villa González Ortega",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Villa Hidalgo",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Villanueva",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Zacatecas",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Trancoso",
+    "estado": "Zacatecas"
+  },
+  {
+    "municipio": "Santa María de la Paz",
+    "estado": "Zacatecas"
+  }
+]
