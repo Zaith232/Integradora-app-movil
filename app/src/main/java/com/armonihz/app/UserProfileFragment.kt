@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -54,7 +53,6 @@ class UserProfileFragment : Fragment() {
 
         tvEmail.text = user?.email ?: "Sin correo"
 
-        // 📸 FOTO DE FIREBASE INMEDIATA
         if (user?.photoUrl != null) {
             Glide.with(this)
                 .load(user.photoUrl)
@@ -75,12 +73,10 @@ class UserProfileFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        cargarDatosDesdeRealtime() // 🔄 se actualiza al volver de Editar Perfil
+        cargarDatosDesdeRealtime()
     }
 
-    // 🔹 Cargar nombre y teléfono desde Realtime Database
     private fun cargarDatosDesdeRealtime() {
-
         val user = FirebaseAuth.getInstance().currentUser ?: return
         val database = com.google.firebase.database.FirebaseDatabase.getInstance().reference
 
@@ -107,7 +103,6 @@ class UserProfileFragment : Fragment() {
 
     private fun observarFotoDesdeApi() {
         sharedViewModel.profilePhotoUrl.observe(viewLifecycleOwner) { url ->
-
             val googleUrl = FirebaseAuth.getInstance().currentUser?.photoUrl
 
             when {
@@ -135,38 +130,30 @@ class UserProfileFragment : Fragment() {
     }
 
     private fun loadProfileFromApi() {
-
         val user = FirebaseAuth.getInstance().currentUser ?: return
+        val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
 
-        user.getIdToken(false).addOnSuccessListener { result ->
+        viewLifecycleOwner.lifecycleScope.launch {
+            try {
+                // ⬅️ Se eliminó la petición a Firebase y el envío del token
+                val response = api.getClientProfile()
 
-            val firebaseToken = result.token ?: return@addOnSuccessListener
-            val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
+                if (!isAdded) return@launch
 
-            viewLifecycleOwner.lifecycleScope.launch {
-                try {
+                if (response.isSuccessful) {
+                    val photoUrl = response.body()?.photoUrl
 
-                    val response = api.getClientProfile("Bearer $firebaseToken")
-
-                    if (!isAdded) return@launch
-
-                    if (response.isSuccessful) {
-
-                        val photoUrl = response.body()?.photoUrl
-
-                        if (!photoUrl.isNullOrEmpty()) {
-                            sharedViewModel.updatePhoto(photoUrl)
-                        }
+                    if (!photoUrl.isNullOrEmpty()) {
+                        sharedViewModel.updatePhoto(photoUrl)
                     }
-
-                } catch (_: CancellationException) {
                 }
+
+            } catch (_: CancellationException) {
             }
         }
     }
 
     private fun configurarLogout(view: View) {
-
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
             .build()
@@ -174,7 +161,6 @@ class UserProfileFragment : Fragment() {
         val googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
 
         view.findViewById<Button>(R.id.btnLogout).setOnClickListener {
-
             androidx.appcompat.app.AlertDialog.Builder(requireContext())
                 .setTitle("Cerrar sesión")
                 .setMessage("¿Estás seguro de que deseas cerrar sesión?")
@@ -186,7 +172,6 @@ class UserProfileFragment : Fragment() {
                     TokenManager.clearToken(requireContext())
 
                     googleSignInClient.signOut().addOnCompleteListener {
-
                         LoadingManager.hide()
 
                         val intent = Intent(requireContext(), LoginActivity::class.java)
@@ -203,7 +188,6 @@ class UserProfileFragment : Fragment() {
     }
 
     private fun configurarNavegacion(view: View) {
-
         view.findViewById<Button>(R.id.btnHome).setOnClickListener { open(HomeFragment()) }
         view.findViewById<Button>(R.id.btnFavorite).setOnClickListener { open(FavoritesFragment()) }
         view.findViewById<Button>(R.id.btnEvent).setOnClickListener { open(MyEventsFragment()) }

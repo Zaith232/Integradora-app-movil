@@ -74,12 +74,11 @@ class MyEventsFragment : Fragment() {
             // ⬅️ VALIDACIÓN: Evita crash si sales del fragmento rápido
             if (!isAdded) return@addOnSuccessListener
 
-            val token = "Bearer ${result.token}"
             val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
 
             lifecycleScope.launch {
                 try {
-                    val response = api.getMyEvents(token)
+                    val response = api.getMyEvents()
 
                     // ⬅️ VALIDACIÓN
                     if (!isAdded) return@launch

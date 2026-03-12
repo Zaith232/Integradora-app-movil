@@ -39,69 +39,60 @@ interface ApiService {
     @GET("api/v1/client/profile")
     suspend fun getProfile(): Response<ProfileResponse>
 
+    // ⬅️ Se eliminó el @Header
     @GET("api/v1/client/profile")
-    suspend fun getClientProfile(
-        @Header("Authorization") token: String
-    ): Response<ClientProfileResponse>
+    suspend fun getClientProfile(): Response<ClientProfileResponse>
 
+    // ⬅️ Se eliminó el @Header
     @POST("api/v1/client/sync-google-photo")
     suspend fun syncGooglePhoto(
-        @Header("Authorization") token: String,
         @Body request: SyncGooglePhotoRequest
     ): Response<GenericResponse>
 
     @DELETE("api/v1/client/account")
     suspend fun deleteAccount(): Response<Unit>
 
-    @POST("api/v1/client/sync") // ⬅️ Le agregué api/v1/ aquí para mantener consistencia, revisa si es correcto
+    // ⬅️ Se eliminó el @Header
+    @POST("api/v1/client/sync")
     suspend fun syncClient(
-        @Header("Authorization") token: String,
         @Body data: Map<String, String>
     ): Response<Unit>
 
+    // ⬅️ Se eliminó el @Header
     @POST("api/v1/client/events")
     suspend fun createEvent(
-        @Header("Authorization") token: String,
         @Body request: EventRequest
     ): Response<GenericResponse>
 
     // 1. Obtener los eventos del cliente
     @GET("api/v1/client/events")
-    suspend fun getMyEvents(
-        @Header("Authorization") token: String
-    ): Response<List<EventResponse>>
+    suspend fun getMyEvents(): Response<List<EventResponse>>
 
-    // 2. Obtener las propuestas de un evento específico
+    // 2. Obtener las propuestas de un evento específico (⬅️ Se eliminó el @Header)
     @GET("api/v1/client/events/{id}/applications")
     suspend fun getEventApplications(
-        @Header("Authorization") token: String,
         @Path("id") eventId: Int
     ): Response<EventApplicationsResponse>
 
-    // 3. Aceptar una propuesta
+    // 3. Aceptar una propuesta (⬅️ Se eliminó el @Header)
     @POST("api/v1/client/events/{eventId}/applications/{appId}/accept")
     suspend fun acceptApplication(
-        @Header("Authorization") token: String,
         @Path("eventId") eventId: Int,
         @Path("appId") appId: Int
     ): Response<AcceptResponse>
 
-    // 4. ACTUALIZAR UN EVENTO (NUEVO)
+    // 4. ACTUALIZAR UN EVENTO (⬅️ Se eliminó el @Header)
     @PUT("api/v1/client/events/{id}")
     suspend fun updateEvent(
-        @Header("Authorization") token: String,
         @Path("id") eventId: Int,
         @Body request: EventRequest
     ): Response<GenericResponse>
 
     // Obtener el perfil de un músico específico
-// Obtener el perfil de un músico específico
     @GET("api/v1/musicians/{id}")
     suspend fun getMusicianProfile(
         @Path("id") musicianId: Int
-    ): Response<MusicianProfileWrapperResponse> // ⬅️ Cambiamos el tipo aquí
-
-    // Asegúrate de importar esto arriba: import com.google.gson.JsonObject
+    ): Response<MusicianProfileWrapperResponse>
 
     @GET("api/v1/musicians")
     suspend fun getAllMusicians(): retrofit2.Response<com.google.gson.JsonObject>

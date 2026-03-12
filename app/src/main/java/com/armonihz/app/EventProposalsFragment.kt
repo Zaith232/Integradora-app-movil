@@ -22,7 +22,7 @@ class EventProposalsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var eventId: Int = -1
-    private lateinit var proposalAdapter: ProposalAdapter // ⬅️ Declaramos el adapter
+    private lateinit var proposalAdapter: ProposalAdapter
 
     companion object {
         private const val ARG_EVENT_ID = "event_id"
@@ -51,7 +51,7 @@ class EventProposalsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupRecyclerView() // ⬅️ Inicializamos la lista
+        setupRecyclerView()
 
         if (eventId != -1) {
             loadProposals()
@@ -65,7 +65,6 @@ class EventProposalsFragment : Fragment() {
                 acceptApplication(applicationId)
             },
             onMusicianClick = { musicianId ->
-                // ⬅️ Navegamos a la pantalla del perfil del músico pasando su ID
                 val fragment = MusicianProfileFragment.newInstance(musicianId)
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.fragmentContainer, fragment)
@@ -82,28 +81,23 @@ class EventProposalsFragment : Fragment() {
 
     private fun loadProposals() {
         val user = FirebaseAuth.getInstance().currentUser ?: return
+        val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
 
-        user.getIdToken(true).addOnSuccessListener { result ->
-            val token = "Bearer ${result.token}"
-            val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
-
-            lifecycleScope.launch {
-                try {
-                    val response = api.getEventApplications(token, eventId)
-                    if (response.isSuccessful && response.body() != null) {
-                        // Actualizamos los datos del adapter
-                        proposalAdapter.updateData(response.body()!!.applications)
-                    } else {
-                        Toast.makeText(context, "Error al cargar propuestas", Toast.LENGTH_SHORT).show()
-                    }
-                } catch (e: Exception) {
-                    Log.e("API_ERROR", "Excepción: ${e.message}")
+        lifecycleScope.launch {
+            try {
+                // ⬅️ Se eliminó la petición a Firebase y el envío del token
+                val response = api.getEventApplications(eventId)
+                if (response.isSuccessful && response.body() != null) {
+                    proposalAdapter.updateData(response.body()!!.applications)
+                } else {
+                    Toast.makeText(context, "Error al cargar propuestas", Toast.LENGTH_SHORT).show()
                 }
+            } catch (e: Exception) {
+                Log.e("API_ERROR", "Excepción: ${e.message}")
             }
         }
     }
 
-    // ⬅️ LA NUEVA FUNCIÓN PARA ACEPTAR LA PROPUESTA
     private fun acceptApplication(applicationId: Int) {
         val user = FirebaseAuth.getInstance().currentUser
         if (user == null) {
@@ -111,29 +105,23 @@ class EventProposalsFragment : Fragment() {
             return
         }
 
-        user.getIdToken(true).addOnSuccessListener { result ->
-            val token = "Bearer ${result.token}"
-            val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
+        val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
 
-            lifecycleScope.launch {
-                try {
-                    // Llamamos a la API enviando el ID del evento y el ID de la propuesta
-                    val response = api.acceptApplication(token, eventId, applicationId)
+        lifecycleScope.launch {
+            try {
+                // ⬅️ Se eliminó la petición a Firebase y el envío del token
+                val response = api.acceptApplication(eventId, applicationId)
 
-                    if (response.isSuccessful && response.body() != null) {
-                        Toast.makeText(context, response.body()!!.message, Toast.LENGTH_SHORT).show()
-
-                        // 🔄 Recargamos la lista para que la interfaz se actualice
-                        // (El botón se pondrá gris y las demás propuestas se ocultarán según la lógica de tu Adapter)
-                        loadProposals()
-                    } else {
-                        Toast.makeText(context, "Error al aceptar al músico", Toast.LENGTH_SHORT).show()
-                        Log.e("API_ERROR", "Código: ${response.code()}")
-                    }
-                } catch (e: Exception) {
-                    Log.e("API_ERROR", "Excepción al aceptar: ${e.message}")
-                    Toast.makeText(context, "Error de conexión", Toast.LENGTH_SHORT).show()
+                if (response.isSuccessful && response.body() != null) {
+                    Toast.makeText(context, response.body()!!.message, Toast.LENGTH_SHORT).show()
+                    loadProposals()
+                } else {
+                    Toast.makeText(context, "Error al aceptar al músico", Toast.LENGTH_SHORT).show()
+                    Log.e("API_ERROR", "Código: ${response.code()}")
                 }
+            } catch (e: Exception) {
+                Log.e("API_ERROR", "Excepción al aceptar: ${e.message}")
+                Toast.makeText(context, "Error de conexión", Toast.LENGTH_SHORT).show()
             }
         }
     }

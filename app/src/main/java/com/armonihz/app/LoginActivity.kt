@@ -37,7 +37,6 @@ class LoginActivity : AppCompatActivity() {
         val textRegister = findViewById<TextView>(R.id.textRegister)
         val tvForgotPassword = findViewById<TextView>(R.id.tvForgotPassword)
 
-        // 🔵 GOOGLE CONFIG
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
@@ -45,9 +44,7 @@ class LoginActivity : AppCompatActivity() {
 
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        // 🔐 LOGIN EMAIL FIREBASE
         btnLogin.setOnClickListener {
-
             val correo = etCorreo.text.toString().trim()
             val password = etPassword.text.toString().trim()
 
@@ -59,35 +56,27 @@ class LoginActivity : AppCompatActivity() {
             auth.signInWithEmailAndPassword(correo, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-
                         val user = auth.currentUser
 
-                        // 🛑 VERIFICAMOS SI EL CORREO ESTÁ VALIDADO
                         if (user != null && user.isEmailVerified) {
-
-                            // Si está verificado, lo dejamos entrar
-                            user.getIdToken(true)
-                                .addOnSuccessListener { result ->
-                                    val firebaseToken = result.token
-                                    if (firebaseToken != null) {
-                                        TokenManager.saveToken(this@LoginActivity, firebaseToken)
-                                        syncClient()
-                                        entrarAlMain()
-                                    }
+                            user.getIdToken(true).addOnSuccessListener { result ->
+                                val firebaseToken = result.token
+                                if (firebaseToken != null) {
+                                    TokenManager.saveToken(this@LoginActivity, firebaseToken)
+                                    syncClient()
+                                    entrarAlMain()
                                 }
+                            }
                         } else {
-                            // Si NO está verificado, le avisamos y cerramos la sesión temporal que Firebase abrió
                             auth.signOut()
                             Toast.makeText(this, "Por favor, verifica tu correo en tu bandeja de entrada antes de entrar.", Toast.LENGTH_LONG).show()
                         }
-
                     } else {
                         Toast.makeText(this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
                     }
                 }
         }
 
-        // 🔵 LOGIN GOOGLE
         btnGoogle.setOnClickListener {
             startActivityForResult(googleSignInClient.signInIntent, RC_SIGN_IN)
         }
@@ -105,20 +94,17 @@ class LoginActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        // 🔐 SI YA HAY TOKEN FIREBASE → ENTRA DIRECTO
         val token = TokenManager.getToken(this)
         if (token != null) {
             entrarAlMain()
         }
     }
 
-    // 🔄 RESULTADO GOOGLE
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == RC_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-
             try {
                 val account = task.getResult(ApiException::class.java)
                 firebaseAuthWithGoogle(account.idToken!!)
@@ -128,26 +114,21 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    // 🔐 GOOGLE → FIREBASE
     private fun firebaseAuthWithGoogle(idToken: String) {
-
         val credential = GoogleAuthProvider.getCredential(idToken, null)
 
         auth.signInWithCredential(credential)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-
-                    auth.currentUser?.getIdToken(true)
-                        ?.addOnSuccessListener { result ->
-                            val firebaseToken = result.token
-                            if (firebaseToken != null) {
-                                TokenManager.saveToken(this, firebaseToken)
-                                syncClient()
-                                syncGooglePhotoIfNeeded()
-                                entrarAlMain()
-                            }
+                    auth.currentUser?.getIdToken(true)?.addOnSuccessListener { result ->
+                        val firebaseToken = result.token
+                        if (firebaseToken != null) {
+                            TokenManager.saveToken(this, firebaseToken)
+                            syncClient()
+                            syncGooglePhotoIfNeeded()
+                            entrarAlMain()
                         }
-
+                    }
                 } else {
                     Toast.makeText(this, "Error Firebase", Toast.LENGTH_SHORT).show()
                 }
@@ -155,23 +136,14 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun syncGooglePhotoIfNeeded() {
-
         val user = FirebaseAuth.getInstance().currentUser ?: return
         val googlePhotoUrl = user.photoUrl?.toString() ?: return
 
         lifecycleScope.launch {
             try {
-
-                val firebaseToken = user.getIdToken(false).await().token ?: return@launch
-
-                val api = RetrofitClient.getInstance(this@LoginActivity)
-                    .create(ApiService::class.java)
-
-                api.syncGooglePhoto(
-                    "Bearer $firebaseToken",
-                    SyncGooglePhotoRequest(googlePhotoUrl)
-                )
-
+                // ⬅️ Ya no enviamos "Bearer $firebaseToken" manual
+                val api = RetrofitClient.getInstance(this@LoginActivity).create(ApiService::class.java)
+                api.syncGooglePhoto(SyncGooglePhotoRequest(googlePhotoUrl))
             } catch (e: Exception) {
                 Log.e("SYNC_PHOTO", "No se pudo sincronizar foto")
             }
@@ -179,28 +151,17 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun syncClient() {
-
         val user = FirebaseAuth.getInstance().currentUser ?: return
 
         lifecycleScope.launch {
             try {
-
-                val firebaseToken = user.getIdToken(false).await().token ?: return@launch
-
-                val api = RetrofitClient.getInstance(this@LoginActivity)
-                    .create(ApiService::class.java)
+                // ⬅️ Ya no enviamos el token manualmente
+                val api = RetrofitClient.getInstance(this@LoginActivity).create(ApiService::class.java)
 
                 val name = user.displayName ?: ""
                 val email = user.email ?: ""
 
-                api.syncClient(
-                    "Bearer $firebaseToken",
-                    mapOf(
-                        "name" to name,
-                        "email" to email
-                    )
-                )
-
+                api.syncClient(mapOf("name" to name, "email" to email))
             } catch (e: Exception) {
                 Log.e("SYNC_CLIENT", "No se pudo sincronizar cliente")
             }
@@ -213,9 +174,7 @@ class LoginActivity : AppCompatActivity() {
         finish()
     }
 
-    // 📩 DIÁLOGO RECUPERAR PASSWORD
     private fun mostrarDialogoRecuperarPassword(correoInicial: String) {
-
         val dialogView = layoutInflater.inflate(R.layout.dialog_forgot_password, null)
         val builder = androidx.appcompat.app.AlertDialog.Builder(this)
         builder.setView(dialogView)
@@ -251,10 +210,8 @@ class LoginActivity : AppCompatActivity() {
                         Toast.makeText(this, "Error al enviar correo", Toast.LENGTH_LONG).show()
                     }
                 }
-
             dialog.dismiss()
         }
-
         dialog.show()
     }
 }

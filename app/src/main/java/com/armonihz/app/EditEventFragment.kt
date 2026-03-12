@@ -275,7 +275,6 @@ class EditEventFragment : Fragment() {
         }
     }
 
-    // ⬅️ FUNCIONES DEL LOADER
     private fun showLoader() {
         binding.loader.root.visibility = View.VISIBLE
     }
@@ -308,7 +307,7 @@ class EditEventFragment : Fragment() {
         }
 
         binding.btnSaveEvent.isEnabled = false
-        showLoader() // ⬅️ MOSTRAR EL INDICADOR
+        showLoader()
 
         val request = EventRequest(
             titulo = titulo,
@@ -327,33 +326,27 @@ class EditEventFragment : Fragment() {
             return
         }
 
-        user.getIdToken(true).addOnSuccessListener { result ->
-            val token = "Bearer ${result.token}"
-            val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
+        val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
 
-            lifecycleScope.launch {
-                try {
-                    val response = api.updateEvent(token, eventToEdit!!.id, request)
-                    if (response.isSuccessful) {
-                        Toast.makeText(context, "Evento actualizado con éxito", Toast.LENGTH_SHORT).show()
-                        parentFragmentManager.popBackStack()
-                    } else {
-                        Toast.makeText(context, "Error al actualizar: ${response.code()}", Toast.LENGTH_SHORT).show()
-                        Log.e("API_ERROR", "Error: ${response.code()}")
-                        binding.btnSaveEvent.isEnabled = true
-                    }
-                } catch (e: Exception) {
-                    Toast.makeText(context, "Error de conexión", Toast.LENGTH_SHORT).show()
-                    Log.e("API_ERROR", "Exception: ${e.message}")
+        lifecycleScope.launch {
+            try {
+                // ⬅️ Se eliminó la petición a Firebase y el envío del token
+                val response = api.updateEvent(eventToEdit!!.id, request)
+                if (response.isSuccessful) {
+                    Toast.makeText(context, "Evento actualizado con éxito", Toast.LENGTH_SHORT).show()
+                    parentFragmentManager.popBackStack()
+                } else {
+                    Toast.makeText(context, "Error al actualizar: ${response.code()}", Toast.LENGTH_SHORT).show()
+                    Log.e("API_ERROR", "Error: ${response.code()}")
                     binding.btnSaveEvent.isEnabled = true
-                } finally {
-                    hideLoader() // ⬅️ OCULTARLO AL FINALIZAR
                 }
+            } catch (e: Exception) {
+                Toast.makeText(context, "Error de conexión", Toast.LENGTH_SHORT).show()
+                Log.e("API_ERROR", "Exception: ${e.message}")
+                binding.btnSaveEvent.isEnabled = true
+            } finally {
+                hideLoader()
             }
-        }.addOnFailureListener {
-            Toast.makeText(context, "Error de autenticación con Firebase", Toast.LENGTH_SHORT).show()
-            binding.btnSaveEvent.isEnabled = true
-            hideLoader() // ⬅️ OCULTARLO SI FALLA FIREBASE
         }
     }
 

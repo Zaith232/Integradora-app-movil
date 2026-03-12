@@ -13,7 +13,7 @@ class AuthInterceptor(private val context: Context) : Interceptor {
 
         val request = if (token != null) {
             chain.request().newBuilder()
-                .addHeader("Authorization", "Bearer $token")
+                .header("Authorization", "Bearer $token") // ⬅️ CAMBIO AQUÍ: Usar .header en lugar de .addHeader
                 .build()
         } else {
             chain.request()

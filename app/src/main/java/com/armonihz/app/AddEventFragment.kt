@@ -200,7 +200,6 @@ class AddEventFragment : Fragment() {
         }
     }
 
-    // ⬅️ FUNCIONES DEL LOADER
     private fun showLoader() {
         binding.loader.root.visibility = View.VISIBLE
     }
@@ -241,34 +240,28 @@ class AddEventFragment : Fragment() {
         }
 
         binding.btnPublish.isEnabled = false
-        showLoader() // ⬅️ MOSTRAR EL INDICADOR
+        showLoader()
 
-        user.getIdToken(true).addOnSuccessListener { result ->
-            val token = "Bearer ${result.token}"
-            val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
+        val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
 
-            lifecycleScope.launch {
-                try {
-                    val response = api.createEvent(token, nuevoEvento)
-                    if (response.isSuccessful) {
-                        Toast.makeText(context, "¡Evento publicado con éxito!", Toast.LENGTH_SHORT).show()
-                        parentFragmentManager.popBackStack()
-                    } else {
-                        Toast.makeText(context, "Error al publicar: ${response.code()}", Toast.LENGTH_SHORT).show()
-                        binding.btnPublish.isEnabled = true
-                    }
-                } catch (e: Exception) {
-                    Log.e("API_ERROR", "Error de red: ${e.message}")
-                    Toast.makeText(context, "Error de conexión", Toast.LENGTH_SHORT).show()
+        lifecycleScope.launch {
+            try {
+                // ⬅️ Se eliminó la petición a Firebase y el envío del token
+                val response = api.createEvent(nuevoEvento)
+                if (response.isSuccessful) {
+                    Toast.makeText(context, "¡Evento publicado con éxito!", Toast.LENGTH_SHORT).show()
+                    parentFragmentManager.popBackStack()
+                } else {
+                    Toast.makeText(context, "Error al publicar: ${response.code()}", Toast.LENGTH_SHORT).show()
                     binding.btnPublish.isEnabled = true
-                } finally {
-                    hideLoader() // ⬅️ OCULTARLO AL FINALIZAR
                 }
+            } catch (e: Exception) {
+                Log.e("API_ERROR", "Error de red: ${e.message}")
+                Toast.makeText(context, "Error de conexión", Toast.LENGTH_SHORT).show()
+                binding.btnPublish.isEnabled = true
+            } finally {
+                hideLoader()
             }
-        }.addOnFailureListener {
-            Toast.makeText(context, "Error de autenticación con Firebase", Toast.LENGTH_SHORT).show()
-            binding.btnPublish.isEnabled = true
-            hideLoader() // ⬅️ OCULTARLO SI FALLA FIREBASE
         }
     }
 

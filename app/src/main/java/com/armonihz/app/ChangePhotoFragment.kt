@@ -42,13 +42,11 @@ class ChangePhotoFragment : Fragment() {
 
     private val sharedViewModel: ProfileSharedViewModel by activityViewModels()
 
-    // 📷 SELECT IMAGE
     private val pickImageLauncher =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             uri?.let { if (isValidImage(it)) startCrop(it) }
         }
 
-    // ✂️ CROP IMAGE
     private val cropImageLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK && result.data != null) {
@@ -114,7 +112,6 @@ class ChangePhotoFragment : Fragment() {
         return view
     }
 
-    // 👀 OBSERVAR FOTO EN TIEMPO REAL
     private fun observeSharedPhoto() {
         sharedViewModel.profilePhotoUrl.observe(viewLifecycleOwner) { url ->
             if (!url.isNullOrEmpty()) {
@@ -131,9 +128,7 @@ class ChangePhotoFragment : Fragment() {
         }
     }
 
-    // ⚡ CARGA INICIAL INSTANTÁNEA
     private fun loadInitialPhoto() {
-
         val sharedUrl = sharedViewModel.profilePhotoUrl.value
         val user = FirebaseAuth.getInstance().currentUser
 
@@ -141,27 +136,13 @@ class ChangePhotoFragment : Fragment() {
             !sharedUrl.isNullOrEmpty() -> {
                 hasLaravelPhoto = true
                 enableDeleteButton(true)
-
-                Glide.with(this)
-                    .load(sharedUrl)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .skipMemoryCache(false)
-                    .circleCrop()
-                    .into(ivProfilePicture)
+                Glide.with(this).load(sharedUrl).diskCacheStrategy(DiskCacheStrategy.ALL).circleCrop().into(ivProfilePicture)
             }
-
             user?.photoUrl != null -> {
                 hasLaravelPhoto = false
                 enableDeleteButton(false)
-
-                Glide.with(this)
-                    .load(user.photoUrl)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .skipMemoryCache(false)
-                    .circleCrop()
-                    .into(ivProfilePicture)
+                Glide.with(this).load(user.photoUrl).diskCacheStrategy(DiskCacheStrategy.ALL).circleCrop().into(ivProfilePicture)
             }
-
             else -> {
                 enableDeleteButton(false)
                 ivProfilePicture.setImageResource(android.R.drawable.ic_menu_camera)
@@ -170,50 +151,39 @@ class ChangePhotoFragment : Fragment() {
         }
     }
 
-    // 🌐 CARGAR DESDE API SOLO SI NO HAY NADA
     private fun loadCurrentPhoto() {
+        val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
 
-        val user = FirebaseAuth.getInstance().currentUser ?: return
+        viewLifecycleOwner.lifecycleScope.launch {
+            try {
+                // ⬅️ Se eliminó la obtención y paso del token de Firebase
+                val response = api.getClientProfile()
 
-        user.getIdToken(false).addOnSuccessListener { result ->
+                if (!isAdded) return@launch
 
-            val firebaseToken = result.token ?: return@addOnSuccessListener
-            val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
-
-            viewLifecycleOwner.lifecycleScope.launch {
-                try {
-                    val response = api.getClientProfile("Bearer $firebaseToken")
-
-                    if (!isAdded) return@launch
-
-                    val photoUrlLaravel = response.body()?.photoUrl
-
-                    if (!photoUrlLaravel.isNullOrEmpty()) {
-                        sharedViewModel.updatePhoto(photoUrlLaravel)
-                    }
-
-                } catch (e: Exception) {
-                    if (e is CancellationException) return@launch
+                val photoUrlLaravel = response.body()?.photoUrl
+                if (!photoUrlLaravel.isNullOrEmpty()) {
+                    sharedViewModel.updatePhoto(photoUrlLaravel)
                 }
+            } catch (e: Exception) {
+                if (e is CancellationException) return@launch
             }
         }
     }
 
     private fun uploadPhotoToApi(imageUri: Uri) {
-
         showLoader()
-
         val file = File(requireContext().cacheDir, "upload.jpg")
         val inputStream = requireContext().contentResolver.openInputStream(imageUri)
         file.outputStream().use { inputStream?.copyTo(it) }
 
         val requestFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
         val photoPart = MultipartBody.Part.createFormData("foto", file.name, requestFile)
-
         val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
 
         viewLifecycleOwner.lifecycleScope.launch {
             try {
+                // El token ya lo inyecta el interceptor en esta petición
                 val response = api.uploadProfilePhoto(photoPart)
 
                 if (!isAdded) return@launch
@@ -226,7 +196,6 @@ class ChangePhotoFragment : Fragment() {
                 } else {
                     Toast.makeText(requireContext(), "Error ${response.code()}", Toast.LENGTH_SHORT).show()
                 }
-
             } catch (e: Exception) {
                 if (e is CancellationException) return@launch
             } finally {
@@ -236,9 +205,7 @@ class ChangePhotoFragment : Fragment() {
     }
 
     private fun deletePhotoFromApi() {
-
         showLoader()
-
         val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -251,13 +218,10 @@ class ChangePhotoFragment : Fragment() {
                     sharedViewModel.updatePhoto(null)
                     hasLaravelPhoto = false
                     enableDeleteButton(false)
-
                     ivProfilePicture.setImageResource(android.R.drawable.ic_menu_camera)
-
                     Toast.makeText(requireContext(), "Foto eliminada", Toast.LENGTH_SHORT).show()
                     requireActivity().supportFragmentManager.popBackStack()
                 }
-
             } catch (e: Exception) {
                 if (e is CancellationException) return@launch
             } finally {
@@ -272,23 +236,14 @@ class ChangePhotoFragment : Fragment() {
     }
 
     private fun startCrop(sourceUri: Uri) {
-        val destinationUri = Uri.fromFile(
-            File(requireContext().cacheDir, "cropped_${System.currentTimeMillis()}.jpg")
-        )
-
+        val destinationUri = Uri.fromFile(File(requireContext().cacheDir, "cropped_${System.currentTimeMillis()}.jpg"))
         val options = UCrop.Options().apply {
             setCompressionFormat(android.graphics.Bitmap.CompressFormat.JPEG)
             setCompressionQuality(90)
             setToolbarTitle("Ajustar Foto")
             setCircleDimmedLayer(true)
         }
-
-        val uCropIntent = UCrop.of(sourceUri, destinationUri)
-            .withAspectRatio(1f, 1f)
-            .withMaxResultSize(800, 800)
-            .withOptions(options)
-            .getIntent(requireContext())
-
+        val uCropIntent = UCrop.of(sourceUri, destinationUri).withAspectRatio(1f, 1f).withMaxResultSize(800, 800).withOptions(options).getIntent(requireContext())
         cropImageLauncher.launch(uCropIntent)
     }
 
@@ -310,15 +265,9 @@ class ChangePhotoFragment : Fragment() {
                 }
             }
         }
-
         return true
     }
 
-    private fun showLoader() {
-        loader.visibility = View.VISIBLE
-    }
-
-    private fun hideLoader() {
-        loader.visibility = View.GONE
-    }
+    private fun showLoader() { loader.visibility = View.VISIBLE }
+    private fun hideLoader() { loader.visibility = View.GONE }
 }
