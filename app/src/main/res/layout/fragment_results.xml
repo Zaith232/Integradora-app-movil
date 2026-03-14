@@ -5,43 +5,52 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8FAFC">
+    android:background="@color/md_background">
 
     <LinearLayout
         android:id="@+id/searchHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp"
+        android:paddingHorizontal="24dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="16dp"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Resultados"
-            android:textSize="24sp"
+            android:textSize="28sp"
             android:textStyle="bold"
-            android:textColor="#1E293B"/>
+            android:textColor="@color/md_onSurface"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="8dp">
+            android:layout_marginTop="16dp">
 
             <com.google.android.material.chip.Chip
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Guadalajara"
-                app:chipBackgroundColor="#F1F5F9"
-                app:closeIconVisible="true"/>
+                android:textColor="@color/md_onSurface"
+                app:chipBackgroundColor="@color/md_surface"
+                app:chipStrokeColor="@color/md_outline"
+                app:chipStrokeWidth="1dp"
+                app:closeIconVisible="true"
+                app:closeIconTint="@color/md_onSurfaceVariant"/>
 
             <com.google.android.material.chip.Chip
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="Mariachi"
-                app:chipBackgroundColor="#F1F5F9"/>
+                android:textColor="@color/md_onSurface"
+                app:chipBackgroundColor="@color/md_surface"
+                app:chipStrokeColor="@color/md_outline"
+                app:chipStrokeWidth="1dp"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -49,25 +58,29 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/searchHeader"
-        app:layout_constraintBottom_toTopOf="@id/bottomNav">
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigation">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingHorizontal="16dp">
+            android:paddingHorizontal="24dp"
+            android:paddingBottom="24dp">
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="2dp">
+                app:cardCornerRadius="24dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@color/md_surface"
+                app:strokeColor="@color/md_outline"
+                app:strokeWidth="1dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="12dp">
+                    android:padding="16dp">
 
                     <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/imgResult"
@@ -75,7 +88,8 @@
                         android:layout_height="80dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/mariachi"
-                        app:shapeAppearanceOverlay="@style/CircleImage"
+                        android:background="@color/md_outline"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"/>
@@ -86,9 +100,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:text="Mariachi Sol de Jalisco"
-                        android:textSize="17sp"
+                        android:textSize="18sp"
                         android:textStyle="bold"
-                        android:textColor="#1E293B"
+                        android:textColor="@color/md_onSurface"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toEndOf="@id/imgResult"
                         app:layout_constraintEnd_toEndOf="parent"/>
@@ -99,7 +113,8 @@
                         android:layout_height="wrap_content"
                         android:text="⭐ 4.8 (120)"
                         android:textColor="#F59E0B"
-                        android:textSize="13sp"
+                        android:textSize="14sp"
+                        android:layout_marginTop="4dp"
                         app:layout_constraintTop_toBottomOf="@id/txtName"
                         app:layout_constraintStart_toStartOf="@id/txtName"/>
 
@@ -108,8 +123,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="10 años de experiencia"
-                        android:textColor="#64748B"
-                        android:textSize="13sp"
+                        android:textColor="@color/md_onSurfaceVariant"
+                        android:textSize="14sp"
+                        android:layout_marginTop="2dp"
                         app:layout_constraintTop_toBottomOf="@id/txtRating"
                         app:layout_constraintStart_toStartOf="@id/txtName"/>
 
@@ -117,56 +133,29 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Ver perfil ›"
-                        android:textColor="#0D9488"
+                        android:textColor="@color/md_primary"
                         android:textStyle="bold"
-                        android:layout_marginTop="4dp"
+                        android:textSize="14sp"
+                        android:layout_marginTop="8dp"
                         app:layout_constraintTop_toBottomOf="@id/txtExp"
                         app:layout_constraintStart_toStartOf="@id/txtName"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-    <!-- Bottom Navigation -->
-    <LinearLayout
-        android:id="@+id/bottomNav"
-        android:layout_width="0dp"
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="10dp"
-        android:orientation="horizontal"
-        android:background="#0F172A"
+        android:background="@color/md_surface"
+        app:itemIconTint="@color/md_onSurfaceVariant"
+        app:itemTextColor="@color/md_onSurfaceVariant"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnHome"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Home"
-            android:textColor="#FFFFFF"
-            android:background="@android:color/transparent"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnFavorite"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Favoritos"
-            android:textColor="#FFFFFF"
-            android:background="@android:color/transparent"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnProfile"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Perfil"
-            android:textColor="#FFFFFF"
-            android:background="@android:color/transparent"/>
-
-    </LinearLayout>
+        app:menu="@menu/bottom_nav_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

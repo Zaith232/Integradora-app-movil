@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class ResultsFragment : Fragment() {
 
@@ -16,17 +16,30 @@ class ResultsFragment : Fragment() {
     ): View {
         val view = inflater.inflate(R.layout.fragment_results, container, false)
 
-        view.findViewById<Button>(R.id.btnHome).setOnClickListener {
-            open(HomeFragment())
-        }
-        view.findViewById<Button>(R.id.btnFavorite).setOnClickListener {
-            open(FavoritesFragment())
-        }
-        view.findViewById<Button>(R.id.btnProfile).setOnClickListener {
-            open(UserProfileFragment())
-        }
-        view.findViewById<Button>(R.id.btnEvent).setOnClickListener {
-            open(MyEventsFragment())
+        // Enlazamos el nuevo BottomNavigationView
+        val bottomNavigation = view.findViewById<BottomNavigationView>(R.id.bottomNavigation)
+
+        // Configuramos los clics de cada pestaña
+        bottomNavigation.setOnItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_home -> {
+                    open(HomeFragment())
+                    true
+                }
+                R.id.nav_events -> {
+                    open(MyEventsFragment())
+                    true
+                }
+                R.id.nav_favorites -> {
+                    open(FavoritesFragment())
+                    true
+                }
+                R.id.nav_profile -> {
+                    open(UserProfileFragment())
+                    true
+                }
+                else -> false
+            }
         }
 
         return view

@@ -188,10 +188,36 @@ class UserProfileFragment : Fragment() {
     }
 
     private fun configurarNavegacion(view: View) {
-        view.findViewById<Button>(R.id.btnHome).setOnClickListener { open(HomeFragment()) }
-        view.findViewById<Button>(R.id.btnFavorite).setOnClickListener { open(FavoritesFragment()) }
-        view.findViewById<Button>(R.id.btnEvent).setOnClickListener { open(MyEventsFragment()) }
+        // 1. Enlazamos el nuevo menú de navegación
+        val bottomNavigation = view.findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottomNavigation)
 
+        // 2. Indicamos que estamos en la pestaña de Perfil
+        bottomNavigation.selectedItemId = R.id.nav_profile
+
+        // 3. Manejamos los clics de las pestañas
+        bottomNavigation.setOnItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_home -> {
+                    open(HomeFragment())
+                    true
+                }
+                R.id.nav_events -> {
+                    open(MyEventsFragment())
+                    true
+                }
+                R.id.nav_favorites -> {
+                    open(FavoritesFragment())
+                    true
+                }
+                R.id.nav_profile -> {
+                    // Ya estamos en el perfil, no hacemos nada
+                    true
+                }
+                else -> false
+            }
+        }
+
+        // 4. Configurar los clics de los botones de la pantalla
         buttonSettings.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainer, SettingsFragment())
@@ -199,7 +225,7 @@ class UserProfileFragment : Fragment() {
                 .commit()
         }
 
-        view.findViewById<Button>(R.id.btnMyReviews).setOnClickListener {
+        view.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnMyReviews).setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainer, ReviewsFragment())
                 .addToBackStack(null)
