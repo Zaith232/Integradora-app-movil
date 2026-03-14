@@ -179,6 +179,19 @@ class EditEventFragment : Fragment() {
                     val timePickerFin = TimePickerDialog(
                         requireContext(),
                         { _, horaFin, minutoFin ->
+
+                            val inicioMin = horaInicio * 60 + minutoInicio
+                            val finMin = horaFin * 60 + minutoFin
+
+                            if (finMin <= inicioMin) {
+                                Toast.makeText(
+                                    context,
+                                    "La hora de finalización debe ser mayor que la de inicio",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                return@TimePickerDialog
+                            }
+
                             val horaInicioStr = String.format("%02d:%02d", horaInicio, minutoInicio)
                             val horaFinStr = String.format("%02d:%02d", horaFin, minutoFin)
 

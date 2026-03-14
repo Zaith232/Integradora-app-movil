@@ -94,8 +94,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        val token = TokenManager.getToken(this)
-        if (token != null) {
+        if (FirebaseAuth.getInstance().currentUser != null) {
             entrarAlMain()
         }
     }
