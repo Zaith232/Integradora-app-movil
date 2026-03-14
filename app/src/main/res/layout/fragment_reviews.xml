@@ -2,58 +2,54 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:colorBackground">
+    android:background="@color/md_background">
 
-    <!-- HEADER -->
     <LinearLayout
         android:id="@+id/headerLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp"
+        android:padding="24dp"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Mis Reseñas"
-            android:textSize="26sp"
+            android:textSize="28sp"
             android:textStyle="bold"
-            android:textColor="?attr/colorOnSurface"/>
+            android:textColor="@color/md_onSurface"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Has compartido 12 opiniones"
-            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textColor="@color/md_onSurfaceVariant"
             android:textSize="14sp"/>
     </LinearLayout>
 
-    <!-- LISTA -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/headerLayout"
-        app:layout_constraintBottom_toTopOf="@id/bottomNav">
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigation">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingHorizontal="16dp">
+            android:paddingHorizontal="24dp">
 
-            <!-- CARD RESEÑA -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="2dp"
-                app:cardBackgroundColor="?attr/colorSurface"
-                app:strokeColor="?attr/colorOutline"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@color/md_surface"
+                app:strokeColor="@color/md_outline"
                 app:strokeWidth="1dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -67,7 +63,7 @@
                         android:layout_height="48dp"
                         android:src="@drawable/mariachi"
                         android:scaleType="centerCrop"
-                        app:shapeAppearanceOverlay="@style/CircleImage"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"/>
 
@@ -78,8 +74,8 @@
                         android:layout_marginStart="12dp"
                         android:text="Mariachi Sol de Jalisco"
                         android:textStyle="bold"
-                        android:textColor="?attr/colorOnSurface"
-                        android:textSize="16sp"
+                        android:textColor="@color/md_onSurface"
+                        android:textSize="18sp"
                         app:layout_constraintTop_toTopOf="@id/imgGroup"
                         app:layout_constraintStart_toEndOf="@id/imgGroup"
                         app:layout_constraintEnd_toStartOf="@id/txtDate"/>
@@ -90,11 +86,10 @@
                         android:layout_height="wrap_content"
                         android:text="Hace 2 días"
                         android:textSize="12sp"
-                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:textColor="@color/md_onSurfaceVariant"
                         app:layout_constraintTop_toTopOf="@id/groupName"
                         app:layout_constraintEnd_toEndOf="parent"/>
 
-                    <!-- ESTRELLAS -->
                     <LinearLayout
                         android:id="@+id/starsLayout"
                         android:layout_width="wrap_content"
@@ -104,19 +99,19 @@
                         app:layout_constraintTop_toBottomOf="@id/groupName"
                         app:layout_constraintStart_toStartOf="@id/groupName">
 
-                        <ImageView android:layout_width="14dp" android:layout_height="14dp" android:src="@drawable/ic_star" app:tint="?attr/colorSecondary"/>
-                        <ImageView android:layout_width="14dp" android:layout_height="14dp" android:src="@drawable/ic_star" app:tint="?attr/colorSecondary"/>
-                        <ImageView android:layout_width="14dp" android:layout_height="14dp" android:src="@drawable/ic_star" app:tint="?attr/colorSecondary"/>
-                        <ImageView android:layout_width="14dp" android:layout_height="14dp" android:src="@drawable/ic_star" app:tint="?attr/colorSecondary"/>
-                        <ImageView android:layout_width="14dp" android:layout_height="14dp" android:src="@drawable/ic_star" app:tint="?attr/colorSecondary"/>
+                        <ImageView android:layout_width="14dp" android:layout_height="14dp" android:src="@drawable/ic_star" app:tint="#F59E0B"/>
+                        <ImageView android:layout_width="14dp" android:layout_height="14dp" android:src="@drawable/ic_star" app:tint="#F59E0B"/>
+                        <ImageView android:layout_width="14dp" android:layout_height="14dp" android:src="@drawable/ic_star" app:tint="#F59E0B"/>
+                        <ImageView android:layout_width="14dp" android:layout_height="14dp" android:src="@drawable/ic_star" app:tint="#F59E0B"/>
+                        <ImageView android:layout_width="14dp" android:layout_height="14dp" android:src="@drawable/ic_star" app:tint="#F59E0B"/>
                     </LinearLayout>
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="16dp"
                         android:text="“Excelente presentación...”"
-                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:textColor="@color/md_onSurfaceVariant"
                         android:textStyle="italic"
                         app:layout_constraintTop_toBottomOf="@id/imgGroup"
                         app:layout_constraintStart_toStartOf="parent"
@@ -128,54 +123,16 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <!-- BOTTOM NAV (temporal) -->
-    <LinearLayout
-        android:id="@+id/bottomNav"
-        android:layout_width="0dp"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="10dp"
-        android:orientation="horizontal"
-        android:background="?attr/colorSurface"
+        android:background="@color/md_surface"
+        app:itemIconTint="@color/md_onSurfaceVariant"
+        app:itemTextColor="@color/md_onSurfaceVariant"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnHome"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Home"
-            android:textColor="?attr/colorOnSurface"
-            android:background="@android:color/transparent"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnEvent"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Eventos"
-            android:textColor="?attr/colorOnSurface"
-            android:background="@android:color/transparent"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnFavorite"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Favoritos"
-            android:textColor="?attr/colorOnSurface"
-            android:background="@android:color/transparent"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnProfile"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Perfil"
-            android:textColor="?attr/colorPrimary"
-            android:background="@android:color/transparent"/>
-
-    </LinearLayout>
+        app:menu="@menu/bottom_nav_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -225,13 +225,30 @@ class MusicianProfileFragment : Fragment() {
     }
 
     private fun setupListeners() {
-        binding.btnHome.setOnClickListener { open(HomeFragment()) }
-        binding.btnEvent.setOnClickListener { open(MyEventsFragment()) }
-        binding.btnFavorite.setOnClickListener { open(FavoritesFragment()) }
-        binding.btnProfile.setOnClickListener { open(UserProfileFragment()) }
-
         binding.btnFav.setOnClickListener {
-            Toast.makeText(context, "Añadido a favoritos ❤️", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Añadido a favoritos", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.bottomNavigation.setOnItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_home -> {
+                    open(HomeFragment())
+                    true
+                }
+                R.id.nav_events -> {
+                    open(MyEventsFragment())
+                    true
+                }
+                R.id.nav_favorites -> {
+                    open(FavoritesFragment())
+                    true
+                }
+                R.id.nav_profile -> {
+                    open(UserProfileFragment())
+                    true
+                }
+                else -> false
+            }
         }
     }
 

@@ -11,6 +11,7 @@ import com.armonihz.app.network.model.DeletePhotoResponse
 import com.armonihz.app.network.model.EventApplicationsResponse
 import com.armonihz.app.network.model.EventRequest
 import com.armonihz.app.network.model.EventResponse
+import com.armonihz.app.network.model.FcmTokenRequest
 import com.armonihz.app.network.model.MusicianProfileDetailResponse
 import com.armonihz.app.network.model.MusicianProfileWrapperResponse
 import com.armonihz.app.network.model.PaginatedMusiciansWrapper
@@ -35,6 +36,13 @@ interface ApiService {
     suspend fun firebaseLogin(
         @Body request: FirebaseLoginRequest
     ): Response<AuthResponse>
+
+    // Enviar el FCM Token al servidor para las notificaciones
+    // Enviar el FCM Token al servidor
+    @POST("api/v1/client/fcm-token")
+    suspend fun updateFcmToken(
+        @Body request: com.armonihz.app.network.model.FcmTokenRequest
+    ): retrofit2.Response<com.armonihz.app.network.model.GenericResponse>
 
     @GET("api/v1/client/profile")
     suspend fun getProfile(): Response<ProfileResponse>

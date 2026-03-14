@@ -98,6 +98,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupNavigation() {
+        // 1. Configuración del buscador
         binding.searchInput.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainer, ResultsFragment())
@@ -105,10 +106,29 @@ class HomeFragment : Fragment() {
                 .commit()
         }
 
-        binding.btnHome.setOnClickListener { }
-        binding.btnFavorite.setOnClickListener { open(FavoritesFragment()) }
-        binding.btnProfile.setOnClickListener { open(UserProfileFragment()) }
-        binding.btnEvent.setOnClickListener { open(MyEventsFragment()) }
+        // 2. Configuración del nuevo Bottom Navigation
+        binding.bottomNavigation.setOnItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_home -> {
+                    // Ya estamos en HomeFragment, normalmente aquí no se hace nada
+                    // o se hace scroll hacia arriba en la lista
+                    true
+                }
+                R.id.nav_events -> {
+                    open(MyEventsFragment())
+                    true
+                }
+                R.id.nav_favorites -> {
+                    open(FavoritesFragment())
+                    true
+                }
+                R.id.nav_profile -> {
+                    open(UserProfileFragment())
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     private fun open(fragment: Fragment) {

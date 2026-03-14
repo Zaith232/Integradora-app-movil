@@ -21,6 +21,7 @@ gsonConverter = "2.9.0"
 okhttp = "4.12.0"
 loggingInterceptor = "4.12.0"
 fragmentV="1.6.2"
+firebaseMessaging = "23.4.1"
 
 
 
@@ -45,6 +46,7 @@ okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhtt
 logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "loggingInterceptor" }
 okhttp-multipart = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
 androidx-fragment = { group = "androidx.fragment", name = "fragment-ktx", version.ref= "fragmentV"}
+firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging-ktx", version.ref = "firebaseMessaging" }
 
 
 

@@ -46,6 +46,7 @@ configurations.all {
 }
 
 dependencies {
+    implementation(libs.firebase.messaging)
     implementation(libs.androidx.fragment)
     implementation(libs.retrofit)
     implementation(libs.gson.converter)

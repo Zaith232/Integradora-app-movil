@@ -110,10 +110,26 @@ class MyEventsFragment : Fragment() {
                 .commit()
         }
 
-        binding.btnHome.setOnClickListener { open(HomeFragment()) }
-        binding.btnFavorite.setOnClickListener { open(FavoritesFragment()) }
-        binding.btnProfile.setOnClickListener { open(UserProfileFragment()) }
-        binding.btnEvent.setOnClickListener { }
+        binding.bottomNavigation.selectedItemId = R.id.nav_events
+
+        binding.bottomNavigation.setOnItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_home -> {
+                    open(HomeFragment())
+                    true
+                }
+                R.id.nav_events -> true
+                R.id.nav_favorites -> {
+                    open(FavoritesFragment())
+                    true
+                }
+                R.id.nav_profile -> {
+                    open(UserProfileFragment())
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     private fun open(fragment: Fragment) {

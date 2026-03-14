@@ -125,3 +125,7 @@ data class PaginatedMusiciansData(
     val data: List<MusicianProfileDetailResponse>, // ⬅️ AQUÍ está la lista real de músicos
     // val links: Any? (Podrías mapear los links y metas aquí si quieres hacer scroll infinito después)
 )
+
+data class FcmTokenRequest(
+    val fcm_token: String
+)
