@@ -206,11 +206,21 @@ class MusicianProfileFragment : Fragment() {
                         }
 
                         com.bumptech.glide.Glide.with(this@MusicianProfileFragment)
-                            .load(fullImageUrl)
+                            .load("https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80")
                             .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL)
                             .skipMemoryCache(false)
                             .centerCrop()
                             .into(binding.heroImage)
+                        val matrix = android.graphics.ColorMatrix()
+                        matrix.setSaturation(0f)
+
+                        val filter = android.graphics.ColorMatrixColorFilter(matrix)
+                        binding.heroImage.colorFilter = filter
+
+                        Glide.with(this@MusicianProfileFragment)
+                            .load(fullImageUrl)
+                            .centerCrop()
+                            .into(binding.profileImage)
                     }
 
                 } else {

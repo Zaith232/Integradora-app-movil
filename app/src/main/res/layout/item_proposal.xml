@@ -53,5 +53,16 @@
             android:textColor="?attr/colorOnPrimary"
             app:cornerRadius="8dp"/>
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCancelProposal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Cancelar Propuesta"
+            android:backgroundTint="?attr/colorError"
+            android:textColor="?attr/colorOnError"
+            app:cornerRadius="8dp"/>
+
     </LinearLayout>
+
 </androidx.cardview.widget.CardView>

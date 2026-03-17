@@ -89,12 +89,23 @@ interface ApiService {
         @Path("appId") appId: Int
     ): Response<AcceptResponse>
 
+    @POST("api/v1/client/events/{eventId}/applications/{appId}/cancel")
+    suspend fun cancelApplication(
+        @Path("eventId") eventId: Int,
+        @Path("appId") appId: Int
+    ): Response<GenericResponse>
+
     // 4. ACTUALIZAR UN EVENTO (⬅️ Se eliminó el @Header)
     @PUT("api/v1/client/events/{id}")
     suspend fun updateEvent(
         @Path("id") eventId: Int,
         @Body request: EventRequest
     ): Response<GenericResponse>
+
+    @DELETE("api/v1/client/events/{id}")
+    suspend fun deleteEvent(
+        @Path("id") id: Int
+    ): Response<Unit>
 
     // Obtener el perfil de un músico específico
     @GET("api/v1/musicians/{id}")

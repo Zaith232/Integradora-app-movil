@@ -13,6 +13,7 @@ import com.armonihz.app.databinding.FragmentEventProposalsBinding
 import com.armonihz.app.network.ApiService
 import com.armonihz.app.network.RetrofitClient
 import com.armonihz.app.ui.adapters.ProposalAdapter
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 
@@ -38,12 +39,18 @@ class EventProposalsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         arguments?.let {
             eventId = it.getInt(ARG_EVENT_ID, -1)
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+
         _binding = FragmentEventProposalsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -53,54 +60,131 @@ class EventProposalsFragment : Fragment() {
 
         setupRecyclerView()
 
+        binding.btnBack.setOnClickListener {
+            parentFragmentManager.popBackStack()
+        }
+
         if (eventId != -1) {
             loadProposals()
         }
     }
 
     private fun setupRecyclerView() {
+
         proposalAdapter = ProposalAdapter(
             proposalsList = emptyList(),
+
+            //Aceptar propuesta
             onAcceptClick = { applicationId ->
-                acceptApplication(applicationId)
+                showAcceptDialog(applicationId)
             },
+
+            //Cancelar propuesta
+            onCancelClick = { applicationId ->
+                showCancelDialog(applicationId)
+            },
+
+            //Ver perfil del músico
             onMusicianClick = { musicianId ->
+
                 val fragment = MusicianProfileFragment.newInstance(musicianId)
+
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.fragmentContainer, fragment)
                     .addToBackStack(null)
                     .commit()
+
             }
         )
 
         binding.rvProposals.apply {
+
             layoutManager = LinearLayoutManager(requireContext())
             adapter = proposalAdapter
+
         }
     }
 
+    /**
+     * Dialog moderno para aceptar músico
+     */
+    private fun showAcceptDialog(applicationId: Int) {
+
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Aceptar músico")
+            .setMessage("¿Estás seguro de aceptar esta propuesta?\n\nUna vez aceptada, el evento quedará asignado.")
+            .setIcon(android.R.drawable.ic_dialog_info)
+            .setNegativeButton("Cancelar") { dialog, _ ->
+
+                dialog.dismiss()
+
+            }
+            .setPositiveButton("Aceptar") { _, _ ->
+
+                acceptApplication(applicationId)
+
+            }
+            .show()
+    }
+
+    /**
+     * Dialog moderno para cancelar solicitud
+     */
+    private fun showCancelDialog(applicationId: Int) {
+
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Cancelar solicitud")
+            .setMessage("¿Seguro que deseas cancelar esta solicitud?\n\nEsta acción no se puede deshacer.")
+            .setIcon(android.R.drawable.ic_dialog_alert)
+            .setNegativeButton("No") { dialog, _ ->
+
+                dialog.dismiss()
+
+            }
+            .setPositiveButton("Sí, cancelar") { _, _ ->
+
+                cancelApplication(applicationId)
+
+            }
+            .show()
+    }
+
     private fun loadProposals() {
+
         val user = FirebaseAuth.getInstance().currentUser ?: return
+
         val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
 
         lifecycleScope.launch {
+
             try {
-                // ⬅️ Se eliminó la petición a Firebase y el envío del token
+
                 val response = api.getEventApplications(eventId)
+
                 if (response.isSuccessful && response.body() != null) {
+
                     proposalAdapter.updateData(response.body()!!.applications)
+
                 } else {
+
                     Toast.makeText(context, "Error al cargar propuestas", Toast.LENGTH_SHORT).show()
+
                 }
+
             } catch (e: Exception) {
+
                 Log.e("API_ERROR", "Excepción: ${e.message}")
+
             }
         }
     }
 
     private fun acceptApplication(applicationId: Int) {
+
         val user = FirebaseAuth.getInstance().currentUser
+
         if (user == null) {
+
             Toast.makeText(context, "Debes iniciar sesión", Toast.LENGTH_SHORT).show()
             return
         }
@@ -108,20 +192,69 @@ class EventProposalsFragment : Fragment() {
         val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
 
         lifecycleScope.launch {
+
             try {
-                // ⬅️ Se eliminó la petición a Firebase y el envío del token
+
                 val response = api.acceptApplication(eventId, applicationId)
 
                 if (response.isSuccessful && response.body() != null) {
+
                     Toast.makeText(context, response.body()!!.message, Toast.LENGTH_SHORT).show()
+
                     loadProposals()
+
                 } else {
+
                     Toast.makeText(context, "Error al aceptar al músico", Toast.LENGTH_SHORT).show()
                     Log.e("API_ERROR", "Código: ${response.code()}")
+
                 }
+
             } catch (e: Exception) {
+
                 Log.e("API_ERROR", "Excepción al aceptar: ${e.message}")
                 Toast.makeText(context, "Error de conexión", Toast.LENGTH_SHORT).show()
+
+            }
+        }
+    }
+
+    private fun cancelApplication(applicationId: Int) {
+
+        val user = FirebaseAuth.getInstance().currentUser
+
+        if (user == null) {
+
+            Toast.makeText(context, "Debes iniciar sesión", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
+
+        lifecycleScope.launch {
+
+            try {
+
+                val response = api.cancelApplication(eventId, applicationId)
+
+                if (response.isSuccessful && response.body() != null) {
+
+                    Toast.makeText(context, response.body()!!.message, Toast.LENGTH_SHORT).show()
+
+                    loadProposals()
+
+                } else {
+
+                    Toast.makeText(context, "Error al cancelar solicitud", Toast.LENGTH_SHORT).show()
+                    Log.e("API_ERROR", "Código: ${response.code()}")
+
+                }
+
+            } catch (e: Exception) {
+
+                Log.e("API_ERROR", "Excepción: ${e.message}")
+                Toast.makeText(context, "Error de conexión", Toast.LENGTH_SHORT).show()
+
             }
         }
     }

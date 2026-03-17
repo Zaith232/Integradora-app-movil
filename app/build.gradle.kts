@@ -46,6 +46,8 @@ configurations.all {
 }
 
 dependencies {
+    implementation(libs.hdodenhof)
+    implementation(libs.androidx.swiperefreshlayout)
     implementation(libs.firebase.messaging)
     implementation(libs.androidx.fragment)
     implementation(libs.retrofit)
