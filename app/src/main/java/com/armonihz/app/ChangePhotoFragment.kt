@@ -118,10 +118,12 @@ class ChangePhotoFragment : Fragment() {
                 hasLaravelPhoto = true
                 enableDeleteButton(true)
 
+                val cacheBustedUrl = "$url?t=${System.currentTimeMillis()}"
+
                 Glide.with(this)
-                    .load(url)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .skipMemoryCache(false)
+                    .load(cacheBustedUrl)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
                     .circleCrop()
                     .into(ivProfilePicture)
             }
@@ -136,7 +138,14 @@ class ChangePhotoFragment : Fragment() {
             !sharedUrl.isNullOrEmpty() -> {
                 hasLaravelPhoto = true
                 enableDeleteButton(true)
-                Glide.with(this).load(sharedUrl).diskCacheStrategy(DiskCacheStrategy.ALL).circleCrop().into(ivProfilePicture)
+                val cacheBustedUrl = "$sharedUrl?t=${System.currentTimeMillis()}"
+
+                Glide.with(this)
+                    .load(cacheBustedUrl)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
+                    .circleCrop()
+                    .into(ivProfilePicture)
             }
             user?.photoUrl != null -> {
                 hasLaravelPhoto = false
@@ -190,7 +199,10 @@ class ChangePhotoFragment : Fragment() {
 
                 if (response.isSuccessful) {
                     val newPhotoUrl = response.body()?.photoUrl
-                    sharedViewModel.updatePhoto(newPhotoUrl)
+
+                    if (!newPhotoUrl.isNullOrEmpty()) {
+                        sharedViewModel.updatePhoto(newPhotoUrl)
+                    }
                     Toast.makeText(requireContext(), "Foto actualizada", Toast.LENGTH_SHORT).show()
                     requireActivity().supportFragmentManager.popBackStack()
                 } else {

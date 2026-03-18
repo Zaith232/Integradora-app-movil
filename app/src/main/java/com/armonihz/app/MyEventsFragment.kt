@@ -96,8 +96,6 @@ class MyEventsFragment : Fragment() {
 
     private fun loadMyEvents() {
 
-
-
         val user = FirebaseAuth.getInstance().currentUser
 
         if (user == null) {
@@ -108,6 +106,8 @@ class MyEventsFragment : Fragment() {
 
         user.getIdToken(true).addOnSuccessListener {
 
+            if (!isAdded || _binding == null) return@addOnSuccessListener
+
             val api = RetrofitClient
                 .getInstance(requireContext())
                 .create(ApiService::class.java)
@@ -117,6 +117,8 @@ class MyEventsFragment : Fragment() {
                 try {
 
                     val response = api.getMyEvents()
+
+                    if (!isAdded || _binding == null) return@launch
 
                     if (response.isSuccessful && response.body() != null) {
 
@@ -148,6 +150,8 @@ class MyEventsFragment : Fragment() {
 
                     Log.e("API_ERROR", "Excepción: ${e.message}")
                 }
+
+                if (!isAdded || _binding == null) return@launch
 
                 binding.progressLoader.visibility = View.GONE
                 binding.swipeRefresh.isRefreshing = false

@@ -1,6 +1,7 @@
 package com.armonihz.app.ui.adapters
 
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,6 +36,7 @@ class EventAdapter(
     }
 
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
+
         val event = eventsList[position]
 
         holder.tvEventTitle.text = event.titulo
@@ -113,6 +115,9 @@ class EventAdapter(
         } else {
             holder.tvDeleteEvent.visibility = View.VISIBLE
         }
+        Log.d("EVENT_DEBUG", "Dias restantes: $daysLeft")
+        Log.d("EVENT_DEBUG", "Fecha recibida: ${event.fecha}")
+
     }
 
     override fun getItemCount() = eventsList.size
@@ -124,26 +129,51 @@ class EventAdapter(
 
     // Función para calcular días restantes
     private fun daysUntil(dateString: String): Long {
+
         return try {
-            val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+
+            val format = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
             val eventDate = format.parse(dateString) ?: return Long.MAX_VALUE
-            val today = Date()
+
+            val calendarToday = Calendar.getInstance()
+            calendarToday.set(Calendar.HOUR_OF_DAY, 0)
+            calendarToday.set(Calendar.MINUTE, 0)
+            calendarToday.set(Calendar.SECOND, 0)
+            calendarToday.set(Calendar.MILLISECOND, 0)
+
+            val today = calendarToday.time
 
             val diff = eventDate.time - today.time
+
             diff / (1000 * 60 * 60 * 24)
+
         } catch (e: Exception) {
+
+            Log.e("DATE_ERROR", "Error parsing date: $dateString")
+
             Long.MAX_VALUE
         }
     }
 
     private fun isExpired(dateString: String): Boolean {
+
         return try {
-            val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+
+            val format = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
             val eventDate = format.parse(dateString) ?: return false
-            val today = Date()
+
+            val calendarToday = Calendar.getInstance()
+            calendarToday.set(Calendar.HOUR_OF_DAY, 0)
+            calendarToday.set(Calendar.MINUTE, 0)
+            calendarToday.set(Calendar.SECOND, 0)
+            calendarToday.set(Calendar.MILLISECOND, 0)
+
+            val today = calendarToday.time
 
             eventDate.before(today)
+
         } catch (e: Exception) {
+
             false
         }
     }

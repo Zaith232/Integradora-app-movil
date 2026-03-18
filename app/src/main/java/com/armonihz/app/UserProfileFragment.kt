@@ -35,11 +35,7 @@ class UserProfileFragment : Fragment() {
 
     private val sharedViewModel: ProfileSharedViewModel by activityViewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
         val view = inflater.inflate(R.layout.fragment_user_profile, container, false)
 
@@ -53,9 +49,10 @@ class UserProfileFragment : Fragment() {
 
         tvEmail.text = user?.email ?: "Sin correo"
 
-        if (user?.photoUrl != null) {
+        // 🔵 Cargar foto de Google inmediatamente
+        user?.photoUrl?.let {
             Glide.with(this)
-                .load(user.photoUrl)
+                .load(it)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .circleCrop()
                 .into(profileImage)
@@ -71,52 +68,34 @@ class UserProfileFragment : Fragment() {
         return view
     }
 
-    override fun onResume() {
-        super.onResume()
-        cargarDatosDesdeRealtime()
-    }
-
-    private fun cargarDatosDesdeRealtime() {
-        val user = FirebaseAuth.getInstance().currentUser ?: return
-        val database = com.google.firebase.database.FirebaseDatabase.getInstance().reference
-
-        database.child("usuarios").child(user.uid).get()
-            .addOnSuccessListener { snapshot ->
-
-                if (!isAdded) return@addOnSuccessListener
-
-                if (snapshot.exists()) {
-
-                    val nombre = snapshot.child("nombre").value?.toString() ?: ""
-                    val apellido = snapshot.child("apellido").value?.toString() ?: ""
-                    val telefono = snapshot.child("telefono").value?.toString() ?: ""
-
-                    tvName.text = "$nombre $apellido".trim()
-                    tvPhone.text = if (telefono.isNotEmpty()) telefono else "Sin teléfono"
-
-                } else {
-                    tvName.text = user.displayName ?: "Sin nombre"
-                    tvPhone.text = "Sin teléfono"
-                }
-            }
+    private fun bustCache(url: String): String {
+        val cleanUrl = url.substringBefore("?")
+        return "$cleanUrl?t=${System.currentTimeMillis()}"
     }
 
     private fun observarFotoDesdeApi() {
+
         sharedViewModel.profilePhotoUrl.observe(viewLifecycleOwner) { url ->
+
             val googleUrl = FirebaseAuth.getInstance().currentUser?.photoUrl
 
             when {
+
+                // 🔵 Foto desde Laravel
                 !url.isNullOrEmpty() -> {
+
                     Glide.with(this)
-                        .load(url)
+                        .load(bustCache(url))
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .circleCrop()
                         .into(profileImage)
                 }
 
+                // 🔵 Foto de Google
                 googleUrl != null -> {
+
                     Glide.with(this)
-                        .load(googleUrl)
+                        .load(bustCache(googleUrl.toString()))
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .circleCrop()
                         .into(profileImage)
@@ -130,17 +109,19 @@ class UserProfileFragment : Fragment() {
     }
 
     private fun loadProfileFromApi() {
-        val user = FirebaseAuth.getInstance().currentUser ?: return
+
         val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
 
         viewLifecycleOwner.lifecycleScope.launch {
+
             try {
-                // ⬅️ Se eliminó la petición a Firebase y el envío del token
+
                 val response = api.getClientProfile()
 
                 if (!isAdded) return@launch
 
                 if (response.isSuccessful) {
+
                     val photoUrl = response.body()?.photoUrl
 
                     if (!photoUrl.isNullOrEmpty()) {
@@ -153,7 +134,34 @@ class UserProfileFragment : Fragment() {
         }
     }
 
+    private fun cargarDatosDesdeRealtime() {
+
+        val user = FirebaseAuth.getInstance().currentUser ?: return
+        val database = com.google.firebase.database.FirebaseDatabase.getInstance().reference
+
+        database.child("usuarios").child(user.uid).get().addOnSuccessListener { snapshot ->
+
+            if (!isAdded) return@addOnSuccessListener
+
+            if (snapshot.exists()) {
+
+                val nombre = snapshot.child("nombre").value?.toString() ?: ""
+                val apellido = snapshot.child("apellido").value?.toString() ?: ""
+                val telefono = snapshot.child("telefono").value?.toString() ?: ""
+
+                tvName.text = "$nombre $apellido".trim()
+                tvPhone.text = if (telefono.isNotEmpty()) telefono else "Sin teléfono"
+
+            } else {
+
+                tvName.text = user.displayName ?: "Sin nombre"
+                tvPhone.text = "Sin teléfono"
+            }
+        }
+    }
+
     private fun configurarLogout(view: View) {
+
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
             .build()
@@ -161,6 +169,7 @@ class UserProfileFragment : Fragment() {
         val googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
 
         view.findViewById<Button>(R.id.btnLogout).setOnClickListener {
+
             androidx.appcompat.app.AlertDialog.Builder(requireContext())
                 .setTitle("Cerrar sesión")
                 .setMessage("¿Estás seguro de que deseas cerrar sesión?")
@@ -172,6 +181,7 @@ class UserProfileFragment : Fragment() {
                     TokenManager.clearToken(requireContext())
 
                     googleSignInClient.signOut().addOnCompleteListener {
+
                         LoadingManager.hide()
 
                         val intent = Intent(requireContext(), LoginActivity::class.java)
@@ -188,52 +198,45 @@ class UserProfileFragment : Fragment() {
     }
 
     private fun configurarNavegacion(view: View) {
-        // 1. Enlazamos el nuevo menú de navegación
+
         val bottomNavigation = view.findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottomNavigation)
 
-        // 2. Indicamos que estamos en la pestaña de Perfil
         bottomNavigation.selectedItemId = R.id.nav_profile
 
-        // 3. Manejamos los clics de las pestañas
-        bottomNavigation.setOnItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
+        bottomNavigation.setOnItemSelectedListener {
+
+            when (it.itemId) {
+
                 R.id.nav_home -> {
                     open(HomeFragment())
                     true
                 }
+
                 R.id.nav_events -> {
                     open(MyEventsFragment())
                     true
                 }
+
                 R.id.nav_favorites -> {
                     open(FavoritesFragment())
                     true
                 }
-                R.id.nav_profile -> {
-                    // Ya estamos en el perfil, no hacemos nada
-                    true
-                }
+
                 else -> false
             }
         }
 
-        // 4. Configurar los clics de los botones de la pantalla
         buttonSettings.setOnClickListener {
+
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainer, SettingsFragment())
-                .addToBackStack(null)
-                .commit()
-        }
-
-        view.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnMyReviews).setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, ReviewsFragment())
                 .addToBackStack(null)
                 .commit()
         }
     }
 
     private fun open(fragment: Fragment) {
+
         parentFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainer, fragment)
             .commit()

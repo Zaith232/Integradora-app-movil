@@ -235,8 +235,8 @@ class AddEventFragment : Fragment() {
         }
 
         val presupuesto = presupuestoStr.toDoubleOrNull() ?: 0.0
-        if (presupuesto < 500.0) {
-            Toast.makeText(context, "El presupuesto mínimo debe ser de $500", Toast.LENGTH_SHORT).show()
+        if (presupuesto <= 0.0) {
+            Toast.makeText(context, "El presupuesto mínimo debe ser mayor de $0", Toast.LENGTH_SHORT).show()
             return
         }
         if (presupuesto > 100000.0) {

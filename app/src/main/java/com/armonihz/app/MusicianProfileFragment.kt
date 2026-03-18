@@ -202,7 +202,7 @@ class MusicianProfileFragment : Fragment() {
                             musician.profile_picture
                         } else {
                             val cleanPath = musician.profile_picture.removePrefix("/")
-                            "https://armonihz-web-armonihz.lugsb1.easypanel.host/storage/$cleanPath"
+                            "https://armonihz-web-armonihz.lugsb1.easypanel.host/file/$cleanPath"
                         }
 
                         com.bumptech.glide.Glide.with(this@MusicianProfileFragment)
