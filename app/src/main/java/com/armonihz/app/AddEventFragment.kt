@@ -16,9 +16,11 @@ import com.armonihz.app.databinding.FragmentAddEventBinding
 import com.armonihz.app.network.ApiService
 import com.armonihz.app.network.RetrofitClient
 import com.armonihz.app.network.model.EventRequest
+import com.armonihz.app.network.model.Genre
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import java.util.Calendar
@@ -29,11 +31,9 @@ class AddEventFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var ciudadesDisponibles: List<String> = emptyList()
+    private var genresList: List<Genre> = emptyList()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentAddEventBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -41,239 +41,157 @@ class AddEventFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupSpinner()
+        cargarGeneros()
         setupDatePicker()
         setupTimePicker()
         setupFormValidation()
-
         cargarCiudadesDesdeAssets()
 
-        binding.btnPublish.setOnClickListener {
-            publicarEvento()
-        }
-
-        binding.btnBackAddEvent.setOnClickListener {
-            parentFragmentManager.popBackStack()
-        }
+        binding.btnPublish.setOnClickListener { publicarEvento() }
+        binding.btnBackAddEvent.setOnClickListener { parentFragmentManager.popBackStack() }
     }
 
     private fun setupFormValidation() {
         binding.btnPublish.isEnabled = false
 
-        binding.etTitulo.addTextChangedListener { validarCamposObligatorios() }
-        binding.etFecha.addTextChangedListener { validarCamposObligatorios() }
-        binding.etDuracion.addTextChangedListener { validarCamposObligatorios() }
-        binding.etLocation.addTextChangedListener { validarCamposObligatorios() }
-        binding.etBudget.addTextChangedListener { validarCamposObligatorios() }
+        binding.etTitulo.addTextChangedListener { validarCampos() }
+        binding.etFecha.addTextChangedListener { validarCampos() }
+        binding.etDuracion.addTextChangedListener { validarCampos() }
+        binding.etLocation.addTextChangedListener { validarCampos() }
+        binding.etBudget.addTextChangedListener { validarCampos() }
     }
 
-    private fun validarCamposObligatorios() {
-        val titulo = binding.etTitulo.text.toString().trim()
-        val fecha = binding.etFecha.text.toString().trim()
-        val duracion = binding.etDuracion.text.toString().trim()
-        val ubicacion = binding.etLocation.text.toString().trim()
-        val presupuesto = binding.etBudget.text.toString().trim()
-
-        binding.btnPublish.isEnabled = titulo.isNotEmpty() &&
-                fecha.isNotEmpty() &&
-                duracion.isNotEmpty() &&
-                ubicacion.isNotEmpty() &&
-                presupuesto.isNotEmpty()
+    private fun validarCampos() {
+        binding.btnPublish.isEnabled =
+            binding.etTitulo.text!!.isNotEmpty() &&
+                    binding.etFecha.text!!.isNotEmpty() &&
+                    binding.etDuracion.text!!.isNotEmpty() &&
+                    binding.etLocation.text!!.isNotEmpty() &&
+                    binding.etBudget.text!!.isNotEmpty()
     }
 
-    private fun cargarCiudadesDesdeAssets() {
-        lifecycleScope.launch(Dispatchers.IO) {
+    private fun cargarGeneros() {
+        val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
+
+        lifecycleScope.launch {
             try {
-                val inputStream = requireContext().assets.open("municipios_mexico.json")
-                val size = inputStream.available()
-                val buffer = ByteArray(size)
-                inputStream.read(buffer)
-                inputStream.close()
+                val response = api.getGenres()
+                if (response.isSuccessful) {
+                    genresList = response.body() ?: emptyList()
+                    val nombres = genresList.map { it.name }
 
-                val jsonString = String(buffer, Charsets.UTF_8)
-                val jsonArray = JSONArray(jsonString)
-
-                val listaTemporal = mutableListOf<String>()
-
-                for (i in 0 until jsonArray.length()) {
-                    val objetoCiudad = jsonArray.getJSONObject(i)
-                    val municipio = objetoCiudad.getString("municipio")
-                    val estado = objetoCiudad.getString("estado")
-
-                    listaTemporal.add("$municipio, $estado")
-                }
-
-                withContext(Dispatchers.Main) {
-                    ciudadesDisponibles = listaTemporal
-                    setupLocationAutoComplete()
+                    val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, nombres)
+                    binding.spinnerMusicType.adapter = adapter
                 }
             } catch (e: Exception) {
-                Log.e("CIUDADES", "Error al cargar el archivo JSON: ${e.message}")
+                Toast.makeText(context, "Error al cargar géneros", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
     private fun setupTimePicker() {
         binding.etDuracion.setOnClickListener {
-            val calendario = Calendar.getInstance()
-            val horaActual = calendario.get(Calendar.HOUR_OF_DAY)
-            val minutoActual = calendario.get(Calendar.MINUTE)
+            val cal = Calendar.getInstance()
 
-            val timePickerInicio = TimePickerDialog(
-                requireContext(),
-                { _, horaInicio, minutoInicio ->
+            TimePickerDialog(requireContext(), { _, h1, m1 ->
+                TimePickerDialog(requireContext(), { _, h2, m2 ->
 
-                    val timePickerFin = TimePickerDialog(
-                        requireContext(),
-                        { _, horaFin, minutoFin ->
+                    if (h2 * 60 + m2 <= h1 * 60 + m1) {
+                        Toast.makeText(context, "Hora inválida", Toast.LENGTH_SHORT).show()
+                        return@TimePickerDialog
+                    }
 
-                            val inicioMin = horaInicio * 60 + minutoInicio
-                            val finMin = horaFin * 60 + minutoFin
-
-                            if (finMin <= inicioMin) {
-                                Toast.makeText(
-                                    context,
-                                    "La hora de finalización debe ser mayor que la de inicio",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                return@TimePickerDialog
-                            }
-
-                            val horaInicioStr = String.format("%02d:%02d", horaInicio, minutoInicio)
-                            val horaFinStr = String.format("%02d:%02d", horaFin, minutoFin)
-
-                            binding.etDuracion.setText("$horaInicioStr a $horaFinStr")
-                        },
-                        horaInicio + 2,
-                        minutoInicio,
-                        true
+                    binding.etDuracion.setText(
+                        "%02d:%02d a %02d:%02d".format(h1, m1, h2, m2)
                     )
-                    timePickerFin.setTitle("Selecciona a qué hora termina")
-                    timePickerFin.show()
+                }, h1 + 2, m1, true).show()
 
-                },
-                horaActual,
-                minutoActual,
-                true
-            )
-            timePickerInicio.setTitle("Selecciona a qué hora empieza")
-            timePickerInicio.show()
+            }, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
         }
-    }
-
-    private fun setupLocationAutoComplete() {
-        val adapter = ArrayAdapter(
-            requireContext(),
-            android.R.layout.simple_dropdown_item_1line,
-            ciudadesDisponibles
-        )
-        binding.etLocation.setAdapter(adapter)
-
-        binding.etLocation.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus) {
-                val textoIngresado = binding.etLocation.text.toString()
-                if (textoIngresado.isNotEmpty() && !ciudadesDisponibles.contains(textoIngresado)) {
-                    binding.etLocation.setText("")
-                    Toast.makeText(context, "Por favor, selecciona una ciudad de la lista", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-    }
-
-    private fun setupSpinner() {
-        val options = arrayOf("Mariachi", "Banda", "Trío", "Grupo Versátil")
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, options)
-        binding.spinnerMusicType.adapter = adapter
     }
 
     private fun setupDatePicker() {
         binding.etFecha.setOnClickListener {
-            val calendario = Calendar.getInstance()
-            val year = calendario.get(Calendar.YEAR)
-            val month = calendario.get(Calendar.MONTH)
-            val day = calendario.get(Calendar.DAY_OF_MONTH)
+            val cal = Calendar.getInstance()
 
-            val datePicker = DatePickerDialog(
-                requireContext(),
-                { _, selectedYear, selectedMonth, selectedDay ->
-                    val fechaSeleccionada = String.format(
-                        "%02d/%02d/%04d",
-                        selectedDay,
-                        selectedMonth + 1,
-                        selectedYear
-                    )
-                    binding.etFecha.setText(fechaSeleccionada)
-                },
-                year,
-                month,
-                day
-            )
-            datePicker.datePicker.minDate = System.currentTimeMillis()
-            datePicker.show()
+            DatePickerDialog(requireContext(), { _, y, m, d ->
+                binding.etFecha.setText("%02d/%02d/%04d".format(d, m + 1, y))
+            }, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)).apply {
+                datePicker.minDate = System.currentTimeMillis()
+            }.show()
         }
     }
 
-    private fun showLoader() {
-        binding.loader.root.visibility = View.VISIBLE
-    }
+    private fun cargarCiudadesDesdeAssets() {
+        lifecycleScope.launch(Dispatchers.IO) {
+            val json = requireContext().assets.open("municipios_mexico.json").bufferedReader().use { it.readText() }
+            val arr = JSONArray(json)
+            val lista = mutableListOf<String>()
 
-    private fun hideLoader() {
-        binding.loader.root.visibility = View.GONE
+            for (i in 0 until arr.length()) {
+                val o = arr.getJSONObject(i)
+                lista.add("${o.getString("municipio")}, ${o.getString("estado")}")
+            }
+
+            withContext(Dispatchers.Main) {
+                ciudadesDisponibles = lista
+                val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, lista)
+                binding.etLocation.setAdapter(adapter)
+            }
+        }
     }
 
     private fun publicarEvento() {
-        val titulo = binding.etTitulo.text.toString().trim()
-        val tipoMusica = binding.spinnerMusicType.selectedItem.toString()
-        val fecha = binding.etFecha.text.toString().trim()
-        val duracion = binding.etDuracion.text.toString().trim()
-        val ubicacion = binding.etLocation.text.toString().trim()
-        val descripcion = binding.etDescription.text.toString().trim()
-        val presupuestoStr = binding.etBudget.text.toString().trim()
+        val presupuesto = binding.etBudget.text.toString().toDoubleOrNull() ?: 0.0
 
-        if (titulo.isEmpty() || fecha.isEmpty() || ubicacion.isEmpty() || presupuestoStr.isEmpty() || duracion.isEmpty()) {
+        if (presupuesto <= 0) {
+            Toast.makeText(context, "Presupuesto inválido", Toast.LENGTH_SHORT).show()
             return
         }
 
-        val presupuesto = presupuestoStr.toDoubleOrNull() ?: 0.0
-        if (presupuesto <= 0.0) {
-            Toast.makeText(context, "El presupuesto mínimo debe ser mayor de $0", Toast.LENGTH_SHORT).show()
-            return
-        }
-        if (presupuesto > 100000.0) {
-            Toast.makeText(context, "El presupuesto máximo permitido es $100,000", Toast.LENGTH_SHORT).show()
-            return
-        }
+        val genreId = genresList[binding.spinnerMusicType.selectedItemPosition].id
 
-        val nuevoEvento = EventRequest(titulo, tipoMusica, fecha, duracion, ubicacion, descripcion, presupuesto)
+        val request = EventRequest(
+            titulo = binding.etTitulo.text.toString(),
+            genre_id = genreId,
+            fecha = binding.etFecha.text.toString(),
+            duracion = binding.etDuracion.text.toString(),
+            ubicacion = binding.etLocation.text.toString(),
+            descripcion = binding.etDescription.text.toString(),
+            presupuesto = presupuesto
+        )
 
         val user = FirebaseAuth.getInstance().currentUser
         if (user == null) {
-            Toast.makeText(context, "Debes iniciar sesión para publicar", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "No autenticado", Toast.LENGTH_SHORT).show()
             return
         }
-
-        binding.btnPublish.isEnabled = false
-        showLoader()
 
         val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
 
         lifecycleScope.launch {
             try {
-                // ⬅️ Se eliminó la petición a Firebase y el envío del token
-                val response = api.createEvent(nuevoEvento)
-                if (response.isSuccessful) {
-                    Toast.makeText(context, "¡Evento publicado con éxito!", Toast.LENGTH_SHORT).show()
+                // Deshabilitar botón al iniciar para evitar el doble clic
+                _binding?.btnPublish?.isEnabled = false
+
+                val res = api.createEvent(request)
+
+                // IMPORTANTE: Verificar si el binding sigue vivo antes de continuar
+                val currentBinding = _binding ?: return@launch
+
+                if (res.isSuccessful) {
+                    Toast.makeText(context, "Evento creado", Toast.LENGTH_SHORT).show()
                     parentFragmentManager.popBackStack()
                 } else {
-                    Toast.makeText(context, "Error al publicar: ${response.code()}", Toast.LENGTH_SHORT).show()
-                    binding.btnPublish.isEnabled = true
+                    currentBinding.btnPublish.isEnabled = true
+                    Toast.makeText(context, "Error en el servidor", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {
-                Log.e("API_ERROR", "Error de red: ${e.message}")
-                Toast.makeText(context, "Error de conexión", Toast.LENGTH_SHORT).show()
-                binding.btnPublish.isEnabled = true
-            } finally {
-                hideLoader()
+                // Verificar binding otra vez en el catch
+                _binding?.btnPublish?.isEnabled = true
+                if (context != null) {
+                    Toast.makeText(context, "Error de red", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }

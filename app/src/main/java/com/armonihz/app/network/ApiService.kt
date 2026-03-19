@@ -12,6 +12,7 @@ import com.armonihz.app.network.model.EventApplicationsResponse
 import com.armonihz.app.network.model.EventRequest
 import com.armonihz.app.network.model.EventResponse
 import com.armonihz.app.network.model.FcmTokenRequest
+import com.armonihz.app.network.model.Genre
 import com.armonihz.app.network.model.MusicianProfileDetailResponse
 import com.armonihz.app.network.model.MusicianProfileWrapperResponse
 import com.armonihz.app.network.model.PaginatedMusiciansWrapper
@@ -24,95 +25,98 @@ interface ApiService {
     suspend fun getTest(): Response<GenericResponse>
 
     @Multipart
-    @POST("api/v1/client/foto")
+    @POST("client/foto")
     suspend fun uploadProfilePhoto(
         @Part foto: MultipartBody.Part
     ): Response<UploadPhotoResponse>
 
-    @DELETE("api/v1/client/foto")
+    @DELETE("client/foto")
     suspend fun deleteProfilePhoto(): Response<DeletePhotoResponse>
 
-    @POST("api/v1/firebase-login")
+    @POST("firebase-login")
     suspend fun firebaseLogin(
         @Body request: FirebaseLoginRequest
     ): Response<AuthResponse>
 
     // Enviar el FCM Token al servidor para las notificaciones
     // Enviar el FCM Token al servidor
-    @POST("api/v1/client/fcm-token")
+    @POST("client/fcm-token")
     suspend fun updateFcmToken(
         @Body request: com.armonihz.app.network.model.FcmTokenRequest
     ): retrofit2.Response<com.armonihz.app.network.model.GenericResponse>
 
-    @GET("api/v1/client/profile")
+    @GET("client/profile")
     suspend fun getProfile(): Response<ProfileResponse>
 
     // ⬅️ Se eliminó el @Header
-    @GET("api/v1/client/profile")
+    @GET("client/profile")
     suspend fun getClientProfile(): Response<ClientProfileResponse>
 
     // ⬅️ Se eliminó el @Header
-    @POST("api/v1/client/sync-google-photo")
+    @POST("client/sync-google-photo")
     suspend fun syncGooglePhoto(
         @Body request: SyncGooglePhotoRequest
     ): Response<GenericResponse>
 
-    @DELETE("api/v1/client/account")
+    @DELETE("client/account")
     suspend fun deleteAccount(): Response<Unit>
 
     // ⬅️ Se eliminó el @Header
-    @POST("api/v1/client/sync")
+    @POST("client/sync")
     suspend fun syncClient(
         @Body data: Map<String, String>
     ): Response<Unit>
 
     // ⬅️ Se eliminó el @Header
-    @POST("api/v1/client/events")
+    @POST("client/events")
     suspend fun createEvent(
         @Body request: EventRequest
     ): Response<GenericResponse>
 
     // 1. Obtener los eventos del cliente
-    @GET("api/v1/client/events")
+    @GET("client/events")
     suspend fun getMyEvents(): Response<List<EventResponse>>
 
     // 2. Obtener las propuestas de un evento específico (⬅️ Se eliminó el @Header)
-    @GET("api/v1/client/events/{id}/applications")
+    @GET("client/events/{id}/applications")
     suspend fun getEventApplications(
         @Path("id") eventId: Int
     ): Response<EventApplicationsResponse>
 
     // 3. Aceptar una propuesta (⬅️ Se eliminó el @Header)
-    @POST("api/v1/client/events/{eventId}/applications/{appId}/accept")
+    @POST("client/events/{eventId}/applications/{appId}/accept")
     suspend fun acceptApplication(
         @Path("eventId") eventId: Int,
         @Path("appId") appId: Int
     ): Response<AcceptResponse>
 
-    @POST("api/v1/client/events/{eventId}/applications/{appId}/cancel")
+    @POST("client/events/{eventId}/applications/{appId}/cancel")
     suspend fun cancelApplication(
         @Path("eventId") eventId: Int,
         @Path("appId") appId: Int
     ): Response<GenericResponse>
 
     // 4. ACTUALIZAR UN EVENTO (⬅️ Se eliminó el @Header)
-    @PUT("api/v1/client/events/{id}")
+    @PUT("client/events/{id}")
     suspend fun updateEvent(
         @Path("id") eventId: Int,
         @Body request: EventRequest
     ): Response<GenericResponse>
 
-    @DELETE("api/v1/client/events/{id}")
+    @DELETE("client/events/{id}")
     suspend fun deleteEvent(
         @Path("id") id: Int
     ): Response<Unit>
 
     // Obtener el perfil de un músico específico
-    @GET("api/v1/musicians/{id}")
+    @GET("musicians/{id}")
     suspend fun getMusicianProfile(
         @Path("id") musicianId: Int
     ): Response<MusicianProfileWrapperResponse>
 
-    @GET("api/v1/musicians")
+    @GET("musicians")
     suspend fun getAllMusicians(): retrofit2.Response<com.google.gson.JsonObject>
+
+    @GET("genres")
+    suspend fun getGenres(): Response<List<Genre>>
 }

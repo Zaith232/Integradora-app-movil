@@ -1,24 +1,36 @@
 package com.armonihz.app.network
 
-import android.content.Context
-import com.armonihz.app.auth.TokenManager
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.tasks.await
 import okhttp3.Interceptor
 import okhttp3.Response
 
-class AuthInterceptor(private val context: Context) : Interceptor {
+class AuthInterceptor : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
+        val requestOriginal = chain.request()
 
-        val token = TokenManager.getToken(context)
+        val user = FirebaseAuth.getInstance().currentUser
 
-        val request = if (token != null) {
-            chain.request().newBuilder()
-                .header("Authorization", "Bearer $token") // ⬅️ CAMBIO AQUÍ: Usar .header en lugar de .addHeader
-                .build()
-        } else {
-            chain.request()
+        if (user == null) {
+            return chain.proceed(requestOriginal)
         }
 
-        return chain.proceed(request)
+        return try {
+            val token = runBlocking {
+                user.getIdToken(true).await().token
+            }
+
+            val newRequest = requestOriginal.newBuilder()
+                .header("Authorization", "Bearer $token")
+                .header("Accept", "application/json")
+                .build()
+
+            chain.proceed(newRequest)
+
+        } catch (e: Exception) {
+            chain.proceed(requestOriginal)
+        }
     }
 }

@@ -29,9 +29,11 @@ data class SyncGooglePhotoRequest(
     val photoUrl: String
 )
 
+
+
 data class EventRequest(
     val titulo: String,
-    val tipoMusica: String,
+    val genre_id: Int,
     val fecha: String,
     val duracion: String,
     val ubicacion: String,
@@ -128,4 +130,9 @@ data class PaginatedMusiciansData(
 
 data class FcmTokenRequest(
     val fcm_token: String
+)
+
+data class Genre(
+    val id: Int,
+    val name: String
 )
