@@ -121,19 +121,27 @@ class UserProfileFragment : Fragment() {
                 if (!isAdded) return@launch
 
                 if (response.isSuccessful) {
+                    val body = response.body()
 
-                    val photoUrl = response.body()?.photoUrl
-
+                    // 1. Cargar la foto
+                    val photoUrl = body?.photoUrl
                     if (!photoUrl.isNullOrEmpty()) {
                         sharedViewModel.updatePhoto(photoUrl)
+                    }
+
+                    // 2. Cargar el nombre desde la API de Laravel
+                    val nombreApi = body?.nombre
+                    if (!nombreApi.isNullOrEmpty()) {
+                        tvName.text = nombreApi
                     }
                 }
 
             } catch (_: CancellationException) {
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
     }
-
     private fun cargarDatosDesdeRealtime() {
 
         val user = FirebaseAuth.getInstance().currentUser ?: return

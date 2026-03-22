@@ -24,6 +24,7 @@ fragmentV="1.6.2"
 firebaseMessaging = "23.4.1"
 swiperefreshlayout = "1.1.0"
 circleimage = "3.1.0"
+media3 = "1.2.0"
 
 
 
@@ -51,6 +52,8 @@ androidx-fragment = { group = "androidx.fragment", name = "fragment-ktx", versio
 firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging-ktx", version.ref = "firebaseMessaging" }
 androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
 hdodenhof = { group = "de.hdodenhof", name = "circleimageview", version.ref = "circleimage" }
+media3-exoplayer = { group = "androidx.media3", name = "media3-exoplayer", version.ref = "media3" }
+media3-ui = { group = "androidx.media3", name = "media3-ui", version.ref = "media3" }
 
 
 

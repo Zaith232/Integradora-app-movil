@@ -11,6 +11,7 @@ import com.armonihz.app.network.model.DeletePhotoResponse
 import com.armonihz.app.network.model.EventApplicationsResponse
 import com.armonihz.app.network.model.EventRequest
 import com.armonihz.app.network.model.EventResponse
+import com.armonihz.app.network.model.FavoriteMusiciansResponse
 import com.armonihz.app.network.model.FcmTokenRequest
 import com.armonihz.app.network.model.Genre
 import com.armonihz.app.network.model.MusicianProfileDetailResponse
@@ -119,4 +120,20 @@ interface ApiService {
 
     @GET("genres")
     suspend fun getGenres(): Response<List<Genre>>
+
+    // ⬅️ NUEVAS RUTAS PARA FAVORITOS
+
+    // Agregar a favoritos
+    @POST("client/favorites/{id}")
+    suspend fun addFavorite(
+        @Path("id") musicianId: Int
+    ): Response<GenericResponse>
+
+    // Quitar de favoritos
+    @DELETE("client/favorites/{id}")
+    suspend fun removeFavorite(
+        @Path("id") musicianId: Int
+    ): Response<GenericResponse>
+    @GET("client/favorites")
+    suspend fun getMyFavorites(): retrofit2.Response<FavoriteMusiciansResponse>
 }

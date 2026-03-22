@@ -46,6 +46,8 @@ configurations.all {
 }
 
 dependencies {
+    implementation(libs.media3.exoplayer)
+    implementation(libs.media3.ui)
     implementation(libs.hdodenhof)
     implementation(libs.androidx.swiperefreshlayout)
     implementation(libs.firebase.messaging)

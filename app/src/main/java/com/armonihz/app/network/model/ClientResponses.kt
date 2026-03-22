@@ -12,7 +12,7 @@ data class UploadPhotoResponse(
 )
 
 data class ClientProfileResponse(
-    val name: String,
+    val nombre: String?,
     val email: String,
     val photoUrl: String?
 )
@@ -22,6 +22,8 @@ data class DeletePhotoResponse(
 )
 
 data class ProfileResponse(
+    val nombre: String?,
+    val email: String?,
     val photoUrl: String?
 )
 
@@ -100,6 +102,7 @@ data class MusicianProfileDetailResponse(
     val bio: String?,
     val hourly_rate: String?,
 
+
     // ⬅️ NUEVOS CAMPOS AGREGADOS SEGÚN TU MODELO LARAVEL
     val is_verified: Int?, // Laravel suele enviar 0 o 1 para los booleanos
     val phone: String?,
@@ -107,7 +110,16 @@ data class MusicianProfileDetailResponse(
     val facebook: String?,
     val youtube: String?,
     val coverage_notes: String?,
-    val genres: List<GenreResponse>? // Por si quieres mostrar los géneros después
+    val genres: List<GenreResponse>?, // Por si quieres mostrar los géneros después
+    val media: MediaDataResponse? = null,
+    val is_favorite: Boolean? = false
+
+)
+
+data class MultimediaItem(
+    val id: Int,
+    val type: String, // Devolverá "image" o "video" desde tu API
+    val file_path: String
 )
 
 data class GenreResponse(
@@ -135,4 +147,23 @@ data class FcmTokenRequest(
 data class Genre(
     val id: Int,
     val name: String
+)
+
+data class MediaDataResponse(
+    val photos: List<MediaItemResponse>?,
+    val videos: List<MediaItemResponse>?
+)
+
+data class MediaItemResponse(
+    val id: Int,
+    val url: String,
+    val title: String? = null,
+    val is_featured: Boolean? = null
+)
+
+// (Conserva tu clase MultimediaItem que creamos antes, la usaremos para el adaptador)
+
+data class FavoriteMusiciansResponse(
+    val success: Boolean,
+    val data: List<MusicianProfileDetailResponse>
 )
