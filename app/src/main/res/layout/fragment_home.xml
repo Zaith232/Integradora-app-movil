@@ -35,9 +35,10 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
+                        android:id="@+id/tvGreeting"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Hola, Juan 👋"
+                        android:text="Hola 👋"
                         android:textColor="@color/md_onSurfaceVariant"
                         android:textSize="16sp" />
 
@@ -97,44 +98,18 @@
                 android:id="@+id/categoryScroll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="20dp"
                 android:clipToPadding="false"
                 android:paddingHorizontal="24dp"
                 android:scrollbars="none">
 
                 <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroupCategories"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:singleLine="true">
-
-                    <com.google.android.material.chip.Chip
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Mariachi"
-                        app:chipBackgroundColor="@color/md_primary"
-                        android:textColor="@color/md_onPrimary"
-                        app:chipIcon="@drawable/ic_star"
-                        app:chipIconTint="@color/md_onPrimary"/>
-
-                    <com.google.android.material.chip.Chip
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Banda"
-                        app:chipBackgroundColor="@color/md_surface"
-                        android:textColor="@color/md_onSurface"
-                        app:chipStrokeColor="@color/md_outline"
-                        app:chipStrokeWidth="1dp"/>
-
-                    <com.google.android.material.chip.Chip
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Tríos"
-                        app:chipBackgroundColor="@color/md_surface"
-                        android:textColor="@color/md_onSurface"
-                        app:chipStrokeColor="@color/md_outline"
-                        app:chipStrokeWidth="1dp"/>
-
-                </com.google.android.material.chip.ChipGroup>
+                    app:singleSelection="true"
+                    app:singleLine="true"
+                    app:chipSpacingHorizontal="-6dp"> </com.google.android.material.chip.ChipGroup>
             </HorizontalScrollView>
 
             <TextView

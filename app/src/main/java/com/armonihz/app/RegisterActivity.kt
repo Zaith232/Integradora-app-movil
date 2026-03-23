@@ -15,6 +15,12 @@ import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.database.FirebaseDatabase
+import androidx.lifecycle.lifecycleScope
+import com.armonihz.app.auth.TokenManager
+import com.armonihz.app.network.ApiService
+import com.armonihz.app.network.RetrofitClient
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 
 class RegisterActivity : AppCompatActivity() {
 

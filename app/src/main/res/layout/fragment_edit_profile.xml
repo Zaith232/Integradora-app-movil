@@ -59,7 +59,7 @@
                 app:boxStrokeWidthFocused="0dp"
                 app:hintEnabled="false">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etEditName"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
@@ -88,7 +88,7 @@
                 app:boxStrokeWidthFocused="0dp"
                 app:hintEnabled="false">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etEditLastName"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
@@ -99,6 +99,8 @@
                     android:textColor="?attr/colorOnSurface"
                     android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
+
+
 
             <!-- TELÉFONO -->
             <TextView
@@ -117,7 +119,7 @@
                 app:boxStrokeWidthFocused="0dp"
                 app:hintEnabled="false">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etEditPhone"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"

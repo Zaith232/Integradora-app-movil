@@ -14,7 +14,14 @@ import com.armonihz.app.network.ApiService
 import com.armonihz.app.network.RetrofitClient
 import com.armonihz.app.network.model.MusicianProfileDetailResponse
 import com.armonihz.app.ui.adapters.MusicianAdapter
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.firebase.auth.FirebaseAuth
+import android.text.Editable
+import android.text.TextWatcher
+import com.google.android.material.chip.Chip
 
 class HomeFragment : Fragment() {
 
@@ -22,6 +29,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var musicianAdapter: MusicianAdapter
+    private var allMusicians: List<MusicianProfileDetailResponse> = emptyList()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,7 +45,100 @@ class HomeFragment : Fragment() {
 
         setupRecyclerView()
         setupNavigation()
-        loadMusiciansFromApi()
+
+        // ✅ Mostrar datos locales de Firebase Auth de inmediato
+        val user = FirebaseAuth.getInstance().currentUser
+        val primerNombre = user?.displayName?.split(" ")?.firstOrNull() ?: "Usuario"
+        binding.tvGreeting.text = "Hola, $primerNombre 👋"
+
+        user?.photoUrl?.let {
+            Glide.with(this)
+                .load(it)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .circleCrop()
+                .into(binding.ivProfile)
+        }
+
+        // ✅ Cargar todo en paralelo
+        lifecycleScope.launch {
+            cargarTodoEnParalelo()
+        }
+    }
+
+    private suspend fun cargarTodoEnParalelo() {
+        val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
+
+        // ✅ Las 3 llamadas arrancan al mismo tiempo
+        val musicianosDeferred = lifecycleScope.async {
+            try { api.getAllMusicians() } catch (e: Exception) { null }
+        }
+        val perfilDeferred = lifecycleScope.async {
+            try { api.getProfile() } catch (e: Exception) { null }
+        }
+        val generosDeferred = lifecycleScope.async {
+            try { api.getGenres() } catch (e: Exception) { null }
+        }
+
+        // ✅ Esperar los 3 resultados juntos
+        val musicianosResponse = musicianosDeferred.await()
+        val perfilResponse     = perfilDeferred.await()
+        val generosResponse    = generosDeferred.await()
+
+        if (!isAdded) return
+
+        // ✅ Procesar perfil
+        perfilResponse?.body()?.let { body ->
+            val nombre = body.nombre?.split(" ")?.firstOrNull() ?: "Usuario"
+            binding.tvGreeting.text = "Hola, $nombre 👋"
+
+            val photoUrl = body.photoUrl
+            if (!photoUrl.isNullOrEmpty()) {
+                Glide.with(this)
+                    .load("$photoUrl?t=${System.currentTimeMillis()}")
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .circleCrop()
+                    .into(binding.ivProfile)
+            }
+        }
+
+        // ✅ Procesar géneros
+        generosResponse?.body()?.let { genres ->
+            binding.chipGroupCategories.removeAllViews()
+            for (genre in genres) {
+                val chip = Chip(requireContext()).apply {
+                    text = genre.name
+                    isCheckable = true
+                    setChipDrawable(
+                        com.google.android.material.chip.ChipDrawable.createFromAttributes(
+                            requireContext(), null, 0,
+                            com.google.android.material.R.style.Widget_MaterialComponents_Chip_Choice
+                        )
+                    )
+                    tag = genre.name
+                }
+                binding.chipGroupCategories.addView(chip)
+            }
+        }
+
+        // ✅ Procesar músicos
+        musicianosResponse?.body()?.let { jsonResponse ->
+            try {
+                val dataObject     = jsonResponse.getAsJsonObject("data")
+                val musiciansArray = dataObject.getAsJsonArray("data")
+                val gson = com.google.gson.Gson()
+                val type = object : com.google.gson.reflect.TypeToken<List<MusicianProfileDetailResponse>>() {}.type
+                val musiciansList: List<MusicianProfileDetailResponse> = gson.fromJson(musiciansArray, type)
+
+                allMusicians = musiciansList
+                filterMusicians()
+
+            } catch (e: Exception) {
+                Log.e("API_ERROR", "Error procesando músicos: ${e.message}")
+                if (isAdded) Toast.makeText(requireContext(), "Error al cargar músicos", Toast.LENGTH_SHORT).show()
+            }
+        } ?: run {
+            if (isAdded) Toast.makeText(requireContext(), "No se pudieron cargar los músicos", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun setupRecyclerView() {
@@ -58,62 +159,30 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun loadMusiciansFromApi() {
-        val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
-
-        lifecycleScope.launch {
-            try {
-                // 1. Llamamos a la API (ahora devuelve un JsonObject genérico)
-                val response = api.getAllMusicians()
-
-                if (!isAdded) return@launch
-
-                if (response.isSuccessful && response.body() != null) {
-
-                    val jsonResponse = response.body()!!
-
-                    // 2. Extraemos el arreglo 'data' manualmente sorteando la paginación de Laravel
-                    // Entramos al primer "data" (objeto) y luego al segundo "data" (arreglo)
-                    val dataObject = jsonResponse.getAsJsonObject("data")
-                    val musiciansArray = dataObject.getAsJsonArray("data")
-
-                    // 3. Convertimos ese arreglo JSON a nuestra lista de Kotlin
-                    val gson = com.google.gson.Gson()
-                    val type = object : com.google.gson.reflect.TypeToken<List<MusicianProfileDetailResponse>>() {}.type
-                    val musiciansList: List<MusicianProfileDetailResponse> = gson.fromJson(musiciansArray, type)
-
-                    // 4. Actualizamos el adaptador
-                    musicianAdapter.updateData(musiciansList)
-
-                } else {
-                    Log.e("API_ERROR", "Error al cargar músicos: ${response.code()}")
-                    Toast.makeText(context, "No se pudieron cargar los músicos", Toast.LENGTH_SHORT).show()
-                }
-            } catch (e: Exception) {
-                if (!isAdded) return@launch
-                Log.e("API_ERROR", "Excepción: ${e.message}")
-                Toast.makeText(context, "Error de conexión", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
     private fun setupNavigation() {
-        // 1. Configuración del buscador
-        binding.searchInput.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, ResultsFragment())
-                .addToBackStack(null)
-                .commit()
+        binding.searchInput.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                filterMusicians()
+            }
+        })
+
+        binding.chipGroupCategories.setOnCheckedStateChangeListener { _, _ ->
+            filterMusicians()
         }
 
-        // 2. Configuración del nuevo Bottom Navigation
+        binding.ivProfile.setOnClickListener {
+            binding.bottomNavigation.selectedItemId = R.id.nav_profile
+        }
+
+        binding.tvGreeting.setOnClickListener {
+            binding.bottomNavigation.selectedItemId = R.id.nav_profile
+        }
+
         binding.bottomNavigation.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.nav_home -> {
-                    // Ya estamos en HomeFragment, normalmente aquí no se hace nada
-                    // o se hace scroll hacia arriba en la lista
-                    true
-                }
+                R.id.nav_home -> true
                 R.id.nav_events -> {
                     open(MyEventsFragment())
                     true
@@ -135,6 +204,29 @@ class HomeFragment : Fragment() {
         parentFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainer, fragment)
             .commit()
+    }
+
+    private fun filterMusicians() {
+        val query = binding.searchInput.text.toString().trim().lowercase()
+
+        val selectedChipId = binding.chipGroupCategories.checkedChipId
+
+        val categoryFilter = if (selectedChipId != View.NO_ID) {
+            val selectedChip = binding.chipGroupCategories.findViewById<Chip>(selectedChipId)
+            selectedChip?.tag as? String
+        } else {
+            null
+        }
+
+        val filteredList = allMusicians.filter { musician ->
+            val matchesName = query.isEmpty() || musician.stage_name.lowercase().contains(query)
+            val matchesCategory = categoryFilter == null || musician.genres?.any { genre ->
+                genre.name.lowercase().contains(categoryFilter.lowercase())
+            } == true
+            matchesName && matchesCategory
+        }
+
+        musicianAdapter.updateData(filteredList)
     }
 
     override fun onDestroyView() {

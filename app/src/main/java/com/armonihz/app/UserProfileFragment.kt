@@ -59,7 +59,6 @@ class UserProfileFragment : Fragment() {
         }
 
         observarFotoDesdeApi()
-        cargarDatosDesdeRealtime()
         loadProfileFromApi()
 
         configurarLogout(view)
@@ -115,8 +114,8 @@ class UserProfileFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
 
             try {
-
-                val response = api.getClientProfile()
+                // 🔵 Asegúrate de que este método en tu ApiService esté retornando Response<ProfileResponse>
+                val response = api.getProfile()
 
                 if (!isAdded) return@launch
 
@@ -129,10 +128,21 @@ class UserProfileFragment : Fragment() {
                         sharedViewModel.updatePhoto(photoUrl)
                     }
 
-                    // 2. Cargar el nombre desde la API de Laravel
-                    val nombreApi = body?.nombre
-                    if (!nombreApi.isNullOrEmpty()) {
-                        tvName.text = nombreApi
+                    // 2. Cargar el nombre
+                    val nombre   = body?.nombre   ?: ""
+                    val apellido = body?.apellido ?: ""
+                    val nombreCompleto = "$nombre $apellido".trim()
+
+                    if (nombreCompleto.isNotEmpty()) {
+                        tvName.text = nombreCompleto
+                    }
+
+                    // 3. Cargar el teléfono (NUEVO)
+                    val telefonoApi = body?.telefono
+                    if (!telefonoApi.isNullOrEmpty()) {
+                        tvPhone.text = telefonoApi
+                    } else {
+                        tvPhone.text = "Sin teléfono"
                     }
                 }
 
@@ -142,31 +152,7 @@ class UserProfileFragment : Fragment() {
             }
         }
     }
-    private fun cargarDatosDesdeRealtime() {
 
-        val user = FirebaseAuth.getInstance().currentUser ?: return
-        val database = com.google.firebase.database.FirebaseDatabase.getInstance().reference
-
-        database.child("usuarios").child(user.uid).get().addOnSuccessListener { snapshot ->
-
-            if (!isAdded) return@addOnSuccessListener
-
-            if (snapshot.exists()) {
-
-                val nombre = snapshot.child("nombre").value?.toString() ?: ""
-                val apellido = snapshot.child("apellido").value?.toString() ?: ""
-                val telefono = snapshot.child("telefono").value?.toString() ?: ""
-
-                tvName.text = "$nombre $apellido".trim()
-                tvPhone.text = if (telefono.isNotEmpty()) telefono else "Sin teléfono"
-
-            } else {
-
-                tvName.text = user.displayName ?: "Sin nombre"
-                tvPhone.text = "Sin teléfono"
-            }
-        }
-    }
 
     private fun configurarLogout(view: View) {
 

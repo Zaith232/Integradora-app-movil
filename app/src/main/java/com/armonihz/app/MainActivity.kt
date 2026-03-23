@@ -35,12 +35,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, HomeFragment())
-                .commit()
+            // ✅ Un solo bloque que decide qué fragment cargar
+            if (intent.getBooleanExtra("ir_a_editar_perfil", false)) {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainer, EditProfileFragment())
+                    .commit()
+            } else {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainer, HomeFragment())
+                    .commit()
+            }
         }
 
-        // 2. Disparar el proceso de notificaciones al entrar a la pantalla principal
         configurarNotificaciones()
     }
 

@@ -19,6 +19,7 @@ import com.armonihz.app.network.model.MusicianProfileWrapperResponse
 import com.armonihz.app.network.model.PaginatedMusiciansWrapper
 import com.armonihz.app.network.model.ProfileResponse
 import com.armonihz.app.network.model.SyncGooglePhotoRequest
+import com.armonihz.app.network.model.UpdateProfileRequest
 
 interface ApiService {
 
@@ -136,4 +137,9 @@ interface ApiService {
     ): Response<GenericResponse>
     @GET("client/favorites")
     suspend fun getMyFavorites(): retrofit2.Response<FavoriteMusiciansResponse>
+
+    @PUT("client/profile")
+    suspend fun updateProfile(
+        @Body request: UpdateProfileRequest
+    ): Response<GenericResponse>
 }

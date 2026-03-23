@@ -13,8 +13,16 @@ data class UploadPhotoResponse(
 
 data class ClientProfileResponse(
     val nombre: String?,
+    val apellido: String?,
     val email: String,
+    val telefono : String?,
     val photoUrl: String?
+)
+
+data class UpdateProfileRequest(
+    val nombre: String,
+    val apellido: String,
+    val telefono: String
 )
 
 data class DeletePhotoResponse(
@@ -23,7 +31,9 @@ data class DeletePhotoResponse(
 
 data class ProfileResponse(
     val nombre: String?,
+    val apellido: String?,
     val email: String?,
+    val telefono: String?,
     val photoUrl: String?
 )
 
@@ -54,7 +64,8 @@ data class EventResponse(
     // ⬅️ Nuevos campos
     val duracion: String,
     val descripcion: String?, // Puede ser nulo
-    val presupuesto: Double
+    val presupuesto: Double,
+    val nombre_cliente: String?
 ) : Serializable // ⬅️ Agregamos Serializable para enviarlo fácilmente al nuevo Fragment
 
 data class EventApplicationsResponse(

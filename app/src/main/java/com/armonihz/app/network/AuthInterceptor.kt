@@ -19,7 +19,7 @@ class AuthInterceptor : Interceptor {
 
         return try {
             val token = runBlocking {
-                user.getIdToken(true).await().token
+                user.getIdToken(false).await().token
             }
 
             val newRequest = requestOriginal.newBuilder()
