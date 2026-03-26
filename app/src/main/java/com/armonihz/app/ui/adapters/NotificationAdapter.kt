@@ -11,7 +11,7 @@ import com.armonihz.app.R
 import com.armonihz.app.network.model.HiringRequestItem
 import java.text.SimpleDateFormat
 import java.util.Locale
-
+import java.util.TimeZone
 class NotificationAdapter(
     private var requestsList: List<HiringRequestItem>,
     private val onItemClick: (HiringRequestItem) -> Unit
@@ -95,6 +95,41 @@ class NotificationAdapter(
 
         holder.itemView.setOnClickListener {
             onItemClick(item)
+        }
+        try {
+            // La fecha cruda que viene de Laravel: "2026-03-31T01:00:00.000000Z"
+            val rawDate = item.event_date
+
+            // TRUCO MÁGICO: Usamos substring para recortar la parte fea de los microsegundos
+            // y la 'Z', quedándonos solo con "yyyy-MM-dd'T'HH:mm:ss".
+            // Esto hace que el parseo sea robusto en cualquier versión de Android.
+            val parsableDate = rawDate.substring(0, 19) // "2026-03-31T01:00:00"
+
+            // 1. Definimos el formato de entrada (cómo leemos la cadena limpia)
+            val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US)
+            // Laravel envía la hora en UTC (Z), así que le avisamos al parser
+            inputFormat.timeZone = TimeZone.getTimeZone("UTC")
+
+            // 2. Definimos el formato de salida deseado (cómo queremos que lo vea el cliente)
+            // Formato elegido para la lista: "AAAA-MM-DD - HH:MM AM/PM"
+            val outputFormat = SimpleDateFormat("yyyy-MM-dd - hh:mm a", Locale.US)
+            // Le pedimos que muestre la hora local del celular del cliente
+            outputFormat.timeZone = TimeZone.getDefault()
+
+            // Hacemos la conversión
+            val date = inputFormat.parse(parsableDate)
+
+            if (date != null) {
+                // Ponemos la fecha bonita en el TextView
+                holder.tvEventDate.text = outputFormat.format(date)
+            } else {
+                // Fallback: si algo sale mal, mostramos la fecha cruda para no dejar en blanco
+                holder.tvEventDate.text = item.event_date
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            // Fallback en caso de error
+            holder.tvEventDate.text = item.event_date
         }
     }
 

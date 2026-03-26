@@ -14,7 +14,9 @@ import com.armonihz.app.network.model.HiringRequestItem
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 import java.util.Locale
+import java.util.TimeZone
 
 class RequestDetailBottomSheet(
     private val requestItem: HiringRequestItem
@@ -44,12 +46,28 @@ class RequestDetailBottomSheet(
         tvMusician.text = "Músico: ${requestItem.musician_profile?.stage_name ?: "Desconocido"}"
         tvLocation.text = "Ubicación: ${requestItem.event_location}"
 
-        // 🌟 FIX FECHA: Limpiamos el formato "2026-03-31T20:00:00.000000Z" que manda Laravel
+        // 🌟 FIX FECHA BONITA 🌟
         try {
-            val fechaLimpia = requestItem.event_date.substringBefore("T")
-            val horaLimpia = requestItem.event_date.substringAfter("T").substringBefore(".")
-            tvDate.text = "Fecha: $fechaLimpia — $horaLimpia hrs"
+            val rawDateDetails = requestItem.event_date
+            // Cortamos los microsegundos feos: "2026-03-31T20:00:00"
+            val parsableDateDetails = rawDateDetails.substring(0, 19)
+
+            val inputFormatDetails = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US)
+            inputFormatDetails.timeZone = TimeZone.getTimeZone("UTC")
+
+            // Formato de salida: "31 de marzo, 2026 - 08:00 PM"
+            val outputFormatDetails = SimpleDateFormat("d 'de' MMMM, yyyy - hh:mm a", Locale("es", "MX"))
+            outputFormatDetails.timeZone = TimeZone.getDefault()
+
+            val dateDetails = inputFormatDetails.parse(parsableDateDetails)
+
+            if (dateDetails != null) {
+                tvDate.text = "Fecha: ${outputFormatDetails.format(dateDetails)}"
+            } else {
+                tvDate.text = "Fecha: $rawDateDetails"
+            }
         } catch (e: Exception) {
+            e.printStackTrace()
             tvDate.text = "Fecha: ${requestItem.event_date}"
         }
 
@@ -73,7 +91,6 @@ class RequestDetailBottomSheet(
         }
     }
 
-    // 🌟 FIX BOTONES: Usamos lifecycleScope.launch directamente
     private fun responderContraoferta(requestId: Int, status: String) {
         val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
 
@@ -83,13 +100,12 @@ class RequestDetailBottomSheet(
                 view?.findViewById<MaterialButton>(R.id.btnAcceptOffer)?.isEnabled = false
                 view?.findViewById<MaterialButton>(R.id.btnRejectOffer)?.isEnabled = false
 
-                // Asegúrate de tener esta función en tu ApiService.kt
                 val response = api.respondToHiringRequest(requestId, mapOf("status" to status))
 
                 if (response.isSuccessful) {
                     val mensaje = if (status == "accepted") "¡Evento Confirmado!" else "Contraoferta rechazada"
                     Toast.makeText(requireContext(), mensaje, Toast.LENGTH_SHORT).show()
-                    dismiss() // Cierra el panel
+                    dismiss()
                 } else {
                     Toast.makeText(requireContext(), "Error al guardar respuesta", Toast.LENGTH_SHORT).show()
                     view?.findViewById<MaterialButton>(R.id.btnAcceptOffer)?.isEnabled = true
