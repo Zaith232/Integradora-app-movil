@@ -35,15 +35,22 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         if (savedInstanceState == null) {
-            // ✅ Un solo bloque que decide qué fragment cargar
-            if (intent.getBooleanExtra("ir_a_editar_perfil", false)) {
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainer, EditProfileFragment())
-                    .commit()
-            } else {
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainer, HomeFragment())
-                    .commit()
+            when {
+                intent.getBooleanExtra("ir_a_completar_perfil", false) -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentContainer, CompleteProfileFragment())
+                        .commit()
+                }
+                intent.getBooleanExtra("ir_a_editar_perfil", false) -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentContainer, EditProfileFragment())
+                        .commit()
+                }
+                else -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentContainer, HomeFragment())
+                        .commit()
+                }
             }
         }
 

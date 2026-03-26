@@ -153,15 +153,14 @@ class LoginActivity : AppCompatActivity() {
                         if (firebaseToken != null) {
                             TokenManager.saveToken(this, firebaseToken)
                             lifecycleScope.launch {
-                                // ✅ sync y foto en paralelo
-                                val syncJob  = launch { syncClient(esGoogle = true) }
-                                val photoJob = launch { syncGooglePhotoIfNeeded() }
+                                launch { syncClient(esGoogle = true) }
+                                launch { syncGooglePhotoIfNeeded() }
 
-                                // Solo esperamos para saber si hay que completar perfil
-                                syncJob.join()
-                                photoJob.join()
-
-                                irAMainOCompletarPerfil()
+                                // ✅ Siempre va a CompletarPerfil en Google
+                                val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                                intent.putExtra("ir_a_completar_perfil", true)
+                                startActivity(intent)
+                                finish()
                             }
                         }
                     }
@@ -214,28 +213,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private suspend fun irAMainOCompletarPerfil() {
-        try {
-            val api = RetrofitClient.getInstance(this).create(ApiService::class.java)
-            val response = api.getProfile()
 
-            if (response.isSuccessful) {
-                val apellido = response.body()?.apellido
-                if (apellido.isNullOrEmpty()) {
-                    val intent = Intent(this, MainActivity::class.java)
-                    intent.putExtra("ir_a_editar_perfil", true)
-                    startActivity(intent)
-                    finish()
-                } else {
-                    entrarAlMain()
-                }
-            } else {
-                entrarAlMain()
-            }
-        } catch (e: Exception) {
-            entrarAlMain()
-        }
-    }
 
     private suspend fun syncGooglePhotoIfNeeded() {
         val user = FirebaseAuth.getInstance().currentUser ?: return

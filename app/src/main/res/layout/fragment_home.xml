@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,6 +21,7 @@
             android:orientation="vertical"
             android:paddingBottom="24dp">
 
+            <!-- Header: saludo + foto de perfil -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -65,6 +67,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <!-- Buscador -->
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
@@ -94,6 +97,7 @@
                     android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Chips de géneros -->
             <HorizontalScrollView
                 android:id="@+id/categoryScroll"
                 android:layout_width="match_parent"
@@ -107,11 +111,13 @@
                     android:id="@+id/chipGroupCategories"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:singleSelection="true"
+                    app:chipSpacingHorizontal="-6dp"
                     app:singleLine="true"
-                    app:chipSpacingHorizontal="-6dp"> </com.google.android.material.chip.ChipGroup>
+                    app:singleSelection="true" />
+
             </HorizontalScrollView>
 
+            <!-- Título sección -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -122,6 +128,32 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
+            <!-- Shimmer placeholder — visible mientras carga -->
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmerLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:paddingHorizontal="24dp"
+                android:visibility="gone"
+                tools:ignore="MissingClass">
+
+                <!-- 4 skeletons apilados que imitan la card horizontal -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/item_musician_skeleton" />
+                    <include layout="@layout/item_musician_skeleton" />
+                    <include layout="@layout/item_musician_skeleton" />
+                    <include layout="@layout/item_musician_skeleton" />
+
+                </LinearLayout>
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+            <!-- Lista real de músicos -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvMusicians"
                 android:layout_width="match_parent"
@@ -129,7 +161,20 @@
                 android:layout_marginTop="16dp"
                 android:clipToPadding="false"
                 android:nestedScrollingEnabled="false"
-                android:paddingHorizontal="24dp" />
+                android:paddingHorizontal="24dp"
+                android:visibility="gone" />
+
+            <!-- Estado vacío -->
+            <TextView
+                android:id="@+id/tvEmptyState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="Aún no hay músicos disponibles con este género 🎸"
+                android:textAlignment="center"
+                android:textColor="@color/md_onSurfaceVariant"
+                android:textSize="16sp"
+                android:visibility="gone" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
@@ -145,4 +190,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav_menu" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

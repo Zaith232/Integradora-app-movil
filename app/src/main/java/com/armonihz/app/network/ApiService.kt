@@ -1,6 +1,7 @@
 package com.armonihz.app.network
 
 import com.armonihz.app.network.model.AcceptResponse
+import com.armonihz.app.network.model.AvailabilityResponse
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -14,6 +15,8 @@ import com.armonihz.app.network.model.EventResponse
 import com.armonihz.app.network.model.FavoriteMusiciansResponse
 import com.armonihz.app.network.model.FcmTokenRequest
 import com.armonihz.app.network.model.Genre
+import com.armonihz.app.network.model.HiringRequestPayload
+import com.armonihz.app.network.model.HiringRequestsListResponse
 import com.armonihz.app.network.model.MusicianProfileDetailResponse
 import com.armonihz.app.network.model.MusicianProfileWrapperResponse
 import com.armonihz.app.network.model.PaginatedMusiciansWrapper
@@ -142,4 +145,27 @@ interface ApiService {
     suspend fun updateProfile(
         @Body request: UpdateProfileRequest
     ): Response<GenericResponse>
+
+    // Obtener fechas ocupadas del músico
+    @GET("musicians/{id}/availability")
+    suspend fun getMusicianAvailability(
+        @Path("id") musicianId: Int
+    ): Response<AvailabilityResponse>
+
+    // Enviar la solicitud de contratación (¡Ya tienes el endpoint en tu api.php!)
+    @POST("hiring-requests")
+    suspend fun createHiringRequest(
+        @Body request: HiringRequestPayload
+    ): Response<GenericResponse>
+
+    // Obtener las solicitudes que el cliente ha enviado
+    @GET("hiring-requests")
+    suspend fun getMyHiringRequests(): Response<HiringRequestsListResponse>
+
+    // Responder a una contraoferta
+    @POST("hiring-requests/{id}/respond")
+    suspend fun respondToHiringRequest(
+        @Path("id") requestId: Int,
+        @Body payload: Map<String, String>
+    ): retrofit2.Response<com.armonihz.app.network.model.GenericResponse>
 }

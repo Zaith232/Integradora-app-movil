@@ -7,9 +7,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.armonihz.app.R
-import com.armonihz.app.network.model.MusicianProfileDetailResponse // Asegúrate de que esta ruta coincida con tu modelo
+import com.armonihz.app.network.model.MusicianProfileDetailResponse
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 
 class MusicianAdapter(
     private var musiciansList: List<MusicianProfileDetailResponse>,
@@ -19,7 +21,10 @@ class MusicianAdapter(
     class MusicianViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val ivCoverPhoto: ImageView = view.findViewById(R.id.ivCoverPhoto)
         val tvStageName: TextView = view.findViewById(R.id.tvStageName)
-        val tvLocationAndRate: TextView = view.findViewById(R.id.tvLocationAndRate)
+        val tvLocation: TextView = view.findViewById(R.id.tvLocation)
+        val tvPriceHint: TextView = view.findViewById(R.id.tvPriceHint)
+        val tvRating: TextView = view.findViewById(R.id.tvRating)
+        val chipGroupGenres: ChipGroup = view.findViewById(R.id.chipGroupGenres)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicianViewHolder {
@@ -31,14 +36,39 @@ class MusicianAdapter(
     override fun onBindViewHolder(holder: MusicianViewHolder, position: Int) {
         val musician = musiciansList[position]
 
+        // Nombre artístico
         holder.tvStageName.text = musician.stage_name
 
-        // Construimos el texto de ubicación y tarifa
+        // Ubicación
         val locationText = musician.location ?: "Ubicación desconocida"
-        val rateText = if (!musician.hourly_rate.isNullOrEmpty()) " • $${musician.hourly_rate}/h" else ""
-        holder.tvLocationAndRate.text = "📍 $locationText$rateText"
+        holder.tvLocation.text = "📍 $locationText"
 
-        // Lógica de foto con Glide (igual que en tu perfil)
+        // Precio
+        if (!musician.hourly_rate.isNullOrEmpty()) {
+            holder.tvPriceHint.text = "Desde $${musician.hourly_rate}"
+        } else {
+            holder.tvPriceHint.text = "A convenir"
+        }
+
+        // Rating (puedes reemplazar "4.8" por un campo real del modelo si lo tienes)
+        holder.tvRating.text = "4.8"
+
+        // Chips de géneros — limpiar primero para evitar duplicados al reciclar
+        holder.chipGroupGenres.removeAllViews()
+        musician.genres?.take(2)?.forEach { genre ->
+            val chip = Chip(holder.itemView.context).apply {
+                text = genre.name
+                isClickable = false
+                isCheckable = false
+                textSize = 10f
+                chipMinHeight = 28f
+                chipStartPadding = 6f
+                chipEndPadding = 6f
+            }
+            holder.chipGroupGenres.addView(chip)
+        }
+
+        // Foto con Glide
         if (musician.profile_picture.isNullOrEmpty()) {
             Glide.with(holder.itemView.context).clear(holder.ivCoverPhoto)
             holder.ivCoverPhoto.setImageDrawable(null)

@@ -254,6 +254,8 @@ class MyEventsFragment : Fragment() {
                     open(FavoritesFragment())
                     true
                 }
+                R.id.nav_notifications -> { open(NotificationsFragment()); true }
+
 
                 R.id.nav_profile -> {
                     open(UserProfileFragment())

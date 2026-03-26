@@ -15,6 +15,7 @@ import com.armonihz.app.network.RetrofitClient
 import com.armonihz.app.network.model.MusicianProfileDetailResponse
 import com.armonihz.app.ui.adapters.MusicianAdapter
 import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -31,6 +32,11 @@ class HomeFragment : Fragment() {
     private lateinit var musicianAdapter: MusicianAdapter
     private var allMusicians: List<MusicianProfileDetailResponse> = emptyList()
 
+    companion object {
+        // Caché en memoria para géneros — no cambian frecuentemente
+        private var cachedGenres: List<com.armonihz.app.network.model.Genre>? = null
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -46,7 +52,7 @@ class HomeFragment : Fragment() {
         setupRecyclerView()
         setupNavigation()
 
-        // ✅ Mostrar datos locales de Firebase Auth de inmediato
+        // Mostrar datos de Firebase Auth de inmediato sin esperar la API
         val user = FirebaseAuth.getInstance().currentUser
         val primerNombre = user?.displayName?.split(" ")?.firstOrNull() ?: "Usuario"
         binding.tvGreeting.text = "Hola, $primerNombre 👋"
@@ -59,7 +65,12 @@ class HomeFragment : Fragment() {
                 .into(binding.ivProfile)
         }
 
-        // ✅ Cargar todo en paralelo
+        // Si hay géneros cacheados, pintarlos de inmediato sin esperar la red
+        cachedGenres?.let { pintarGeneros(it) }
+
+        // Mostrar shimmer y arrancar carga
+        mostrarShimmer(true)
+
         lifecycleScope.launch {
             cargarTodoEnParalelo()
         }
@@ -68,60 +79,43 @@ class HomeFragment : Fragment() {
     private suspend fun cargarTodoEnParalelo() {
         val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
 
-        // ✅ Las 3 llamadas arrancan al mismo tiempo
-        val musicianosDeferred = lifecycleScope.async {
-            try { api.getAllMusicians() } catch (e: Exception) { null }
-        }
-        val perfilDeferred = lifecycleScope.async {
-            try { api.getProfile() } catch (e: Exception) { null }
-        }
-        val generosDeferred = lifecycleScope.async {
-            try { api.getGenres() } catch (e: Exception) { null }
-        }
+        coroutineScope {
+            // Las 3 llamadas arrancan al mismo tiempo
+            val musicianosDeferred = async {
+                try { api.getAllMusicians() } catch (e: Exception) { null }
+            }
+            val perfilDeferred = async {
+                try { api.getProfile() } catch (e: Exception) { null }
+            }
+            // Solo pedir géneros si no están cacheados
+            val generosDeferred = if (cachedGenres == null) {
+                async { try { api.getGenres() } catch (e: Exception) { null } }
+            } else null
 
-        // ✅ Esperar los 3 resultados juntos
-        val musicianosResponse = musicianosDeferred.await()
-        val perfilResponse     = perfilDeferred.await()
-        val generosResponse    = generosDeferred.await()
+            // Músicos tienen prioridad — en cuanto lleguen los mostramos
+            val musicianosResponse = musicianosDeferred.await()
+            if (!isAdded) return@coroutineScope
 
-        if (!isAdded) return
+            procesarMusicos(musicianosResponse)
+            mostrarShimmer(false) // Apagar shimmer en cuanto tengamos músicos
 
-        // ✅ Procesar perfil
-        perfilResponse?.body()?.let { body ->
-            val nombre = body.nombre?.split(" ")?.firstOrNull() ?: "Usuario"
-            binding.tvGreeting.text = "Hola, $nombre 👋"
+            // Perfil y géneros llegan después sin bloquear la lista
+            val perfilResponse  = perfilDeferred.await()
+            val generosResponse = generosDeferred?.await()
 
-            val photoUrl = body.photoUrl
-            if (!photoUrl.isNullOrEmpty()) {
-                Glide.with(this)
-                    .load("$photoUrl?t=${System.currentTimeMillis()}")
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .circleCrop()
-                    .into(binding.ivProfile)
+            if (!isAdded) return@coroutineScope
+
+            procesarPerfil(perfilResponse)
+
+            generosResponse?.body()?.let { genres ->
+                cachedGenres = genres
+                pintarGeneros(genres)
             }
         }
+    }
 
-        // ✅ Procesar géneros
-        generosResponse?.body()?.let { genres ->
-            binding.chipGroupCategories.removeAllViews()
-            for (genre in genres) {
-                val chip = Chip(requireContext()).apply {
-                    text = genre.name
-                    isCheckable = true
-                    setChipDrawable(
-                        com.google.android.material.chip.ChipDrawable.createFromAttributes(
-                            requireContext(), null, 0,
-                            com.google.android.material.R.style.Widget_MaterialComponents_Chip_Choice
-                        )
-                    )
-                    tag = genre.name
-                }
-                binding.chipGroupCategories.addView(chip)
-            }
-        }
-
-        // ✅ Procesar músicos
-        musicianosResponse?.body()?.let { jsonResponse ->
+    private fun procesarMusicos(response: retrofit2.Response<com.google.gson.JsonObject>?) {
+        response?.body()?.let { jsonResponse ->
             try {
                 val dataObject     = jsonResponse.getAsJsonObject("data")
                 val musiciansArray = dataObject.getAsJsonArray("data")
@@ -138,6 +132,63 @@ class HomeFragment : Fragment() {
             }
         } ?: run {
             if (isAdded) Toast.makeText(requireContext(), "No se pudieron cargar los músicos", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun procesarPerfil(response: retrofit2.Response<com.armonihz.app.network.model.ProfileResponse>?) {
+        response?.body()?.let { profile ->
+            try {
+                // Como ya está tipado, usamos 'profile' directamente
+                val nombre = profile.nombre?.split(" ")?.firstOrNull() ?: return@let
+                binding.tvGreeting.text = "Hola, $nombre 👋"
+
+                val photoUrl = profile.photoUrl
+                if (!photoUrl.isNullOrEmpty()) {
+                    Glide.with(this)
+                        .load("$photoUrl?t=${System.currentTimeMillis()}")
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .circleCrop()
+                        .into(binding.ivProfile)
+                }
+
+                // Esto evita el error de "if must have both main and else branches"
+                Unit
+            } catch (e: Exception) {
+                Log.e("API_ERROR", "Error procesando perfil: ${e.message}")
+            }
+        }
+    }
+
+    private fun pintarGeneros(genres: List<com.armonihz.app.network.model.Genre>) {
+        if (!isAdded) return
+        binding.chipGroupCategories.removeAllViews()
+        for (genre in genres) {
+            val chip = Chip(requireContext()).apply {
+                text = genre.name
+                isCheckable = true
+                setChipDrawable(
+                    com.google.android.material.chip.ChipDrawable.createFromAttributes(
+                        requireContext(), null, 0,
+                        com.google.android.material.R.style.Widget_MaterialComponents_Chip_Choice
+                    )
+                )
+                tag = genre.name
+            }
+            binding.chipGroupCategories.addView(chip)
+        }
+    }
+
+    private fun mostrarShimmer(mostrar: Boolean) {
+        if (!isAdded) return
+        if (mostrar) {
+            binding.shimmerLayout.startShimmer()
+            binding.shimmerLayout.visibility = View.VISIBLE
+            binding.rvMusicians.visibility = View.GONE
+            binding.tvEmptyState.visibility = View.GONE
+        } else {
+            binding.shimmerLayout.stopShimmer()
+            binding.shimmerLayout.visibility = View.GONE
+            // El RecyclerView o el empty state se muestran en filterMusicians()
         }
     }
 
@@ -163,9 +214,7 @@ class HomeFragment : Fragment() {
         binding.searchInput.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            override fun afterTextChanged(s: Editable?) {
-                filterMusicians()
-            }
+            override fun afterTextChanged(s: Editable?) { filterMusicians() }
         })
 
         binding.chipGroupCategories.setOnCheckedStateChangeListener { _, _ ->
@@ -183,18 +232,10 @@ class HomeFragment : Fragment() {
         binding.bottomNavigation.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_home -> true
-                R.id.nav_events -> {
-                    open(MyEventsFragment())
-                    true
-                }
-                R.id.nav_favorites -> {
-                    open(FavoritesFragment())
-                    true
-                }
-                R.id.nav_profile -> {
-                    open(UserProfileFragment())
-                    true
-                }
+                R.id.nav_events -> { open(MyEventsFragment()); true }
+                R.id.nav_favorites -> { open(FavoritesFragment()); true }
+                R.id.nav_notifications -> { open(NotificationsFragment()); true }
+                R.id.nav_profile -> { open(UserProfileFragment()); true }
                 else -> false
             }
         }
@@ -210,13 +251,9 @@ class HomeFragment : Fragment() {
         val query = binding.searchInput.text.toString().trim().lowercase()
 
         val selectedChipId = binding.chipGroupCategories.checkedChipId
-
         val categoryFilter = if (selectedChipId != View.NO_ID) {
-            val selectedChip = binding.chipGroupCategories.findViewById<Chip>(selectedChipId)
-            selectedChip?.tag as? String
-        } else {
-            null
-        }
+            binding.chipGroupCategories.findViewById<Chip>(selectedChipId)?.tag as? String
+        } else null
 
         val filteredList = allMusicians.filter { musician ->
             val matchesName = query.isEmpty() || musician.stage_name.lowercase().contains(query)
@@ -227,6 +264,14 @@ class HomeFragment : Fragment() {
         }
 
         musicianAdapter.updateData(filteredList)
+
+        if (filteredList.isEmpty()) {
+            binding.rvMusicians.visibility = View.GONE
+            binding.tvEmptyState.visibility = View.VISIBLE
+        } else {
+            binding.rvMusicians.visibility = View.VISIBLE
+            binding.tvEmptyState.visibility = View.GONE
+        }
     }
 
     override fun onDestroyView() {

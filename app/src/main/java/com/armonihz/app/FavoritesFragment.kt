@@ -128,6 +128,7 @@ class FavoritesFragment : Fragment() {
                 R.id.nav_home -> { open(HomeFragment()); true }
                 R.id.nav_events -> { open(MyEventsFragment()); true }
                 R.id.nav_favorites -> true
+                R.id.nav_notifications -> { open(NotificationsFragment()); true }
                 R.id.nav_profile -> { open(UserProfileFragment()); true }
                 else -> false
             }

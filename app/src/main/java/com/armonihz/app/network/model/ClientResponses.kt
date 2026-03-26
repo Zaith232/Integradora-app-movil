@@ -178,3 +178,47 @@ data class FavoriteMusiciansResponse(
     val success: Boolean,
     val data: List<MusicianProfileDetailResponse>
 )
+
+// HiringRequestPayload.kt
+data class HiringRequestPayload(
+    val musician_profile_id: Int,
+    val event_date: String, // Formato "YYYY-MM-DD HH:mm:ss"
+    val end_time: String,
+    val event_location: String,
+    val description: String,
+    val budget: Double
+)
+
+// AvailabilityResponse.kt
+data class AvailabilityResponse(
+    val success: Boolean,
+    val data: List<BusyDate>
+)
+
+data class BusyDate(
+    val start: String,
+    val end: String
+)
+
+data class HiringRequestsListResponse(
+    val data: List<HiringRequestItem>
+)
+
+data class HiringRequestItem(
+    val id: Int,
+    val event_date: String,
+    val end_time: String?,
+    val event_location: String,
+    val description: String,
+    val budget: Double,
+    val status: String,
+    val musician_message: String?, // Para la contraoferta
+    val counter_offer: Double?,    // Para el nuevo precio
+    val musician_profile: MusicianMiniProfile?
+)
+
+data class MusicianMiniProfile(
+    val id: Int,
+    val stage_name: String
+    // Si tu API devuelve foto, puedes agregarla aquí: val photo: String?
+)

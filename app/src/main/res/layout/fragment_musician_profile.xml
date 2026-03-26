@@ -225,6 +225,21 @@
                         android:gravity="end"
                         android:orientation="horizontal">
 
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnContratar"
+                            android:layout_width="0dp"
+                            android:layout_height="56dp"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="16dp"
+                            android:text="Solicitar Contratación"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:cornerRadius="28dp"
+                            app:icon="@drawable/ic_calendar"
+                            app:iconGravity="textStart"
+                            app:backgroundTint="?attr/colorPrimary"
+                            app:elevation="4dp"/>
+
                         <ImageButton
                             android:id="@+id/btnFav"
                             android:layout_width="54dp"
@@ -232,8 +247,14 @@
                             android:background="@drawable/bg_secondary_button"
                             android:src="@drawable/ic_favorite_border"
                             app:tint="?attr/colorPrimary" />
+
+
                     </LinearLayout>
+
+
                 </LinearLayout>
+
+
             </androidx.cardview.widget.CardView>
 
             <TextView

@@ -17,6 +17,11 @@
         android:title="Favoritos" />
 
     <item
+        android:id="@+id/nav_notifications"
+        android:icon="@drawable/ic_notifications"
+        android:title="Notificaciones" />
+
+    <item
         android:id="@+id/nav_profile"
         android:icon="@drawable/ic_person"
         android:title="Perfil" />
