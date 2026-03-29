@@ -25,9 +25,11 @@ import com.armonihz.app.network.ApiService
 import com.armonihz.app.network.RetrofitClient
 import com.armonihz.app.network.model.MultimediaItem
 import com.armonihz.app.ui.adapters.MultimediaAdapter
+import com.armonihz.app.ui.adapters.ReviewAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.coroutines.launch
+import java.util.Locale
 
 class MusicianProfileFragment : Fragment() {
 
@@ -42,6 +44,8 @@ class MusicianProfileFragment : Fragment() {
     // Creamos dos listas separadas en memoria para fotos y videos
     private var photosList: List<MultimediaItem> = emptyList()
     private var videosList: List<MultimediaItem> = emptyList()
+
+    private lateinit var reviewAdapter: ReviewAdapter
 
     companion object {
         private const val ARG_MUSICIAN_ID = "musician_id"
@@ -71,12 +75,15 @@ class MusicianProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        reviewAdapter = ReviewAdapter(emptyList())
+        binding.rvReviews.adapter = reviewAdapter
 
         setupTabs()
         setupListeners()
 
         if (musicianId != -1) {
             loadMusicianProfile()
+            loadReviews()
         } else {
             Toast.makeText(context, "Error: Músico no encontrado", Toast.LENGTH_SHORT).show()
         }
@@ -101,6 +108,9 @@ class MusicianProfileFragment : Fragment() {
             binding.btnTabDescription.setTypeface(null, android.graphics.Typeface.BOLD)
             binding.btnTabContact.alpha = 0.5f
             binding.btnTabContact.setTypeface(null, android.graphics.Typeface.NORMAL)
+
+            binding.indicatorDescription.visibility = View.VISIBLE
+            binding.indicatorContact.visibility = View.INVISIBLE
         } else {
             binding.layoutDescription.visibility = View.GONE
             binding.layoutContactInfo.visibility = View.VISIBLE
@@ -109,6 +119,9 @@ class MusicianProfileFragment : Fragment() {
             binding.btnTabContact.setTypeface(null, android.graphics.Typeface.BOLD)
             binding.btnTabDescription.alpha = 0.5f
             binding.btnTabDescription.setTypeface(null, android.graphics.Typeface.NORMAL)
+
+            binding.indicatorDescription.visibility = View.INVISIBLE
+            binding.indicatorContact.visibility = View.VISIBLE
         }
     }
 
@@ -119,12 +132,18 @@ class MusicianProfileFragment : Fragment() {
             binding.btnTabVideos.alpha = 0.5f
             binding.btnTabVideos.setTypeface(null, android.graphics.Typeface.NORMAL)
 
+            binding.indicatorPhotos.visibility = View.VISIBLE
+            binding.indicatorVideos.visibility = View.INVISIBLE
+
             updateMultimediaAdapter(photosList)
         } else {
             binding.btnTabVideos.alpha = 1f
             binding.btnTabVideos.setTypeface(null, android.graphics.Typeface.BOLD)
             binding.btnTabPhotos.alpha = 0.5f
             binding.btnTabPhotos.setTypeface(null, android.graphics.Typeface.NORMAL)
+
+            binding.indicatorPhotos.visibility = View.INVISIBLE
+            binding.indicatorVideos.visibility = View.VISIBLE
 
             updateMultimediaAdapter(videosList)
         }
@@ -170,7 +189,7 @@ class MusicianProfileFragment : Fragment() {
                         binding.tvHourlyRate.text = "Tarifa a convenir"
                     }
 
-                    binding.tvVerified.visibility = if (musician.is_verified == 1) View.VISIBLE else View.GONE
+                    binding.chipVerified.visibility = if (musician.is_verified == 1) View.VISIBLE else View.GONE
 
                     if (!musician.coverage_notes.isNullOrEmpty()) {
                         binding.tvCoverageNotes.text = "🚗 Cobertura: ${musician.coverage_notes}"
@@ -335,15 +354,9 @@ class MusicianProfileFragment : Fragment() {
 
     private fun updateFavoriteIcon() {
         if (isFavorite) {
-            // Corazón lleno cuando ESTÁ en favoritos
-            binding.btnFav.setImageResource(R.drawable.ic_favorite)
-            // Opcional: Pintar el corazón de rojo o del color primario
-            // binding.btnFav.setColorFilter(Color.RED)
+            binding.btnFav.setIconResource(R.drawable.ic_favorite)
         } else {
-            // Corazón con contorno cuando NO ESTÁ en favoritos
-            binding.btnFav.setImageResource(R.drawable.ic_favorite_border)
-            // Opcional: Quitar el filtro de color para que vuelva al color original
-            // binding.btnFav.clearColorFilter()
+            binding.btnFav.setIconResource(R.drawable.ic_favorite_border)
         }
     }
 
@@ -476,6 +489,35 @@ class MusicianProfileFragment : Fragment() {
             if (musicianId != -1) {
                 val bottomSheet = HiringBottomSheetFragment(musicianId)
                 bottomSheet.show(parentFragmentManager, "HiringBottomSheet")
+            }
+        }
+    }
+
+    private fun loadReviews() {
+        val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
+
+        lifecycleScope.launch {
+            try {
+                val response = api.getMusicianReviews(musicianId)
+                if (response.isSuccessful && response.body() != null) {
+                    val reviews = response.body()!!.data
+
+                    if (reviews.isNotEmpty()) {
+                        binding.rvReviews.visibility = View.VISIBLE
+                        binding.tvNoReviews.visibility = View.GONE
+                        reviewAdapter.updateData(reviews)
+
+                        // BONUS: ¡Actualizamos la cajita de valoración de arriba en tu Card!
+                        val average = reviews.map { it.rating }.average()
+                        binding.tvRating.text = String.format(Locale.US, "%.1f ⭐", average)
+                    } else {
+                        binding.rvReviews.visibility = View.GONE
+                        binding.tvNoReviews.visibility = View.VISIBLE
+                        binding.tvRating.text = "Nuevo" // Si no tiene reseñas
+                    }
+                }
+            } catch (e: Exception) {
+                Log.e("REVIEWS_ERROR", "Error al cargar reseñas: ${e.message}")
             }
         }
     }

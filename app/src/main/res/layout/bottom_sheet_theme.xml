@@ -1,0 +1,38 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="16dp">
+
+    <!-- Handle bar -->
+    <View
+        android:layout_width="36dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/bg_handle_bar" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TEMA DE LA APLICACIÓN"
+        android:textSize="11sp"
+        android:letterSpacing="0.1"
+        android:gravity="center"
+        android:textColor="?attr/colorOnSurfaceVariant"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Opción: Seguir sistema -->
+    <include layout="@layout/item_theme_option"
+        android:id="@+id/optionSystem" />
+
+    <!-- Opción: Modo claro -->
+    <include layout="@layout/item_theme_option"
+        android:id="@+id/optionLight" />
+
+    <!-- Opción: Modo oscuro -->
+    <include layout="@layout/item_theme_option"
+        android:id="@+id/optionDark" />
+
+</LinearLayout>

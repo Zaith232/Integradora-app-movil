@@ -161,19 +161,21 @@ class HomeFragment : Fragment() {
 
     private fun pintarGeneros(genres: List<com.armonihz.app.network.model.Genre>) {
         if (!isAdded) return
+
         binding.chipGroupCategories.removeAllViews()
+
         for (genre in genres) {
-            val chip = Chip(requireContext()).apply {
-                text = genre.name
-                isCheckable = true
-                setChipDrawable(
-                    com.google.android.material.chip.ChipDrawable.createFromAttributes(
-                        requireContext(), null, 0,
-                        com.google.android.material.R.style.Widget_MaterialComponents_Chip_Choice
-                    )
-                )
-                tag = genre.name
-            }
+            // 1. Inflar el diseño personalizado que contiene el estilo Filter
+            val chip = layoutInflater.inflate(R.layout.item_category_chip, binding.chipGroupCategories, false) as Chip
+
+            // 2. Asignar los valores al chip
+            chip.text = genre.name
+            chip.tag = genre.name
+
+            // 3. Importante: Generar un ID único para que el singleSelection funcione
+            chip.id = View.generateViewId()
+
+            // 4. Agregarlo al ChipGroup
             binding.chipGroupCategories.addView(chip)
         }
     }

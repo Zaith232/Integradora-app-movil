@@ -23,10 +23,11 @@ class EventAdapter(
         val tvEventTitle: TextView = view.findViewById(R.id.tvEventTitle)
         val tvEventDetails: TextView = view.findViewById(R.id.tvEventDetails)
         val tvProposals: TextView = view.findViewById(R.id.tvProposals)
-        val tvEventStatus: TextView = view.findViewById(R.id.tvEventStatus)
+        val chipStatus: com.google.android.material.chip.Chip = view.findViewById(R.id.chipStatus) // antes tvEventStatus
         val tvEditEvent: TextView = view.findViewById(R.id.tvEditEvent)
-        val tvEventWarning: TextView = view.findViewById(R.id.tvEventWarning) // NUEVO
-        val tvDeleteEvent: TextView = itemView.findViewById(R.id.tvDeleteEvent)
+        val tvEventWarning: TextView = view.findViewById(R.id.tvEventWarning)
+        val tvDeleteEvent: TextView = view.findViewById(R.id.tvDeleteEvent)
+        val viewStatusBar: View = view.findViewById(R.id.viewStatusBar) // barra lateral
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
@@ -46,42 +47,46 @@ class EventAdapter(
         val expired = isExpired(event.fecha)
         val daysLeft = daysUntil(event.fecha)
 
-        // 🔴 EVENTO CADUCADO
+        // 🔴 CADUCADO
         if (expired) {
-
-            holder.tvEventStatus.text = "Estado: Caducado"
-            holder.tvEventStatus.setTextColor(Color.parseColor("#DC3545"))
+            holder.viewStatusBar.setBackgroundColor(Color.parseColor("#9E9E9E"))
+            holder.chipStatus.text = "Caducado"
+            holder.chipStatus.setChipBackgroundColorResource(android.R.color.transparent)
+            holder.chipStatus.chipBackgroundColor = android.content.res.ColorStateList.valueOf(Color.parseColor("#F5F5F5"))
+            holder.chipStatus.setTextColor(Color.parseColor("#616161"))
 
             holder.tvEventWarning.visibility = View.VISIBLE
             holder.tvEventWarning.text = "❌ Este evento ya caducó"
-
             holder.tvEditEvent.visibility = View.GONE
-
         }
 
-        // 🟢 EVENTO DISPONIBLE
+        // 🟢 DISPONIBLE
         else if (event.status == "open") {
-
-            holder.tvEventStatus.text = "Estado: Disponible"
-            holder.tvEventStatus.setTextColor(Color.parseColor("#28A745"))
+            holder.viewStatusBar.setBackgroundColor(Color.parseColor("#1565C0"))
+            holder.chipStatus.text = "Disponible"
+            holder.chipStatus.chipBackgroundColor = android.content.res.ColorStateList.valueOf(Color.parseColor("#E8F5E9"))
+            holder.chipStatus.setTextColor(Color.parseColor("#2E7D32"))
 
             holder.tvEditEvent.visibility = View.VISIBLE
 
-            // ⚠ EVENTO POR CADUCAR
             if (daysLeft in 0..2) {
+                holder.viewStatusBar.setBackgroundColor(Color.parseColor("#F9A825"))
+                holder.chipStatus.text = "Por caducar"
+                holder.chipStatus.chipBackgroundColor = android.content.res.ColorStateList.valueOf(Color.parseColor("#FFF8E1"))
+                holder.chipStatus.setTextColor(Color.parseColor("#F57F17"))
                 holder.tvEventWarning.visibility = View.VISIBLE
-                holder.tvEventWarning.text = "⚠ Este evento está por caducar"
+                holder.tvEventWarning.text = "Caduca en $daysLeft días"
             } else {
                 holder.tvEventWarning.visibility = View.GONE
             }
-
         }
 
-        // ⚪ EVENTO CERRADO
+        // ⚪ CERRADO
         else {
-
-            holder.tvEventStatus.text = "Estado: Aceptado/Cerrado"
-            holder.tvEventStatus.setTextColor(Color.parseColor("#6C757D"))
+            holder.viewStatusBar.setBackgroundColor(Color.parseColor("#9E9E9E"))
+            holder.chipStatus.text = "Cerrado"
+            holder.chipStatus.chipBackgroundColor = android.content.res.ColorStateList.valueOf(Color.parseColor("#F5F5F5"))
+            holder.chipStatus.setTextColor(Color.parseColor("#616161"))
 
             holder.tvEditEvent.visibility = View.GONE
             holder.tvEventWarning.visibility = View.GONE

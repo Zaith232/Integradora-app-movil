@@ -18,6 +18,7 @@ import com.armonihz.app.network.RetrofitClient
 import com.armonihz.app.utils.ThemeManager
 import com.google.android.gms.auth.api.signin.*
 import com.google.android.gms.common.api.ApiException
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.firebase.auth.EmailAuthProvider
@@ -35,6 +36,14 @@ class SettingsFragment : Fragment() {
     private lateinit var loader: View
     private var isDeleting = false
 
+    // Datos de cada opción de tema
+    private data class ThemeOption(
+        val title: String,
+        val subtitle: String,
+        val iconRes: Int,
+        val modo: String
+    )
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,15 +60,15 @@ class SettingsFragment : Fragment() {
 
         googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
 
-        val btnBack = view.findViewById<ImageView>(R.id.btnBack)
-        val tvEditProfile = view.findViewById<TextView>(R.id.tvEditProfile)
-        val tvEditPhoto = view.findViewById<TextView>(R.id.tvEditPhoto)
-        val tvChangePassword = view.findViewById<TextView>(R.id.tvChangePassword)
+        val btnBack           = view.findViewById<ImageView>(R.id.btnBack)
+        val tvEditProfile     = view.findViewById<TextView>(R.id.tvEditProfile)
+        val tvEditPhoto       = view.findViewById<TextView>(R.id.tvEditPhoto)
+        val tvChangePassword  = view.findViewById<TextView>(R.id.tvChangePassword)
         val switchNotifications = view.findViewById<SwitchMaterial>(R.id.switchNotifications)
-        val tvThemeSelector = view.findViewById<TextView>(R.id.tvThemeSelector)
+        val tvThemeSelector   = view.findViewById<TextView>(R.id.tvThemeSelector)
 
         btnDeleteAccount = view.findViewById(R.id.btnDeleteAccount)
-        loader = view.findViewById(R.id.loader)
+        loader           = view.findViewById(R.id.loader)
 
         val user = auth.currentUser
         val esUsuarioGoogle = user?.providerData?.any { it.providerId == "google.com" } == true
@@ -118,28 +127,76 @@ class SettingsFragment : Fragment() {
     }
 
     private fun mostrarSelectorTema() {
-        val opciones = arrayOf("Seguir sistema", "Modo claro", "Modo oscuro")
+        val bottomSheet = BottomSheetDialog(requireContext())
+        val sheetView   = layoutInflater.inflate(R.layout.bottom_sheet_theme, null)
+        bottomSheet.setContentView(sheetView)
 
-        val seleccionActual = when (ThemeManager.getTheme(requireContext())) {
-            ThemeManager.MODE_LIGHT -> 1
-            ThemeManager.MODE_DARK -> 2
-            else -> 0
+        // Definición de las 3 opciones con título, subtítulo, ícono y modo
+        val opcionesData = listOf(
+            ThemeOption(
+                title    = "Seguir sistema",
+                subtitle = "Se adapta a tu dispositivo",
+                iconRes  = R.drawable.ic_theme_system,
+                modo     = ThemeManager.MODE_SYSTEM
+            ),
+            ThemeOption(
+                title    = "Modo claro",
+                subtitle = "Fondo blanco, texto oscuro",
+                iconRes  = R.drawable.ic_theme_light,
+                modo     = ThemeManager.MODE_LIGHT
+            ),
+            ThemeOption(
+                title    = "Modo oscuro",
+                subtitle = "Fondo oscuro, texto claro",
+                iconRes  = R.drawable.ic_theme_dark,
+                modo     = ThemeManager.MODE_DARK
+            )
+        )
+
+        val vistas = listOf(
+            sheetView.findViewById<View>(R.id.optionSystem),
+            sheetView.findViewById<View>(R.id.optionLight),
+            sheetView.findViewById<View>(R.id.optionDark)
+        )
+
+        // ✅ CORRECCIÓN: Asignar textos e íconos a cada fila desde el código
+        vistas.forEachIndexed { i, view ->
+            view.findViewById<TextView>(R.id.themeTitle).text     = opcionesData[i].title
+            view.findViewById<TextView>(R.id.themeSubtitle).text  = opcionesData[i].subtitle
+            view.findViewById<ImageView>(R.id.themeIcon).setImageResource(opcionesData[i].iconRes)
         }
 
-        AlertDialog.Builder(requireContext())
-            .setTitle("Tema de la aplicación")
-            .setSingleChoiceItems(opciones, seleccionActual) { dialog, which ->
+        // Tema actualmente activo
+        val temaActual = when (ThemeManager.getTheme(requireContext())) {
+            ThemeManager.MODE_LIGHT -> 1
+            ThemeManager.MODE_DARK  -> 2
+            else                    -> 0
+        }
 
-                when (which) {
-                    0 -> ThemeManager.saveTheme(requireContext(), ThemeManager.MODE_SYSTEM)
-                    1 -> ThemeManager.saveTheme(requireContext(), ThemeManager.MODE_LIGHT)
-                    2 -> ThemeManager.saveTheme(requireContext(), ThemeManager.MODE_DARK)
-                }
-
-                requireActivity().recreate()
-                dialog.dismiss()
+        // Marca visualmente la opción activa
+        fun marcarSeleccionado(index: Int) {
+            vistas.forEachIndexed { i, view ->
+                val radio = view.findViewById<ImageView>(R.id.radioIndicator)
+                radio.setImageResource(
+                    if (i == index) R.drawable.ic_radio_selected
+                    else            R.drawable.ic_radio_unselected
+                )
             }
-            .show()
+        }
+
+        marcarSeleccionado(temaActual)
+
+        // Click en cada opción
+        vistas.forEachIndexed { i, view ->
+            view.setOnClickListener {
+                marcarSeleccionado(i)
+                ThemeManager.saveTheme(requireContext(), opcionesData[i].modo)
+                bottomSheet.dismiss()
+                requireActivity().recreate()
+            }
+        }
+
+        bottomSheet.show()
     }
 
     // --- PASO 1: CONFIRMAR ---
@@ -173,11 +230,7 @@ class SettingsFragment : Fragment() {
 
         val esGoogle = user.providerData.any { it.providerId == "google.com" }
 
-        if (esGoogle) {
-            reautenticarConGoogle()
-        } else {
-            reautenticarConEmail(user)
-        }
+        if (esGoogle) reautenticarConGoogle() else reautenticarConEmail(user)
     }
 
     private fun reautenticarConEmail(user: FirebaseUser) {
@@ -190,28 +243,19 @@ class SettingsFragment : Fragment() {
             .setMessage("Para eliminar tu cuenta ingresa tu contraseña")
             .setView(passwordInput)
             .setPositiveButton("Confirmar") { _, _ ->
-
                 val password = passwordInput.text.toString()
-
                 if (password.isEmpty()) {
                     cancelarEliminacion("Contraseña requerida")
                     return@setPositiveButton
                 }
-
-                showLoader() // Mostramos el loader mientras verifica
+                showLoader()
                 val credential = EmailAuthProvider.getCredential(email, password)
-
                 user.reauthenticate(credential).addOnCompleteListener { authTask ->
-                    if (authTask.isSuccessful) {
-                        eliminarDatosBackendYFirebase(user) // Si es correcta, procedemos a borrar
-                    } else {
-                        cancelarEliminacion("Contraseña incorrecta")
-                    }
+                    if (authTask.isSuccessful) eliminarDatosBackendYFirebase(user)
+                    else cancelarEliminacion("Contraseña incorrecta")
                 }
             }
-            .setNegativeButton("Cancelar") { _, _ ->
-                cancelarEliminacion(null)
-            }
+            .setNegativeButton("Cancelar") { _, _ -> cancelarEliminacion(null) }
             .setCancelable(false)
             .show()
     }
@@ -229,16 +273,13 @@ class SettingsFragment : Fragment() {
         if (requestCode == 999) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
-                val account = task.getResult(ApiException::class.java)
+                val account    = task.getResult(ApiException::class.java)
                 val credential = GoogleAuthProvider.getCredential(account.idToken, null)
-                val user = auth.currentUser ?: return
+                val user       = auth.currentUser ?: return
 
                 user.reauthenticate(credential).addOnCompleteListener { authTask ->
-                    if (authTask.isSuccessful) {
-                        eliminarDatosBackendYFirebase(user) // Si es correcta, procedemos a borrar
-                    } else {
-                        cancelarEliminacion("Error al reautenticar con Google")
-                    }
+                    if (authTask.isSuccessful) eliminarDatosBackendYFirebase(user)
+                    else cancelarEliminacion("Error al reautenticar con Google")
                 }
             } catch (e: Exception) {
                 cancelarEliminacion("Reautenticación cancelada")
@@ -248,34 +289,23 @@ class SettingsFragment : Fragment() {
 
     // --- PASO 3 y 4: BORRAR BACKEND Y LUEGO FIREBASE ---
     private fun eliminarDatosBackendYFirebase(user: FirebaseUser) {
-
         lifecycleScope.launch {
             try {
-
-                // 🛑 EL FIX: Pedimos a Firebase un token fresco (true = forzar refresco)
                 val tokenResult = user.getIdToken(true).await()
-                val freshToken = tokenResult.token
+                val freshToken  = tokenResult.token
 
-                // Guardamos el token nuevo para que Retrofit lo use
                 if (freshToken != null) {
                     TokenManager.saveToken(requireContext(), freshToken)
                 }
 
-                // Ahora sí instanciamos la API y hacemos la llamada
-                val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
+                val api      = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
                 val response = api.deleteAccount()
 
                 if (response.isSuccessful || response.code() == 404) {
-
-                    // Si Laravel lo borró con éxito, borramos en Firebase
                     user.delete().addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            cerrarSesionYSalir() // Todo exitoso, lo sacamos de la app
-                        } else {
-                            cancelarEliminacion("Error de Firebase: No se pudo eliminar la cuenta.")
-                        }
+                        if (task.isSuccessful) cerrarSesionYSalir()
+                        else cancelarEliminacion("Error de Firebase: No se pudo eliminar la cuenta.")
                     }
-
                 } else {
                     cancelarEliminacion("Error en el servidor al eliminar cuenta (HTTP ${response.code()}).")
                 }
@@ -291,7 +321,6 @@ class SettingsFragment : Fragment() {
         hideLoader()
         isDeleting = false
 
-        // Limpiamos todos los tokens y sesiones locales
         googleSignInClient.signOut()
         TokenManager.clearToken(requireContext())
         auth.signOut()
@@ -307,16 +336,9 @@ class SettingsFragment : Fragment() {
         hideLoader()
         isDeleting = false
         btnDeleteAccount.isEnabled = true
-        if (mensaje != null) {
-            Toast.makeText(requireContext(), mensaje, Toast.LENGTH_LONG).show()
-        }
+        if (mensaje != null) Toast.makeText(requireContext(), mensaje, Toast.LENGTH_LONG).show()
     }
 
-    private fun showLoader() {
-        loader.visibility = View.VISIBLE
-    }
-
-    private fun hideLoader() {
-        loader.visibility = View.GONE
-    }
+    private fun showLoader() { loader.visibility = View.VISIBLE }
+    private fun hideLoader() { loader.visibility = View.GONE   }
 }

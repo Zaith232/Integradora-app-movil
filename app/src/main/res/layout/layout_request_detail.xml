@@ -7,39 +7,41 @@
     android:padding="24dp"
     android:background="?attr/colorSurface">
 
-    <View
-        android:layout_width="40dp"
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="36dp"
         android:layout_height="4dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="16dp"
-        android:background="?attr/colorOutline"
-        android:alpha="0.5" />
+        android:layout_marginBottom="24dp"
+        app:cardBackgroundColor="?attr/colorOutline"
+        app:cardCornerRadius="2dp"
+        app:cardElevation="0dp" />
 
     <TextView
         android:id="@+id/tvDetailTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Detalle de Solicitud"
-        android:textSize="20sp"
+        android:textSize="22sp"
         android:textStyle="bold"
         android:textColor="?attr/colorOnSurface"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="20dp" />
 
     <TextView
         android:id="@+id/tvDetailMusician"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Músico: Nombre"
+        android:text="Músico: BRAYAN ZAITH"
         android:textSize="16sp"
         android:textColor="?attr/colorPrimary"
         android:textStyle="bold"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginBottom="6dp"/>
 
     <TextView
         android:id="@+id/tvDetailDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Fecha: 31 Mar, 2026"
+        android:text="Fecha: 31 Mar, 2026 - 01:00 a.m."
+        android:textSize="14sp"
         android:textColor="?attr/colorOnSurfaceVariant"
         android:layout_marginBottom="4dp"/>
 
@@ -48,78 +50,91 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Ubicación: 36 poniente"
+        android:textSize="14sp"
         android:textColor="?attr/colorOnSurfaceVariant"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="24dp"/>
 
-    <LinearLayout
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/layoutCounterOffer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="#F3E8FF"
-        android:padding="16dp"
-        android:layout_marginBottom="24dp"
-        android:visibility="gone">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Respuesta del músico:"
-            android:textStyle="bold"
-            android:textColor="#6D28D9"
-            android:layout_marginBottom="8dp"/>
-
-        <TextView
-            android:id="@+id/tvMusicianMessage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Mensaje del músico..."
-            android:textColor="#4C1D95"
-            android:layout_marginBottom="12dp"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Nueva tarifa propuesta:"
-            android:textSize="12sp"
-            android:textColor="#6D28D9"/>
-
-        <TextView
-            android:id="@+id/tvNewPrice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="$8,000 MXN"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="#7C3AED"/>
+        android:layout_marginBottom="8dp"
+        app:cardBackgroundColor="?attr/colorSurfaceVariant"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
+        app:strokeColor="?attr/colorOutlineVariant"
+        app:strokeWidth="1dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="16dp"
-            android:weightSum="2">
+            android:orientation="vertical"
+            android:padding="20dp">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnRejectOffer"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:layout_marginEnd="8dp"
-                android:text="Rechazar"
-                android:textColor="#DC2626"
-                app:strokeColor="#FCA5A5" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Respuesta del músico"
+                android:textStyle="bold"
+                android:textColor="?attr/colorPrimary"
+                android:layout_marginBottom="8dp"/>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnAcceptOffer"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:layout_marginStart="8dp"
-                android:text="Aceptar"
-                app:backgroundTint="#7C3AED" />
+            <TextView
+                android:id="@+id/tvMusicianMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="hola jeje"
+                android:textSize="15sp"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nueva tarifa propuesta:"
+                android:textSize="12sp"
+                android:textColor="?attr/colorOnSurfaceVariant"/>
+
+            <TextView
+                android:id="@+id/tvNewPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="$20,000.00 MXN"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:textColor="?attr/colorPrimary"
+                android:layout_marginTop="2dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="24dp"
+                android:weightSum="2">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnRejectOffer"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="52dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:text="Rechazar"
+                    android:textColor="?attr/colorError"
+                    app:strokeColor="?attr/colorError" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAcceptOffer"
+                    android:layout_width="0dp"
+                    android:layout_height="52dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:text="Aceptar"
+                    android:textColor="?attr/colorOnPrimary"
+                    app:backgroundTint="?attr/colorPrimary" />
+            </LinearLayout>
+
         </LinearLayout>
-    </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>

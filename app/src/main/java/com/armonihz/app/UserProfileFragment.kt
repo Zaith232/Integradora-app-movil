@@ -1,5 +1,6 @@
 package com.armonihz.app
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,12 +18,14 @@ import com.armonihz.app.utils.LoadingManager
 import com.armonihz.app.viewmodel.ProfileSharedViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.signature.ObjectKey
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class UserProfileFragment : Fragment() {
@@ -32,11 +35,25 @@ class UserProfileFragment : Fragment() {
     private lateinit var tvPhone: TextView
     private lateinit var profileImage: ShapeableImageView
     private lateinit var buttonSettings: MaterialButton
+    private lateinit var buttonReviews: MaterialButton
 
     private val sharedViewModel: ProfileSharedViewModel by activityViewModels()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    // ✅ MEJORA 4: ApiService se crea una sola vez con lazy
+    private val api by lazy {
+        RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
+    }
 
+    // ✅ MEJORA 1: Referencia a SharedPreferences para caché local
+    private val profilePrefs by lazy {
+        requireContext().getSharedPreferences("profile_cache", Context.MODE_PRIVATE)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         val view = inflater.inflate(R.layout.fragment_user_profile, container, false)
 
         tvName = view.findViewById(R.id.etuserName)
@@ -44,77 +61,88 @@ class UserProfileFragment : Fragment() {
         tvPhone = view.findViewById(R.id.tvUserPhone)
         profileImage = view.findViewById(R.id.profileImage)
         buttonSettings = view.findViewById(R.id.btnSettings)
+        buttonReviews = view.findViewById(R.id.btnMyReviews)
 
         val user = FirebaseAuth.getInstance().currentUser
-
         tvEmail.text = user?.email ?: "Sin correo"
 
-        // 🔵 Cargar foto de Google inmediatamente
-        user?.photoUrl?.let {
-            Glide.with(this)
-                .load(it)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .circleCrop()
-                .into(profileImage)
+        // ✅ MEJORA 1: Mostrar datos del caché local INMEDIATAMENTE (sin esperar la API)
+        mostrarCacheLocal()
+
+        // Foto de Google como fallback mientras llega la API
+        if (profilePrefs.getString("photo_url", null).isNullOrEmpty()) {
+            user?.photoUrl?.let {
+                cargarFotoEnImageView(it.toString(), "google")
+            }
         }
 
         observarFotoDesdeApi()
         loadProfileFromApi()
-
         configurarLogout(view)
         configurarNavegacion(view)
 
         return view
     }
 
-    private fun bustCache(url: String): String {
-        val cleanUrl = url.substringBefore("?")
-        return "$cleanUrl?t=${System.currentTimeMillis()}"
+    // ✅ MEJORA 1: Mostrar datos guardados localmente antes de llamar a la API
+    private fun mostrarCacheLocal() {
+        val nombreCache = profilePrefs.getString("nombre", null)
+        val telefonoCache = profilePrefs.getString("telefono", null)
+        val photoUrlCache = profilePrefs.getString("photo_url", null)
+
+        if (!nombreCache.isNullOrEmpty()) tvName.text = nombreCache
+        if (!telefonoCache.isNullOrEmpty()) tvPhone.text = telefonoCache else tvPhone.text = "Sin teléfono"
+        if (!photoUrlCache.isNullOrEmpty()) sharedViewModel.updatePhoto(photoUrlCache)
+    }
+
+    // ✅ MEJORA 1: Guardar datos en caché local después de obtenerlos de la API
+    private fun guardarCacheLocal(nombre: String, telefono: String?, photoUrl: String?) {
+        profilePrefs.edit()
+            .putString("nombre", nombre)
+            .putString("telefono", telefono ?: "")
+            .putString("photo_url", photoUrl ?: "")
+            .apply()
+    }
+
+    // ✅ MEJORA 3: Usar Glide signature en lugar de bustCache con timestamp en URL
+    // Esto respeta el caché de disco y solo re-descarga cuando la foto cambia realmente
+    private fun cargarFotoEnImageView(url: String, versionKey: String) {
+        if (!isAdded) return
+        Glide.with(this)
+            .load(url)
+            .signature(ObjectKey(versionKey))    // ← reemplaza bustCache()
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .circleCrop()
+            .placeholder(R.drawable.ic_user_placeholder)
+            .into(profileImage)
     }
 
     private fun observarFotoDesdeApi() {
-
         sharedViewModel.profilePhotoUrl.observe(viewLifecycleOwner) { url ->
-
             val googleUrl = FirebaseAuth.getInstance().currentUser?.photoUrl
 
             when {
+                // ✅ MEJORA 3: signature con la URL como clave (cambia solo cuando la foto cambia)
+                !url.isNullOrEmpty() -> cargarFotoEnImageView(url, url)
 
-                // 🔵 Foto desde Laravel
-                !url.isNullOrEmpty() -> {
+                googleUrl != null -> cargarFotoEnImageView(googleUrl.toString(), googleUrl.toString())
 
-                    Glide.with(this)
-                        .load(bustCache(url))
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .circleCrop()
-                        .into(profileImage)
-                }
-
-                // 🔵 Foto de Google
-                googleUrl != null -> {
-
-                    Glide.with(this)
-                        .load(bustCache(googleUrl.toString()))
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .circleCrop()
-                        .into(profileImage)
-                }
-
-                else -> {
-                    profileImage.setImageResource(R.drawable.ic_user_placeholder)
-                }
+                else -> profileImage.setImageResource(R.drawable.ic_user_placeholder)
             }
         }
     }
 
     private fun loadProfileFromApi() {
-
-        val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
-
         viewLifecycleOwner.lifecycleScope.launch {
-
             try {
-                // 🔵 Asegúrate de que este método en tu ApiService esté retornando Response<ProfileResponse>
+                // ✅ MEJORA 2: Si tuvieras múltiples endpoints, lánzalos en paralelo con async
+                // Ejemplo con un segundo endpoint hipotético:
+                //   val notifDeferred = async { api.getNotifications() }
+                //   val profileDeferred = async { api.getProfile() }
+                //   val notif = notifDeferred.await()
+                //   val profile = profileDeferred.await()
+                //
+                // Por ahora, con un solo endpoint:
                 val response = api.getProfile()
 
                 if (!isAdded) return@launch
@@ -122,66 +150,59 @@ class UserProfileFragment : Fragment() {
                 if (response.isSuccessful) {
                     val body = response.body()
 
-                    // 1. Cargar la foto
+                    // Foto
                     val photoUrl = body?.photoUrl
                     if (!photoUrl.isNullOrEmpty()) {
                         sharedViewModel.updatePhoto(photoUrl)
                     }
 
-                    // 2. Cargar el nombre
-                    val nombre   = body?.nombre   ?: ""
+                    // Nombre
+                    val nombre = body?.nombre ?: ""
                     val apellido = body?.apellido ?: ""
                     val nombreCompleto = "$nombre $apellido".trim()
-
                     if (nombreCompleto.isNotEmpty()) {
                         tvName.text = nombreCompleto
                     }
 
-                    // 3. Cargar el teléfono (NUEVO)
-                    val telefonoApi = body?.telefono
-                    if (!telefonoApi.isNullOrEmpty()) {
-                        tvPhone.text = telefonoApi
-                    } else {
-                        tvPhone.text = "Sin teléfono"
-                    }
+                    // Teléfono
+                    val telefono = body?.telefono
+                    tvPhone.text = if (!telefono.isNullOrEmpty()) telefono else "Sin teléfono"
+
+                    // ✅ MEJORA 1: Guardar en caché local para la próxima apertura
+                    guardarCacheLocal(nombreCompleto, telefono, photoUrl)
                 }
 
             } catch (_: CancellationException) {
+                // Ignorar cancelaciones normales del ciclo de vida
             } catch (e: Exception) {
                 e.printStackTrace()
+                // Si la API falla, el usuario ya ve los datos del caché — sin pantalla en blanco
             }
         }
     }
 
-
     private fun configurarLogout(view: View) {
-
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
             .build()
-
         val googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
 
         view.findViewById<Button>(R.id.btnLogout).setOnClickListener {
-
             androidx.appcompat.app.AlertDialog.Builder(requireContext())
                 .setTitle("Cerrar sesión")
                 .setMessage("¿Estás seguro de que deseas cerrar sesión?")
                 .setPositiveButton("Sí, cerrar sesión") { _, _ ->
-
                     LoadingManager.show(requireActivity(), "Cerrando sesión...")
-
                     FirebaseAuth.getInstance().signOut()
                     TokenManager.clearToken(requireContext())
 
+                    // ✅ Limpiar caché local al cerrar sesión
+                    profilePrefs.edit().clear().apply()
+
                     googleSignInClient.signOut().addOnCompleteListener {
-
                         LoadingManager.hide()
-
                         val intent = Intent(requireContext(), LoginActivity::class.java)
-                        intent.flags =
-                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-
+                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)
                         requireActivity().finishAffinity()
                     }
@@ -192,46 +213,35 @@ class UserProfileFragment : Fragment() {
     }
 
     private fun configurarNavegacion(view: View) {
-
         val bottomNavigation = view.findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottomNavigation)
-
         bottomNavigation.selectedItemId = R.id.nav_profile
 
         bottomNavigation.setOnItemSelectedListener {
-
             when (it.itemId) {
-
-                R.id.nav_home -> {
-                    open(HomeFragment())
-                    true
-                }
-
-                R.id.nav_events -> {
-                    open(MyEventsFragment())
-                    true
-                }
-
-                R.id.nav_favorites -> {
-                    open(FavoritesFragment())
-                    true
-                }
+                R.id.nav_home -> { open(HomeFragment()); true }
+                R.id.nav_events -> { open(MyEventsFragment()); true }
+                R.id.nav_favorites -> { open(FavoritesFragment()); true }
                 R.id.nav_notifications -> { open(NotificationsFragment()); true }
-
                 else -> false
             }
         }
 
         buttonSettings.setOnClickListener {
-
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainer, SettingsFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+
+        buttonReviews.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, MyReviewsFragment())
                 .addToBackStack(null)
                 .commit()
         }
     }
 
     private fun open(fragment: Fragment) {
-
         parentFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainer, fragment)
             .commit()

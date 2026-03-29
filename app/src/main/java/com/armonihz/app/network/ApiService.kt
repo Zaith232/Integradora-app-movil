@@ -19,8 +19,11 @@ import com.armonihz.app.network.model.HiringRequestPayload
 import com.armonihz.app.network.model.HiringRequestsListResponse
 import com.armonihz.app.network.model.MusicianProfileDetailResponse
 import com.armonihz.app.network.model.MusicianProfileWrapperResponse
+import com.armonihz.app.network.model.MusicianReviewsResponse
+import com.armonihz.app.network.model.MyReviewsResponse
 import com.armonihz.app.network.model.PaginatedMusiciansWrapper
 import com.armonihz.app.network.model.ProfileResponse
+import com.armonihz.app.network.model.ReviewRequest
 import com.armonihz.app.network.model.SyncGooglePhotoRequest
 import com.armonihz.app.network.model.UpdateProfileRequest
 
@@ -168,4 +171,19 @@ interface ApiService {
         @Path("id") requestId: Int,
         @Body payload: Map<String, String>
     ): retrofit2.Response<com.armonihz.app.network.model.GenericResponse>
+
+    // Crear una reseña
+    @POST("reviews") // Asegúrate de que coincida con tu api.php (si está en un grupo v1, ajusta la ruta)
+    suspend fun createReview(
+        @Body request: ReviewRequest
+    ): Response<GenericResponse>
+
+    // Obtener las reseñas de un músico
+    @GET("musicians/{id}/reviews")
+    suspend fun getMusicianReviews(
+        @Path("id") musicianId: Int
+    ): Response<MusicianReviewsResponse>
+
+    @GET("client/reviews")
+    suspend fun getMyReviews(): retrofit2.Response<MyReviewsResponse>
 }

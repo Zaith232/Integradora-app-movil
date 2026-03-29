@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Cuerpo del calendario -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#000000"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M3,6a2,2 0,0,1 2,-2h14a2,2 0,0,1 2,2v14a2,2 0,0,1 -2,2H5a2,2 0,0,1 -2,-2Z"/>
+
+    <!-- Línea horizontal superior -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#000000"
+        android:strokeWidth="1.5"
+        android:pathData="M3,10h18"/>
+
+    <!-- Pin izquierdo -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#000000"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:pathData="M8,2v4"/>
+
+    <!-- Pin derecho -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#000000"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:pathData="M16,2v4"/>
+
+    <!-- Signo de interrogación / vacío (círculo con ?) -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#000000"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:pathData="M12,14a1,1 0,0,1 1,-1 1.5,1.5 0,1,0 -1.5,-1.5"/>
+
+    <path
+        android:fillColor="#000000"
+        android:pathData="M12,17.5m-0.75,0a0.75,0.75 0,1,0 1.5,0a0.75,0.75 0,1,0 -1.5,0"/>
+
+</vector>

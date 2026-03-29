@@ -4,12 +4,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.armonihz.app.R
 import com.armonihz.app.network.model.MusicianProfileDetailResponse
 import com.bumptech.glide.Glide
+import com.google.android.material.imageview.ShapeableImageView
 
 class FavoritesAdapter(
     private var favorites: MutableList<MusicianProfileDetailResponse>,
@@ -18,7 +18,8 @@ class FavoritesAdapter(
 ) : RecyclerView.Adapter<FavoritesAdapter.FavoriteViewHolder>() {
 
     inner class FavoriteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val imgFav: ImageView = view.findViewById(R.id.imgFav)
+        // Cambiado a ShapeableImageView para coincidir con el XML moderno
+        val imgFav: ShapeableImageView = view.findViewById(R.id.imgFav)
         val txtNameFav: TextView = view.findViewById(R.id.txtNameFav)
         val txtDetailsFav: TextView = view.findViewById(R.id.txtDetailsFav)
         val btnRemoveFav: ImageButton = view.findViewById(R.id.btnRemoveFav)
@@ -45,19 +46,43 @@ class FavoritesAdapter(
 
             Glide.with(holder.itemView.context).load(url).centerCrop().into(holder.imgFav)
         } else {
-            holder.imgFav.setImageResource(R.drawable.ic_user_placeholder) // Cambia esto por tu placeholder
+            // Asegúrate de tener este ícono o cámbialo por el tuyo (ej. R.drawable.ic_launcher_background)
+            holder.imgFav.setImageResource(R.drawable.ic_user_placeholder)
         }
 
-        // Clicks
+        // Clic en la tarjeta completa
         holder.itemView.setOnClickListener { onMusicianClick(musician.id) }
-        holder.btnRemoveFav.setOnClickListener { onRemoveClick(musician, position) }
+
+        // 🚀 CORRECCIÓN CLAVE PARA PREVENIR CRASHES:
+        // Usamos adapterPosition para obtener la posición actual, no la inicial
+        holder.btnRemoveFav.setOnClickListener {
+            val currentPosition = holder.adapterPosition
+            if (currentPosition != RecyclerView.NO_POSITION) {
+                onRemoveClick(musician, currentPosition)
+            }
+        }
     }
 
     override fun getItemCount() = favorites.size
 
-    // Método para borrar visualmente el elemento sin recargar toda la lista
+    // 🚀 Método MEJORADO para borrar visualmente el elemento
     fun removeItem(position: Int) {
-        favorites.removeAt(position)
-        notifyItemRemoved(position)
+        if (position in 0 until favorites.size) {
+            // 1. Lo borramos de la lista en memoria
+            favorites.removeAt(position)
+
+            // 2. Ejecutamos la animación de salida
+            notifyItemRemoved(position)
+
+            // 3. ¡IMPORTANTE! Actualizamos las posiciones de los elementos que quedaron abajo
+            notifyItemRangeChanged(position, favorites.size)
+        }
+    }
+
+    // Opcional: Para cuando recargues la lista completa desde la API
+    fun updateData(newFavorites: List<MusicianProfileDetailResponse>) {
+        favorites.clear()
+        favorites.addAll(newFavorites)
+        notifyDataSetChanged()
     }
 }

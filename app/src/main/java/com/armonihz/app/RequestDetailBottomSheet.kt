@@ -17,11 +17,12 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.TimeZone
+import com.google.android.material.card.MaterialCardView
 
 class RequestDetailBottomSheet(
     private val requestItem: HiringRequestItem
 ) : BottomSheetDialogFragment() {
-
+    private lateinit var layoutCounterOffer: MaterialCardView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,7 +36,7 @@ class RequestDetailBottomSheet(
         val tvMusician = view.findViewById<TextView>(R.id.tvDetailMusician)
         val tvDate = view.findViewById<TextView>(R.id.tvDetailDate)
         val tvLocation = view.findViewById<TextView>(R.id.tvDetailLocation)
-        val layoutCounterOffer = view.findViewById<LinearLayout>(R.id.layoutCounterOffer)
+        layoutCounterOffer = view.findViewById<MaterialCardView>(R.id.layoutCounterOffer)
         val tvMessage = view.findViewById<TextView>(R.id.tvMusicianMessage)
         val tvNewPrice = view.findViewById<TextView>(R.id.tvNewPrice)
 

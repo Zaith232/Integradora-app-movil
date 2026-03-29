@@ -222,3 +222,53 @@ data class MusicianMiniProfile(
     val stage_name: String
     // Si tu API devuelve foto, puedes agregarla aquí: val photo: String?
 )
+
+data class ReviewRequest(
+    val musician_profile_id: Int,
+    val rating: Int,
+    val comment: String?, // Opcional
+    val hiring_request_id: Int
+)
+// 1. El Wrapper (Mantiene tu estándar actual)
+data class MusicianReviewsResponse(
+    val success: Boolean,
+    val data: List<ReviewItem>
+)
+
+// 2. El Item Principal (NUEVO, porque no existía nada igual)
+data class ReviewItem(
+    val id: Int,
+    val rating: Int,
+    val comment: String?,
+    val response: String?,
+    val created_at: String,
+    val client: ClientMiniProfile? // Usamos un mini perfil
+)
+
+// 3. El Mini Perfil (NUEVO, por seguridad de los datos del cliente)
+data class ClientMiniProfile(
+    val id: Int,
+    val nombre: String,
+    val apellido: String,
+    val profile_picture: String?
+)
+
+data class MyReviewsResponse(
+    val success: Boolean,
+    val data: List<MyReviewItem>
+)
+
+data class MyReviewItem(
+    val id: Int,
+    val rating: Int,
+    val comment: String?,
+    val response: String?,
+    val created_at: String,
+    val musician: MusicianReviewInfo
+)
+
+data class MusicianReviewInfo(
+    val id: Int,
+    val stage_name: String,
+    val profile_picture: String?
+)

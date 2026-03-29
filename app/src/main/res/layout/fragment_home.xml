@@ -111,7 +111,7 @@
                     android:id="@+id/chipGroupCategories"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:chipSpacingHorizontal="-6dp"
+                    app:chipSpacingHorizontal="8dp"
                     app:singleLine="true"
                     app:singleSelection="true" />
 
