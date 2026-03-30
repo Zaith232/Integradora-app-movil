@@ -93,8 +93,12 @@ class NotificationAdapter(
                 holder.tvStatusBadge.setTextColor(Color.parseColor("#1D4ED8")) // Azul oscuro
                 badgeBackground.setColor(Color.parseColor("#DBEAFE")) // Azul claro
 
-                // Mostramos el botón SOLO si está completado
-                holder.btnLeaveReview.visibility = View.VISIBLE
+                // 🔥 AQUÍ ESTÁ EL CAMBIO: Solo mostramos el botón si NO tiene reseña
+                if (item.has_review == true) {
+                    holder.btnLeaveReview.visibility = View.GONE
+                } else {
+                    holder.btnLeaveReview.visibility = View.VISIBLE
+                }
             }
             "rejected" -> {
                 holder.tvStatusBadge.text = "Rechazada"

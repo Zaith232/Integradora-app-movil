@@ -149,6 +149,23 @@ class NotificationsFragment : Fragment() {
                         rvNotifications.visibility = View.VISIBLE
                         layoutEmptyState.visibility = View.GONE
                         adapter.updateData(solicitudes)
+
+                        // 🔥 NUEVO: REVISAR SI HAY QUE ABRIR UNA SOLICITUD AUTOMÁTICAMENTE 🔥
+                        val idABuscar = arguments?.getString("hiring_request_id")
+                        if (idABuscar != null) {
+                            // Buscamos la solicitud en la lista que coincida con el ID
+                            val targetRequest = solicitudes.find { it.id.toString() == idABuscar }
+
+                            if (targetRequest != null) {
+                                // Abrimos el modal
+                                val bottomSheet = RequestDetailBottomSheet(targetRequest)
+                                bottomSheet.show(parentFragmentManager, "RequestDetail")
+
+                                // Borramos el argumento para que no se vuelva a abrir si rotan la pantalla
+                                arguments?.remove("hiring_request_id")
+                            }
+                        }
+                        // 🔥 FIN DE LO NUEVO 🔥
                     }
                 } else {
                     context?.let { safeContext ->

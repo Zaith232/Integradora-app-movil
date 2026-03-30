@@ -34,6 +34,26 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val hiringRequestId = intent.getStringExtra("hiring_request_id")
+
+        if (hiringRequestId != null) {
+            val status = intent.getStringExtra("status")
+            Log.d("FCM", "Abriendo solicitud $hiringRequestId con estado $status")
+
+            val bundle = Bundle()
+            bundle.putString("hiring_request_id", hiringRequestId)
+
+            val fragment = NotificationsFragment()
+            fragment.arguments = bundle
+
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, fragment)
+                .commit()
+
+            configurarNotificaciones()
+            return
+        }
+
         if (savedInstanceState == null) {
             when {
                 intent.getBooleanExtra("ir_a_completar_perfil", false) -> {

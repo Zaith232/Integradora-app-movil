@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -42,12 +41,26 @@ class MyReviewsFragment : Fragment() {
 
         // Inicializar Adapter
         rvMyReviews.layoutManager = LinearLayoutManager(requireContext())
-        adapter = MyReviewsAdapter(emptyList())
+
+        // 🔥 AQUÍ ESTÁ EL CAMBIO: Pasamos la acción del clic
+        adapter = MyReviewsAdapter(emptyList()) { musicianId ->
+            abrirPerfilMusico(musicianId)
+        }
+
         rvMyReviews.adapter = adapter
 
         cargarMisResenas()
 
         return view
+    }
+
+    // 🔥 NUEVA FUNCIÓN: Se encarga de hacer la transición al perfil
+    private fun abrirPerfilMusico(musicianId: Int) {
+        val fragment = MusicianProfileFragment.newInstance(musicianId)
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, fragment)
+            .addToBackStack(null) // Te permite regresar a la lista de reseñas presionando "Atrás"
+            .commit()
     }
 
     private fun cargarMisResenas() {

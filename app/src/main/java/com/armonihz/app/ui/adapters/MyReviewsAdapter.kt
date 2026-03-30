@@ -15,7 +15,8 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.TimeZone
 
-class MyReviewsAdapter(private var reviewsList: List<MyReviewItem>) : RecyclerView.Adapter<MyReviewsAdapter.MyReviewViewHolder>() {
+class MyReviewsAdapter(private var reviewsList: List<MyReviewItem>, private val onItemClick: (Int) -> Unit)
+    : RecyclerView.Adapter<MyReviewsAdapter.MyReviewViewHolder>() {
 
     class MyReviewViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val ivMusicianPhoto: CircleImageView = view.findViewById(R.id.ivMusicianPhoto)
@@ -69,6 +70,10 @@ class MyReviewsAdapter(private var reviewsList: List<MyReviewItem>) : RecyclerVi
             Glide.with(holder.itemView.context).load(url).centerCrop().into(holder.ivMusicianPhoto)
         } else {
             holder.ivMusicianPhoto.setImageResource(R.drawable.ic_user_placeholder)
+        }
+
+        holder.itemView.setOnClickListener {
+            onItemClick(review.musician.id)
         }
     }
 

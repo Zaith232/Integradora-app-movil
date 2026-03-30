@@ -68,8 +68,18 @@ class ReviewAdapter(private var reviews: List<ReviewItem>) : RecyclerView.Adapte
             holder.tvReviewDate.text = review.created_at.substring(0, 10)
         }
 
-        // Foto del cliente (Si tienes URL, si no se queda el placeholder por defecto)
-        // Glide.with(holder.itemView.context).load(review.client?.profile_picture).into(holder.ivClientPhoto)
+        val photoUrl = review.client?.photoUrl // 🔥 Asegúrate de que en tu modelo se llama photoUrl
+
+        if (!photoUrl.isNullOrEmpty()) {
+            Glide.with(holder.itemView.context)
+                .load(photoUrl)
+                .placeholder(R.drawable.ic_user_placeholder) // Muestra esto mientras carga
+                .centerCrop()
+                .into(holder.ivClientPhoto)
+        } else {
+            // Si el cliente no tiene foto, ponemos la imagen por defecto
+            holder.ivClientPhoto.setImageResource(R.drawable.ic_user_placeholder)
+        }
     }
 
     override fun getItemCount() = reviews.size

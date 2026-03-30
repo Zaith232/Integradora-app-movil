@@ -214,7 +214,8 @@ data class HiringRequestItem(
     val status: String,
     val musician_message: String?, // Para la contraoferta
     val counter_offer: Double?,    // Para el nuevo precio
-    val musician_profile: MusicianMiniProfile?
+    val musician_profile: MusicianMiniProfile?,
+    val has_review: Boolean? = false
 )
 
 data class MusicianMiniProfile(
@@ -250,7 +251,7 @@ data class ClientMiniProfile(
     val id: Int,
     val nombre: String,
     val apellido: String,
-    val profile_picture: String?
+    val photoUrl: String? // ✅ Ahora sí coinciden
 )
 
 data class MyReviewsResponse(

@@ -1,8 +1,6 @@
 package com.armonihz.app
 
 import android.os.Bundle
-import android.os.Parcel
-import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,23 +11,31 @@ import com.armonihz.app.network.RetrofitClient
 import com.armonihz.app.network.model.HiringRequestPayload
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.button.MaterialButton
-import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
+import java.util.Calendar // Añadimos Calendar para manejar la conversión de AM/PM
 import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.DateValidatorPointForward
 
 class HiringBottomSheetFragment(private val musicianId: Int) : BottomSheetDialogFragment() {
 
+    // Formato 24H para la base de datos
     private var selectedDate: String = ""
     private var selectedStartTime: String = ""
     private var selectedEndTime: String = ""
-    private var disabledDatesUtc = LongArray(0)
+
+    // Formato 12H con AM/PM para mostrarle al usuario
+    private var displayStartTime: String = ""
+    private var displayEndTime: String = ""
+
+    private var ocupados: List<RangoOcupado> = emptyList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -51,13 +57,13 @@ class HiringBottomSheetFragment(private val musicianId: Int) : BottomSheetDialog
         cargarDisponibilidad()
 
         btnPickDate.setOnClickListener {
-            val constraints = CalendarConstraints.Builder()
-                .setValidator(BusyDateValidator(disabledDatesUtc))
-                .build()
+            // Creamos una restricción para que solo se puedan seleccionar fechas de hoy en adelante
+            val constraintsBuilder = CalendarConstraints.Builder()
+                .setValidator(DateValidatorPointForward.now()) // 🔥 Esta es la clave
 
             val datePicker = MaterialDatePicker.Builder.datePicker()
                 .setTitleText("Selecciona la fecha")
-                .setCalendarConstraints(constraints)
+                .setCalendarConstraints(constraintsBuilder.build()) // Aplicamos la restricción al DatePicker
                 .build()
 
             datePicker.addOnPositiveButtonClickListener { selection ->
@@ -71,26 +77,42 @@ class HiringBottomSheetFragment(private val musicianId: Int) : BottomSheetDialog
 
         btnStartTime.setOnClickListener {
             val timePicker = MaterialTimePicker.Builder()
-                .setTimeFormat(TimeFormat.CLOCK_24H)
+                .setTimeFormat(TimeFormat.CLOCK_12H) // 🔥 CAMBIADO A 12H
                 .setTitleText("Hora de inicio")
                 .build()
 
             timePicker.addOnPositiveButtonClickListener {
-                selectedStartTime = String.format("%02d:%02d:00", timePicker.hour, timePicker.minute)
-                btnStartTime.text = String.format("Inicio: %02d:%02d", timePicker.hour, timePicker.minute)
+                // 1. Guardamos formato 24H para Laravel
+                selectedStartTime = String.format(Locale.getDefault(), "%02d:%02d:00", timePicker.hour, timePicker.minute)
+
+                // 2. Formateamos a AM/PM para el botón
+                val cal = Calendar.getInstance()
+                cal.set(Calendar.HOUR_OF_DAY, timePicker.hour)
+                cal.set(Calendar.MINUTE, timePicker.minute)
+                displayStartTime = SimpleDateFormat("hh:mm a", Locale.getDefault()).format(cal.time)
+
+                btnStartTime.text = "Inicio: $displayStartTime"
             }
             timePicker.show(parentFragmentManager, "START_TIME")
         }
 
         btnEndTime.setOnClickListener {
             val timePicker = MaterialTimePicker.Builder()
-                .setTimeFormat(TimeFormat.CLOCK_24H)
+                .setTimeFormat(TimeFormat.CLOCK_12H) // 🔥 CAMBIADO A 12H
                 .setTitleText("Hora de fin")
                 .build()
 
             timePicker.addOnPositiveButtonClickListener {
-                selectedEndTime = String.format("%02d:%02d:00", timePicker.hour, timePicker.minute)
-                btnEndTime.text = String.format("Fin: %02d:%02d", timePicker.hour, timePicker.minute)
+                // 1. Guardamos formato 24H para Laravel
+                selectedEndTime = String.format(Locale.getDefault(), "%02d:%02d:00", timePicker.hour, timePicker.minute)
+
+                // 2. Formateamos a AM/PM para el botón
+                val cal = Calendar.getInstance()
+                cal.set(Calendar.HOUR_OF_DAY, timePicker.hour)
+                cal.set(Calendar.MINUTE, timePicker.minute)
+                displayEndTime = SimpleDateFormat("hh:mm a", Locale.getDefault()).format(cal.time)
+
+                btnEndTime.text = "Fin: $displayEndTime"
             }
             timePicker.show(parentFragmentManager, "END_TIME")
         }
@@ -107,17 +129,15 @@ class HiringBottomSheetFragment(private val musicianId: Int) : BottomSheetDialog
                 return@setOnClickListener
             }
 
-            // 🔥 SOLUCIÓN A LA MEDIANOCHE:
-            // Si la hora de fin es menor a la de inicio (ej. 01:00 < 20:00), sumamos 1 día a la fecha final.
             var endDateForDatabase = selectedDate
             if (selectedEndTime < selectedStartTime) {
                 try {
                     val sdfDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                     val parsedDate = sdfDate.parse(selectedDate)
                     if (parsedDate != null) {
-                        val cal = java.util.Calendar.getInstance()
+                        val cal = Calendar.getInstance()
                         cal.time = parsedDate
-                        cal.add(java.util.Calendar.DAY_OF_YEAR, 1) // Sumamos 1 día
+                        cal.add(Calendar.DAY_OF_YEAR, 1)
                         endDateForDatabase = sdfDate.format(cal.time)
                     }
                 } catch (e: Exception) {
@@ -125,14 +145,28 @@ class HiringBottomSheetFragment(private val musicianId: Int) : BottomSheetDialog
                 }
             }
 
-            val horaInicioLimpia = selectedStartTime.dropLast(3)
-            val horaFinLimpia = selectedEndTime.dropLast(3)
-            val finalDescription = "⏰ Horario: $horaInicioLimpia a $horaFinLimpia hrs.\n\n" + etLocation.text.toString() + "\n\n" + etDescription.text.toString()
+            val usuarioInicioStr = "$selectedDate $selectedStartTime"
+            val usuarioFinStr = "$endDateForDatabase $selectedEndTime"
+
+            val choque = revisarSiHayChoque(usuarioInicioStr, usuarioFinStr)
+
+            if (choque != null) {
+                // 🔥 El mensaje de error ahora usa horaInicio y horaFin con AM/PM
+                Toast.makeText(
+                    context,
+                    "El músico ya tiene un evento ese día de ${choque.horaInicio} a ${choque.horaFin}. Por favor, elige otro horario.",
+                    Toast.LENGTH_LONG
+                ).show()
+                return@setOnClickListener
+            }
+
+            // 🔥 La descripción que verá el músico ahora incluye AM/PM
+            val finalDescription = "⏰ Horario: $displayStartTime a $displayEndTime\n\n" + etLocation.text.toString() + "\n\n" + etDescription.text.toString()
 
             val payload = HiringRequestPayload(
                 musician_profile_id = musicianId,
-                event_date = "$selectedDate $selectedStartTime",
-                end_time = "$endDateForDatabase $selectedEndTime", // Usamos la fecha calculada
+                event_date = usuarioInicioStr,
+                end_time = usuarioFinStr,
                 event_location = etLocation.text.toString(),
                 description = finalDescription,
                 budget = budgetStr.toDouble()
@@ -148,33 +182,65 @@ class HiringBottomSheetFragment(private val musicianId: Int) : BottomSheetDialog
             try {
                 val response = api.getMusicianAvailability(musicianId)
                 if (response.isSuccessful && response.body() != null) {
-                    val busyDates = response.body()!!.data
-                    val timestamps = mutableListOf<Long>()
+                    val busyDatesFromApi = response.body()!!.data
+                    val listaOcupados = mutableListOf<RangoOcupado>()
 
                     val sdfBackend = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-                    val sdfUtc = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                    sdfUtc.timeZone = TimeZone.getTimeZone("UTC")
+                    // 🔥 NUEVO: Dile a Android que no reste ni sume horas por la zona horaria UTC
+                    sdfBackend.timeZone = TimeZone.getTimeZone("UTC")
 
-                    for (busy in busyDates) {
+                    val sdfSoloHoraAmPm = SimpleDateFormat("hh:mm a", Locale.getDefault())
+                    // Y también le decimos al de salida que use la misma referencia
+                    sdfSoloHoraAmPm.timeZone = TimeZone.getTimeZone("UTC")
+
+                    for (busy in busyDatesFromApi) {
                         try {
-                            val dateObj = sdfBackend.parse(busy.start)
-                            if (dateObj != null) {
-                                val dayString = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(dateObj)
-                                val utcDate = sdfUtc.parse(dayString)
-                                if (utcDate != null) {
-                                    timestamps.add(utcDate.time)
-                                }
+                            val inicioDate = sdfBackend.parse(busy.start)
+                            val finDate = sdfBackend.parse(busy.end ?: busy.start)
+
+                            if (inicioDate != null && finDate != null) {
+                                val horaInicio = sdfSoloHoraAmPm.format(inicioDate)
+                                val horaFin = sdfSoloHoraAmPm.format(finDate)
+
+                                listaOcupados.add(
+                                    RangoOcupado(
+                                        inicioDate.time,
+                                        finDate.time,
+                                        horaInicio,
+                                        horaFin
+                                    )
+                                )
                             }
                         } catch (e: Exception) {
                             e.printStackTrace()
                         }
                     }
-                    disabledDatesUtc = timestamps.toLongArray()
+                    ocupados = listaOcupados
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
+    }
+
+    private fun revisarSiHayChoque(usuarioInicioStr: String, usuarioFinStr: String): RangoOcupado? {
+        try {
+            val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+            // 🔥 NUEVO: Añadimos esto para igualarlo a lo que lee del backend
+            sdf.timeZone = TimeZone.getTimeZone("UTC")
+
+            val usuarioInicioTime = sdf.parse(usuarioInicioStr)?.time ?: return null
+            val usuarioFinTime = sdf.parse(usuarioFinStr)?.time ?: return null
+
+            for (ocupado in ocupados) {
+                if (usuarioInicioTime < ocupado.finMillis && usuarioFinTime > ocupado.inicioMillis) {
+                    return ocupado
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return null
     }
 
     private fun enviarSolicitud(payload: HiringRequestPayload, btn: MaterialButton) {
@@ -202,26 +268,9 @@ class HiringBottomSheetFragment(private val musicianId: Int) : BottomSheetDialog
     }
 }
 
-class BusyDateValidator(private val disabledDates: LongArray) : CalendarConstraints.DateValidator {
-    override fun isValid(date: Long): Boolean {
-        if (date < MaterialDatePicker.todayInUtcMilliseconds()) {
-            return false
-        }
-        return !disabledDates.contains(date)
-    }
-
-    override fun writeToParcel(dest: Parcel, flags: Int) {
-        dest.writeLongArray(disabledDates)
-    }
-
-    override fun describeContents(): Int = 0
-
-    companion object CREATOR : Parcelable.Creator<BusyDateValidator> {
-        override fun createFromParcel(parcel: Parcel): BusyDateValidator {
-            return BusyDateValidator(parcel.createLongArray() ?: LongArray(0))
-        }
-        override fun newArray(size: Int): Array<BusyDateValidator?> {
-            return arrayOfNulls(size)
-        }
-    }
-}
+data class RangoOcupado(
+    val inicioMillis: Long,
+    val finMillis: Long,
+    val horaInicio: String,
+    val horaFin: String
+)
