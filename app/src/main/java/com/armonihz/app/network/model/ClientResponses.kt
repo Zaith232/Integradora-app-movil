@@ -206,6 +206,7 @@ data class HiringRequestsListResponse(
 
 data class HiringRequestItem(
     val id: Int,
+    val type: String? = "hiring",
     val event_date: String,
     val end_time: String?,
     val event_location: String,
@@ -228,7 +229,8 @@ data class ReviewRequest(
     val musician_profile_id: Int,
     val rating: Int,
     val comment: String?, // Opcional
-    val hiring_request_id: Int
+    val hiring_request_id: Int? = null,        // 🔥 Cambiar a nullable
+    val casting_application_id: Int? = null
 )
 // 1. El Wrapper (Mantiene tu estándar actual)
 data class MusicianReviewsResponse(

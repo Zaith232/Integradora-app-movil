@@ -103,7 +103,9 @@ class NotificationsFragment : Fragment() {
                 musician_profile_id = item.musician_profile!!.id,
                 rating = rating,
                 comment = if (comment.isEmpty()) null else comment,
-                hiring_request_id = item.id
+                // 🔥 La magia está aquí:
+                hiring_request_id = if (item.type == "hiring" || item.type == null) item.id else null,
+                casting_application_id = if (item.type == "casting") item.id else null
             )
 
             lifecycleScope.launch {
