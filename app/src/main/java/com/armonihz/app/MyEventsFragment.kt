@@ -44,6 +44,7 @@ class MyEventsFragment : Fragment() {
         setupListeners()
         setupRefresh()
         setupChipFilters()
+        setupAutoDateSubtitle()
 
         val hasCache = loadCachedEvents()
 
@@ -300,6 +301,20 @@ class MyEventsFragment : Fragment() {
         } catch (e: Exception) {
             false
         }
+    }
+
+    private fun setupAutoDateSubtitle() {
+        // Definimos el formato: MMMM (Mes completo), yyyy (Año)
+        // Locale.getDefault() usará el idioma del teléfono del usuario (ej: "abril 2026")
+        val sdf = SimpleDateFormat("MMMM yyyy", Locale.getDefault())
+        val currentDate = sdf.format(Date())
+
+        // Capitalizar la primera letra si lo deseas (opcional)
+        val formattedDate = currentDate.replaceFirstChar {
+            if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
+        }
+
+        binding.tvSubtitle.text = formattedDate
     }
 
     override fun onDestroyView() {

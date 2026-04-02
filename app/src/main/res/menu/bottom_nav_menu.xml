@@ -19,7 +19,7 @@
     <item
         android:id="@+id/nav_notifications"
         android:icon="@drawable/ic_notifications"
-        android:title="Notificaciones" />
+        android:title="Solicitudes" />
 
     <item
         android:id="@+id/nav_profile"

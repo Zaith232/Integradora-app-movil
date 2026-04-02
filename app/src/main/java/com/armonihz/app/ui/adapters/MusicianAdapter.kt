@@ -50,8 +50,13 @@ class MusicianAdapter(
             holder.tvPriceHint.text = "A convenir"
         }
 
-        // Rating (puedes reemplazar "4.8" por un campo real del modelo si lo tienes)
-        holder.tvRating.text = "4.8"
+        if (musician.rating_average != null && musician.rating_average > 0.0) {
+            // Formateamos para que siempre muestre 1 decimal (ej. "4.0", "4.8")
+            holder.tvRating.text = String.format(java.util.Locale.US, "%.1f", musician.rating_average)
+        } else {
+            // Si es 0 o nulo, le ponemos "Nuevo" para que se vea mejor
+            holder.tvRating.text = "Nuevo"
+        }
 
         // Chips de géneros — limpiar primero para evitar duplicados al reciclar
         holder.chipGroupGenres.removeAllViews()

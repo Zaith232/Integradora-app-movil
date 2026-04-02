@@ -186,4 +186,10 @@ interface ApiService {
 
     @GET("client/reviews")
     suspend fun getMyReviews(): retrofit2.Response<MyReviewsResponse>
+
+    @POST("client/events")
+    suspend fun createEvent(
+        @Header("Authorization") token: String,
+        @Body request: EventRequest
+    ): Response<EventResponse>
 }

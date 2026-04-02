@@ -51,6 +51,7 @@ class HomeFragment : Fragment() {
 
         setupRecyclerView()
         setupNavigation()
+        setupRefresh()
 
         // Mostrar datos de Firebase Auth de inmediato sin esperar la API
         val user = FirebaseAuth.getInstance().currentUser
@@ -79,37 +80,44 @@ class HomeFragment : Fragment() {
     private suspend fun cargarTodoEnParalelo() {
         val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
 
-        coroutineScope {
-            // Las 3 llamadas arrancan al mismo tiempo
-            val musicianosDeferred = async {
-                try { api.getAllMusicians() } catch (e: Exception) { null }
+        try {
+            coroutineScope {
+                // Las 3 llamadas arrancan al mismo tiempo
+                val musicianosDeferred = async {
+                    try { api.getAllMusicians() } catch (e: Exception) { null }
+                }
+                val perfilDeferred = async {
+                    try { api.getProfile() } catch (e: Exception) { null }
+                }
+                // Solo pedir géneros si no están cacheados
+                val generosDeferred = if (cachedGenres == null) {
+                    async { try { api.getGenres() } catch (e: Exception) { null } }
+                } else null
+
+                // Músicos tienen prioridad — en cuanto lleguen los mostramos
+                val musicianosResponse = musicianosDeferred.await()
+                if (!isAdded) return@coroutineScope
+
+                procesarMusicos(musicianosResponse)
+                mostrarShimmer(false) // Apagar shimmer en cuanto tengamos músicos
+
+                // Perfil y géneros llegan después sin bloquear la lista
+                val perfilResponse  = perfilDeferred.await()
+                val generosResponse = generosDeferred?.await()
+
+                if (!isAdded) return@coroutineScope
+
+                procesarPerfil(perfilResponse)
+
+                generosResponse?.body()?.let { genres ->
+                    cachedGenres = genres
+                    pintarGeneros(genres)
+                }
             }
-            val perfilDeferred = async {
-                try { api.getProfile() } catch (e: Exception) { null }
-            }
-            // Solo pedir géneros si no están cacheados
-            val generosDeferred = if (cachedGenres == null) {
-                async { try { api.getGenres() } catch (e: Exception) { null } }
-            } else null
-
-            // Músicos tienen prioridad — en cuanto lleguen los mostramos
-            val musicianosResponse = musicianosDeferred.await()
-            if (!isAdded) return@coroutineScope
-
-            procesarMusicos(musicianosResponse)
-            mostrarShimmer(false) // Apagar shimmer en cuanto tengamos músicos
-
-            // Perfil y géneros llegan después sin bloquear la lista
-            val perfilResponse  = perfilDeferred.await()
-            val generosResponse = generosDeferred?.await()
-
-            if (!isAdded) return@coroutineScope
-
-            procesarPerfil(perfilResponse)
-
-            generosResponse?.body()?.let { genres ->
-                cachedGenres = genres
-                pintarGeneros(genres)
+        } finally {
+            // ⬅️ NUEVO: Apagamos la animación de recarga al terminar todo (éxito o error)
+            if (isAdded) {
+                binding.swipeRefresh.isRefreshing = false
             }
         }
     }
@@ -239,6 +247,15 @@ class HomeFragment : Fragment() {
                 R.id.nav_notifications -> { open(NotificationsFragment()); true }
                 R.id.nav_profile -> { open(UserProfileFragment()); true }
                 else -> false
+            }
+        }
+    }
+
+    private fun setupRefresh() {
+        binding.swipeRefresh.setOnRefreshListener {
+            // Cuando jalen hacia abajo, volvemos a llamar a la API
+            lifecycleScope.launch {
+                cargarTodoEnParalelo()
             }
         }
     }

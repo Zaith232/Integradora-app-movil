@@ -148,6 +148,9 @@
             auth.signInWithCredential(credential)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
+                        // 🔥 AQUÍ ESTÁ LA CLAVE: Firebase te indica si la cuenta se acaba de crear en este instante
+                        val isNewUser = task.result?.additionalUserInfo?.isNewUser ?: false
+
                         auth.currentUser?.getIdToken(true)?.addOnSuccessListener { result ->
                             val firebaseToken = result.token
                             if (firebaseToken != null) {
@@ -161,25 +164,33 @@
                                     syncJob.join()
 
                                     try {
-                                        // Consultamos al backend si el perfil está completo
-                                        val api = RetrofitClient.getInstance(this@LoginActivity).create(ApiService::class.java)
-                                        val response = api.getClientProfile()
+                                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
 
-                                        if (response.isSuccessful && response.body() != null) {
-                                            // 1. Quitamos el .data y tomamos el body directamente
-                                            val perfil = response.body()!!
-
-                                            // 2. Verificamos si falta nombre o apellido
-                                            val faltaInformacion = perfil.nombre.isNullOrEmpty() || perfil.apellido.isNullOrEmpty()
-
-                                            val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                                            // Solo mandamos a completar perfil si falta información
-                                            intent.putExtra("ir_a_completar_perfil", faltaInformacion)
+                                        if (isNewUser) {
+                                            // ✅ Es su primera vez iniciando sesión según Firebase.
+                                            // Lo mandamos obligatoriamente a confirmar sus datos.
+                                            intent.putExtra("ir_a_completar_perfil", true)
                                             startActivity(intent)
                                             finish()
                                         } else {
-                                            // Si falla la consulta por alguna razón, por seguridad lo mandamos al main normal
-                                            entrarAlMain()
+                                            // 🔍 Si NO es nuevo, hacemos la verificación por si en el pasado cerró la app sin completar
+                                            val api = RetrofitClient.getInstance(this@LoginActivity).create(ApiService::class.java)
+                                            val response = api.getClientProfile()
+
+                                            if (response.isSuccessful && response.body() != null) {
+                                                val perfil = response.body()!!
+
+                                                // Nota: Como tu backend hace el explode, esto casi siempre será false.
+                                                // Si a futuro agregas un campo obligatorio como 'telefono', agrégalo en esta validación.
+                                                val faltaInformacion = perfil.nombre.isNullOrEmpty() || perfil.apellido.isNullOrEmpty()
+
+                                                intent.putExtra("ir_a_completar_perfil", faltaInformacion)
+                                            } else {
+                                                // Fallback en caso de que la API regrese un error estructurado
+                                                intent.putExtra("ir_a_completar_perfil", false)
+                                            }
+                                            startActivity(intent)
+                                            finish()
                                         }
                                     } catch (e: Exception) {
                                         Log.e("LOGIN", "Error verificando perfil completo", e)
@@ -202,6 +213,9 @@
                 val api = RetrofitClient.getInstance(this).create(ApiService::class.java)
                 val email = user.email ?: ""
 
+                // 🔥 NUEVO: Extraemos la foto directamente de Firebase
+                val photoUrl = user.photoUrl?.toString() ?: ""
+
                 if (!esGoogle) {
                     // ✅ Usuario email: leer de Realtime DB para separar nombre/apellido
                     val snapshot = com.google.firebase.database.FirebaseDatabase
@@ -219,16 +233,22 @@
                             "name"     to "$nombre $apellido",
                             "email"    to email,
                             "nombre"   to nombre,
-                            "apellido" to apellido
+                            "apellido" to apellido,
+                            "photoUrl" to photoUrl // ⬅️ SE AÑADIÓ AQUÍ
                         ))
                     } else {
-                        api.syncClient(mapOf("name" to (user.displayName ?: ""), "email" to email))
+                        api.syncClient(mapOf(
+                            "name" to (user.displayName ?: ""),
+                            "email" to email,
+                            "photoUrl" to photoUrl // ⬅️ SE AÑADIÓ AQUÍ
+                        ))
                     }
                 } else {
                     // ✅ Usuario Google: no consultar Realtime DB, backend hace el explode
                     api.syncClient(mapOf(
                         "name"  to (user.displayName ?: ""),
-                        "email" to email
+                        "email" to email,
+                        "photoUrl" to photoUrl // ⬅️ SE AÑADIÓ AQUÍ
                     ))
                 }
 

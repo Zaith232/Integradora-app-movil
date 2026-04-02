@@ -30,6 +30,16 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.coroutines.launch
 import java.util.Locale
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.MaterialDatePicker
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.TimeZone
+import com.armonihz.app.network.model.BusyDate
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.applandeo.materialcalendarview.EventDay
+import com.applandeo.materialcalendarview.listeners.OnDayClickListener
+import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class MusicianProfileFragment : Fragment() {
 
@@ -80,6 +90,7 @@ class MusicianProfileFragment : Fragment() {
 
         setupTabs()
         setupListeners()
+        setupRefresh()
 
         if (musicianId != -1) {
             loadMusicianProfile()
@@ -312,6 +323,9 @@ class MusicianProfileFragment : Fragment() {
             } catch (e: Exception) {
                 Log.e("API_ERROR", "Excepción: ${e.message}")
                 Toast.makeText(context, "Error de conexión", Toast.LENGTH_SHORT).show()
+            }finally {
+                // ⬅️ NUEVO: Apagamos el indicador de refresco siempre al terminar
+                binding.swipeRefresh.isRefreshing = false
             }
         }
     }
@@ -491,6 +505,24 @@ class MusicianProfileFragment : Fragment() {
                 bottomSheet.show(parentFragmentManager, "HiringBottomSheet")
             }
         }
+        binding.chipVerCalendario.setOnClickListener {
+            if (musicianId != -1) {
+                fetchAndShowCalendar(musicianId)
+            }
+        }
+    }
+
+    private fun setupRefresh() {
+        binding.swipeRefresh.setOnRefreshListener {
+            if (musicianId != -1) {
+                // Volvemos a pedir los datos a Laravel
+                loadMusicianProfile()
+                loadReviews()
+            } else {
+                // Si hay un error y no hay ID, apagamos la animación
+                binding.swipeRefresh.isRefreshing = false
+            }
+        }
     }
 
     private fun loadReviews() {
@@ -521,6 +553,177 @@ class MusicianProfileFragment : Fragment() {
             }
         }
     }
+
+    private fun fetchAndShowCalendar(musicianId: Int) {
+        val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
+
+        lifecycleScope.launch {
+            try {
+                binding.chipVerCalendario.text = "Cargando..."
+                binding.chipVerCalendario.isEnabled = false
+
+                val response = api.getMusicianAvailability(musicianId)
+
+                if (response.isSuccessful && response.body() != null) {
+                    val busyDates = response.body()!!.data
+                    showAvailabilityCalendar(busyDates)
+                } else {
+                    Toast.makeText(context, "Error al cargar disponibilidad", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                Toast.makeText(context, "Sin conexión a internet", Toast.LENGTH_SHORT).show()
+            } finally {
+                binding.chipVerCalendario.text = "Ver calendario →"
+                binding.chipVerCalendario.isEnabled = true
+            }
+        }
+    }
+
+    private fun showAvailabilityCalendar(busyDates: List<BusyDate>) {
+        // 1. Inflamos nuestro nuevo diseño en un BottomSheet
+        val bottomSheetDialog = BottomSheetDialog(requireContext())
+        val view = layoutInflater.inflate(R.layout.dialog_availability_calendar, null)
+        bottomSheetDialog.setContentView(view)
+
+        val calendarView = view.findViewById<com.applandeo.materialcalendarview.CalendarView>(R.id.calendarView)
+        val tvEventTitle = view.findViewById<android.widget.TextView>(R.id.tvEventTitle)
+        val tvEventDetails = view.findViewById<android.widget.TextView>(R.id.tvEventDetails)
+
+        // 2. Preparamos los formatos (Usamos el formato con espacio, como lo tienes en Laravel)
+        val apiFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
+        val dayKeyFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+
+        val eventsList = mutableListOf<EventDay>()
+        val datesMap = mutableMapOf<String, MutableList<BusyDate>>()
+
+        // 3. Procesamos las fechas ocupadas para agruparlas por día
+        for (date in busyDates) {
+            try {
+                val startParsed = apiFormat.parse(date.start)
+                val endParsed = apiFormat.parse(date.end)
+
+                if (startParsed != null && endParsed != null) {
+                    val startCal = Calendar.getInstance().apply { time = startParsed }
+                    val endCal = Calendar.getInstance().apply { time = endParsed }
+
+                    val startDayKey = dayKeyFormat.format(startCal.time)
+                    val endDayKey = dayKeyFormat.format(endCal.time)
+
+                    // --- AGREGAR AL DÍA DE INICIO ---
+                    if (!datesMap.containsKey(startDayKey)) {
+                        datesMap[startDayKey] = mutableListOf()
+                    }
+                    // Evitamos duplicados
+                    if (datesMap[startDayKey]?.contains(date) == false) {
+                        datesMap[startDayKey]?.add(date)
+                        eventsList.add(EventDay(startCal.clone() as Calendar, R.drawable.ic_event_dot))
+                    }
+
+                    // --- AGREGAR AL DÍA DE FIN (Si el evento cruza la medianoche) ---
+                    if (startDayKey != endDayKey) {
+                        if (!datesMap.containsKey(endDayKey)) {
+                            datesMap[endDayKey] = mutableListOf()
+                        }
+                        if (datesMap[endDayKey]?.contains(date) == false) {
+                            datesMap[endDayKey]?.add(date)
+                            // Le ponemos su propio puntito al día siguiente
+                            eventsList.add(EventDay(endCal.clone() as Calendar, R.drawable.ic_event_dot))
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
+        // Le pasamos la lista de eventos al calendario para que pinte los puntitos
+        calendarView.setEvents(eventsList)
+
+        // Bloqueamos los días del pasado para que no puedan seleccionarlos
+        val today = Calendar.getInstance().apply {
+            set(Calendar.HOUR_OF_DAY, 0)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+            set(Calendar.MILLISECOND, 0)
+        }
+        calendarView.setMinimumDate(today)
+// 4. ¿Qué pasa cuando el usuario toca un día?
+        calendarView.setOnDayClickListener(object : OnDayClickListener {
+            override fun onDayClick(eventDay: EventDay) {
+                val clickedCal = eventDay.calendar
+
+                // Ignoramos el clic si es un día en el pasado
+                if (clickedCal.before(today)) {
+                    return
+                }
+
+                val dayKey = dayKeyFormat.format(clickedCal.time)
+
+                // Ponemos el título (Ej: "1 de Abril")
+                val prettyDate = SimpleDateFormat("d 'de' MMMM", Locale("es", "MX")).format(clickedCal.time)
+                tvEventTitle.text = "Disponibilidad el $prettyDate"
+
+                // Buscamos si hay eventos en ese día específico
+                val eventosDelDia = datesMap[dayKey]
+
+                if (eventosDelDia.isNullOrEmpty()) {
+                    tvEventDetails.text = "✅ Todo el día disponible."
+                } else {
+                    val timeFormat = SimpleDateFormat("hh:mm a", Locale.getDefault()) // Formato 12 hrs
+                    val exactTimeFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault()) // Formato 24 hrs para validación
+
+                    val sb = java.lang.StringBuilder("Horarios ocupados:\n\n")
+                    var isFullyBlocked = false // ⬅️ Bandera para saber si todo el día está bloqueado
+
+                    eventosDelDia.forEach {
+                        try {
+                            val startParsed = apiFormat.parse(it.start)
+                            val endParsed = apiFormat.parse(it.end)
+
+                            if (startParsed != null && endParsed != null) {
+
+                                val startDayKey = dayKeyFormat.format(startParsed)
+                                val endDayKey = dayKeyFormat.format(endParsed)
+
+                                val horaInicio = timeFormat.format(startParsed)
+                                val horaFin = timeFormat.format(endParsed)
+
+                                // 🔥 NUEVO: Verificamos si empieza a las 00:00:00 y termina a las 23:59:59
+                                val isAllDay = exactTimeFormat.format(startParsed) == "00:00:00" &&
+                                        exactTimeFormat.format(endParsed) == "23:59:59"
+
+                                if (isAllDay) {
+                                    isFullyBlocked = true
+                                } else if (startDayKey == dayKey && endDayKey == dayKey) {
+                                    // Evento normal (empieza y termina el mismo día)
+                                    sb.append("• De $horaInicio a $horaFin\n")
+                                } else if (startDayKey == dayKey && endDayKey != dayKey) {
+                                    // El evento empieza el día que tocamos, pero termina en la madrugada de mañana
+                                    sb.append("• De $horaInicio a $horaFin del día siguiente\n")
+                                } else if (startDayKey != dayKey && endDayKey == dayKey) {
+                                    // El evento termina el día que tocamos, pero empezó ayer en la noche
+                                    sb.append("• De 12:00 a.m. a $horaFin (continuación de evento)\n")
+                                }
+                            }
+                        } catch (e: Exception) { }
+                    }
+
+                    // 🔥 NUEVO: Decidimos qué mensaje mostrar final
+                    if (isFullyBlocked) {
+                        tvEventDetails.text = "🔴 Todo el día ocupado."
+                    } else {
+                        sb.append("\nEl resto del día está disponible.")
+                        tvEventDetails.text = sb.toString()
+                    }
+                }
+            }
+        })
+
+        bottomSheetDialog.show()
+    }
+
+    // 3. Esta es la nueva función que muestra la lista de horas ocupadas
+
 
     private fun open(fragment: Fragment) {
         parentFragmentManager.beginTransaction()

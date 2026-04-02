@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.RatingBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -30,6 +31,7 @@ class NotificationsFragment : Fragment() {
     private lateinit var rvNotifications: RecyclerView
     private lateinit var layoutEmptyState: LinearLayout
     private lateinit var adapter: NotificationAdapter
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +41,7 @@ class NotificationsFragment : Fragment() {
 
         rvNotifications = view.findViewById(R.id.rvNotifications)
         layoutEmptyState = view.findViewById(R.id.layoutEmptyState)
+        progressBar = view.findViewById(R.id.progressBar)
 
         // Configurar el RecyclerView con AMBOS clics (Tarjeta y Botón de Reseña)
         adapter = NotificationAdapter(
@@ -136,11 +139,20 @@ class NotificationsFragment : Fragment() {
     }
 
     private fun cargarNotificaciones() {
+        // ⬅️ NUEVO: Mostramos la ruedita y ocultamos lo demás antes de pedir los datos
+        progressBar.visibility = View.VISIBLE
+        rvNotifications.visibility = View.GONE
+        layoutEmptyState.visibility = View.GONE
+
         val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
 
         lifecycleScope.launch {
             try {
                 val response = api.getMyHiringRequests()
+
+                // ⬅️ NUEVO: Apagamos la ruedita en cuanto llega la respuesta
+                progressBar.visibility = View.GONE
+
                 if (response.isSuccessful && response.body() != null) {
                     val solicitudes = response.body()!!.data
 
@@ -152,35 +164,31 @@ class NotificationsFragment : Fragment() {
                         layoutEmptyState.visibility = View.GONE
                         adapter.updateData(solicitudes)
 
-                        // 🔥 NUEVO: REVISAR SI HAY QUE ABRIR UNA SOLICITUD AUTOMÁTICAMENTE 🔥
+                        // REVISAR SI HAY QUE ABRIR UNA SOLICITUD AUTOMÁTICAMENTE
                         val idABuscar = arguments?.getString("hiring_request_id")
                         if (idABuscar != null) {
-                            // Buscamos la solicitud en la lista que coincida con el ID
                             val targetRequest = solicitudes.find { it.id.toString() == idABuscar }
 
                             if (targetRequest != null) {
-                                // Abrimos el modal
                                 val bottomSheet = RequestDetailBottomSheet(targetRequest)
                                 bottomSheet.show(parentFragmentManager, "RequestDetail")
-
-                                // Borramos el argumento para que no se vuelva a abrir si rotan la pantalla
                                 arguments?.remove("hiring_request_id")
                             }
                         }
-                        // 🔥 FIN DE LO NUEVO 🔥
                     }
                 } else {
                     context?.let { safeContext ->
-                        Toast.makeText(
-                            safeContext,
-                            "No se pudieron cargar las solicitudes",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText(safeContext, "No se pudieron cargar las solicitudes", Toast.LENGTH_SHORT).show()
+                        layoutEmptyState.visibility = View.VISIBLE // Mostrar algo si falla
                     }
                 }
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Exception) {
+                // ⬅️ NUEVO: Si falla el internet, también hay que apagar la ruedita
+                progressBar.visibility = View.GONE
+                layoutEmptyState.visibility = View.VISIBLE // Mostramos el estado vacío
+
                 Log.e("Notificaciones", "Error de red: ${e.message}")
                 context?.let { safeContext ->
                     Toast.makeText(safeContext, "Error de conexión", Toast.LENGTH_SHORT).show()

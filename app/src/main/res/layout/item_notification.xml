@@ -72,6 +72,19 @@
             app:layout_constraintStart_toStartOf="@id/tvMusicianName" />
 
         <TextView
+            android:id="@+id/tvEventType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="4dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintTop_toTopOf="@id/tvStatusBadge"
+            app:layout_constraintBottom_toBottomOf="@id/tvStatusBadge"
+            app:layout_constraintStart_toEndOf="@id/tvStatusBadge" />
+
+        <TextView
             android:id="@+id/tvBudget"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -79,7 +92,8 @@
             android:textStyle="bold"
             android:textSize="14sp"
             android:textColor="?attr/colorPrimary"
-            app:layout_constraintBottom_toBottomOf="@id/tvStatusBadge"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/tvStatusBadge"
             app:layout_constraintEnd_toEndOf="parent" />
 
         <com.google.android.material.button.MaterialButton
@@ -93,7 +107,7 @@
             app:strokeColor="?attr/colorPrimary"
             app:cornerRadius="8dp"
             android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@id/tvStatusBadge"
+            app:layout_constraintTop_toBottomOf="@id/tvBudget"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

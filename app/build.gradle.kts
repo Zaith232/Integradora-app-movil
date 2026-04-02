@@ -46,6 +46,7 @@ configurations.all {
 }
 
 dependencies {
+    implementation(libs.applandeo.calendar)
     implementation(libs.facebook.shimmer)
     implementation(libs.media3.exoplayer)
     implementation(libs.media3.ui)

@@ -123,7 +123,8 @@ data class MusicianProfileDetailResponse(
     val coverage_notes: String?,
     val genres: List<GenreResponse>?, // Por si quieres mostrar los géneros después
     val media: MediaDataResponse? = null,
-    val is_favorite: Boolean? = false
+    val is_favorite: Boolean? = false,
+    val rating_average: Double?
 
 )
 
@@ -275,3 +276,5 @@ data class MusicianReviewInfo(
     val stage_name: String,
     val profile_picture: String?
 )
+
+

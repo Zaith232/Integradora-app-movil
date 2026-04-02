@@ -17,7 +17,7 @@ import java.util.TimeZone
 class NotificationAdapter(
     private var requestsList: List<HiringRequestItem>,
     private val onItemClick: (HiringRequestItem) -> Unit,
-    // NUEVO: Callback para el botón de reseña
+    // Callback para el botón de reseña
     private val onReviewClick: (HiringRequestItem) -> Unit
 ) : RecyclerView.Adapter<NotificationAdapter.NotificationViewHolder>() {
 
@@ -26,8 +26,10 @@ class NotificationAdapter(
         val tvEventDate: TextView = view.findViewById(R.id.tvEventDate)
         val tvStatusBadge: TextView = view.findViewById(R.id.tvStatusBadge)
         val tvBudget: TextView = view.findViewById(R.id.tvBudget)
-        // NUEVO: Instanciamos el botón
         val btnLeaveReview: Button = view.findViewById(R.id.btnLeaveReview)
+
+        // 🔥 Instanciamos la nueva etiqueta
+        val tvEventType: TextView = view.findViewById(R.id.tvEventType)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationViewHolder {
@@ -93,7 +95,7 @@ class NotificationAdapter(
                 holder.tvStatusBadge.setTextColor(Color.parseColor("#1D4ED8")) // Azul oscuro
                 badgeBackground.setColor(Color.parseColor("#DBEAFE")) // Azul claro
 
-                // 🔥 AQUÍ ESTÁ EL CAMBIO: Solo mostramos el botón si NO tiene reseña
+                // Solo mostramos el botón si NO tiene reseña
                 if (item.has_review == true) {
                     holder.btnLeaveReview.visibility = View.GONE
                 } else {
@@ -117,6 +119,21 @@ class NotificationAdapter(
             }
         }
         holder.tvStatusBadge.background = badgeBackground
+
+        // 🔥 5. NUEVO: Lógica de colores para la etiqueta de Tipo de Evento
+        val typeBackground = GradientDrawable()
+        typeBackground.cornerRadius = 16f
+
+        if (item.type == "casting") {
+            holder.tvEventType.text = "🎤 Casting"
+            holder.tvEventType.setTextColor(Color.parseColor("#7E22CE")) // Morado oscuro
+            typeBackground.setColor(Color.parseColor("#F3E8FF")) // Morado claro
+        } else {
+            holder.tvEventType.text = "💼 Directo"
+            holder.tvEventType.setTextColor(Color.parseColor("#0369A1")) // Azul oscuro
+            typeBackground.setColor(Color.parseColor("#E0F2FE")) // Azul claro
+        }
+        holder.tvEventType.background = typeBackground
 
         // Clic en la tarjeta completa (Abre tu BottomSheet de detalles)
         holder.itemView.setOnClickListener {
