@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -33,6 +34,7 @@ class MyEventsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
+        // ViewBinding hace todo el trabajo, no necesitamos findViewById
         _binding = FragmentMyEventsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -46,11 +48,8 @@ class MyEventsFragment : Fragment() {
         setupChipFilters()
         setupAutoDateSubtitle()
 
-        val hasCache = loadCachedEvents()
+        loadCachedEvents()
 
-        if (!hasCache) {
-            binding.progressLoader.visibility = View.VISIBLE
-        }
 
         loadMyEvents()
     }
@@ -130,6 +129,11 @@ class MyEventsFragment : Fragment() {
             return
         }
 
+        // 🔥 NUEVO: Mostramos el loader si NO estamos haciendo SwipeRefresh
+        if (!binding.swipeRefresh.isRefreshing && allEvents.isEmpty()) {
+            binding.progressBar.visibility = View.VISIBLE
+        }
+
         user.getIdToken(true).addOnSuccessListener {
 
             if (!isAdded || _binding == null) return@addOnSuccessListener
@@ -141,7 +145,6 @@ class MyEventsFragment : Fragment() {
             lifecycleScope.launch {
 
                 try {
-
                     val response = api.getMyEvents()
 
                     if (!isAdded || _binding == null) return@launch
@@ -176,14 +179,15 @@ class MyEventsFragment : Fragment() {
 
                 if (!isAdded || _binding == null) return@launch
 
-                binding.progressLoader.visibility = View.GONE
+                // Apagamos la ruedita de carga y la de swipe refresh
+                binding.progressBar.visibility = View.GONE
                 binding.swipeRefresh.isRefreshing = false
             }
         }
     }
 
     private fun confirmDelete(event: EventResponse) {
-        androidx.appcompat.app.AlertDialog.Builder(requireContext())
+        AlertDialog.Builder(requireContext())
             .setTitle("Eliminar evento")
             .setMessage("¿Seguro que deseas eliminar este evento?")
             .setPositiveButton("Eliminar") { _, _ ->
@@ -249,18 +253,6 @@ class MyEventsFragment : Fragment() {
                 .commit()
         }
 
-        binding.bottomNavigation.selectedItemId = R.id.nav_events
-
-        binding.bottomNavigation.setOnItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.nav_home -> { open(HomeFragment()); true }
-                R.id.nav_events -> true
-                R.id.nav_favorites -> { open(FavoritesFragment()); true }
-                R.id.nav_notifications -> { open(NotificationsFragment()); true }
-                R.id.nav_profile -> { open(UserProfileFragment()); true }
-                else -> false
-            }
-        }
     }
 
     private fun open(fragment: Fragment) {
@@ -304,12 +296,9 @@ class MyEventsFragment : Fragment() {
     }
 
     private fun setupAutoDateSubtitle() {
-        // Definimos el formato: MMMM (Mes completo), yyyy (Año)
-        // Locale.getDefault() usará el idioma del teléfono del usuario (ej: "abril 2026")
         val sdf = SimpleDateFormat("MMMM yyyy", Locale.getDefault())
         val currentDate = sdf.format(Date())
 
-        // Capitalizar la primera letra si lo deseas (opcional)
         val formattedDate = currentDate.replaceFirstChar {
             if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
         }

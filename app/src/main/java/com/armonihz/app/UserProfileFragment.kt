@@ -122,12 +122,15 @@ class UserProfileFragment : Fragment() {
             val googleUrl = FirebaseAuth.getInstance().currentUser?.photoUrl
 
             when {
-                // ✅ MEJORA 3: signature con la URL como clave (cambia solo cuando la foto cambia)
                 !url.isNullOrEmpty() -> cargarFotoEnImageView(url, url)
 
                 googleUrl != null -> cargarFotoEnImageView(googleUrl.toString(), googleUrl.toString())
 
-                else -> profileImage.setImageResource(R.drawable.ic_user_placeholder)
+                else -> {
+                    // 🔥 SOLUCIÓN 2: Limpiar la memoria caché visual de Glide
+                    Glide.with(this).clear(profileImage)
+                    profileImage.setImageResource(R.drawable.ic_user_placeholder) // o ic_menu_camera
+                }
             }
         }
     }
@@ -135,14 +138,6 @@ class UserProfileFragment : Fragment() {
     private fun loadProfileFromApi() {
         viewLifecycleOwner.lifecycleScope.launch {
             try {
-                // ✅ MEJORA 2: Si tuvieras múltiples endpoints, lánzalos en paralelo con async
-                // Ejemplo con un segundo endpoint hipotético:
-                //   val notifDeferred = async { api.getNotifications() }
-                //   val profileDeferred = async { api.getProfile() }
-                //   val notif = notifDeferred.await()
-                //   val profile = profileDeferred.await()
-                //
-                // Por ahora, con un solo endpoint:
                 val response = api.getProfile()
 
                 if (!isAdded) return@launch
@@ -150,11 +145,9 @@ class UserProfileFragment : Fragment() {
                 if (response.isSuccessful) {
                     val body = response.body()
 
-                    // Foto
+                    // 🔥 SOLUCIÓN 1: Actualizar SIEMPRE el ViewModel, incluso si es null
                     val photoUrl = body?.photoUrl
-                    if (!photoUrl.isNullOrEmpty()) {
-                        sharedViewModel.updatePhoto(photoUrl)
-                    }
+                    sharedViewModel.updatePhoto(photoUrl)
 
                     // Nombre
                     val nombre = body?.nombre ?: ""
@@ -168,15 +161,14 @@ class UserProfileFragment : Fragment() {
                     val telefono = body?.telefono
                     tvPhone.text = if (!telefono.isNullOrEmpty()) telefono else "Sin teléfono"
 
-                    // ✅ MEJORA 1: Guardar en caché local para la próxima apertura
+                    // Guardar en caché local
                     guardarCacheLocal(nombreCompleto, telefono, photoUrl)
                 }
 
             } catch (_: CancellationException) {
-                // Ignorar cancelaciones normales del ciclo de vida
+                // Ignorar cancelaciones normales
             } catch (e: Exception) {
                 e.printStackTrace()
-                // Si la API falla, el usuario ya ve los datos del caché — sin pantalla en blanco
             }
         }
     }
@@ -213,18 +205,6 @@ class UserProfileFragment : Fragment() {
     }
 
     private fun configurarNavegacion(view: View) {
-        val bottomNavigation = view.findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottomNavigation)
-        bottomNavigation.selectedItemId = R.id.nav_profile
-
-        bottomNavigation.setOnItemSelectedListener {
-            when (it.itemId) {
-                R.id.nav_home -> { open(HomeFragment()); true }
-                R.id.nav_events -> { open(MyEventsFragment()); true }
-                R.id.nav_favorites -> { open(FavoritesFragment()); true }
-                R.id.nav_notifications -> { open(NotificationsFragment()); true }
-                else -> false
-            }
-        }
 
         buttonSettings.setOnClickListener {
             parentFragmentManager.beginTransaction()

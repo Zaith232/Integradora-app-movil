@@ -55,19 +55,7 @@ class FavoritesFragment : Fragment() {
         )
         rvFavorites.adapter = adapter
 
-        // 2. Configurar Navegación inferior
-        val bottomNav = view.findViewById<BottomNavigationView>(R.id.bottomNavigation)
-        bottomNav.selectedItemId = R.id.nav_favorites
-        bottomNav.setOnItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.nav_home -> { open(HomeFragment()); true }
-                R.id.nav_events -> { open(MyEventsFragment()); true }
-                R.id.nav_favorites -> true
-                R.id.nav_notifications -> { open(NotificationsFragment()); true }
-                R.id.nav_profile -> { open(UserProfileFragment()); true }
-                else -> false
-            }
-        }
+
 
         // 3. Obtener los datos del servidor
         cargarFavoritos()

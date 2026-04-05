@@ -139,6 +139,7 @@ class AddEventFragment : Fragment() {
 
     private fun intentarPublicar() {
         val presupuesto = binding.etBudget.text.toString().toDoubleOrNull()
+        val user = com.google.firebase.auth.FirebaseAuth.getInstance().currentUser
         if (presupuesto == null || presupuesto <= 0) {
             Toast.makeText(context, getString(R.string.invalid_budget), Toast.LENGTH_SHORT).show()
             return
@@ -165,7 +166,9 @@ class AddEventFragment : Fragment() {
             duracion = binding.etDuracion.text.toString(),
             ubicacion = binding.etLocation.text.toString().trim(),
             descripcion = binding.etDescription.text?.toString()?.trim() ?: "",
-            presupuesto = presupuesto
+            presupuesto = presupuesto,
+            email = user?.email,           // NUEVO: Agrega el correo si existe
+            telefono = user?.phoneNumber   // NUEVO: Agrega el teléfono si existe
         )
 
         viewModel.publicarEvento(request)

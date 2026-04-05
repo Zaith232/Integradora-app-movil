@@ -1,327 +1,202 @@
-    package com.armonihz.app
+package com.armonihz.app
 
-    import android.content.Intent
-    import android.os.Bundle
-    import android.util.Log
-    import android.widget.*
-    import androidx.appcompat.app.AppCompatActivity
-    import androidx.lifecycle.lifecycleScope
-    import com.armonihz.app.auth.TokenManager
-    import com.armonihz.app.network.ApiService
-    import com.armonihz.app.network.RetrofitClient
-    import com.armonihz.app.network.model.SyncGooglePhotoRequest
-    import com.google.android.gms.auth.api.signin.*
-    import com.google.android.gms.common.api.ApiException
-    import com.google.firebase.auth.FirebaseAuth
-    import com.google.firebase.auth.GoogleAuthProvider
-    import kotlinx.coroutines.async
-    import kotlinx.coroutines.launch
-    import kotlinx.coroutines.tasks.await
+import android.content.Intent
+import android.os.Bundle
+import android.view.View
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import com.armonihz.app.auth.TokenManager
+import com.armonihz.app.databinding.ActivityLoginBinding
+import com.armonihz.app.databinding.DialogForgotPasswordBinding
+import com.armonihz.app.network.ApiService
+import com.armonihz.app.network.RetrofitClient
+import com.armonihz.app.viewmodel.LoginUiState
+import com.armonihz.app.viewmodel.LoginViewModel
+import com.armonihz.app.viewmodel.LoginViewModelFactory
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 
-    class LoginActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
 
-        private lateinit var auth: FirebaseAuth
-        private lateinit var googleSignInClient: GoogleSignInClient
-        private var isNavigating = false // ✅ Evita doble navegación
+    private lateinit var binding: ActivityLoginBinding
+    private lateinit var googleSignInClient: GoogleSignInClient
 
-        private val RC_SIGN_IN = 100
+    private val api: ApiService by lazy {
+        RetrofitClient.getInstance(this).create(ApiService::class.java)
+    }
 
-        override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-            setContentView(R.layout.activity_login)
+    private val viewModel: LoginViewModel by viewModels {
+        LoginViewModelFactory(api)
+    }
 
-            auth = FirebaseAuth.getInstance()
-
-            val etCorreo = findViewById<EditText>(R.id.etEmail)
-            val etPassword = findViewById<EditText>(R.id.etPassword)
-            val btnLogin = findViewById<Button>(R.id.btnLogin)
-            val btnGoogle = findViewById<Button>(R.id.btnGoogle)
-            val textRegister = findViewById<TextView>(R.id.textRegister)
-            val tvForgotPassword = findViewById<TextView>(R.id.tvForgotPassword)
-
-            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build()
-
-            googleSignInClient = GoogleSignIn.getClient(this, gso)
-
-            btnLogin.setOnClickListener {
-                val correo = etCorreo.text.toString().trim()
-                val password = etPassword.text.toString().trim()
-
-                if (correo.isEmpty() || password.isEmpty()) {
-                    Toast.makeText(this, "Completa los campos", Toast.LENGTH_SHORT).show()
-                    return@setOnClickListener
-                }
-
-                btnLogin.isEnabled = false
-                btnLogin.text = "Entrando..."
-
-                auth.signInWithEmailAndPassword(correo, password)
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            val user = auth.currentUser
-
-                            if (user != null && user.isEmailVerified) {
-                                user.getIdToken(true).addOnSuccessListener { result ->
-                                    val firebaseToken = result.token
-                                    if (firebaseToken != null) {
-                                        TokenManager.saveToken(this, firebaseToken)
-                                        lifecycleScope.launch {
-                                            // ✅ syncClient en paralelo, no bloquea la navegación
-                                            launch { syncClient(esGoogle = false) }
-                                            entrarAlMain()
-                                        }
-                                    }
-                                }
-                            } else {
-                                auth.signOut()
-                                btnLogin.isEnabled = true
-                                btnLogin.text = "Iniciar sesión"
-                                Toast.makeText(this, "Verifica tu correo antes de entrar", Toast.LENGTH_LONG).show()
-                            }
-                        } else {
-                            btnLogin.isEnabled = true
-                            btnLogin.text = "Iniciar sesión"
-                            Toast.makeText(this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-            }
-
-            btnGoogle.setOnClickListener {
-                startActivityForResult(googleSignInClient.signInIntent, RC_SIGN_IN)
-            }
-
-            textRegister.setOnClickListener {
-                startActivity(Intent(this, RegisterActivity::class.java))
-            }
-
-            tvForgotPassword.setOnClickListener {
-                val correoEscrito = etCorreo.text.toString().trim()
-                mostrarDialogoRecuperarPassword(correoEscrito)
-            }
-        }
-
-        override fun onStart() {
-            super.onStart()
-
-            // ✅ Si ya está navegando, no hacer nada
-            if (isNavigating) return
-
-            val user = FirebaseAuth.getInstance().currentUser ?: return
-
-            lifecycleScope.launch {
-                try {
-                    val tokenResult = user.getIdToken(false).await() // ✅ false = usa caché, más rápido
-                    val firebaseToken = tokenResult.token
-
-                    if (firebaseToken != null) {
-                        TokenManager.saveToken(this@LoginActivity, firebaseToken)
-                        // ✅ syncClient en paralelo, no bloquea
-                        launch { syncClient(esGoogle = false) }
-                        entrarAlMain()
-                    }
-                } catch (e: Exception) {
-                    Log.e("LOGIN", "Error obteniendo token", e)
-                }
-            }
-        }
-
-        override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-            super.onActivityResult(requestCode, resultCode, data)
-
-            if (requestCode == RC_SIGN_IN) {
-                val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-                try {
-                    val account = task.getResult(ApiException::class.java)
-                    firebaseAuthWithGoogle(account.idToken!!)
-                } catch (e: ApiException) {
-                    Toast.makeText(this, "Error con Google", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-
-        private fun firebaseAuthWithGoogle(idToken: String) {
-            val credential = GoogleAuthProvider.getCredential(idToken, null)
-
-            auth.signInWithCredential(credential)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        // 🔥 AQUÍ ESTÁ LA CLAVE: Firebase te indica si la cuenta se acaba de crear en este instante
-                        val isNewUser = task.result?.additionalUserInfo?.isNewUser ?: false
-
-                        auth.currentUser?.getIdToken(true)?.addOnSuccessListener { result ->
-                            val firebaseToken = result.token
-                            if (firebaseToken != null) {
-                                TokenManager.saveToken(this, firebaseToken)
-                                lifecycleScope.launch {
-                                    // Ejecutamos la sincronización básica primero
-                                    val syncJob = launch { syncClient(esGoogle = true) }
-                                    launch { syncGooglePhotoIfNeeded() }
-
-                                    // Esperamos a que termine de sincronizar para asegurarnos de que el registro exista en DB
-                                    syncJob.join()
-
-                                    try {
-                                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
-
-                                        if (isNewUser) {
-                                            // ✅ Es su primera vez iniciando sesión según Firebase.
-                                            // Lo mandamos obligatoriamente a confirmar sus datos.
-                                            intent.putExtra("ir_a_completar_perfil", true)
-                                            startActivity(intent)
-                                            finish()
-                                        } else {
-                                            // 🔍 Si NO es nuevo, hacemos la verificación por si en el pasado cerró la app sin completar
-                                            val api = RetrofitClient.getInstance(this@LoginActivity).create(ApiService::class.java)
-                                            val response = api.getClientProfile()
-
-                                            if (response.isSuccessful && response.body() != null) {
-                                                val perfil = response.body()!!
-
-                                                // Nota: Como tu backend hace el explode, esto casi siempre será false.
-                                                // Si a futuro agregas un campo obligatorio como 'telefono', agrégalo en esta validación.
-                                                val faltaInformacion = perfil.nombre.isNullOrEmpty() || perfil.apellido.isNullOrEmpty()
-
-                                                intent.putExtra("ir_a_completar_perfil", faltaInformacion)
-                                            } else {
-                                                // Fallback en caso de que la API regrese un error estructurado
-                                                intent.putExtra("ir_a_completar_perfil", false)
-                                            }
-                                            startActivity(intent)
-                                            finish()
-                                        }
-                                    } catch (e: Exception) {
-                                        Log.e("LOGIN", "Error verificando perfil completo", e)
-                                        // Si no hay internet o falla la API, intentamos entrar al main normal
-                                        entrarAlMain()
-                                    }
-                                }
-                            }
-                        }
-                    } else {
-                        Toast.makeText(this, "Error Firebase", Toast.LENGTH_SHORT).show()
-                    }
-                }
-        }
-
-        private suspend fun syncClient(esGoogle: Boolean) {
-            val user = FirebaseAuth.getInstance().currentUser ?: return
-
-            try {
-                val api = RetrofitClient.getInstance(this).create(ApiService::class.java)
-                val email = user.email ?: ""
-
-                // 🔥 NUEVO: Extraemos la foto directamente de Firebase
-                val photoUrl = user.photoUrl?.toString() ?: ""
-
-                if (!esGoogle) {
-                    // ✅ Usuario email: leer de Realtime DB para separar nombre/apellido
-                    val snapshot = com.google.firebase.database.FirebaseDatabase
-                        .getInstance()
-                        .getReference("usuarios")
-                        .child(user.uid)
-                        .get()
-                        .await()
-
-                    val nombre   = snapshot.child("nombre").getValue(String::class.java)
-                    val apellido = snapshot.child("apellido").getValue(String::class.java)
-
-                    if (!nombre.isNullOrEmpty() && !apellido.isNullOrEmpty()) {
-                        api.syncClient(mapOf(
-                            "name"     to "$nombre $apellido",
-                            "email"    to email,
-                            "nombre"   to nombre,
-                            "apellido" to apellido,
-                            "photoUrl" to photoUrl // ⬅️ SE AÑADIÓ AQUÍ
-                        ))
-                    } else {
-                        api.syncClient(mapOf(
-                            "name" to (user.displayName ?: ""),
-                            "email" to email,
-                            "photoUrl" to photoUrl // ⬅️ SE AÑADIÓ AQUÍ
-                        ))
-                    }
-                } else {
-                    // ✅ Usuario Google: no consultar Realtime DB, backend hace el explode
-                    api.syncClient(mapOf(
-                        "name"  to (user.displayName ?: ""),
-                        "email" to email,
-                        "photoUrl" to photoUrl // ⬅️ SE AÑADIÓ AQUÍ
-                    ))
-                }
-
-                Log.d("SYNC_CLIENT", "Cliente sincronizado")
-            } catch (e: Exception) {
-                Log.e("SYNC_CLIENT", "Error sincronizando cliente", e)
-            }
-        }
-
-
-
-        private suspend fun syncGooglePhotoIfNeeded() {
-            val user = FirebaseAuth.getInstance().currentUser ?: return
-            val googlePhotoUrl = user.photoUrl?.toString() ?: return
-
-            try {
-                val api = RetrofitClient.getInstance(this).create(ApiService::class.java)
-                api.syncGooglePhoto(SyncGooglePhotoRequest(googlePhotoUrl))
-            } catch (e: Exception) {
-                Log.e("SYNC_PHOTO", "No se pudo sincronizar foto", e)
-            }
-        }
-
-        private fun entrarAlMain() {
-            if (isNavigating) return
-            isNavigating = true
-
-            Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        }
-
-        private fun mostrarDialogoRecuperarPassword(correoInicial: String) {
-            val dialogView = layoutInflater.inflate(R.layout.dialog_forgot_password, null)
-            val builder = androidx.appcompat.app.AlertDialog.Builder(this)
-            builder.setView(dialogView)
-
-            val dialog = builder.create()
-            dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
-
-            val etEmail  = dialogView.findViewById<EditText>(R.id.etDialogEmail)
-            val btnCancel = dialogView.findViewById<Button>(R.id.btnDialogCancel)
-            val btnSend   = dialogView.findViewById<Button>(R.id.btnDialogSend)
-
-            etEmail.setText(correoInicial)
-
-            btnCancel.setOnClickListener { dialog.dismiss() }
-
-            btnSend.setOnClickListener {
-                val email = etEmail.text.toString().trim()
-
-                if (email.isEmpty()) {
-                    etEmail.error = "Ingresa un correo"
-                    return@setOnClickListener
-                }
-
-                if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                    etEmail.error = "Correo inválido"
-                    return@setOnClickListener
-                }
-
-                auth.sendPasswordResetEmail(email).addOnCompleteListener { task ->
-                    Toast.makeText(
-                        this,
-                        if (task.isSuccessful) "Si el correo está registrado, recibirás un enlace."
-                        else "Error al enviar correo",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
-
-                dialog.dismiss()
-            }
-
-            dialog.show()
+    // ── Google Sign-In moderno (reemplaza onActivityResult) ──────────────────
+    private val googleSignInLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+        try {
+            val account = task.getResult(ApiException::class.java)
+            viewModel.loginConGoogle(account.idToken!!)
+        } catch (e: ApiException) {
+            Toast.makeText(this, getString(R.string.error_google), Toast.LENGTH_SHORT).show()
         }
     }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        setupGoogleSignIn()
+        setupListeners()
+        observarViewModel()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        // Si ya hay sesión activa, saltar login
+        viewModel.checkSesionActiva()
+    }
+
+    // ── Setup ─────────────────────────────────────────────────────────────────
+
+    private fun setupGoogleSignIn() {
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
+    }
+
+    private fun setupListeners() {
+        binding.btnLogin.setOnClickListener {
+            val correo = binding.etEmail.text.toString().trim()
+            val password = binding.etPassword.text.toString().trim()
+            viewModel.loginConEmail(correo, password)
+        }
+
+        binding.btnGoogle.setOnClickListener {
+            googleSignInLauncher.launch(googleSignInClient.signInIntent)
+        }
+
+        binding.textRegister.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
+        }
+
+        binding.tvForgotPassword.setOnClickListener {
+            val correo = binding.etEmail.text.toString().trim()
+            mostrarDialogoRecuperarPassword(correo)
+        }
+    }
+
+    // ── Observers ─────────────────────────────────────────────────────────────
+
+    private fun observarViewModel() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiState.collect { state ->
+                    when (state) {
+                        is LoginUiState.Idle -> setUiEnabled(true)
+
+                        is LoginUiState.Loading -> setUiEnabled(false)
+
+                        is LoginUiState.Success -> {
+                            // Guardar token actualizado
+                            val user = FirebaseAuth.getInstance().currentUser
+                            val token = user?.getIdToken(false)?.await()?.token
+                            if (token != null) TokenManager.saveToken(this@LoginActivity, token)
+
+                            Toast.makeText(
+                                this@LoginActivity,
+                                getString(R.string.welcome),
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+                            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                            intent.putExtra("ir_a_completar_perfil", state.irACompletarPerfil)
+                            startActivity(intent)
+                            finish()
+                        }
+
+                        is LoginUiState.EmailNotVerified -> {
+                            setUiEnabled(true)
+                            Toast.makeText(
+                                this@LoginActivity,
+                                getString(R.string.verify_email),
+                                Toast.LENGTH_LONG
+                            ).show()
+                            viewModel.resetState()
+                        }
+
+                        is LoginUiState.Error -> {
+                            setUiEnabled(true)
+                            Toast.makeText(this@LoginActivity, state.message, Toast.LENGTH_SHORT).show()
+                            viewModel.resetState()
+                        }
+
+                        is LoginUiState.PasswordResetSent -> {
+                            Toast.makeText(
+                                this@LoginActivity,
+                                getString(R.string.password_reset_sent),
+                                Toast.LENGTH_LONG
+                            ).show()
+                            viewModel.resetState()
+                        }
+
+                        is LoginUiState.PasswordResetError -> {
+                            Toast.makeText(this@LoginActivity, state.message, Toast.LENGTH_SHORT).show()
+                            viewModel.resetState()
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // ── UI helpers ────────────────────────────────────────────────────────────
+
+    private fun setUiEnabled(enabled: Boolean) {
+        binding.btnLogin.isEnabled = enabled
+        binding.btnGoogle.isEnabled = enabled
+        binding.btnLogin.text = if (enabled)
+            getString(R.string.login_button)
+        else
+            getString(R.string.logging_in)
+        binding.progressBar.isVisible = !enabled
+    }
+
+    // ── Diálogo recuperar contraseña ──────────────────────────────────────────
+
+    private fun mostrarDialogoRecuperarPassword(correoInicial: String) {
+        val dialogBinding = DialogForgotPasswordBinding.inflate(layoutInflater)
+
+        val dialog = AlertDialog.Builder(this)
+            .setView(dialogBinding.root)
+            .create()
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        dialogBinding.etDialogEmail.setText(correoInicial)
+
+        dialogBinding.btnDialogCancel.setOnClickListener { dialog.dismiss() }
+
+        dialogBinding.btnDialogSend.setOnClickListener {
+            val email = dialogBinding.etDialogEmail.text.toString().trim()
+            viewModel.enviarRecuperacionPassword(email)
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+}

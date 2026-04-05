@@ -123,7 +123,7 @@ interface ApiService {
     ): Response<MusicianProfileWrapperResponse>
 
     @GET("musicians")
-    suspend fun getAllMusicians(): retrofit2.Response<com.google.gson.JsonObject>
+    suspend fun getAllMusicians(@Header("X-Page") page: Int = 1): retrofit2.Response<com.google.gson.JsonObject>
 
     @GET("genres")
     suspend fun getGenres(): Response<List<Genre>>
@@ -192,4 +192,21 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Body request: EventRequest
     ): Response<EventResponse>
+
+    // En ApiService.kt
+    @POST("musicians/{id}/report")
+    suspend fun reportMusician(
+        @Path("id") musicianId: Int,
+        @Body request: com.armonihz.app.network.model.ReportRequest // Asegúrate de importar tu clase
+    ): Response<com.armonihz.app.network.model.GenericResponse>
+
+    // En ApiService.kt
+    @POST("client/send-verification")
+    suspend fun sendCustomVerification(
+        @Header("Authorization") token: String
+    ): Response<com.armonihz.app.network.model.GenericResponse>
+    @POST("client/forgot-password")
+    suspend fun sendPasswordReset(
+        @Body request: Map<String, String>
+    ): retrofit2.Response<com.armonihz.app.network.model.GenericResponse>
 }

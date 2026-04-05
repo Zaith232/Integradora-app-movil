@@ -32,6 +32,7 @@ class NotificationsFragment : Fragment() {
     private lateinit var layoutEmptyState: LinearLayout
     private lateinit var adapter: NotificationAdapter
     private lateinit var progressBar: ProgressBar
+    private lateinit var swipeRefresh: androidx.swiperefreshlayout.widget.SwipeRefreshLayout // <-- NUEVO
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +43,11 @@ class NotificationsFragment : Fragment() {
         rvNotifications = view.findViewById(R.id.rvNotifications)
         layoutEmptyState = view.findViewById(R.id.layoutEmptyState)
         progressBar = view.findViewById(R.id.progressBar)
+        swipeRefresh = view.findViewById(R.id.swipeRefresh)
+
+        swipeRefresh.setOnRefreshListener {
+            cargarNotificaciones()
+        }
 
         // Configurar el RecyclerView con AMBOS clics (Tarjeta y Botón de Reseña)
         adapter = NotificationAdapter(
@@ -60,19 +66,6 @@ class NotificationsFragment : Fragment() {
         rvNotifications.layoutManager = LinearLayoutManager(requireContext())
         rvNotifications.adapter = adapter
 
-        // Configurar la navegación inferior
-        val bottomNav = view.findViewById<BottomNavigationView>(R.id.bottomNavigation)
-        bottomNav.selectedItemId = R.id.nav_notifications
-        bottomNav.setOnItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.nav_home -> { open(HomeFragment()); true }
-                R.id.nav_events -> { open(MyEventsFragment()); true }
-                R.id.nav_favorites -> { open(FavoritesFragment()); true }
-                R.id.nav_notifications -> true
-                R.id.nav_profile -> { open(UserProfileFragment()); true }
-                else -> false
-            }
-        }
 
         // Llamar a Laravel
         cargarNotificaciones()
@@ -138,9 +131,13 @@ class NotificationsFragment : Fragment() {
         dialog.show()
     }
 
+
     private fun cargarNotificaciones() {
-        // ⬅️ NUEVO: Mostramos la ruedita y ocultamos lo demás antes de pedir los datos
-        progressBar.visibility = View.VISIBLE
+        // Solo mostramos el ProgressBar si NO estamos haciendo un Swipe Refresh
+        if (!swipeRefresh.isRefreshing) {
+            progressBar.visibility = View.VISIBLE
+        }
+
         rvNotifications.visibility = View.GONE
         layoutEmptyState.visibility = View.GONE
 
@@ -150,7 +147,6 @@ class NotificationsFragment : Fragment() {
             try {
                 val response = api.getMyHiringRequests()
 
-                // ⬅️ NUEVO: Apagamos la ruedita en cuanto llega la respuesta
                 progressBar.visibility = View.GONE
 
                 if (response.isSuccessful && response.body() != null) {
@@ -164,7 +160,6 @@ class NotificationsFragment : Fragment() {
                         layoutEmptyState.visibility = View.GONE
                         adapter.updateData(solicitudes)
 
-                        // REVISAR SI HAY QUE ABRIR UNA SOLICITUD AUTOMÁTICAMENTE
                         val idABuscar = arguments?.getString("hiring_request_id")
                         if (idABuscar != null) {
                             val targetRequest = solicitudes.find { it.id.toString() == idABuscar }
@@ -179,27 +174,23 @@ class NotificationsFragment : Fragment() {
                 } else {
                     context?.let { safeContext ->
                         Toast.makeText(safeContext, "No se pudieron cargar las solicitudes", Toast.LENGTH_SHORT).show()
-                        layoutEmptyState.visibility = View.VISIBLE // Mostrar algo si falla
+                        layoutEmptyState.visibility = View.VISIBLE
                     }
                 }
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Exception) {
-                // ⬅️ NUEVO: Si falla el internet, también hay que apagar la ruedita
                 progressBar.visibility = View.GONE
-                layoutEmptyState.visibility = View.VISIBLE // Mostramos el estado vacío
+                layoutEmptyState.visibility = View.VISIBLE
 
                 Log.e("Notificaciones", "Error de red: ${e.message}")
                 context?.let { safeContext ->
                     Toast.makeText(safeContext, "Error de conexión", Toast.LENGTH_SHORT).show()
                 }
+            } finally {
+                // 🔥 NUEVO: Siempre apagar la animación de recarga, pase lo que pase
+                swipeRefresh.isRefreshing = false
             }
         }
-    }
-
-    private fun open(fragment: Fragment) {
-        parentFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, fragment)
-            .commit()
     }
 }

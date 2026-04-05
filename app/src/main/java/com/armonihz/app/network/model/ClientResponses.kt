@@ -50,7 +50,9 @@ data class EventRequest(
     val duracion: String,
     val ubicacion: String,
     val descripcion: String,
-    val presupuesto: Double
+    val presupuesto: Double,
+    val email: String? = null,    // NUEVO
+    val telefono: String? = null  // NUEVO
 )
 
 data class EventResponse(
@@ -277,4 +279,8 @@ data class MusicianReviewInfo(
     val profile_picture: String?
 )
 
+// Dentro de tu paquete de modelos o data classes
+data class ReportRequest(
+    val reason: String
+)
 

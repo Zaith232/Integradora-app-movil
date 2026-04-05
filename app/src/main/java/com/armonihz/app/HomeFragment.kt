@@ -1,6 +1,8 @@
 package com.armonihz.app
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,15 +16,13 @@ import com.armonihz.app.network.ApiService
 import com.armonihz.app.network.RetrofitClient
 import com.armonihz.app.network.model.MusicianProfileDetailResponse
 import com.armonihz.app.ui.adapters.MusicianAdapter
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.google.firebase.auth.FirebaseAuth
-import android.text.Editable
-import android.text.TextWatcher
-import com.google.android.material.chip.Chip
 
 class HomeFragment : Fragment() {
 
@@ -31,6 +31,14 @@ class HomeFragment : Fragment() {
 
     private lateinit var musicianAdapter: MusicianAdapter
     private var allMusicians: List<MusicianProfileDetailResponse> = emptyList()
+
+    // --- VARIABLES DE PAGINACIÓN ---
+    private var currentPage = 1
+    private var isLoadingPagination = false
+    private var isLastPage = false
+
+    // --- VARIABLE DEL FILTRO DE GÉNEROS ---
+    private var selectedGenreFilter: String? = null
 
     companion object {
         // Caché en memoria para géneros — no cambian frecuentemente
@@ -78,13 +86,17 @@ class HomeFragment : Fragment() {
     }
 
     private suspend fun cargarTodoEnParalelo() {
+        // Al recargar, reiniciamos la paginación a la página 1
+        currentPage = 1
+        isLastPage = false
+
         val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
 
         try {
             coroutineScope {
                 // Las 3 llamadas arrancan al mismo tiempo
                 val musicianosDeferred = async {
-                    try { api.getAllMusicians() } catch (e: Exception) { null }
+                    try { api.getAllMusicians(currentPage) } catch (e: Exception) { null }
                 }
                 val perfilDeferred = async {
                     try { api.getProfile() } catch (e: Exception) { null }
@@ -98,7 +110,7 @@ class HomeFragment : Fragment() {
                 val musicianosResponse = musicianosDeferred.await()
                 if (!isAdded) return@coroutineScope
 
-                procesarMusicos(musicianosResponse)
+                procesarMusicos(musicianosResponse, isRefresh = true)
                 mostrarShimmer(false) // Apagar shimmer en cuanto tengamos músicos
 
                 // Perfil y géneros llegan después sin bloquear la lista
@@ -115,38 +127,80 @@ class HomeFragment : Fragment() {
                 }
             }
         } finally {
-            // ⬅️ NUEVO: Apagamos la animación de recarga al terminar todo (éxito o error)
             if (isAdded) {
                 binding.swipeRefresh.isRefreshing = false
             }
         }
     }
 
-    private fun procesarMusicos(response: retrofit2.Response<com.google.gson.JsonObject>?) {
+    // --- FUNCIÓN PARA CARGAR MÁS PÁGINAS AL HACER SCROLL ---
+    private fun loadMoreMusicians() {
+        if (isLoadingPagination || isLastPage) return
+
+        isLoadingPagination = true
+        currentPage++
+
+        // 🔥 MOSTRAMOS LA RUEDITA AL INICIAR LA CARGA
+        binding.pbPagination.visibility = View.VISIBLE
+
+        lifecycleScope.launch {
+            try {
+                val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
+                val response = api.getAllMusicians(currentPage)
+
+                // Procesamos los datos indicando que NO es una recarga (isRefresh = false)
+                procesarMusicos(response, isRefresh = false)
+            } catch (e: Exception) {
+                Log.e("PAGINATION_ERROR", "Error cargando más músicos: ${e.message}")
+                currentPage-- // Revertimos la página si falla la conexión
+            } finally {
+                isLoadingPagination = false
+                // 🔥 OCULTAMOS LA RUEDITA AL TERMINAR (pase lo que pase)
+                binding.pbPagination.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun procesarMusicos(response: retrofit2.Response<com.google.gson.JsonObject>?, isRefresh: Boolean) {
         response?.body()?.let { jsonResponse ->
             try {
-                val dataObject     = jsonResponse.getAsJsonObject("data")
+                val dataObject = jsonResponse.getAsJsonObject("data")
                 val musiciansArray = dataObject.getAsJsonArray("data")
+
+                // Leer la paginación
+                val metaObject = dataObject.getAsJsonObject("meta")
+                val current = metaObject.get("current_page")?.asInt ?: 1
+                val last = metaObject.get("last_page")?.asInt ?: 1
+
+                isLastPage = current >= last
+
                 val gson = com.google.gson.Gson()
                 val type = object : com.google.gson.reflect.TypeToken<List<MusicianProfileDetailResponse>>() {}.type
-                val musiciansList: List<MusicianProfileDetailResponse> = gson.fromJson(musiciansArray, type)
+                val newMusicians: List<MusicianProfileDetailResponse> = gson.fromJson(musiciansArray, type)
 
-                allMusicians = musiciansList
+                if (isRefresh) {
+                    allMusicians = newMusicians
+                } else {
+                    val mutableList = allMusicians.toMutableList()
+                    mutableList.addAll(newMusicians)
+                    // ELIMINA DUPLICADOS
+                    allMusicians = mutableList.distinctBy { it.id }
+                }
+
                 filterMusicians()
 
             } catch (e: Exception) {
                 Log.e("API_ERROR", "Error procesando músicos: ${e.message}")
-                if (isAdded) Toast.makeText(requireContext(), "Error al cargar músicos", Toast.LENGTH_SHORT).show()
+                if (isAdded && isRefresh) Toast.makeText(requireContext(), "Error al cargar músicos", Toast.LENGTH_SHORT).show()
             }
         } ?: run {
-            if (isAdded) Toast.makeText(requireContext(), "No se pudieron cargar los músicos", Toast.LENGTH_SHORT).show()
+            if (isAdded && isRefresh) Toast.makeText(requireContext(), "No se pudieron cargar los músicos", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun procesarPerfil(response: retrofit2.Response<com.armonihz.app.network.model.ProfileResponse>?) {
         response?.body()?.let { profile ->
             try {
-                // Como ya está tipado, usamos 'profile' directamente
                 val nombre = profile.nombre?.split(" ")?.firstOrNull() ?: return@let
                 binding.tvGreeting.text = "Hola, $nombre 👋"
 
@@ -158,9 +212,6 @@ class HomeFragment : Fragment() {
                         .circleCrop()
                         .into(binding.ivProfile)
                 }
-
-                // Esto evita el error de "if must have both main and else branches"
-                Unit
             } catch (e: Exception) {
                 Log.e("API_ERROR", "Error procesando perfil: ${e.message}")
             }
@@ -170,22 +221,35 @@ class HomeFragment : Fragment() {
     private fun pintarGeneros(genres: List<com.armonihz.app.network.model.Genre>) {
         if (!isAdded) return
 
-        binding.chipGroupCategories.removeAllViews()
-
-        for (genre in genres) {
-            // 1. Inflar el diseño personalizado que contiene el estilo Filter
-            val chip = layoutInflater.inflate(R.layout.item_category_chip, binding.chipGroupCategories, false) as Chip
-
-            // 2. Asignar los valores al chip
-            chip.text = genre.name
-            chip.tag = genre.name
-
-            // 3. Importante: Generar un ID único para que el singleSelection funcione
-            chip.id = View.generateViewId()
-
-            // 4. Agregarlo al ChipGroup
-            binding.chipGroupCategories.addView(chip)
+        binding.btnFilterGenre.setOnClickListener {
+            mostrarDialogoGeneros(genres)
         }
+    }
+
+    private fun mostrarDialogoGeneros(genres: List<com.armonihz.app.network.model.Genre>) {
+        // Creamos una lista de puros nombres para mostrar en el diálogo
+        val genreNames = genres.map { it.name }.toTypedArray()
+
+        // Buscamos cuál estaba seleccionado para marcarlo
+        val checkedItem = genreNames.indexOf(selectedGenreFilter)
+
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Filtrar por género")
+            .setSingleChoiceItems(genreNames, checkedItem) { dialog, which ->
+                // Cuando el usuario toca uno, lo guardamos y filtramos
+                selectedGenreFilter = genreNames[which]
+                binding.btnFilterGenre.text = selectedGenreFilter // Cambiamos el texto del botón
+                filterMusicians()
+                dialog.dismiss()
+            }
+            .setNeutralButton("Limpiar filtro") { dialog, _ ->
+                // Para quitar el filtro y ver todos de nuevo
+                selectedGenreFilter = null
+                binding.btnFilterGenre.text = "Todos los géneros"
+                filterMusicians()
+            }
+            .setNegativeButton("Cancelar", null)
+            .show()
     }
 
     private fun mostrarShimmer(mostrar: Boolean) {
@@ -198,7 +262,6 @@ class HomeFragment : Fragment() {
         } else {
             binding.shimmerLayout.stopShimmer()
             binding.shimmerLayout.visibility = View.GONE
-            // El RecyclerView o el empty state se muestran en filterMusicians()
         }
     }
 
@@ -218,6 +281,18 @@ class HomeFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = musicianAdapter
         }
+
+        // --- DETECCIÓN DEL SCROLL INFINITO ---
+        binding.nestedScrollView.setOnScrollChangeListener { v: androidx.core.widget.NestedScrollView, _, scrollY, _, oldScrollY ->
+            if (scrollY > oldScrollY) {
+                val view = v.getChildAt(v.childCount - 1)
+                val diff = (view.bottom - (v.height + v.scrollY))
+
+                if (diff <= 100) {
+                    loadMoreMusicians()
+                }
+            }
+        }
     }
 
     private fun setupNavigation() {
@@ -226,60 +301,31 @@ class HomeFragment : Fragment() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) { filterMusicians() }
         })
-
-        binding.chipGroupCategories.setOnCheckedStateChangeListener { _, _ ->
-            filterMusicians()
-        }
-
-        binding.ivProfile.setOnClickListener {
-            binding.bottomNavigation.selectedItemId = R.id.nav_profile
-        }
-
-        binding.tvGreeting.setOnClickListener {
-            binding.bottomNavigation.selectedItemId = R.id.nav_profile
-        }
-
-        binding.bottomNavigation.setOnItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.nav_home -> true
-                R.id.nav_events -> { open(MyEventsFragment()); true }
-                R.id.nav_favorites -> { open(FavoritesFragment()); true }
-                R.id.nav_notifications -> { open(NotificationsFragment()); true }
-                R.id.nav_profile -> { open(UserProfileFragment()); true }
-                else -> false
-            }
-        }
     }
 
     private fun setupRefresh() {
         binding.swipeRefresh.setOnRefreshListener {
-            // Cuando jalen hacia abajo, volvemos a llamar a la API
             lifecycleScope.launch {
                 cargarTodoEnParalelo()
             }
         }
     }
 
-    private fun open(fragment: Fragment) {
-        parentFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, fragment)
-            .commit()
-    }
-
     private fun filterMusicians() {
         val query = binding.searchInput.text.toString().trim().lowercase()
 
-        val selectedChipId = binding.chipGroupCategories.checkedChipId
-        val categoryFilter = if (selectedChipId != View.NO_ID) {
-            binding.chipGroupCategories.findViewById<Chip>(selectedChipId)?.tag as? String
-        } else null
-
         val filteredList = allMusicians.filter { musician ->
-            val matchesName = query.isEmpty() || musician.stage_name.lowercase().contains(query)
-            val matchesCategory = categoryFilter == null || musician.genres?.any { genre ->
-                genre.name.lowercase().contains(categoryFilter.lowercase())
+            // 🔥 Buscamos en el nombre OR (||) en la ubicación
+            val matchesSearch = query.isEmpty() ||
+                    musician.stage_name.lowercase().contains(query) ||
+                    (musician.location?.lowercase()?.contains(query) == true)
+
+            // 🔥 Buscamos por la categoría seleccionada en el diálogo
+            val matchesCategory = selectedGenreFilter == null || musician.genres?.any { genre ->
+                genre.name.lowercase().contains(selectedGenreFilter!!.lowercase())
             } == true
-            matchesName && matchesCategory
+
+            matchesSearch && matchesCategory
         }
 
         musicianAdapter.updateData(filteredList)

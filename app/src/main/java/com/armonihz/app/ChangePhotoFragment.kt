@@ -126,6 +126,19 @@ class ChangePhotoFragment : Fragment() {
                     .skipMemoryCache(true)
                     .circleCrop()
                     .into(ivProfilePicture)
+            } else {
+                // 🔥 LO QUE FALTABA: ¿Qué hacer cuando la foto es NULL (se eliminó)?
+                hasLaravelPhoto = false
+                enableDeleteButton(false)
+
+                // Si el usuario tiene foto de Google, la mostramos. Si no, ponemos la cámara.
+                val user = FirebaseAuth.getInstance().currentUser
+                if (user?.photoUrl != null) {
+                    Glide.with(this).load(user.photoUrl).circleCrop().into(ivProfilePicture)
+                } else {
+                    Glide.with(this).clear(ivProfilePicture) // Limpiamos la caché de Glide
+                    ivProfilePicture.setImageResource(android.R.drawable.ic_menu_camera)
+                }
             }
         }
     }

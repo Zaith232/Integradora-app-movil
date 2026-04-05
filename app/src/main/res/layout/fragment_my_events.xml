@@ -140,6 +140,8 @@
                 android:gravity="center"
                 android:visibility="gone">
 
+
+
                 <ImageView
                     android:layout_width="72dp"
                     android:layout_height="72dp"
@@ -168,24 +170,16 @@
             </LinearLayout>
 
             <ProgressBar
-                android:id="@+id/progressLoader"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:visibility="gone"/>
 
         </FrameLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@color/md_surface"
-        app:itemIconTint="@color/md_onSurfaceVariant"
-        app:itemTextColor="@color/md_onSurfaceVariant"
-        app:menu="@menu/bottom_nav_menu" />
+
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fabAddEvent"
@@ -193,10 +187,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="96dp"
-        app:icon="@android:drawable/ic_input_add"
+        android:layout_marginBottom="16dp" app:icon="@android:drawable/ic_input_add"
         app:backgroundTint="?attr/colorPrimary"
         app:iconTint="?attr/colorOnPrimary" />
+
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

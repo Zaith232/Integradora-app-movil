@@ -12,10 +12,10 @@
         android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigation"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true">
@@ -93,37 +93,31 @@
                         android:id="@+id/searchInput"
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
-                        android:hint="Mariachis, bandas, tríos..."
+                        android:hint="Busca por ciudad o por nombre"
                         android:inputType="text"
                         android:textColor="@color/md_onSurface"
                         android:textColorHint="@color/md_onSurfaceVariant"
                         android:textSize="14sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <HorizontalScrollView
-                    android:id="@+id/categoryScroll"
-                    android:layout_width="match_parent"
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnFilterGenre"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="24dp"
                     android:layout_marginTop="20dp"
-                    android:clipToPadding="false"
-                    android:paddingHorizontal="24dp"
-                    android:scrollbars="none">
-
-                    <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/chipGroupCategories"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:chipSpacingHorizontal="8dp"
-                        app:singleLine="true"
-                        app:singleSelection="true" />
-
-                </HorizontalScrollView>
+                    android:text="Todos los géneros"
+                    android:textColor="?attr/colorOnSurface"
+                    app:strokeColor="?attr/colorOutline"
+                    app:iconTint="?attr/colorOnSurface"
+                    app:icon="@android:drawable/ic_menu_sort_by_size" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="24dp"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="24dp"
                     android:text="Cerca de ti"
                     android:textColor="@color/md_onSurface"
                     android:textSize="20sp"
@@ -162,12 +156,22 @@
                     android:paddingHorizontal="24dp"
                     android:visibility="gone" />
 
+                <ProgressBar
+                    android:id="@+id/pbPagination"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:indeterminateTint="?attr/colorPrimary"
+                    android:visibility="gone" />
+
                 <TextView
                     android:id="@+id/tvEmptyState"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
-                    android:text="Aún no hay músicos disponibles con este género 🎸"
+                    android:text="Aún no hay músicos disponibles con este filtro 🎸"
                     android:textAlignment="center"
                     android:textColor="@color/md_onSurfaceVariant"
                     android:textSize="16sp"
@@ -176,17 +180,5 @@
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/md_surface"
-        app:itemIconTint="@color/md_onSurfaceVariant"
-        app:itemTextColor="@color/md_onSurfaceVariant"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

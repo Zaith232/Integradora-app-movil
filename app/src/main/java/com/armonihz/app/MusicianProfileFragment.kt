@@ -40,6 +40,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.applandeo.materialcalendarview.EventDay
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import androidx.appcompat.widget.PopupMenu
+import com.armonihz.app.network.model.ReportRequest
 
 class MusicianProfileFragment : Fragment() {
 
@@ -470,33 +472,19 @@ class MusicianProfileFragment : Fragment() {
     }
 
     private fun setupListeners() {
+        binding.btnBack.setOnClickListener {
+            parentFragmentManager.popBackStack()
+        }
         // ⬅️ NUEVO: Conectamos el botón con nuestra función
         binding.btnFav.setOnClickListener {
             toggleFavorite()
         }
 
-        binding.bottomNavigation.setOnItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.nav_home -> {
-                    open(HomeFragment())
-                    true
-                }
-                R.id.nav_events -> {
-                    open(MyEventsFragment())
-                    true
-                }
-                R.id.nav_favorites -> {
-                    open(FavoritesFragment())
-                    true
-                }
-                R.id.nav_notifications -> { open(NotificationsFragment()); true }
-                R.id.nav_profile -> {
-                    open(UserProfileFragment())
-                    true
-                }
-                else -> false
-            }
+        binding.btnMore.setOnClickListener { view ->
+            showOptionsMenu(view)
         }
+
+
 
         // Dentro de setupListeners()
         binding.btnContratar.setOnClickListener {
@@ -720,6 +708,165 @@ class MusicianProfileFragment : Fragment() {
         })
 
         bottomSheetDialog.show()
+    }
+
+    // ==========================================
+    // MENÚ DE OPCIONES Y REPORTE
+    // ==========================================
+    private fun showOptionsMenu(anchor: View) {
+        val popupMenu = PopupMenu(requireContext(), anchor)
+        // Agregamos la opción "Reportar músico" (groupId = 0, itemId = 1, order = 0)
+        popupMenu.menu.add(0, 1, 0, "Reportar músico")
+
+        popupMenu.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                1 -> {
+                    showReportDialog()
+                    true
+                }
+                else -> false
+            }
+        }
+        popupMenu.show()
+    }
+
+    private fun showReportDialog() {
+        val reasons = arrayOf(
+            "Contenido inapropiado",
+            "Perfil falso o suplantación",
+            "Estafa o fraude",
+            "Comportamiento poco profesional",
+            "Otro motivo"
+        )
+
+        // Función auxiliar para convertir dp a píxeles exactos según la pantalla
+        val dpToPx = { dp: Int -> (dp * resources.displayMetrics.density).toInt() }
+
+        // 1. Contenedor principal con padding estilo Material (24dp horizontal)
+        val container = android.widget.LinearLayout(requireContext()).apply {
+            orientation = android.widget.LinearLayout.VERTICAL
+            setPadding(dpToPx(24), dpToPx(8), dpToPx(24), 0)
+        }
+
+        // 2. Grupo de botones
+        val radioGroup = android.widget.RadioGroup(requireContext())
+
+        // 3. TextInputLayout (El contorno Material Design para el campo de texto)
+        val textInputLayout = com.google.android.material.textfield.TextInputLayout(
+            requireContext(),
+            null,
+            // Aplicamos el estilo por defecto de Material para campos de texto
+            com.google.android.material.R.attr.textInputStyle
+        ).apply {
+            hint = "Detalla el motivo..."
+            visibility = View.GONE // Oculto inicialmente
+            boxBackgroundMode = com.google.android.material.textfield.TextInputLayout.BOX_BACKGROUND_OUTLINE
+            layoutParams = android.widget.LinearLayout.LayoutParams(
+                android.widget.LinearLayout.LayoutParams.MATCH_PARENT,
+                android.widget.LinearLayout.LayoutParams.WRAP_CONTENT
+            ).apply { setMargins(0, dpToPx(12), 0, dpToPx(8)) }
+        }
+
+        // El campo de texto en sí, dentro del Layout
+        val editText = com.google.android.material.textfield.TextInputEditText(textInputLayout.context).apply {
+            inputType = android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE
+            minLines = 2
+            maxLines = 4
+        }
+        textInputLayout.addView(editText)
+
+        // 4. Agregar MaterialRadioButtons con espaciado correcto
+        reasons.forEachIndexed { index, reason ->
+            val radioButton = com.google.android.material.radiobutton.MaterialRadioButton(requireContext()).apply {
+                text = reason
+                id = index
+                textSize = 16f
+                layoutParams = android.widget.RadioGroup.LayoutParams(
+                    android.widget.RadioGroup.LayoutParams.MATCH_PARENT,
+                    android.widget.RadioGroup.LayoutParams.WRAP_CONTENT
+                )
+                // Espaciado vertical para que los botones sean fáciles de tocar
+                setPadding(dpToPx(8), dpToPx(12), dpToPx(8), dpToPx(12))
+            }
+            radioGroup.addView(radioButton)
+        }
+
+        // 5. Escuchar los cambios de selección
+        radioGroup.setOnCheckedChangeListener { _, checkedId ->
+            if (checkedId == reasons.size - 1) {
+                textInputLayout.visibility = View.VISIBLE
+                editText.requestFocus()
+            } else {
+                textInputLayout.visibility = View.GONE
+                editText.text?.clear()
+                textInputLayout.error = null // Limpiamos el error visual si cambia de opción
+            }
+        }
+
+        container.addView(radioGroup)
+        container.addView(textInputLayout)
+
+        // 6. Construir el diálogo
+        val dialog = MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Motivo del reporte")
+            .setView(container)
+            .setPositiveButton("Enviar", null)
+            .setNegativeButton("Cancelar", null)
+            .create()
+
+        dialog.show()
+
+        // 7. Configurar la lógica del botón "Enviar" con errores de Material
+        dialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+            val checkedId = radioGroup.checkedRadioButtonId
+
+            if (checkedId == -1) {
+                Toast.makeText(context, "Por favor, selecciona un motivo", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            var finalReason = reasons[checkedId]
+
+            // Si seleccionó "Otro", validamos usando el error nativo de TextInputLayout
+            if (checkedId == reasons.size - 1) {
+                val customReason = editText.text.toString().trim()
+                if (customReason.isEmpty()) {
+                    textInputLayout.error = "Este campo es obligatorio" // Muestra el error en rojo debajo del contorno
+                    return@setOnClickListener
+                }
+                textInputLayout.error = null // Quitamos el error si escribió algo válido
+                finalReason = customReason
+            }
+
+            // --- NUEVO: LLAMADA A LA API ---
+            val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
+
+            lifecycleScope.launch {
+                try {
+                    // Deshabilitar el botón temporalmente para evitar doble clic
+                    dialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE).isEnabled = false
+
+                    val request = ReportRequest(reason = finalReason)
+                    val response = api.reportMusician(musicianId, request)
+
+                    if (response.isSuccessful) {
+                        Toast.makeText(context, "Reporte enviado correctamente", Toast.LENGTH_LONG)
+                            .show()
+                        dialog.dismiss()
+                    } else {
+                        Toast.makeText(context, "Error al enviar el reporte", Toast.LENGTH_SHORT)
+                            .show()
+                        dialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE).isEnabled = true
+                    }
+                } catch (e: Exception) {
+                    Toast.makeText(context, "Sin conexión a internet", Toast.LENGTH_SHORT).show()
+                    dialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE).isEnabled = true
+                }
+            }
+
+            Toast.makeText(context, "Reporte enviado por: $finalReason", Toast.LENGTH_LONG).show()
+            dialog.dismiss()
+        }
     }
 
     // 3. Esta es la nueva función que muestra la lista de horas ocupadas
