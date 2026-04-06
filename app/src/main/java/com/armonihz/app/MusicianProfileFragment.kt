@@ -94,7 +94,10 @@ class MusicianProfileFragment : Fragment() {
         setupListeners()
         setupRefresh()
 
+
+
         if (musicianId != -1) {
+            registrarVistaSilenciosa(musicianId)
             loadMusicianProfile()
             loadReviews()
         } else {
@@ -866,6 +869,21 @@ class MusicianProfileFragment : Fragment() {
 
             Toast.makeText(context, "Reporte enviado por: $finalReason", Toast.LENGTH_LONG).show()
             dialog.dismiss()
+        }
+    }
+
+    private fun registrarVistaSilenciosa(musicianId: Int) {
+        lifecycleScope.launch {
+            try {
+                val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
+                // Disparamos la petición a Laravel
+                api.recordProfileView(musicianId)
+            } catch (e: Exception) {
+                // Falla silenciosa:
+                // Si el internet falla, simplemente no se registra la vista,
+                // pero no le mostramos ningún error molesto al usuario.
+                Log.e("ProfileView", "No se pudo registrar la vista: ${e.message}")
+            }
         }
     }
 

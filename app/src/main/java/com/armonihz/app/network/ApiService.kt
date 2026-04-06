@@ -209,4 +209,7 @@ interface ApiService {
     suspend fun sendPasswordReset(
         @Body request: Map<String, String>
     ): retrofit2.Response<com.armonihz.app.network.model.GenericResponse>
+
+    @POST("musicians/{id}/mobile-view")
+    suspend fun recordProfileView(@Path("id") musicianId: Int): retrofit2.Response<Unit>
 }
