@@ -274,13 +274,31 @@ class MusicianProfileFragment : Fragment() {
 
                     if (!musician.facebook.isNullOrEmpty()) {
                         val fbRaw = musician.facebook.trim()
-                        val fbLabel = fbRaw.substringAfterLast("/").ifEmpty { fbRaw }
-                        binding.tvFacebookValue.text = fbLabel
+                        val fbLabel = try {
+                            val cleanUrl = if (fbRaw.startsWith("http")) fbRaw else "https://facebook.com/$fbRaw"
+                            val uri = Uri.parse(cleanUrl)
+                            val path = uri.path?.trim('/') ?: ""
+                            when {
+                                // Caso profile.php?id=...
+                                uri.query?.contains("id=") == true -> "facebook"
+                                // Si hay varios segmentos → tomar el último
+                                path.contains("/") -> path.substringAfterLast("/")
+                                // Si solo es uno
+                                path.isNotEmpty() -> path
+                                else -> fbRaw
+                            }.ifEmpty { fbRaw }
+                        } catch (e: Exception) {
+                            fbRaw
+                        }
+                        binding.tvFacebookValue.text = "@$fbLabel"
                         binding.tvFacebook.visibility = View.VISIBLE
                         hasContactInfo = true
                         binding.tvFacebook.setOnClickListener {
                             val url = if (fbRaw.startsWith("http")) fbRaw else "https://facebook.com/$fbRaw"
-                            val intent = android.content.Intent(android.content.Intent.ACTION_VIEW, Uri.parse(url))
+                            val intent = android.content.Intent(
+                                android.content.Intent.ACTION_VIEW,
+                                Uri.parse(url)
+                            )
                             startActivity(intent)
                         }
                     }
