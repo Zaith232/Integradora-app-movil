@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="12dp"
+<<<<<<< HEAD
     app:cardBackgroundColor="@color/md_glass_surface"
     app:cardCornerRadius="16dp"
     app:cardElevation="0dp"
@@ -83,21 +84,105 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent">
 
+=======
+    app:cardBackgroundColor="@color/md_surface"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="0dp"
+    app:strokeColor="@color/md_outline"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="110dp"
+        android:orientation="horizontal">
+
+        <!-- Imagen izquierda con badge de rating encima -->
+        <FrameLayout
+            android:layout_width="110dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/ivCoverPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/md_outline"
+                android:scaleType="centerCrop" />
+
+            <!-- Badge de rating -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|start"
+                android:layout_margin="8dp"
+                app:cardBackgroundColor="#CC000000"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="7dp"
+                    android:paddingVertical="3dp">
+
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/ic_star"
+                        app:tint="#F59E0B" />
+
+                    <TextView
+                        android:id="@+id/tvRating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text="4.8"
+                        android:textColor="#FFFFFF"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </FrameLayout>
+
+        <!-- Contenido derecho -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="12dp"
+            android:gravity="center_vertical">
+
+            <!-- Nombre artístico -->
+>>>>>>> 412bd9d2ee7f7558048f9c9b723806b2448b9816
             <TextView
                 android:id="@+id/tvStageName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nombre del artista"
                 android:textColor="@color/md_onSurface"
+<<<<<<< HEAD
                 android:textSize="17sp"
+=======
+                android:textSize="15sp"
+>>>>>>> 412bd9d2ee7f7558048f9c9b723806b2448b9816
                 android:textStyle="bold"
                 android:maxLines="1"
                 android:ellipsize="end" />
 
+<<<<<<< HEAD
+=======
+            <!-- Ubicación -->
+>>>>>>> 412bd9d2ee7f7558048f9c9b723806b2448b9816
             <TextView
                 android:id="@+id/tvLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 android:layout_marginTop="6dp"
                 android:text="Ubicación"
                 android:textColor="@color/md_onSurfaceVariant"
@@ -113,6 +198,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
+=======
+                android:layout_marginTop="4dp"
+                android:text="📍 Ubicación"
+                android:textColor="@color/md_onSurfaceVariant"
+                android:textSize="12sp"
+                android:maxLines="1"
+                android:ellipsize="end" />
+
+            <!-- Chips de géneros -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+>>>>>>> 412bd9d2ee7f7558048f9c9b723806b2448b9816
                 android:scrollbars="none">
 
                 <com.google.android.material.chip.ChipGroup
@@ -121,6 +220,7 @@
                     android:layout_height="wrap_content"
                     app:chipSpacingHorizontal="4dp"
                     app:singleLine="true" />
+<<<<<<< HEAD
             </HorizontalScrollView>
 
             <View
@@ -149,5 +249,24 @@
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+=======
+
+            </HorizontalScrollView>
+
+            <!-- Precio -->
+            <TextView
+                android:id="@+id/tvPriceHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Desde $1,500"
+                android:textColor="@color/md_primary"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+>>>>>>> 412bd9d2ee7f7558048f9c9b723806b2448b9816
 
 </com.google.android.material.card.MaterialCardView>

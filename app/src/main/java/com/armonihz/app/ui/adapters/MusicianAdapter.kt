@@ -41,7 +41,11 @@ class MusicianAdapter(
 
         // Ubicación
         val locationText = musician.location ?: "Ubicación desconocida"
+<<<<<<< HEAD
         holder.tvLocation.text = locationText
+=======
+        holder.tvLocation.text = "📍 $locationText"
+>>>>>>> 412bd9d2ee7f7558048f9c9b723806b2448b9816
 
         // Precio
         if (!musician.hourly_rate.isNullOrEmpty()) {
@@ -76,7 +80,11 @@ class MusicianAdapter(
         // Foto con Glide
         if (musician.profile_picture.isNullOrEmpty()) {
             Glide.with(holder.itemView.context).clear(holder.ivCoverPhoto)
+<<<<<<< HEAD
             holder.ivCoverPhoto.setImageResource(R.drawable.ic_user_placeholder)
+=======
+            holder.ivCoverPhoto.setImageDrawable(null)
+>>>>>>> 412bd9d2ee7f7558048f9c9b723806b2448b9816
         } else {
             val fullImageUrl = if (musician.profile_picture.startsWith("http")) {
                 musician.profile_picture

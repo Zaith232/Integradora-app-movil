@@ -196,7 +196,11 @@ class MusicianProfileFragment : Fragment() {
                     updateFavoriteIcon()
 
                     binding.artistName.text = musician.stage_name
+<<<<<<< HEAD
                     binding.tvLocation.text = musician.location ?: "Ubicación no disponible"
+=======
+                    binding.tvLocation.text = "📍 ${musician.location ?: "Ubicación no disponible"}"
+>>>>>>> 412bd9d2ee7f7558048f9c9b723806b2448b9816
                     binding.tvDescription.text = musician.bio ?: "Sin descripción disponible."
 
                     if (!musician.hourly_rate.isNullOrEmpty()) {
@@ -208,14 +212,22 @@ class MusicianProfileFragment : Fragment() {
                     binding.chipVerified.visibility = if (musician.is_verified == 1) View.VISIBLE else View.GONE
 
                     if (!musician.coverage_notes.isNullOrEmpty()) {
+<<<<<<< HEAD
                         binding.tvCoverageNotes.text = musician.coverage_notes
+=======
+                        binding.tvCoverageNotes.text = "🚗 Cobertura: ${musician.coverage_notes}"
+>>>>>>> 412bd9d2ee7f7558048f9c9b723806b2448b9816
                         binding.tvCoverageNotes.visibility = View.VISIBLE
                     }
 
                     var hasContactInfo = false
 
                     if (!musician.phone.isNullOrEmpty()) {
+<<<<<<< HEAD
                         binding.tvPhoneValue.text = musician.phone
+=======
+                        binding.tvPhone.text = "Tel: ${musician.phone}"
+>>>>>>> 412bd9d2ee7f7558048f9c9b723806b2448b9816
                         binding.tvPhone.visibility = View.VISIBLE
                         hasContactInfo = true
                         binding.tvPhone.setOnClickListener {
@@ -227,8 +239,12 @@ class MusicianProfileFragment : Fragment() {
 
                     if (!musician.instagram.isNullOrEmpty()) {
                         val igUser = musician.instagram.replace("@", "").trim()
+<<<<<<< HEAD
                         val igHandle = if (igUser.startsWith("http")) igUser.substringAfterLast("/") else igUser
                         binding.tvInstagramValue.text = "@$igHandle"
+=======
+                        binding.tvInstagram.text = "IG: @$igUser"
+>>>>>>> 412bd9d2ee7f7558048f9c9b723806b2448b9816
                         binding.tvInstagram.visibility = View.VISIBLE
                         hasContactInfo = true
                         binding.tvInstagram.setOnClickListener {
@@ -239,6 +255,7 @@ class MusicianProfileFragment : Fragment() {
                     }
 
                     if (!musician.facebook.isNullOrEmpty()) {
+<<<<<<< HEAD
                         val fbRaw = musician.facebook.trim()
                         val fbLabel = fbRaw.substringAfterLast("/").ifEmpty { fbRaw }
                         binding.tvFacebookValue.text = fbLabel
@@ -246,12 +263,21 @@ class MusicianProfileFragment : Fragment() {
                         hasContactInfo = true
                         binding.tvFacebook.setOnClickListener {
                             val url = if (fbRaw.startsWith("http")) fbRaw else "https://facebook.com/$fbRaw"
+=======
+                        val fbUser = musician.facebook.trim()
+                        binding.tvFacebook.text = "FB: $fbUser"
+                        binding.tvFacebook.visibility = View.VISIBLE
+                        hasContactInfo = true
+                        binding.tvFacebook.setOnClickListener {
+                            val url = if (fbUser.startsWith("http")) fbUser else "https://facebook.com/$fbUser"
+>>>>>>> 412bd9d2ee7f7558048f9c9b723806b2448b9816
                             val intent = android.content.Intent(android.content.Intent.ACTION_VIEW, Uri.parse(url))
                             startActivity(intent)
                         }
                     }
 
                     if (!musician.youtube.isNullOrEmpty()) {
+<<<<<<< HEAD
                         val ytRaw = musician.youtube.trim()
                         val ytLabel = ytRaw.substringAfterLast("/").removePrefix("@").ifEmpty { ytRaw }
                         binding.tvYoutubeValue.text = ytLabel
@@ -259,6 +285,14 @@ class MusicianProfileFragment : Fragment() {
                         hasContactInfo = true
                         binding.tvYoutube.setOnClickListener {
                             val url = if (ytRaw.startsWith("http")) ytRaw else "https://youtube.com/$ytRaw"
+=======
+                        val ytUser = musician.youtube.trim()
+                        binding.tvYoutube.text = "YT: $ytUser"
+                        binding.tvYoutube.visibility = View.VISIBLE
+                        hasContactInfo = true
+                        binding.tvYoutube.setOnClickListener {
+                            val url = if (ytUser.startsWith("http")) ytUser else "https://youtube.com/$ytUser"
+>>>>>>> 412bd9d2ee7f7558048f9c9b723806b2448b9816
                             val intent = android.content.Intent(android.content.Intent.ACTION_VIEW, Uri.parse(url))
                             startActivity(intent)
                         }
