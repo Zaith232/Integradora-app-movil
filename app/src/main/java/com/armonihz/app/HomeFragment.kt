@@ -147,6 +147,7 @@ class HomeFragment : Fragment() {
             try {
                 val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
                 val response = api.getAllMusicians(currentPage)
+                if (!isAdded) return@launch
 
                 // Procesamos los datos indicando que NO es una recarga (isRefresh = false)
                 procesarMusicos(response, isRefresh = false)
@@ -156,7 +157,9 @@ class HomeFragment : Fragment() {
             } finally {
                 isLoadingPagination = false
                 // 🔥 OCULTAMOS LA RUEDITA AL TERMINAR (pase lo que pase)
-                binding.pbPagination.visibility = View.GONE
+                if (isAdded && _binding != null) { // 👉 PROTEGER EL BINDING AQUÍ
+                    binding.pbPagination.visibility = View.GONE
+                }
             }
         }
     }

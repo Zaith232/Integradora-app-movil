@@ -222,6 +222,7 @@ class MusicianProfileFragment : Fragment() {
         lifecycleScope.launch {
             try {
                 val response = api.getMusicianProfile(musicianId)
+                if (!isAdded) return@launch
                 if (response.isSuccessful && response.body() != null) {
 
                     val musician = response.body()!!.data
@@ -392,11 +393,15 @@ class MusicianProfileFragment : Fragment() {
                 }
 
             } catch (e: Exception) {
+                if (!isAdded) return@launch
                 Log.e("API_ERROR", "Excepción: ${e.message}")
                 Toast.makeText(context, "Error de conexión", Toast.LENGTH_SHORT).show()
             }finally {
                 // ⬅️ NUEVO: Apagamos el indicador de refresco siempre al terminar
-                binding.swipeRefresh.isRefreshing = false
+                // ⚠️ PELIGRO FATAL: En el finally intentas usar 'binding' que ya es null si el fragment se destruyó
+                if (isAdded && _binding != null) { // 👉 PROTEGER ASÍ
+                    binding.swipeRefresh.isRefreshing = false
+                }
             }
         }
     }
@@ -588,6 +593,7 @@ class MusicianProfileFragment : Fragment() {
         lifecycleScope.launch {
             try {
                 val response = api.getMusicianReviews(musicianId)
+                if (!isAdded) return@launch
                 if (response.isSuccessful && response.body() != null) {
                     val reviews = response.body()!!.data
 
@@ -606,7 +612,13 @@ class MusicianProfileFragment : Fragment() {
                     }
                 }
             } catch (e: Exception) {
+                if (!isAdded) return@launch
                 Log.e("REVIEWS_ERROR", "Error al cargar reseñas: ${e.message}")
+            } finally {
+                // ⚠️ PELIGRO FATAL: En el finally intentas usar 'binding' que ya es null si el fragment se destruyó
+                if (isAdded && _binding != null) { // 👉 PROTEGER ASÍ
+                    binding.swipeRefresh.isRefreshing = false
+                }
             }
         }
     }
@@ -615,6 +627,7 @@ class MusicianProfileFragment : Fragment() {
         val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
 
         lifecycleScope.launch {
+            if (!isAdded) return@launch
             try {
                 binding.chipVerCalendario.text = "Cargando..."
                 binding.chipVerCalendario.isEnabled = false
@@ -628,10 +641,14 @@ class MusicianProfileFragment : Fragment() {
                     Toast.makeText(context, "Error al cargar disponibilidad", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {
+                if (!isAdded) return@launch
                 Toast.makeText(context, "Sin conexión a internet", Toast.LENGTH_SHORT).show()
             } finally {
                 binding.chipVerCalendario.text = "Ver calendario →"
                 binding.chipVerCalendario.isEnabled = true
+                if (isAdded && _binding != null) { // 👉 PROTEGER ASÍ
+                    binding.swipeRefresh.isRefreshing = false
+                }
             }
         }
     }

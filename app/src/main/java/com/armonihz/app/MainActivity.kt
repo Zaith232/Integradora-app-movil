@@ -119,7 +119,8 @@ class MainActivity : AppCompatActivity() {
                     current is AddEventFragment ||
                     current is EditEventFragment ||
                     current is SettingsFragment ||
-                    current is MyReviewsFragment
+                    current is MyReviewsFragment ||
+                    current is ChangePhotoFragment
             bottomNav.visibility = if (sinNav) View.GONE else View.VISIBLE
         }
 

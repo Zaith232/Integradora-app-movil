@@ -73,6 +73,10 @@ class FavoritesFragment : Fragment() {
         lifecycleScope.launch {
             try {
                 val response = api.getMyFavorites()
+
+                // 1. Verificamos si el fragmento sigue vivo antes de interactuar con la UI o el contexto
+                if (!isAdded) return@launch
+
                 progressBar.visibility = View.GONE
 
                 if (response.isSuccessful && response.body() != null) {
@@ -88,6 +92,9 @@ class FavoritesFragment : Fragment() {
                     mostrarEstadoVacio()
                 }
             } catch (e: Exception) {
+                // 2. Verificamos si el fragmento sigue vivo en el catch también
+                if (!isAdded) return@launch
+
                 progressBar.visibility = View.GONE
                 Log.e("FAVORITOS_API", "Error: ${e.message}")
                 Toast.makeText(requireContext(), "Error de conexión", Toast.LENGTH_SHORT).show()

@@ -88,7 +88,11 @@ class NotificationsFragment : Fragment() {
             val comment = etComment.text.toString().trim()
 
             if (rating == 0) {
-                Toast.makeText(requireContext(), "Por favor selecciona una calificación", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Por favor selecciona una calificación",
+                    Toast.LENGTH_SHORT
+                ).show()
                 return@setOnClickListener
             }
 
@@ -106,21 +110,32 @@ class NotificationsFragment : Fragment() {
 
             lifecycleScope.launch {
                 try {
-                    val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
+                    val api =
+                        RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
                     val response = api.createReview(request)
+                    if (!isAdded) return@launch
 
                     if (response.isSuccessful) {
-                        Toast.makeText(requireContext(), "¡Reseña enviada con éxito!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            "¡Reseña enviada con éxito!",
+                            Toast.LENGTH_SHORT
+                        ).show()
                         dialog.dismiss()
 
                         // Recargamos la lista para actualizar estados
                         cargarNotificaciones()
                     } else {
-                        Toast.makeText(requireContext(), "Error al enviar reseña", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            "Error al enviar reseña",
+                            Toast.LENGTH_SHORT
+                        ).show()
                         btnSubmitReview.isEnabled = true
                         btnSubmitReview.text = "Enviar reseña"
                     }
                 } catch (e: Exception) {
+                    if (!isAdded) return@launch
                     Toast.makeText(requireContext(), "Error de conexión", Toast.LENGTH_SHORT).show()
                     btnSubmitReview.isEnabled = true
                     btnSubmitReview.text = "Enviar reseña"
@@ -146,6 +161,8 @@ class NotificationsFragment : Fragment() {
         lifecycleScope.launch {
             try {
                 val response = api.getMyHiringRequests()
+
+                if (!isAdded) return@launch
 
                 progressBar.visibility = View.GONE
 
@@ -173,13 +190,18 @@ class NotificationsFragment : Fragment() {
                     }
                 } else {
                     context?.let { safeContext ->
-                        Toast.makeText(safeContext, "No se pudieron cargar las solicitudes", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            safeContext,
+                            "No se pudieron cargar las solicitudes",
+                            Toast.LENGTH_SHORT
+                        ).show()
                         layoutEmptyState.visibility = View.VISIBLE
                     }
                 }
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Exception) {
+                if (!isAdded) return@launch
                 progressBar.visibility = View.GONE
                 layoutEmptyState.visibility = View.VISIBLE
 
@@ -189,7 +211,9 @@ class NotificationsFragment : Fragment() {
                 }
             } finally {
                 // 🔥 NUEVO: Siempre apagar la animación de recarga, pase lo que pase
-                swipeRefresh.isRefreshing = false
+                if (isAdded) {
+                    swipeRefresh.isRefreshing = false
+                }
             }
         }
     }

@@ -198,16 +198,12 @@ class MyEventsFragment : Fragment() {
     }
 
     private fun deleteEvent(eventId: Int) {
-
-        val api = RetrofitClient
-            .getInstance(requireContext())
-            .create(ApiService::class.java)
-
+        val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
         lifecycleScope.launch {
-
             try {
-
                 val response = api.deleteEvent(eventId)
+                // ⚠️ PELIGRO: Si sales del fragment mientras se elimina, 'context' será null y el Toast hará crash.
+                if (!isAdded) return@launch // 👉 AGREGAR ESTO
 
                 if (response.isSuccessful) {
                     Toast.makeText(context, "Evento eliminado", Toast.LENGTH_SHORT).show()
@@ -215,8 +211,9 @@ class MyEventsFragment : Fragment() {
                 } else {
                     Toast.makeText(context, "No se pudo eliminar", Toast.LENGTH_SHORT).show()
                 }
-
             } catch (e: Exception) {
+                // ⚠️ PELIGRO: Lo mismo aquí
+                if (!isAdded) return@launch // 👉 AGREGAR ESTO
                 Toast.makeText(context, "Error de conexión", Toast.LENGTH_SHORT).show()
             }
         }
