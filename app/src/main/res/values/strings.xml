@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">ArmonihzMobile</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="event_created">¡Evento creado exitosamente!</string>
+    <string name="invalid_budget">El presupuesto debe ser mayor a 0</string>
+    <string name="genres_not_loaded">Los géneros aún no han cargado</string>
+    <string name="invalid_date">Fecha inválida</string>
+    <string name="invalid_end_time">La hora de fin debe ser mayor a la de inicio</string>
+    <string name="event_updated">¡Evento actualizado con éxito!</string>
+
+    <!-- Resenia -->
+    <string name="review_sent">¡Reseña enviada con éxito!</string>
+    <string name="select_rating">Por favor selecciona una calificación</string>
+    <string name="sending">Enviando…</string>
+    <string name="submit_review">Enviar reseña</string>
+
+    <!-- Login -->
+    <string name="error_google">Error al iniciar con Google</string>
+    <string name="welcome">¡Bienvenido!</string>
+    <string name="verify_email">Verifica tu correo antes de entrar</string>
+    <string name="password_reset_sent">Si el correo está registrado, recibirás un enlace.</string>
+    <string name="login_button">Iniciar sesión</string>
+    <string name="logging_in">Entrando…</string>
+
+    <!-- Registro -->
+    <string name="register_button">Registrarme</string>
+    <string name="registering">Registrando…</string>
+    <string name="register_success">Cuenta creada. Revisa tu correo para verificarla.</string>
+    <string name="password_hint_default">Mínimo 8 caracteres, 1 mayúscula y 1 número</string>
+    <string name="password_strong">¡Contraseña segura!</string>
+    <string name="passwords_match">Las contraseñas coinciden</string>
+    <string name="passwords_no_match">Las contraseñas no coinciden</string>
+    <string name="exit_confirm_title">¿Estás seguro de salir?</string>
+    <string name="exit_confirm_message">Si sales ahora, perderás los datos ingresados.</string>
+    <string name="exit_confirm_yes">Salir</string>
+    <string name="exit_confirm_no">Cancelar</string>
+
+    <!-- Perfil musico -->
+    <string name="error_musician_not_found">Error: Músico no encontrado</string>
+    <string name="no_location">Ubicación no disponible</string>
+    <string name="no_description">Sin descripción disponible</string>
+    <string name="rate_to_agree">Tarifa a convenir</string>
+    <string name="coverage">Cobertura</string>
+    <string name="new_label">Nuevo</string>
+    <string name="loading">Cargando…</string>
+    <string name="ver_calendario">Ver calendario →</string>
+    <string name="error_favorite">Error al actualizar favoritos</string>
+
+</resources>
