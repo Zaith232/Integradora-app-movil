@@ -100,8 +100,6 @@ class MusicianProfileFragment : Fragment() {
         setupListeners()
         setupRefresh()
 
-
-
         if (musicianId != -1) {
             registrarVistaSilenciosa(musicianId)
             loadMusicianProfile()
@@ -334,13 +332,27 @@ class MusicianProfileFragment : Fragment() {
                         binding.tvNoContact.visibility = View.GONE
                     }
 
-                    if (musician.profile_picture.isNullOrEmpty()) {
-                        Glide.with(this@MusicianProfileFragment).clear(binding.heroImage)
-                        binding.heroImage.setImageDrawable(null)
-                        binding.heroImage.setBackgroundColor(Color.parseColor("#E2E8F0"))
-                    } else {
-                        binding.heroImage.setBackgroundColor(Color.TRANSPARENT)
+                    // --- CORRECCIÓN APLICADA AQUÍ ---
+                    // 1. Cargar SIEMPRE la imagen de fondo (heroImage) y aplicarle el filtro B/N
+                    binding.heroImage.setBackgroundColor(Color.TRANSPARENT)
+                    Glide.with(this@MusicianProfileFragment)
+                        .load("https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80")
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .skipMemoryCache(false)
+                        .centerCrop()
+                        .into(binding.heroImage)
 
+                    val matrix = android.graphics.ColorMatrix()
+                    matrix.setSaturation(0f)
+                    binding.heroImage.colorFilter = android.graphics.ColorMatrixColorFilter(matrix)
+
+                    // 2. Condicional EXCLUSIVO para la foto de perfil circular (profileImage)
+                    if (musician.profile_picture.isNullOrEmpty()) {
+                        // Si no tiene foto, limpiamos el ImageView y mostramos el placeholder
+                        Glide.with(this@MusicianProfileFragment).clear(binding.profileImage)
+                        binding.profileImage.setImageResource(R.drawable.ic_user_placeholder)
+                    } else {
+                        // Si tiene foto, armamos la URL y la cargamos
                         val fullImageUrl = if (musician.profile_picture.startsWith("http")) {
                             musician.profile_picture
                         } else {
@@ -349,22 +361,11 @@ class MusicianProfileFragment : Fragment() {
                         }
 
                         Glide.with(this@MusicianProfileFragment)
-                            .load("https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80")
-                            .diskCacheStrategy(DiskCacheStrategy.ALL)
-                            .skipMemoryCache(false)
-                            .centerCrop()
-                            .into(binding.heroImage)
-                        val matrix = android.graphics.ColorMatrix()
-                        matrix.setSaturation(0f)
-
-                        val filter = android.graphics.ColorMatrixColorFilter(matrix)
-                        binding.heroImage.colorFilter = filter
-
-                        Glide.with(this@MusicianProfileFragment)
                             .load(fullImageUrl)
                             .centerCrop()
                             .into(binding.profileImage)
                     }
+                    // --- FIN DE LA CORRECCIÓN ---
 
                     photosList = musician.media?.photos?.map {
                         MultimediaItem(id = it.id, type = "image", file_path = it.url)
@@ -558,8 +559,6 @@ class MusicianProfileFragment : Fragment() {
             showOptionsMenu(view)
         }
 
-
-
         // Dentro de setupListeners()
         binding.btnContratar.setOnClickListener {
             if (musicianId != -1) {
@@ -721,7 +720,7 @@ class MusicianProfileFragment : Fragment() {
             set(Calendar.MILLISECOND, 0)
         }
         calendarView.setMinimumDate(today)
-// 4. ¿Qué pasa cuando el usuario toca un día?
+        // 4. ¿Qué pasa cuando el usuario toca un día?
         calendarView.setOnDayClickListener(object : OnDayClickListener {
             override fun onDayClick(eventDay: EventDay) {
                 val clickedCal = eventDay.calendar
@@ -969,9 +968,6 @@ class MusicianProfileFragment : Fragment() {
             }
         }
     }
-
-    // 3. Esta es la nueva función que muestra la lista de horas ocupadas
-
 
     private fun open(fragment: Fragment) {
         parentFragmentManager.beginTransaction()
