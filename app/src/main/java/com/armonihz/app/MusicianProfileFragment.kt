@@ -42,6 +42,12 @@ import com.applandeo.materialcalendarview.listeners.OnDayClickListener
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import androidx.appcompat.widget.PopupMenu
 import com.armonihz.app.network.model.ReportRequest
+import androidx.constraintlayout.widget.ConstraintSet
+import androidx.transition.ChangeBounds
+import androidx.transition.TransitionManager
+import android.util.TypedValue
+import androidx.core.content.ContextCompat
+import android.graphics.Typeface
 
 class MusicianProfileFragment : Fragment() {
 
@@ -142,27 +148,56 @@ class MusicianProfileFragment : Fragment() {
     }
 
     private fun switchMultimediaTab(showPhotos: Boolean) {
-        if (showPhotos) {
-            binding.btnTabPhotos.alpha = 1f
-            binding.btnTabPhotos.setTypeface(null, android.graphics.Typeface.BOLD)
-            binding.btnTabVideos.alpha = 0.5f
-            binding.btnTabVideos.setTypeface(null, android.graphics.Typeface.NORMAL)
+        // 1. Obtener los colores dinámicamente para el texto
+        val typedValue = TypedValue()
+        requireContext().theme.resolveAttribute(com.google.android.material.R.attr.colorOnPrimary, typedValue, true)
+        val colorActive = typedValue.data
+        val colorInactive = ContextCompat.getColor(requireContext(), R.color.md_onSurfaceVariant)
 
+        // 2. Preparar el motor de Constraints para la animación
+        val constraintSet = ConstraintSet()
+        constraintSet.clone(binding.tabsContainer)
+
+        if (showPhotos) {
+            // Enganchar la pastilla a los bordes de "Fotos"
+            constraintSet.connect(R.id.animatedPill, ConstraintSet.START, R.id.btnTabPhotos, ConstraintSet.START)
+            constraintSet.connect(R.id.animatedPill, ConstraintSet.END, R.id.btnTabPhotos, ConstraintSet.END)
+
+            // Actualizar diseño de textos
+            binding.btnTabPhotos.setTypeface(null, Typeface.BOLD)
+            binding.btnTabPhotos.setTextColor(colorActive)
+
+            binding.btnTabVideos.setTypeface(null, Typeface.NORMAL)
+            binding.btnTabVideos.setTextColor(colorInactive)
+
+            // Mostrar recycler
             binding.indicatorPhotos.visibility = View.VISIBLE
             binding.indicatorVideos.visibility = View.INVISIBLE
-
             updateMultimediaAdapter(photosList)
-        } else {
-            binding.btnTabVideos.alpha = 1f
-            binding.btnTabVideos.setTypeface(null, android.graphics.Typeface.BOLD)
-            binding.btnTabPhotos.alpha = 0.5f
-            binding.btnTabPhotos.setTypeface(null, android.graphics.Typeface.NORMAL)
 
+        } else {
+            // Enganchar la pastilla a los bordes de "Videos"
+            constraintSet.connect(R.id.animatedPill, ConstraintSet.START, R.id.btnTabVideos, ConstraintSet.START)
+            constraintSet.connect(R.id.animatedPill, ConstraintSet.END, R.id.btnTabVideos, ConstraintSet.END)
+
+            // Actualizar diseño de textos
+            binding.btnTabVideos.setTypeface(null, Typeface.BOLD)
+            binding.btnTabVideos.setTextColor(colorActive)
+
+            binding.btnTabPhotos.setTypeface(null, Typeface.NORMAL)
+            binding.btnTabPhotos.setTextColor(colorInactive)
+
+            // Mostrar recycler
             binding.indicatorPhotos.visibility = View.INVISIBLE
             binding.indicatorVideos.visibility = View.VISIBLE
-
             updateMultimediaAdapter(videosList)
         }
+
+        // 3. ¡Ejecutar la animación!
+        val transition = ChangeBounds()
+        transition.duration = 250 // Velocidad en milisegundos (250 es un buen estándar)
+        TransitionManager.beginDelayedTransition(binding.tabsContainer, transition)
+        constraintSet.applyTo(binding.tabsContainer)
     }
 
     private fun updateMultimediaAdapter(list: List<MultimediaItem>) {

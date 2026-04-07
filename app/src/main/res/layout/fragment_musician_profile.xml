@@ -115,22 +115,31 @@
                         android:paddingTop="82dp"
                         android:paddingBottom="24dp">
 
-                        <LinearLayout
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center"
+                            android:layout_marginHorizontal="16dp"
                             android:layout_marginBottom="4dp">
 
                             <TextView
                                 android:id="@+id/artistName"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Cargando..."
+                                android:layout_width="0dp"  android:layout_height="wrap_content"
+                                app:layout_constraintWidth_default="wrap" android:text="Cargando..."
                                 android:textColor="@color/md_onSurface"
                                 android:textSize="26sp"
                                 android:textStyle="bold"
-                                android:letterSpacing="-0.01" />
+                                android:letterSpacing="-0.01"
+                                android:gravity="center"
+                                android:maxLines="2"
+                                app:autoSizeTextType="uniform"
+                                app:autoSizeMinTextSize="16sp"
+                                app:autoSizeMaxTextSize="26sp"
+                                app:autoSizeStepGranularity="1sp"
+                                app:layout_constraintHorizontal_chainStyle="packed"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toStartOf="@id/chipVerified"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent" />
 
                             <ImageView
                                 android:id="@+id/chipVerified"
@@ -139,8 +148,13 @@
                                 android:layout_marginStart="8dp"
                                 android:src="@drawable/ic_star"
                                 android:visibility="gone"
-                                app:tint="#8B5CF6" />
-                        </LinearLayout>
+                                app:tint="#8B5CF6"
+                                app:layout_constraintStart_toEndOf="@id/artistName"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="@id/artistName"
+                                app:layout_constraintBottom_toBottomOf="@id/artistName" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <TextView
                             android:id="@+id/tvLocation"
@@ -759,12 +773,22 @@
                                 android:textColor="@color/md_onSurface" />
 
                             <!-- Tabs tipo pastilla -->
-                            <LinearLayout
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/tabsContainer"
                                 android:layout_width="wrap_content"
                                 android:layout_height="36dp"
-                                android:orientation="horizontal"
                                 android:background="@drawable/bg_glass_card"
-                                android:paddingHorizontal="4dp">
+                                android:padding="4dp">
+
+                                <View
+                                    android:id="@+id/animatedPill"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:background="@drawable/bg_primary_button"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="@+id/btnTabPhotos"
+                                    app:layout_constraintEnd_toEndOf="@+id/btnTabPhotos" />
 
                                 <TextView
                                     android:id="@+id/btnTabPhotos"
@@ -776,7 +800,11 @@
                                     android:textSize="13sp"
                                     android:textStyle="bold"
                                     android:textColor="?attr/colorOnPrimary"
-                                    android:background="@drawable/bg_primary_button" />
+                                    android:elevation="2dp"
+                                    android:background="@android:color/transparent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent" />
 
                                 <TextView
                                     android:id="@+id/btnTabVideos"
@@ -787,8 +815,14 @@
                                     android:paddingHorizontal="16dp"
                                     android:textSize="13sp"
                                     android:textColor="@color/md_onSurfaceVariant"
-                                    android:background="@android:color/transparent" />
-                            </LinearLayout>
+                                    android:elevation="2dp"
+                                    android:background="@android:color/transparent"
+                                    app:layout_constraintStart_toEndOf="@id/btnTabPhotos"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
                         </LinearLayout>
 
                         <!-- Indicadores técnicos (ocultos, solo la lógica los usa) -->
