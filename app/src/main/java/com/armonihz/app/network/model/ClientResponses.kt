@@ -122,12 +122,13 @@ data class MusicianProfileDetailResponse(
     val instagram: String?,
     val facebook: String?,
     val youtube: String?,
+    val tiktok: String?,
+    val spotify: String?,
     val coverage_notes: String?,
     val genres: List<GenreResponse>?, // Por si quieres mostrar los géneros después
     val media: MediaDataResponse? = null,
     val is_favorite: Boolean? = false,
     val rating_average: Double?
-
 )
 
 data class MultimediaItem(

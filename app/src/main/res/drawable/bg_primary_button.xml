@@ -1,8 +1,4 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-<<<<<<< HEAD
     <solid android:color="#8B5CF6"/>
-=======
-    <solid android:color="#0D9488"/>
->>>>>>> 412bd9d2ee7f7558048f9c9b723806b2448b9816
     <corners android:radius="28dp"/>
 </shape>

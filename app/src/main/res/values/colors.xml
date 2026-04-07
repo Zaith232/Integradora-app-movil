@@ -3,7 +3,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-<<<<<<< HEAD
     <!-- Marca: Premium Purple -->
     <color name="md_primary">#8B5CF6</color>
     <color name="md_onPrimary">#FFFFFF</color>
@@ -17,17 +16,6 @@
     <color name="md_glass_surface">#E6FFFFFF</color> <!-- 90% Blanco para cristal claro -->
     <color name="md_glass_stroke">#FFFFFF</color> <!-- Borde blanco puro -->
     <color name="md_onSurface">#1E293B</color> <!-- Gris oscuro para texto -->
-=======
-
-    <!-- Marca -->
-    <color name="md_primary">#0D9488</color>
-    <color name="md_onPrimary">#FFFFFF</color>
-
-    <!-- Light -->
-    <color name="md_background">#F8FAFC</color>
-    <color name="md_surface">#FFFFFF</color>
-    <color name="md_onSurface">#1E293B</color>
->>>>>>> 412bd9d2ee7f7558048f9c9b723806b2448b9816
     <color name="md_onSurfaceVariant">#64748B</color>
     <color name="md_outline">#E2E8F0</color>
     <color name="md_error">#EF4444</color>
@@ -36,9 +24,4 @@
     <color name="hint_default">#9E9E9E</color>
     <color name="error_red">#F44336</color>
     <color name="success_green">#00897B</color>
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 412bd9d2ee7f7558048f9c9b723806b2448b9816
 </resources>

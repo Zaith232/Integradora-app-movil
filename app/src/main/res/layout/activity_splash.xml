@@ -4,7 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-<<<<<<< HEAD
     android:background="@drawable/bg_gradient_main">
 
     <!-- Logotipo Principal -->
@@ -16,26 +15,11 @@
         android:src="@drawable/armonihz_logo"
         app:tint="@color/md_onSurface"
         app:layout_constraintBottom_toTopOf="@id/lottieSplash"
-=======
-    android:background="?android:colorBackground">
-
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Armonihz"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        android:textColor="?attr/colorPrimary"
-        android:letterSpacing="0.05"
-        app:layout_constraintBottom_toTopOf="@id/tvSubtitle"
->>>>>>> 412bd9d2ee7f7558048f9c9b723806b2448b9816
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
-<<<<<<< HEAD
     <!-- Animación Lottie Intermedia (Ondas) -->
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottieSplash"
@@ -51,13 +35,10 @@
         app:layout_constraintTop_toBottomOf="@id/ivLogoSplash" />
 
     <!-- Saludo / Nombre de Usuario -->
-=======
->>>>>>> 412bd9d2ee7f7558048f9c9b723806b2448b9816
     <TextView
         android:id="@+id/tvSubtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
         android:layout_marginTop="16dp"
         android:text="Bienvenido, usuario(a)"
         android:textColor="@color/md_onSurfaceVariant"
@@ -67,28 +48,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/lottieSplash" />
-=======
-        android:layout_marginTop="8dp"
-        android:text="Bienvenido, usuario(a)"
-        android:textColor="?attr/colorOnSurfaceVariant"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@id/lottieSplash"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTitle" />
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottieSplash"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_marginTop="32dp"
-        app:lottie_rawRes="@raw/sound_waves"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvSubtitle" />
->>>>>>> 412bd9d2ee7f7558048f9c9b723806b2448b9816
 
 </androidx.constraintlayout.widget.ConstraintLayout>

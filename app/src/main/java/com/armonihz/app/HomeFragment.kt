@@ -64,11 +64,7 @@ class HomeFragment : Fragment() {
         // Mostrar datos de Firebase Auth de inmediato sin esperar la API
         val user = FirebaseAuth.getInstance().currentUser
         val primerNombre = user?.displayName?.split(" ")?.firstOrNull() ?: "Usuario"
-<<<<<<< HEAD
         binding.tvGreeting.text = "Hola, $primerNombre"
-=======
-        binding.tvGreeting.text = "Hola, $primerNombre 👋"
->>>>>>> 412bd9d2ee7f7558048f9c9b723806b2448b9816
 
         user?.photoUrl?.let {
             Glide.with(this)
@@ -206,11 +202,7 @@ class HomeFragment : Fragment() {
         response?.body()?.let { profile ->
             try {
                 val nombre = profile.nombre?.split(" ")?.firstOrNull() ?: return@let
-<<<<<<< HEAD
                 binding.tvGreeting.text = "Hola, $nombre"
-=======
-                binding.tvGreeting.text = "Hola, $nombre 👋"
->>>>>>> 412bd9d2ee7f7558048f9c9b723806b2448b9816
 
                 val photoUrl = profile.photoUrl
                 if (!photoUrl.isNullOrEmpty()) {
