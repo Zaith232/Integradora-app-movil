@@ -80,6 +80,13 @@
                     android:src="@color/white"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <!-- Header Overlay Gradient -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="@drawable/bg_gradient_header_overlay"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/profileImage"
 
@@ -176,17 +183,19 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             android:weightSum="3"
-                            android:layout_marginBottom="20dp">
+                            android:layout_marginBottom="24dp">
 
+                            <!-- Tarjeta: Tarifa -->
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:layout_marginEnd="4dp"
+                                android:minHeight="80dp"
+                                android:layout_marginEnd="6dp"
                                 android:orientation="vertical"
                                 android:gravity="center"
                                 android:background="@drawable/bg_glass_card"
-                                android:padding="10dp">
+                                android:padding="12dp">
 
                                 <TextView
                                     android:id="@+id/tvHourlyRate"
@@ -195,25 +204,31 @@
                                     android:text="$—"
                                     android:textColor="?attr/colorOnSurface"
                                     android:textSize="13sp"
-                                    android:textStyle="bold" />
+                                    android:lineSpacingExtra="4dp"
+                                    android:textStyle="bold"
+                                    android:gravity="center" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="por hora"
+                                    android:text="Por hora"
+                                    android:lineSpacingExtra="8dp"
                                     android:textColor="?attr/colorOnSurfaceVariant"
-                                    android:textSize="10sp" />
+                                    android:textSize="11sp"
+                                    android:gravity="center" />
                             </LinearLayout>
 
+                            <!-- Tarjeta: Notas -->
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:layout_marginHorizontal="4dp"
+                                android:minHeight="80dp"
+                                android:layout_marginHorizontal="6dp"
                                 android:orientation="vertical"
                                 android:gravity="center"
                                 android:background="@drawable/bg_glass_card"
-                                android:padding="10dp">
+                                android:padding="12dp">
 
                                 <TextView
                                     android:id="@+id/tvCoverageNotes"
@@ -222,25 +237,32 @@
                                     android:text="—"
                                     android:textColor="?attr/colorOnSurface"
                                     android:textSize="13sp"
-                                    android:textStyle="bold" />
+                                    android:lineSpacingExtra="4dp"
+                                    android:textStyle="bold"
+                                    android:gravity="center"
+                                    android:textAlignment="center" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="cobertura"
+                                    android:text="Notas"
+                                    android:lineSpacingExtra="8dp"
                                     android:textColor="?attr/colorOnSurfaceVariant"
-                                    android:textSize="10sp" />
+                                    android:textSize="11sp"
+                                    android:gravity="center" />
                             </LinearLayout>
 
+                            <!-- Tarjeta: Valoración -->
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:layout_marginStart="4dp"
+                                android:minHeight="80dp"
+                                android:layout_marginStart="6dp"
                                 android:orientation="vertical"
                                 android:gravity="center"
                                 android:background="@drawable/bg_glass_card"
-                                android:padding="10dp">
+                                android:padding="12dp">
 
                                 <TextView
                                     android:id="@+id/tvRating"
@@ -249,14 +271,18 @@
                                     android:text="—"
                                     android:textColor="?attr/colorOnSurface"
                                     android:textSize="13sp"
-                                    android:textStyle="bold" />
+                                    android:lineSpacingExtra="4dp"
+                                    android:textStyle="bold"
+                                    android:gravity="center" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="valoración"
+                                    android:text="Valoración"
+                                    android:lineSpacingExtra="8dp"
                                     android:textColor="?attr/colorOnSurfaceVariant"
-                                    android:textSize="10sp" />
+                                    android:textSize="11sp"
+                                    android:gravity="center" />
                             </LinearLayout>
                         </LinearLayout>
 
@@ -661,13 +687,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
-                    android:layout_marginTop="20dp"
-                    app:cardCornerRadius="24dp"
-                    app:cardElevation="0dp"
-                    app:strokeWidth="1dp"
-                    app:strokeColor="@color/md_glass_stroke"
                     app:cardBackgroundColor="@color/md_glass_surface"
                     app:layout_constraintTop_toBottomOf="@id/profileCard"
+                    android:layout_marginTop="32dp"
                     app:layout_constraintStart_toStartOf="parent">
 
                     <LinearLayout
@@ -768,8 +790,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="Galeria"
-                                android:textSize="16sp"
+                                android:textSize="18sp"
                                 android:textStyle="bold"
+                                android:letterSpacing="0.02"
                                 android:textColor="@color/md_onSurface" />
 
                             <!-- Tabs tipo pastilla -->
@@ -843,8 +866,10 @@
                             android:id="@+id/rvMultimedia"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:minHeight="220dp"
                             android:orientation="horizontal"
                             android:clipToPadding="false"
+                            android:paddingHorizontal="4dp"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
                     </LinearLayout>
