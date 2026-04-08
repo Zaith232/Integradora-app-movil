@@ -2,7 +2,10 @@ package com.armonihz.app
 
 import android.app.Dialog
 import android.graphics.Color
+import android.graphics.RenderEffect
+import android.graphics.Shader
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -58,6 +61,8 @@ class MusicianProfileFragment : Fragment() {
 
     // ⬅️ NUEVO: Variable para controlar el estado del favorito
     private var isFavorite: Boolean = false
+
+    private var currentProfileImageUrl: String? = null
 
     // Creamos dos listas separadas en memoria para fotos y videos
     private var photosList: List<MultimediaItem> = emptyList()
@@ -367,6 +372,7 @@ class MusicianProfileFragment : Fragment() {
                     // 2. Condicional EXCLUSIVO para la foto de perfil circular (profileImage)
                     if (musician.profile_picture.isNullOrEmpty()) {
                         // Si no tiene foto, limpiamos el ImageView y mostramos el placeholder
+                        currentProfileImageUrl = null
                         Glide.with(this@MusicianProfileFragment).clear(binding.profileImage)
                         binding.profileImage.setImageResource(R.drawable.ic_user_placeholder)
                     } else {
@@ -377,6 +383,7 @@ class MusicianProfileFragment : Fragment() {
                             val cleanPath = musician.profile_picture.removePrefix("/")
                             "https://armonihz-web-armonihz.lugsb1.easypanel.host/file/$cleanPath"
                         }
+                        currentProfileImageUrl = fullImageUrl
 
                         Glide.with(this@MusicianProfileFragment)
                             .load(fullImageUrl)
@@ -509,6 +516,69 @@ class MusicianProfileFragment : Fragment() {
         dialog.show()
     }
 
+    private fun showProfileImageOverlay() {
+        val dialog = Dialog(requireContext(), android.R.style.Theme_Translucent_NoTitleBar_Fullscreen)
+
+        val frameLayout = FrameLayout(requireContext()).apply {
+            layoutParams = ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
+            setBackgroundColor(Color.parseColor("#CC000000"))
+            isClickable = true
+            isFocusable = true
+        }
+
+        val imageView = ImageView(requireContext()).apply {
+            layoutParams = FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
+            scaleType = ImageView.ScaleType.FIT_CENTER
+        }
+
+        val url = currentProfileImageUrl
+        if (url.isNullOrEmpty()) {
+            imageView.setImageResource(R.drawable.ic_user_placeholder)
+        } else {
+            Glide.with(this).load(url).into(imageView)
+        }
+
+        val closeButton = ImageButton(requireContext()).apply {
+            val btnParams = FrameLayout.LayoutParams(120, 120)
+            btnParams.gravity = Gravity.TOP or Gravity.END
+            btnParams.setMargins(0, 60, 40, 0)
+            layoutParams = btnParams
+            setImageResource(android.R.drawable.ic_menu_close_clear_cancel)
+            setBackgroundColor(Color.TRANSPARENT)
+            setColorFilter(Color.WHITE)
+            setOnClickListener { dialog.dismiss() }
+            contentDescription = "Cerrar"
+        }
+
+        // Tap fuera para cerrar (tap en imagen no)
+        frameLayout.setOnClickListener { dialog.dismiss() }
+        imageView.setOnClickListener { }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            binding.root.setRenderEffect(
+                RenderEffect.createBlurEffect(25f, 25f, Shader.TileMode.CLAMP)
+            )
+        }
+
+        dialog.setOnDismissListener {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                binding.root.setRenderEffect(null)
+            }
+        }
+
+        frameLayout.addView(imageView)
+        frameLayout.addView(closeButton)
+
+        dialog.setContentView(frameLayout)
+        dialog.show()
+    }
+
     // ==========================================
     // REPRODUCTOR DE VIDEO CON EXOPLAYER Y FONDO TRANSPARENTE
     // ==========================================
@@ -577,6 +647,10 @@ class MusicianProfileFragment : Fragment() {
 
         binding.btnMore.setOnClickListener { view ->
             showOptionsMenu(view)
+        }
+
+        binding.profileImage.setOnClickListener {
+            showProfileImageOverlay()
         }
 
         // Dentro de setupListeners()

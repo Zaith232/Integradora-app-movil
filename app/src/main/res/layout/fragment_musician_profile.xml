@@ -12,7 +12,7 @@
         android:id="@+id/topToolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#26000000"
+        android:background="@color/md_toolbar_scrim"
         android:elevation="0dp">
 
         <ImageView
@@ -22,6 +22,9 @@
             android:padding="12dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@android:drawable/ic_menu_revert"
+            android:contentDescription="@string/cd_back"
+            android:clickable="true"
+            android:focusable="true"
             app:tint="?attr/colorOnPrimary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -50,6 +53,9 @@
             android:padding="12dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_more_vert"
+            android:contentDescription="@string/cd_more_options"
+            android:clickable="true"
+            android:focusable="true"
             app:tint="?attr/colorOnPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -70,6 +76,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/screen_padding"
                 android:paddingBottom="32dp">
 
                 <ImageView
@@ -78,6 +85,7 @@
                     android:layout_height="200dp"
                     android:scaleType="centerCrop"
                     android:src="@color/white"
+                    android:importantForAccessibility="no"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <!-- Header Overlay Gradient -->
@@ -93,6 +101,7 @@
                     android:layout_width="140dp"
                     android:layout_height="140dp"
                     android:src="@drawable/ic_user_placeholder"
+                    android:contentDescription="@string/cd_profile_photo"
                     app:civ_border_width="4dp"
                     app:civ_border_color="?attr/colorPrimary"
                     android:elevation="16dp"
@@ -105,9 +114,9 @@
                     android:id="@+id/profileCard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginHorizontal="@dimen/screen_padding"
                     android:layout_marginTop="8dp"
-                    app:cardCornerRadius="28dp"
+                    app:cardCornerRadius="@dimen/glass_radius_large"
                     app:cardElevation="0dp"
                     app:strokeWidth="1dp"
                     app:strokeColor="@color/md_glass_stroke"
@@ -125,7 +134,6 @@
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="16dp"
                             android:layout_marginBottom="4dp">
 
                             <TextView
@@ -154,6 +162,7 @@
                                 android:layout_height="22dp"
                                 android:layout_marginStart="8dp"
                                 android:src="@drawable/ic_star"
+                                android:contentDescription="@string/cd_verified_musician"
                                 android:visibility="gone"
                                 app:tint="#8B5CF6"
                                 app:layout_constraintStart_toEndOf="@id/artistName"
@@ -186,16 +195,24 @@
                             android:layout_marginBottom="24dp">
 
                             <!-- Tarjeta: Tarifa -->
-                            <LinearLayout
+                            <com.google.android.material.card.MaterialCardView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:minHeight="80dp"
                                 android:layout_marginEnd="6dp"
-                                android:orientation="vertical"
-                                android:gravity="center"
-                                android:background="@drawable/bg_glass_card"
-                                android:padding="12dp">
+                                app:cardCornerRadius="@dimen/glass_radius"
+                                app:cardElevation="0dp"
+                                app:strokeWidth="1dp"
+                                app:strokeColor="@color/md_glass_stroke"
+                                app:cardBackgroundColor="@color/md_glass_surface">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:gravity="center"
+                                    android:padding="12dp">
 
                                 <TextView
                                     android:id="@+id/tvHourlyRate"
@@ -203,7 +220,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="$—"
                                     android:textColor="?attr/colorOnSurface"
-                                    android:textSize="13sp"
+                                    android:textSize="15sp"
                                     android:lineSpacingExtra="4dp"
                                     android:textStyle="bold"
                                     android:gravity="center" />
@@ -214,21 +231,30 @@
                                     android:text="Por hora"
                                     android:lineSpacingExtra="8dp"
                                     android:textColor="?attr/colorOnSurfaceVariant"
-                                    android:textSize="11sp"
+                                    android:textSize="12sp"
                                     android:gravity="center" />
-                            </LinearLayout>
+                                </LinearLayout>
+                            </com.google.android.material.card.MaterialCardView>
 
                             <!-- Tarjeta: Notas -->
-                            <LinearLayout
+                            <com.google.android.material.card.MaterialCardView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:minHeight="80dp"
                                 android:layout_marginHorizontal="6dp"
-                                android:orientation="vertical"
-                                android:gravity="center"
-                                android:background="@drawable/bg_glass_card"
-                                android:padding="12dp">
+                                app:cardCornerRadius="@dimen/glass_radius"
+                                app:cardElevation="0dp"
+                                app:strokeWidth="1dp"
+                                app:strokeColor="@color/md_glass_stroke"
+                                app:cardBackgroundColor="@color/md_glass_surface">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:gravity="center"
+                                    android:padding="12dp">
 
                                 <TextView
                                     android:id="@+id/tvCoverageNotes"
@@ -236,7 +262,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="—"
                                     android:textColor="?attr/colorOnSurface"
-                                    android:textSize="13sp"
+                                    android:textSize="15sp"
                                     android:lineSpacingExtra="4dp"
                                     android:textStyle="bold"
                                     android:gravity="center"
@@ -248,21 +274,30 @@
                                     android:text="Notas"
                                     android:lineSpacingExtra="8dp"
                                     android:textColor="?attr/colorOnSurfaceVariant"
-                                    android:textSize="11sp"
+                                    android:textSize="12sp"
                                     android:gravity="center" />
-                            </LinearLayout>
+                                </LinearLayout>
+                            </com.google.android.material.card.MaterialCardView>
 
                             <!-- Tarjeta: Valoración -->
-                            <LinearLayout
+                            <com.google.android.material.card.MaterialCardView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:minHeight="80dp"
                                 android:layout_marginStart="6dp"
-                                android:orientation="vertical"
-                                android:gravity="center"
-                                android:background="@drawable/bg_glass_card"
-                                android:padding="12dp">
+                                app:cardCornerRadius="@dimen/glass_radius"
+                                app:cardElevation="0dp"
+                                app:strokeWidth="1dp"
+                                app:strokeColor="@color/md_glass_stroke"
+                                app:cardBackgroundColor="@color/md_glass_surface">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:gravity="center"
+                                    android:padding="12dp">
 
                                 <TextView
                                     android:id="@+id/tvRating"
@@ -270,7 +305,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="—"
                                     android:textColor="?attr/colorOnSurface"
-                                    android:textSize="13sp"
+                                    android:textSize="15sp"
                                     android:lineSpacingExtra="4dp"
                                     android:textStyle="bold"
                                     android:gravity="center" />
@@ -281,9 +316,10 @@
                                     android:text="Valoración"
                                     android:lineSpacingExtra="8dp"
                                     android:textColor="?attr/colorOnSurfaceVariant"
-                                    android:textSize="11sp"
+                                    android:textSize="12sp"
                                     android:gravity="center" />
-                            </LinearLayout>
+                                </LinearLayout>
+                            </com.google.android.material.card.MaterialCardView>
                         </LinearLayout>
 
                         <LinearLayout
@@ -307,7 +343,12 @@
                                     android:textSize="15sp"
                                     android:textStyle="bold"
                                     android:gravity="center"
-                                    android:textColor="?attr/colorPrimary"
+                                android:textColor="@color/tab_text_selector"
+                                android:background="?attr/selectableItemBackground"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:minHeight="48dp"
+                                android:paddingTop="10dp"
                                     android:paddingBottom="8dp" />
 
                                 <View
@@ -331,7 +372,12 @@
                                     android:text="Contacto"
                                     android:textSize="15sp"
                                     android:gravity="center"
-                                    android:textColor="?attr/colorOnSurfaceVariant"
+                                android:textColor="@color/tab_text_selector"
+                                android:background="?attr/selectableItemBackground"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:minHeight="48dp"
+                                android:paddingTop="10dp"
                                     android:paddingBottom="8dp" />
 
                                 <View
@@ -343,12 +389,13 @@
                             </LinearLayout>
                         </LinearLayout>
 
-                        <View
+                        <com.google.android.material.divider.MaterialDivider
                             android:layout_width="match_parent"
-                            android:layout_height="0.5dp"
-                            android:background="?attr/colorOutline"
-                            android:alpha="0.3"
-                            android:layout_marginBottom="14dp" />
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="14dp"
+                            app:dividerColor="?attr/colorOutline"
+                            app:dividerThickness="1dp"
+                            android:alpha="0.3" />
 
                         <LinearLayout
                             android:id="@+id/layoutDescription"
@@ -383,22 +430,32 @@
                                 android:visibility="gone" />
 
                             <!-- Tarjeta: Teléfono -->
-                            <LinearLayout
+                            <com.google.android.material.card.MaterialCardView
                                 android:id="@+id/tvPhone"
                                 android:layout_width="match_parent"
-                                android:layout_height="56dp"
-                                android:orientation="horizontal"
-                                android:gravity="center_vertical"
-                                android:background="@drawable/bg_glass_card"
+                                android:layout_height="64dp"
                                 android:layout_marginBottom="10dp"
-                                android:paddingHorizontal="16dp"
-                                android:visibility="gone">
+                                android:visibility="gone"
+                                android:clickable="true"
+                                android:focusable="true"
+                                app:cardCornerRadius="@dimen/glass_radius"
+                                app:cardElevation="0dp"
+                                app:strokeWidth="1dp"
+                                app:strokeColor="@color/md_glass_stroke"
+                                app:cardBackgroundColor="@color/md_glass_surface">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical"
+                                    android:paddingHorizontal="16dp">
 
                                 <ImageView
                                     android:layout_width="28dp"
                                     android:layout_height="28dp"
                                     android:src="@drawable/ic_whatsapp"
-                                     />
+                                    android:contentDescription="@string/cd_whatsapp" />
 
                                 <LinearLayout
                                     android:layout_width="0dp"
@@ -412,35 +469,55 @@
                                         android:layout_height="wrap_content"
                                         android:text="Teléfono"
                                         android:textColor="@color/md_onSurfaceVariant"
-                                        android:textSize="11sp" />
+                                        android:textSize="12sp" />
 
                                     <TextView
                                         android:id="@+id/tvPhoneValue"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:textColor="@color/md_onSurface"
-                                        android:textSize="14sp"
+                                        android:textSize="15sp"
                                         android:textStyle="bold" />
                                 </LinearLayout>
-                            </LinearLayout>
+
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:src="@drawable/ic_chevron_right"
+                                    android:contentDescription="@string/cd_open_link"
+                                    app:tint="?attr/colorOnSurfaceVariant"
+                                    android:alpha="0.8" />
+                                </LinearLayout>
+                            </com.google.android.material.card.MaterialCardView>
 
                             <!-- Tarjeta: Instagram -->
-                            <LinearLayout
+                            <com.google.android.material.card.MaterialCardView
                                 android:id="@+id/tvInstagram"
                                 android:layout_width="match_parent"
-                                android:layout_height="56dp"
-                                android:orientation="horizontal"
-                                android:gravity="center_vertical"
-                                android:background="@drawable/bg_glass_card"
+                                android:layout_height="64dp"
                                 android:layout_marginBottom="10dp"
-                                android:paddingHorizontal="16dp"
-                                android:visibility="gone">
+                                android:visibility="gone"
+                                android:clickable="true"
+                                android:focusable="true"
+                                app:cardCornerRadius="@dimen/glass_radius"
+                                app:cardElevation="0dp"
+                                app:strokeWidth="1dp"
+                                app:strokeColor="@color/md_glass_stroke"
+                                app:cardBackgroundColor="@color/md_glass_surface">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical"
+                                    android:paddingHorizontal="16dp">
 
                                 <ImageView
                                     android:layout_width="28dp"
                                     android:layout_height="28dp"
                                     android:src="@drawable/icons8_instagram"
-                                     />
+                                    android:contentDescription="@string/cd_instagram"
+                                    />
 
                                 <LinearLayout
                                     android:layout_width="0dp"
@@ -454,35 +531,55 @@
                                         android:layout_height="wrap_content"
                                         android:text="Instagram"
                                         android:textColor="@color/md_onSurfaceVariant"
-                                        android:textSize="11sp" />
+                                        android:textSize="12sp" />
 
                                     <TextView
                                         android:id="@+id/tvInstagramValue"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textColor="#E1306C"
-                                        android:textSize="14sp"
+                                        android:textColor="?attr/colorOnSurface"
+                                        android:textSize="15sp"
                                         android:textStyle="bold" />
                                 </LinearLayout>
-                            </LinearLayout>
+
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:src="@drawable/ic_chevron_right"
+                                    android:contentDescription="@string/cd_open_link"
+                                    app:tint="?attr/colorOnSurfaceVariant"
+                                    android:alpha="0.8" />
+                                </LinearLayout>
+                            </com.google.android.material.card.MaterialCardView>
 
                             <!-- Tarjeta: Facebook -->
-                            <LinearLayout
+                            <com.google.android.material.card.MaterialCardView
                                 android:id="@+id/tvFacebook"
                                 android:layout_width="match_parent"
-                                android:layout_height="56dp"
-                                android:orientation="horizontal"
-                                android:gravity="center_vertical"
-                                android:background="@drawable/bg_glass_card"
+                                android:layout_height="64dp"
                                 android:layout_marginBottom="10dp"
-                                android:paddingHorizontal="16dp"
-                                android:visibility="gone">
+                                android:visibility="gone"
+                                android:clickable="true"
+                                android:focusable="true"
+                                app:cardCornerRadius="@dimen/glass_radius"
+                                app:cardElevation="0dp"
+                                app:strokeWidth="1dp"
+                                app:strokeColor="@color/md_glass_stroke"
+                                app:cardBackgroundColor="@color/md_glass_surface">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical"
+                                    android:paddingHorizontal="16dp">
 
                                 <ImageView
                                     android:layout_width="28dp"
                                     android:layout_height="28dp"
                                     android:src="@drawable/ic_facebook"
-                                     />
+                                    android:contentDescription="@string/cd_facebook"
+                                    />
 
                                 <LinearLayout
                                     android:layout_width="0dp"
@@ -496,35 +593,55 @@
                                         android:layout_height="wrap_content"
                                         android:text="Facebook"
                                         android:textColor="@color/md_onSurfaceVariant"
-                                        android:textSize="11sp" />
+                                        android:textSize="12sp" />
 
                                     <TextView
                                         android:id="@+id/tvFacebookValue"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textColor="#1877F2"
-                                        android:textSize="14sp"
+                                        android:textColor="?attr/colorOnSurface"
+                                        android:textSize="15sp"
                                         android:textStyle="bold" />
                                 </LinearLayout>
-                            </LinearLayout>
+
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:src="@drawable/ic_chevron_right"
+                                    android:contentDescription="@string/cd_open_link"
+                                    app:tint="?attr/colorOnSurfaceVariant"
+                                    android:alpha="0.8" />
+                                </LinearLayout>
+                            </com.google.android.material.card.MaterialCardView>
 
                             <!-- Tarjeta: YouTube -->
-                            <LinearLayout
+                            <com.google.android.material.card.MaterialCardView
                                 android:id="@+id/tvYoutube"
                                 android:layout_width="match_parent"
-                                android:layout_height="56dp"
-                                android:orientation="horizontal"
-                                android:gravity="center_vertical"
-                                android:background="@drawable/bg_glass_card"
+                                android:layout_height="64dp"
                                 android:layout_marginBottom="10dp"
-                                android:paddingHorizontal="16dp"
-                                android:visibility="gone">
+                                android:visibility="gone"
+                                android:clickable="true"
+                                android:focusable="true"
+                                app:cardCornerRadius="@dimen/glass_radius"
+                                app:cardElevation="0dp"
+                                app:strokeWidth="1dp"
+                                app:strokeColor="@color/md_glass_stroke"
+                                app:cardBackgroundColor="@color/md_glass_surface">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical"
+                                    android:paddingHorizontal="16dp">
 
                                 <ImageView
                                     android:layout_width="28dp"
                                     android:layout_height="28dp"
                                     android:src="@drawable/ic_youtube"
-                                     />
+                                    android:contentDescription="@string/cd_youtube"
+                                    />
 
                                 <LinearLayout
                                     android:layout_width="0dp"
@@ -538,35 +655,55 @@
                                         android:layout_height="wrap_content"
                                         android:text="YouTube"
                                         android:textColor="@color/md_onSurfaceVariant"
-                                        android:textSize="11sp" />
+                                        android:textSize="12sp" />
 
                                     <TextView
                                         android:id="@+id/tvYoutubeValue"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textColor="#FF0000"
-                                        android:textSize="14sp"
+                                        android:textColor="?attr/colorOnSurface"
+                                        android:textSize="15sp"
                                         android:textStyle="bold" />
                                 </LinearLayout>
-                            </LinearLayout>
+
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:src="@drawable/ic_chevron_right"
+                                    android:contentDescription="@string/cd_open_link"
+                                    app:tint="?attr/colorOnSurfaceVariant"
+                                    android:alpha="0.8" />
+                                </LinearLayout>
+                            </com.google.android.material.card.MaterialCardView>
 
                             <!-- Tarjeta: TikTok -->
-                            <LinearLayout
+                            <com.google.android.material.card.MaterialCardView
                                 android:id="@+id/tvTiktok"
                                 android:layout_width="match_parent"
-                                android:layout_height="56dp"
-                                android:orientation="horizontal"
-                                android:gravity="center_vertical"
-                                android:background="@drawable/bg_glass_card"
+                                android:layout_height="64dp"
                                 android:layout_marginBottom="10dp"
-                                android:paddingHorizontal="16dp"
-                                android:visibility="gone">
+                                android:visibility="gone"
+                                android:clickable="true"
+                                android:focusable="true"
+                                app:cardCornerRadius="@dimen/glass_radius"
+                                app:cardElevation="0dp"
+                                app:strokeWidth="1dp"
+                                app:strokeColor="@color/md_glass_stroke"
+                                app:cardBackgroundColor="@color/md_glass_surface">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical"
+                                    android:paddingHorizontal="16dp">
 
                                 <ImageView
                                     android:layout_width="28dp"
                                     android:layout_height="28dp"
                                     android:src="@drawable/ic_tiktok"
-                                     />
+                                    android:contentDescription="@string/cd_tiktok"
+                                    />
 
                                 <LinearLayout
                                     android:layout_width="0dp"
@@ -580,34 +717,54 @@
                                         android:layout_height="wrap_content"
                                         android:text="TikTok"
                                         android:textColor="@color/md_onSurfaceVariant"
-                                        android:textSize="11sp" />
+                                        android:textSize="12sp" />
 
                                     <TextView
                                         android:id="@+id/tvTiktokValue"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:textColor="?attr/colorOnSurface"
-                                        android:textSize="14sp"
+                                        android:textSize="15sp"
                                         android:textStyle="bold" />
                                 </LinearLayout>
-                            </LinearLayout>
+
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:src="@drawable/ic_chevron_right"
+                                    android:contentDescription="@string/cd_open_link"
+                                    app:tint="?attr/colorOnSurfaceVariant"
+                                    android:alpha="0.8" />
+                                </LinearLayout>
+                            </com.google.android.material.card.MaterialCardView>
 
                             <!-- Tarjeta: Spotify -->
-                            <LinearLayout
+                            <com.google.android.material.card.MaterialCardView
                                 android:id="@+id/tvSpotify"
                                 android:layout_width="match_parent"
-                                android:layout_height="56dp"
-                                android:orientation="horizontal"
-                                android:gravity="center_vertical"
-                                android:background="@drawable/bg_glass_card"
-                                android:paddingHorizontal="16dp"
-                                android:visibility="gone">
+                                android:layout_height="64dp"
+                                android:visibility="gone"
+                                android:clickable="true"
+                                android:focusable="true"
+                                app:cardCornerRadius="@dimen/glass_radius"
+                                app:cardElevation="0dp"
+                                app:strokeWidth="1dp"
+                                app:strokeColor="@color/md_glass_stroke"
+                                app:cardBackgroundColor="@color/md_glass_surface">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical"
+                                    android:paddingHorizontal="16dp">
 
                                 <ImageView
                                     android:layout_width="28dp"
                                     android:layout_height="28dp"
                                     android:src="@drawable/ic_spotify"
-                                     />
+                                    android:contentDescription="@string/cd_spotify"
+                                    />
 
                                 <LinearLayout
                                     android:layout_width="0dp"
@@ -621,17 +778,25 @@
                                         android:layout_height="wrap_content"
                                         android:text="Spotify"
                                         android:textColor="@color/md_onSurfaceVariant"
-                                        android:textSize="11sp" />
+                                        android:textSize="12sp" />
 
                                     <TextView
                                         android:id="@+id/tvSpotifyValue"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textColor="#1DB954"
-                                        android:textSize="14sp"
+                                        android:textColor="?attr/colorOnSurface"
+                                        android:textSize="15sp"
                                         android:textStyle="bold" />
                                 </LinearLayout>
-                            </LinearLayout>
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:src="@drawable/ic_chevron_right"
+                                    android:contentDescription="@string/cd_open_link"
+                                    app:tint="?attr/colorOnSurfaceVariant"
+                                    android:alpha="0.8" />
+                                </LinearLayout>
+                            </com.google.android.material.card.MaterialCardView>
 
                         </LinearLayout>
 
@@ -686,7 +851,7 @@
                     android:id="@+id/scrollDates"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginHorizontal="@dimen/screen_padding"
                     app:cardBackgroundColor="@color/md_glass_surface"
                     app:layout_constraintTop_toBottomOf="@id/profileCard"
                     android:layout_marginTop="32dp"
@@ -791,10 +956,10 @@
                     android:id="@+id/layoutMultimediaTabs"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginHorizontal="@dimen/screen_padding"
                     android:layout_marginTop="24dp"
                     android:visibility="gone"
-                    app:cardCornerRadius="24dp"
+                    app:cardCornerRadius="@dimen/glass_radius"
                     app:cardElevation="0dp"
                     app:strokeWidth="1dp"
                     app:strokeColor="@color/md_glass_stroke"
@@ -910,7 +1075,7 @@
                     android:id="@+id/labelReviews"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="@dimen/screen_padding"
                     android:layout_marginTop="32dp"
                     android:text="Reseñas"
                     android:textSize="18sp"
@@ -923,7 +1088,7 @@
                     android:id="@+id/tvNoReviews"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginHorizontal="@dimen/screen_padding"
                     android:layout_marginTop="16dp"
                     android:text="Este músico aún no tiene reseñas. ¡Sé el primero en contratarlo!"
                     android:textColor="?attr/colorOnSurfaceVariant"
@@ -935,7 +1100,7 @@
                     android:id="@+id/rvReviews"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginHorizontal="@dimen/screen_padding"
                     android:layout_marginTop="12dp"
                     android:nestedScrollingEnabled="false"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

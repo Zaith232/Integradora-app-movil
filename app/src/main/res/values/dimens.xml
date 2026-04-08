@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="screen_padding">16dp</dimen>
+    <dimen name="section_spacing">24dp</dimen>
+    <dimen name="item_spacing">12dp</dimen>
+
+    <dimen name="glass_radius">24dp</dimen>
+    <dimen name="glass_radius_large">28dp</dimen>
+</resources>

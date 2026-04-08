@@ -48,4 +48,17 @@
     <string name="ver_calendario">Ver calendario →</string>
     <string name="error_favorite">Error al actualizar favoritos</string>
 
+    <!-- Accesibilidad (contentDescription) -->
+    <string name="cd_back">Volver</string>
+    <string name="cd_more_options">Más opciones</string>
+    <string name="cd_profile_photo">Foto de perfil del músico</string>
+    <string name="cd_verified_musician">Músico verificado</string>
+    <string name="cd_whatsapp">WhatsApp</string>
+    <string name="cd_instagram">Instagram</string>
+    <string name="cd_facebook">Facebook</string>
+    <string name="cd_youtube">YouTube</string>
+    <string name="cd_tiktok">TikTok</string>
+    <string name="cd_spotify">Spotify</string>
+    <string name="cd_open_link">Abrir enlace</string>
+
 </resources>
