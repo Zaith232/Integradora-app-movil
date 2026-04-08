@@ -8,6 +8,12 @@
 
         <item name="android:colorBackground">@color/md_background</item>
 
+        <!-- System bars (Dark): match app background -->
+        <item name="android:statusBarColor">@color/md_background</item>
+        <item name="android:navigationBarColor">@color/md_background</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+
         <item name="colorSurface">@color/md_surface</item>
         <item name="colorOnSurface">@color/md_onSurface</item>
         <item name="colorOnSurfaceVariant">@color/md_onSurfaceVariant</item>

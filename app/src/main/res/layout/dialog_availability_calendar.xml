@@ -11,8 +11,16 @@
         android:id="@+id/calendarView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/md_calendar_surface"
         app:type="one_day_picker"
         app:headerColor="?attr/colorPrimary"
+        app:headerLabelColor="?attr/colorOnPrimary"
+        app:pagesColor="@color/md_calendar_pages"
+        app:abbreviationsBarColor="@color/md_calendar_abbrev_bar"
+        app:abbreviationsLabelsColor="@color/md_calendar_abbrev_label"
+        app:daysLabelsColor="@color/md_calendar_day_label"
+        app:anotherMonthsDaysLabelsColor="@color/md_calendar_other_month_day_label"
+        app:disabledDaysLabelsColor="@color/md_calendar_disabled_day_label"
         app:todayLabelColor="?attr/colorPrimary"/>
 
     <LinearLayout

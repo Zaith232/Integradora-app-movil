@@ -31,6 +31,15 @@
     <!-- Glass shadow (Dark) -->
     <color name="md_glass_shadow">#1F000000</color>
 
+    <!-- Calendar surfaces (Dark) -->
+    <color name="md_calendar_surface">#1C1F2A</color>
+    <color name="md_calendar_pages">#1C1F2A</color>
+    <color name="md_calendar_abbrev_bar">#181B24</color>
+    <color name="md_calendar_day_label">#FFFFFF</color>
+    <color name="md_calendar_other_month_day_label">#66FFFFFF</color>
+    <color name="md_calendar_disabled_day_label">#40FFFFFF</color>
+    <color name="md_calendar_abbrev_label">#A1A1AA</color>
+
     <color name="hint_default">#71717A</color>
     <color name="error_red">#EF4444</color>
     <color name="success_green">#10B981</color>

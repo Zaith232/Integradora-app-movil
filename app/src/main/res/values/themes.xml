@@ -10,6 +10,12 @@
         <!-- 🎨 Fondo app -->
         <item name="android:colorBackground">@color/md_background</item>
 
+        <!-- System bars (Light): match app background -->
+        <item name="android:statusBarColor">@color/md_background</item>
+        <item name="android:navigationBarColor">@color/md_background</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+
         <!-- 🎨 Surface (Cards, sheets, etc.) -->
         <item name="colorSurface">@color/md_surface</item>
         <item name="colorOnSurface">@color/md_onSurface</item>

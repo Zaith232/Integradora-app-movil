@@ -76,7 +76,6 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="@dimen/screen_padding"
                 android:paddingBottom="32dp">
 
                 <ImageView
@@ -174,7 +173,7 @@
 
                         <TextView
                             android:id="@+id/tvLocation"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
                             android:text="Cargando ubicación..."
@@ -182,7 +181,10 @@
                             android:textSize="13sp"
                             android:layout_marginTop="4dp"
                             android:layout_marginBottom="20dp"
-                            android:gravity="center_vertical"
+                            android:gravity="center"
+                            android:textAlignment="center"
+                            android:maxLines="2"
+                            android:ellipsize="end"
                             app:drawableStartCompat="@drawable/ic_location"
                             app:drawableTint="@color/md_onSurfaceVariant"
                             android:drawablePadding="4dp" />
@@ -220,7 +222,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="$—"
                                     android:textColor="?attr/colorOnSurface"
-                                    android:textSize="15sp"
+                                    android:textSize="13sp"
                                     android:lineSpacingExtra="4dp"
                                     android:textStyle="bold"
                                     android:gravity="center" />
@@ -262,7 +264,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="—"
                                     android:textColor="?attr/colorOnSurface"
-                                    android:textSize="15sp"
+                                    android:textSize="13sp"
                                     android:lineSpacingExtra="4dp"
                                     android:textStyle="bold"
                                     android:gravity="center"
@@ -305,7 +307,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="—"
                                     android:textColor="?attr/colorOnSurface"
-                                    android:textSize="15sp"
+                                    android:textSize="13sp"
                                     android:lineSpacingExtra="4dp"
                                     android:textStyle="bold"
                                     android:gravity="center" />
@@ -810,12 +812,15 @@
                                 <com.google.android.material.button.MaterialButton
                                     android:id="@+id/btnContratar"
                                     android:layout_width="0dp"
-                                    android:layout_height="48dp"
+                                    android:layout_height="wrap_content"
+                                    android:minHeight="48dp"
                                     android:layout_weight="1"
                                     android:layout_marginEnd="10dp"
                                     android:text="Solicitar contratación"
                                     android:textSize="14sp"
                                     android:textStyle="bold"
+                                    android:maxLines="2"
+                                    android:ellipsize="end"
                                     app:cornerRadius="24dp"
                                     app:icon="@drawable/ic_calendar"
                                     app:iconGravity="textStart"
@@ -904,8 +909,16 @@
                             android:id="@+id/calendarView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:background="@color/md_calendar_surface"
                             app:type="one_day_picker"
                             app:headerColor="?attr/colorPrimary"
+                            app:headerLabelColor="?attr/colorOnPrimary"
+                            app:pagesColor="@color/md_calendar_pages"
+                            app:abbreviationsBarColor="@color/md_calendar_abbrev_bar"
+                            app:abbreviationsLabelsColor="@color/md_calendar_abbrev_label"
+                            app:daysLabelsColor="@color/md_calendar_day_label"
+                            app:anotherMonthsDaysLabelsColor="@color/md_calendar_other_month_day_label"
+                            app:disabledDaysLabelsColor="@color/md_calendar_disabled_day_label"
                             app:todayLabelColor="?attr/colorPrimary"
                             app:selectionColor="?attr/colorPrimary"
                             android:layout_marginTop="8dp"/>
