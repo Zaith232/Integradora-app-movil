@@ -734,7 +734,37 @@
                             android:lineSpacingExtra="2dp"
                             android:layout_marginBottom="16dp" />
 
-                        <!-- Chip de accion estilizado -->
+                        <!-- Calendario integrado -->
+                        <com.applandeo.materialcalendarview.CalendarView
+                            android:id="@+id/calendarView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:type="one_day_picker"
+                            app:headerColor="?attr/colorPrimary"
+                            app:todayLabelColor="?attr/colorPrimary"
+                            app:selectionColor="?attr/colorPrimary"
+                            android:layout_marginTop="8dp"/>
+
+                        <TextView
+                            android:id="@+id/tvEventTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="Selecciona un día"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textStyle="bold"
+                            android:textSize="15sp"/>
+
+                        <TextView
+                            android:id="@+id/tvEventDetails"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="Toca una fecha en el calendario para ver los horarios ocupados."
+                            android:textColor="@color/md_onSurfaceVariant"
+                            android:textSize="13sp"/>
+
+                        <!-- Chip de accion estilizado (oculto ahora que el calendario es visible) -->
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/chipVerCalendario"
                             android:layout_width="wrap_content"
@@ -742,6 +772,7 @@
                             android:text="Ver calendario"
                             android:textSize="13sp"
                             android:textStyle="bold"
+                            android:visibility="gone"
                             app:cornerRadius="20dp"
                             app:icon="@drawable/ic_calendar"
                             app:iconGravity="textStart"
