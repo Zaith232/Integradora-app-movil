@@ -23,6 +23,7 @@ import java.util.Locale
 import java.util.TimeZone
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointForward
+import org.json.JSONObject
 
 class HiringBottomSheetFragment(private val musicianId: Int) : BottomSheetDialogFragment() {
 
@@ -83,7 +84,12 @@ class HiringBottomSheetFragment(private val musicianId: Int) : BottomSheetDialog
 
             timePicker.addOnPositiveButtonClickListener {
                 // 1. Guardamos formato 24H para Laravel
-                selectedStartTime = String.format(Locale.getDefault(), "%02d:%02d:00", timePicker.hour, timePicker.minute)
+                selectedStartTime = String.format(
+                    Locale.getDefault(),
+                    "%02d:%02d:00",
+                    timePicker.hour,
+                    timePicker.minute
+                )
 
                 // 2. Formateamos a AM/PM para el botón
                 val cal = Calendar.getInstance()
@@ -104,7 +110,12 @@ class HiringBottomSheetFragment(private val musicianId: Int) : BottomSheetDialog
 
             timePicker.addOnPositiveButtonClickListener {
                 // 1. Guardamos formato 24H para Laravel
-                selectedEndTime = String.format(Locale.getDefault(), "%02d:%02d:00", timePicker.hour, timePicker.minute)
+                selectedEndTime = String.format(
+                    Locale.getDefault(),
+                    "%02d:%02d:00",
+                    timePicker.hour,
+                    timePicker.minute
+                )
 
                 // 2. Formateamos a AM/PM para el botón
                 val cal = Calendar.getInstance()
@@ -119,7 +130,11 @@ class HiringBottomSheetFragment(private val musicianId: Int) : BottomSheetDialog
 
         btnSubmit.setOnClickListener {
             if (selectedDate.isEmpty() || selectedStartTime.isEmpty() || selectedEndTime.isEmpty()) {
-                Toast.makeText(context, "Selecciona fecha, hora de inicio y fin", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    context,
+                    "Selecciona fecha, hora de inicio y fin",
+                    Toast.LENGTH_SHORT
+                ).show()
                 return@setOnClickListener
             }
 
@@ -161,7 +176,8 @@ class HiringBottomSheetFragment(private val musicianId: Int) : BottomSheetDialog
             }
 
             // 🔥 La descripción que verá el músico ahora incluye AM/PM
-            val finalDescription = "⏰ Horario: $displayStartTime a $displayEndTime\n\n" + etLocation.text.toString() + "\n\n" + etDescription.text.toString()
+            val finalDescription =
+                "⏰ Horario: $displayStartTime a $displayEndTime\n\n" + etLocation.text.toString() + "\n\n" + etDescription.text.toString()
 
             val payload = HiringRequestPayload(
                 musician_profile_id = musicianId,
@@ -195,8 +211,12 @@ class HiringBottomSheetFragment(private val musicianId: Int) : BottomSheetDialog
 
                     for (busy in busyDatesFromApi) {
                         try {
-                            val inicioDate = sdfBackend.parse(busy.start)
-                            val finDate = sdfBackend.parse(busy.end ?: busy.start)
+                            // 🔥 CORRECCIÓN: Limpiamos la 'T' para que siempre sea un espacio y no rompa el parser
+                            val startStr = busy.start.replace("T", " ")
+                            val endStr = (busy.end ?: busy.start).replace("T", " ")
+
+                            val inicioDate = sdfBackend.parse(startStr)
+                            val finDate = sdfBackend.parse(endStr)
 
                             if (inicioDate != null && finDate != null) {
                                 val horaInicio = sdfSoloHoraAmPm.format(inicioDate)
@@ -252,12 +272,29 @@ class HiringBottomSheetFragment(private val musicianId: Int) : BottomSheetDialog
             try {
                 val response = api.createHiringRequest(payload)
                 if (response.isSuccessful) {
-                    Toast.makeText(context, "¡Solicitud enviada con éxito!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, "¡Solicitud enviada con éxito!", Toast.LENGTH_LONG)
+                        .show()
                     dismiss()
                 } else {
                     btn.isEnabled = true
                     btn.text = "Enviar Solicitud"
-                    Toast.makeText(context, "Error al enviar solicitud", Toast.LENGTH_SHORT).show()
+
+                    // 🔥 NUEVO: Extraer el mensaje exacto del backend
+                    var errorMessage = "Error al enviar solicitud" // Mensaje por defecto
+                    try {
+                        val errorString = response.errorBody()?.string()
+                        if (errorString != null) {
+                            val jsonError = JSONObject(errorString)
+                            if (jsonError.has("message")) {
+                                errorMessage = jsonError.getString("message")
+                            }
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+
+                    // Mostrar el mensaje exacto que vino de Laravel
+                    Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
                 }
             } catch (e: Exception) {
                 btn.isEnabled = true
