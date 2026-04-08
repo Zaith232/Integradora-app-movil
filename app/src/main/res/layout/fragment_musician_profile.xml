@@ -171,23 +171,35 @@
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
-                        <TextView
-                            android:id="@+id/tvLocation"
+                        <LinearLayout
+                            android:id="@+id/locationRow"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:text="Cargando ubicación..."
-                            android:textColor="@color/md_onSurfaceVariant"
-                            android:textSize="13sp"
                             android:layout_marginTop="4dp"
                             android:layout_marginBottom="20dp"
-                            android:gravity="center"
-                            android:textAlignment="center"
-                            android:maxLines="2"
-                            android:ellipsize="end"
-                            app:drawableStartCompat="@drawable/ic_location"
-                            app:drawableTint="@color/md_onSurfaceVariant"
-                            android:drawablePadding="4dp" />
+                            android:orientation="horizontal"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:src="@drawable/ic_location"
+                                android:contentDescription="@string/no_location"
+                                app:tint="@color/md_onSurfaceVariant" />
+
+                            <TextView
+                                android:id="@+id/tvLocation"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="6dp"
+                                android:text="Cargando ubicación..."
+                                android:textColor="@color/md_onSurfaceVariant"
+                                android:textSize="13sp"
+                                android:gravity="center"
+                                android:textAlignment="center"
+                                android:maxLines="2"
+                                android:ellipsize="end" />
+                        </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
