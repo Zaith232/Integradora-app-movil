@@ -57,6 +57,15 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // 🔥 TRAMPA 1: Expulsa al usuario inmediatamente si la memoria dice que no ha completado el perfil
+        val prefs = requireContext().getSharedPreferences("ArmonihzPrefs", android.content.Context.MODE_PRIVATE)
+        if (prefs.getBoolean("perfil_incompleto", false)) {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, CompleteProfileFragment())
+                .commit()
+            return // ¡Detiene la carga del HomeFragment!
+        }
+
         setupRecyclerView()
         setupNavigation()
         setupRefresh()
@@ -202,22 +211,38 @@ class HomeFragment : Fragment() {
     }
 
     private fun procesarPerfil(response: retrofit2.Response<com.armonihz.app.network.model.ProfileResponse>?) {
-        response?.body()?.let { profile ->
-            try {
-                val nombre = profile.nombre?.split(" ")?.firstOrNull() ?: return@let
-                binding.tvGreeting.text = "Hola, $nombre"
+        // 🔥 SOLUCIÓN: Usamos un "early return" en lugar de .let { }
+        // Si el body es nulo, la función se detiene aquí y no hace nada más.
+        val profile = response?.body() ?: return
 
-                val photoUrl = profile.photoUrl
-                if (!photoUrl.isNullOrEmpty()) {
-                    Glide.with(this)
-                        .load("$photoUrl?t=${System.currentTimeMillis()}")
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .circleCrop()
-                        .into(binding.ivProfile)
-                }
-            } catch (e: Exception) {
-                Log.e("API_ERROR", "Error procesando perfil: ${e.message}")
+        try {
+            // 🔥 TRAMPA 2 ACTUALIZADA: Confiamos 100% en el booleano del servidor.
+            if (profile.terminos_aceptados != true) {
+                // Nos aseguramos de volver a cerrar el candado local por si se corrompió
+                requireContext().getSharedPreferences("ArmonihzPrefs", android.content.Context.MODE_PRIVATE)
+                    .edit().putBoolean("perfil_incompleto", true).apply()
+
+                // Lo mandamos a completar su perfil
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainer, CompleteProfileFragment())
+                    .commit()
+                return // Detiene este método
             }
+
+            // Si todo está bien, continuamos normal:
+            val nombre = profile.nombre?.split(" ")?.firstOrNull() ?: "Usuario"
+            binding.tvGreeting.text = "Hola, $nombre"
+
+            val photoUrl = profile.photoUrl
+            if (!photoUrl.isNullOrEmpty()) {
+                Glide.with(this)
+                    .load("$photoUrl?t=${System.currentTimeMillis()}")
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .circleCrop()
+                    .into(binding.ivProfile)
+            }
+        } catch (e: Exception) {
+            Log.e("API_ERROR", "Error procesando perfil: ${e.message}")
         }
     }
 

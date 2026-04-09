@@ -26,6 +26,17 @@ import com.armonihz.app.viewmodel.RegisterUiState
 import com.armonihz.app.viewmodel.RegisterViewModel
 import com.armonihz.app.viewmodel.RegisterViewModelFactory
 import kotlinx.coroutines.launch
+import android.graphics.Color
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.TextPaint
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
+import android.view.View
+import android.widget.TextView
+import com.google.android.material.checkbox.MaterialCheckBox
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import java.io.InputStream
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -63,6 +74,7 @@ class RegisterActivity : AppCompatActivity() {
         setupBackHandler()
         setupListeners()
         observarViewModel()
+        configurarTerminosYCondiciones()
     }
 
     // ── Setup ─────────────────────────────────────────────────────────────────
@@ -116,6 +128,13 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun setupListeners() {
         binding.btnRegister.setOnClickListener {
+            // 🔥 NUEVO: Validar el CheckBox antes de registrar
+            if (!binding.cbTerms.isChecked) {
+                Toast.makeText(this, "Debes aceptar los Términos y Condiciones para continuar", Toast.LENGTH_LONG).show()
+                return@setOnClickListener // Detiene la ejecución aquí si no está marcado
+            }
+
+            // Si está marcado, procedemos normal
             viewModel.registrar(
                 nombre          = binding.etName.text.toString().trim(),
                 apellido        = binding.etLName.text.toString().trim(),
@@ -276,5 +295,59 @@ class RegisterActivity : AppCompatActivity() {
                 editando = false
             }
         })
+    }
+
+    private fun configurarTerminosYCondiciones() {
+        val textoCompleto = "Acepto los Términos y Condiciones"
+        val spannableString = SpannableString(textoCompleto)
+
+        val clickableSpan = object : ClickableSpan() {
+            override fun onClick(widget: View) {
+                mostrarPantallaDeTerminos()
+            }
+
+            override fun updateDrawState(ds: TextPaint) {
+                super.updateDrawState(ds)
+                ds.color = ContextCompat.getColor(this@RegisterActivity, R.color.md_primary)
+                ds.isUnderlineText = false
+                ds.isFakeBoldText = true
+            }
+        }
+
+        val startIndex = textoCompleto.indexOf("Términos")
+        val endIndex = textoCompleto.length
+
+        spannableString.setSpan(clickableSpan, startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+        // Usamos binding en lugar de findViewById
+        binding.tvTermsText.text = spannableString
+        binding.tvTermsText.movementMethod = LinkMovementMethod.getInstance()
+        binding.tvTermsText.highlightColor = Color.TRANSPARENT
+    }
+
+    private fun leerTextoDesdeRaw(): String {
+        return try {
+            val inputStream: InputStream = resources.openRawResource(R.raw.terminos_condiciones)
+            inputStream.bufferedReader().use { it.readText() }
+        } catch (e: Exception) {
+            "Error al cargar los términos y condiciones. Por favor, intenta de nuevo."
+        }
+    }
+
+    private fun mostrarPantallaDeTerminos() {
+        val textoLegal = leerTextoDesdeRaw()
+
+        MaterialAlertDialogBuilder(this)
+            .setTitle("Términos y Condiciones")
+            .setMessage(textoLegal)
+            .setPositiveButton("Aceptar") { dialog, _ ->
+                // Usamos binding en lugar de findViewById
+                binding.cbTerms.isChecked = true
+                dialog.dismiss()
+            }
+            .setNegativeButton("Cerrar") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
     }
 }

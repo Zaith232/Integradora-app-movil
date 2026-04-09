@@ -16,7 +16,9 @@ data class ClientProfileResponse(
     val apellido: String?,
     val email: String,
     val telefono : String?,
-    val photoUrl: String?
+    val photoUrl: String?,
+    val terminos_aceptados: Boolean? = false
+
 )
 
 data class UpdateProfileRequest(
@@ -34,7 +36,8 @@ data class ProfileResponse(
     val apellido: String?,
     val email: String?,
     val telefono: String?,
-    val photoUrl: String?
+    val photoUrl: String?,
+    val terminos_aceptados: Boolean? = false
 )
 
 data class SyncGooglePhotoRequest(

@@ -42,8 +42,24 @@ class LoginViewModel(
             try {
                 val token = user.getIdToken(false).await().token
                 if (token != null) {
-                    launch { syncClient(esGoogle = false) }
-                    _uiState.value = LoginUiState.Success(irACompletarPerfil = false)
+                    // Esperamos a que termine la sincronización
+                    val syncJob = launch { syncClient(esGoogle = false) }
+                    syncJob.join()
+
+                    // 🔥 IMPLEMENTACIÓN: Verificamos con la API si ya aceptó los términos
+                    val irACompletar = try {
+                        val response = api.getClientProfile()
+                        if (response.isSuccessful && response.body() != null) {
+                            val perfil = response.body()!!
+                            perfil.terminos_aceptados != true
+                        } else {
+                            true // Por seguridad, si falla la API forzamos la validación
+                        }
+                    } catch (e: Exception) {
+                        true
+                    }
+
+                    _uiState.value = LoginUiState.Success(irACompletarPerfil = irACompletar)
                 } else {
                     _uiState.value = LoginUiState.Idle
                 }
@@ -128,10 +144,13 @@ class LoginViewModel(
                     val response = api.getClientProfile()
                     if (response.isSuccessful && response.body() != null) {
                         val perfil = response.body()!!
-                        perfil.nombre.isNullOrEmpty() || perfil.apellido.isNullOrEmpty()
-                    } else false
+                        // 🔥 IMPLEMENTACIÓN: Verificamos con el booleano
+                        perfil.terminos_aceptados != true
+                    } else {
+                        true
+                    }
                 } catch (e: Exception) {
-                    false
+                    true
                 }
 
                 _uiState.value = LoginUiState.Success(irACompletarPerfil = irACompletar)
@@ -157,7 +176,6 @@ class LoginViewModel(
 
         viewModelScope.launch {
             try {
-                // 🔥 AQUÍ REEMPLAZAMOS FIREBASE POR LARAVEL
                 val response = api.sendPasswordReset(mapOf("email" to email))
 
                 if (response.isSuccessful) {
@@ -177,6 +195,8 @@ class LoginViewModel(
 
     // ── Helpers privados ──────────────────────────────────────────────────────
 
+    // 🔥 TU CÓDIGO ORIGINAL: Ya que Laravel guarda los datos vacíos como null,
+    // no hace falta enviarle campos forzados.
     private suspend fun syncClient(esGoogle: Boolean) {
         val user = auth.currentUser ?: return
 

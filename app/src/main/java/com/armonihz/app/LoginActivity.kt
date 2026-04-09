@@ -1,5 +1,6 @@
 package com.armonihz.app
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -118,14 +119,18 @@ class LoginActivity : AppCompatActivity() {
                             val token = user?.getIdToken(false)?.await()?.token
                             if (token != null) TokenManager.saveToken(this@LoginActivity, token)
 
+                            // 🔥 NUEVO: Guardamos el candado en la memoria física del teléfono
+                            val prefs = getSharedPreferences("ArmonihzPrefs", Context.MODE_PRIVATE)
+                            prefs.edit().putBoolean("perfil_incompleto", state.irACompletarPerfil).apply()
+
                             Toast.makeText(
                                 this@LoginActivity,
                                 getString(R.string.welcome),
                                 Toast.LENGTH_SHORT
                             ).show()
 
+                            // Ya no necesitamos enviar el putExtra, la memoria se encarga
                             val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                            intent.putExtra("ir_a_completar_perfil", state.irACompletarPerfil)
                             startActivity(intent)
                             finish()
                         }
