@@ -25,6 +25,13 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.DateValidatorPointForward
+import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
+import java.util.Date
+import java.util.TimeZone
 
 class AddEventFragment : Fragment() {
 
@@ -202,20 +209,32 @@ class AddEventFragment : Fragment() {
 
     // ── Pickers ──────────────────────────────────────────────────────────────
 
+    // ── Pickers Modernos (Material Design) ───────────────────────────────────
+
     private fun setupDatePicker() {
         binding.etFecha.setOnClickListener {
-            val cal = Calendar.getInstance()
-            DatePickerDialog(
-                requireContext(),
-                { _, y, m, d ->
-                    binding.etFecha.setText("%02d/%02d/%04d".format(d, m + 1, y))
-                },
-                cal.get(Calendar.YEAR),
-                cal.get(Calendar.MONTH),
-                cal.get(Calendar.DAY_OF_MONTH)
-            ).apply {
-                datePicker.minDate = System.currentTimeMillis()
-            }.show()
+            // 1. Restricción para que no se puedan elegir fechas pasadas
+            val constraintsBuilder = CalendarConstraints.Builder()
+                .setValidator(DateValidatorPointForward.now())
+
+            // 2. Construir el calendario Material
+            val datePicker = MaterialDatePicker.Builder.datePicker()
+                .setTitleText("Selecciona la fecha")
+                .setCalendarConstraints(constraintsBuilder.build())
+                .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+                .build()
+
+            // 3. Escuchar la selección y formatear
+            datePicker.addOnPositiveButtonClickListener { selection ->
+                // MaterialDatePicker trabaja en UTC internamente, por lo que ajustamos el timezone
+                val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                sdf.timeZone = TimeZone.getTimeZone("UTC")
+                val dateString = sdf.format(Date(selection))
+
+                binding.etFecha.setText(dateString)
+            }
+
+            datePicker.show(parentFragmentManager, "MATERIAL_DATE_PICKER")
         }
     }
 
@@ -225,30 +244,58 @@ class AddEventFragment : Fragment() {
             val horaActual = cal.get(Calendar.HOUR_OF_DAY)
             val minActual = cal.get(Calendar.MINUTE)
 
-            TimePickerDialog(requireContext(), { _, h1, m1 ->
-                // Hora fin: el mínimo es h1:m1 + 1 minuto
+            // 1. Crear el reloj para la Hora de Inicio
+            val startPicker = MaterialTimePicker.Builder()
+                .setTimeFormat(TimeFormat.CLOCK_12H) // 12H para que muestre AM/PM como en tu foto
+                .setHour(horaActual)
+                .setMinute(minActual)
+                .setTitleText("Hora de inicio")
+                .build()
+
+            startPicker.addOnPositiveButtonClickListener {
+                // startPicker.hour siempre devuelve formato 24h (0-23) sin importar si la UI es 12h
+                val h1 = startPicker.hour
+                val m1 = startPicker.minute
+
+                // Calcular hora inicial sugerida para el fin (+1 minuto)
                 val finHoraInicial = if (m1 == 59) (h1 + 1).coerceAtMost(23) else h1
                 val finMinInicial = if (m1 == 59) 0 else m1 + 1
 
-                TimePickerDialog(requireContext(), { _, h2, m2 ->
+                // 2. Crear el reloj para la Hora de Fin
+                val endPicker = MaterialTimePicker.Builder()
+                    .setTimeFormat(TimeFormat.CLOCK_12H)
+                    .setHour(finHoraInicial)
+                    .setMinute(finMinInicial)
+                    .setTitleText("Hora de fin")
+                    .build()
+
+                endPicker.addOnPositiveButtonClickListener {
+                    val h2 = endPicker.hour
+                    val m2 = endPicker.minute
+
                     val inicioTotal = h1 * 60 + m1
                     val finTotal = h2 * 60 + m2
 
+                    // Validar que la hora de fin sea mayor a la de inicio
                     if (finTotal <= inicioTotal) {
                         Toast.makeText(
                             context,
-                            getString(R.string.invalid_end_time),
+                            getString(R.string.invalid_end_time), // "La hora de fin debe ser mayor..."
                             Toast.LENGTH_SHORT
                         ).show()
-                        return@TimePickerDialog
+                        return@addOnPositiveButtonClickListener
                     }
 
+                    // Escribir en el EditText en formato 24h tal como lo tenías antes
                     binding.etDuracion.setText(
                         "%02d:%02d – %02d:%02d".format(h1, m1, h2, m2)
                     )
-                }, finHoraInicial, finMinInicial, true).show()
+                }
 
-            }, horaActual, minActual, true).show()
+                endPicker.show(parentFragmentManager, "END_TIME_PICKER")
+            }
+
+            startPicker.show(parentFragmentManager, "START_TIME_PICKER")
         }
     }
 
