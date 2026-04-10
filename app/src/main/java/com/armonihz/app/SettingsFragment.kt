@@ -64,7 +64,6 @@ class SettingsFragment : Fragment() {
         val tvEditProfile     = view.findViewById<TextView>(R.id.tvEditProfile)
         val tvEditPhoto       = view.findViewById<TextView>(R.id.tvEditPhoto)
         val tvChangePassword  = view.findViewById<TextView>(R.id.tvChangePassword)
-        val switchNotifications = view.findViewById<SwitchMaterial>(R.id.switchNotifications)
         val tvThemeSelector   = view.findViewById<TextView>(R.id.tvThemeSelector)
 
         btnDeleteAccount = view.findViewById(R.id.btnDeleteAccount)
@@ -106,14 +105,7 @@ class SettingsFragment : Fragment() {
                     .commit()
             }
         }
-
-        switchNotifications.setOnCheckedChangeListener { _, isChecked ->
-            Toast.makeText(
-                requireContext(),
-                if (isChecked) "Notificaciones activadas" else "Notificaciones desactivadas",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
+        
 
         tvThemeSelector.setOnClickListener {
             mostrarSelectorTema()
