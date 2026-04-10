@@ -27,6 +27,13 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.DateValidatorPointForward
+import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
+import java.util.Date
+import java.util.TimeZone
 
 class EditEventFragment : Fragment() {
 
@@ -147,10 +154,25 @@ class EditEventFragment : Fragment() {
 
     // ── Pre-fill ─────────────────────────────────────────────────────────────
 
+
     private fun prefillData() {
         eventToEdit?.let { event ->
             binding.etTitulo.setText(event.titulo)
-            binding.etFecha.setText(event.fecha)
+
+            // 👇 CORRECCIÓN: Transformar la fecha de DB (yyyy-MM-dd) a UI (dd/MM/yyyy)
+            try {
+                val apiFmt = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                val uiFmt = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                val dateObj = apiFmt.parse(event.fecha)
+                if (dateObj != null) {
+                    binding.etFecha.setText(uiFmt.format(dateObj))
+                } else {
+                    binding.etFecha.setText(event.fecha)
+                }
+            } catch (e: Exception) {
+                binding.etFecha.setText(event.fecha)
+            }
+
             binding.etDuracion.setText(event.duracion)
             binding.etLocation.setText(event.ubicacion)
             binding.etBudget.setText(event.presupuesto.toString())
@@ -243,62 +265,101 @@ class EditEventFragment : Fragment() {
             null
         }
     }
-
-    // ── Pickers ──────────────────────────────────────────────────────────────
+// ── Pickers Modernos (Material Design) ───────────────────────────────────
 
     private fun setupDatePicker() {
         binding.etFecha.setOnClickListener {
-            val cal = Calendar.getInstance()
+            val constraintsBuilder = CalendarConstraints.Builder()
+                .setValidator(DateValidatorPointForward.now())
 
-            // Pre-poblar el calendar con la fecha actual del campo si existe
-            val current = binding.etFecha.text.toString()
-            if (current.isNotEmpty()) {
+            // Intentar leer la fecha actual para que el calendario inicie ahí
+            var preselectedTime = MaterialDatePicker.todayInUtcMilliseconds()
+            val currentText = binding.etFecha.text.toString()
+            if (currentText.isNotEmpty()) {
                 try {
-                    val fmt = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-                    val parsed = fmt.parse(current)
-                    if (parsed != null) cal.time = parsed
-                } catch (e: Exception) { /* ignorar, usar fecha actual */ }
+                    val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                    sdf.timeZone = TimeZone.getTimeZone("UTC")
+                    val parsedDate = sdf.parse(currentText)
+                    if (parsedDate != null && parsedDate.time > preselectedTime) {
+                        preselectedTime = parsedDate.time
+                    }
+                } catch (e: Exception) { }
             }
 
-            DatePickerDialog(
-                requireContext(),
-                { _, y, m, d ->
-                    binding.etFecha.setText("%02d/%02d/%04d".format(d, m + 1, y))
-                },
-                cal.get(Calendar.YEAR),
-                cal.get(Calendar.MONTH),
-                cal.get(Calendar.DAY_OF_MONTH)
-            ).apply {
-                datePicker.minDate = System.currentTimeMillis()
-            }.show()
+            val datePicker = MaterialDatePicker.Builder.datePicker()
+                .setTitleText("Selecciona la fecha")
+                .setCalendarConstraints(constraintsBuilder.build())
+                .setSelection(preselectedTime)
+                .build()
+
+            datePicker.addOnPositiveButtonClickListener { selection ->
+                val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                sdf.timeZone = TimeZone.getTimeZone("UTC")
+                binding.etFecha.setText(sdf.format(Date(selection)))
+            }
+
+            datePicker.show(parentFragmentManager, "MATERIAL_DATE_PICKER")
         }
     }
 
     private fun setupTimePicker() {
         binding.etDuracion.setOnClickListener {
-            val cal = Calendar.getInstance()
-            val horaActual = cal.get(Calendar.HOUR_OF_DAY)
-            val minActual = cal.get(Calendar.MINUTE)
+            // Extraer la hora de inicio que ya está en el campo (Ej: "14:00")
+            var h1 = 12
+            var m1 = 0
+            val textDuracion = binding.etDuracion.text.toString()
 
-            TimePickerDialog(requireContext(), { _, h1, m1 ->
-                val finHoraInicial = if (m1 == 59) (h1 + 1).coerceAtMost(23) else h1
-                val finMinInicial = if (m1 == 59) 0 else m1 + 1
+            if (textDuracion.contains("–") || textDuracion.contains("-")) {
+                try {
+                    val parts = textDuracion.split(Regex("[–-]"))
+                    val startParts = parts[0].trim().split(":")
+                    h1 = startParts[0].toInt()
+                    m1 = startParts[1].toInt()
+                } catch(e: Exception){}
+            } else {
+                val cal = Calendar.getInstance()
+                h1 = cal.get(Calendar.HOUR_OF_DAY)
+                m1 = cal.get(Calendar.MINUTE)
+            }
 
-                TimePickerDialog(requireContext(), { _, h2, m2 ->
-                    if (h2 * 60 + m2 <= h1 * 60 + m1) {
-                        Toast.makeText(
-                            context,
-                            getString(R.string.invalid_end_time),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        return@TimePickerDialog
+            val startPicker = MaterialTimePicker.Builder()
+                .setTimeFormat(TimeFormat.CLOCK_12H)
+                .setHour(h1)
+                .setMinute(m1)
+                .setTitleText("Hora de inicio")
+                .build()
+
+            startPicker.addOnPositiveButtonClickListener {
+                val newH1 = startPicker.hour
+                val newM1 = startPicker.minute
+
+                val finHoraInicial = if (newM1 == 59) (newH1 + 1).coerceAtMost(23) else newH1
+                val finMinInicial = if (newM1 == 59) 0 else newM1 + 1
+
+                val endPicker = MaterialTimePicker.Builder()
+                    .setTimeFormat(TimeFormat.CLOCK_12H)
+                    .setHour(finHoraInicial)
+                    .setMinute(finMinInicial)
+                    .setTitleText("Hora de fin")
+                    .build()
+
+                endPicker.addOnPositiveButtonClickListener {
+                    val newH2 = endPicker.hour
+                    val newM2 = endPicker.minute
+
+                    val inicioTotal = newH1 * 60 + newM1
+                    val finTotal = newH2 * 60 + newM2
+
+                    if (finTotal <= inicioTotal) {
+                        Toast.makeText(context, getString(R.string.invalid_end_time), Toast.LENGTH_SHORT).show()
+                        return@addOnPositiveButtonClickListener
                     }
-                    binding.etDuracion.setText(
-                        "%02d:%02d – %02d:%02d".format(h1, m1, h2, m2)
-                    )
-                }, finHoraInicial, finMinInicial, true).show()
 
-            }, horaActual, minActual, true).show()
+                    binding.etDuracion.setText("%02d:%02d - %02d:%02d".format(newH1, newM1, newH2, newM2))
+                }
+                endPicker.show(parentFragmentManager, "END_TIME_PICKER")
+            }
+            startPicker.show(parentFragmentManager, "START_TIME_PICKER")
         }
     }
 

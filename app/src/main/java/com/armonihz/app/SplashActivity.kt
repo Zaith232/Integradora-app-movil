@@ -3,7 +3,6 @@ package com.armonihz.app
 import android.animation.Animator
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.airbnb.lottie.LottieAnimationView
@@ -24,33 +23,35 @@ class SplashActivity : AppCompatActivity() {
 
         lottie.speed = 2f   // 2f = el doble de rápido
 
+        // 1. Configuramos el saludo
+        if (user != null) {
+            val nombre = user.displayName
+            if (!nombre.isNullOrEmpty()) {
+                userText.text = "Bienvenido, $nombre"
+            } else {
+                userText.text = "Bienvenido, usuario(a)"
+            }
+        } else {
+            userText.text = "Bienvenido, usuario(a)"
+        }
 
+        // 2. Esperamos a que termine la animación para decidir a dónde ir
         lottie.addAnimatorListener(object : Animator.AnimatorListener {
             override fun onAnimationEnd(animation: Animator) {
-                startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
-                finish()
+                // 🔥 AQUÍ ESTÁ LA MAGIA: Decidimos el destino
+                if (user != null && user.isEmailVerified) {
+                    // Si hay sesión y está verificado -> Directo al Home (MainActivity)
+                    startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+                } else {
+                    // Si no hay sesión o no ha verificado su correo -> Al Login
+                    startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
+                }
+                finish() // Cerramos el splash
             }
 
             override fun onAnimationStart(animation: Animator) {}
             override fun onAnimationCancel(animation: Animator) {}
             override fun onAnimationRepeat(animation: Animator) {}
         })
-
-
-        if (user != null) {
-            val nombre = user.displayName
-
-            if (!nombre.isNullOrEmpty()) {
-                // 🔹 Ahora esto funcionará al instante tanto para Google como para Correo
-                userText.text = "Bienvenido, $nombre"
-            } else {
-                // 🔹 Por si inicias sesión con una de tus cuentas de prueba antiguas
-                userText.text = "Bienvenido, usuario(a)"
-            }
-        } else {
-            // Si no hay sesión iniciada
-            userText.text = "Bienvenido, usuario(a)"
-        }
-
     }
 }

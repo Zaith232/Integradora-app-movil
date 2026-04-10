@@ -67,8 +67,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        // Si ya hay sesión activa, saltar login
-        viewModel.checkSesionActiva()
+
     }
 
     // ── Setup ─────────────────────────────────────────────────────────────────
@@ -172,13 +171,20 @@ class LoginActivity : AppCompatActivity() {
 
     // ── UI helpers ────────────────────────────────────────────────────────────
 
+    // ── UI helpers ────────────────────────────────────────────────────────────
+
     private fun setUiEnabled(enabled: Boolean) {
         binding.btnLogin.isEnabled = enabled
         binding.btnGoogle.isEnabled = enabled
-        binding.btnLogin.text = if (enabled)
-            getString(R.string.login_button)
-        else
-            getString(R.string.logging_in)
+
+        // Bloquear/Desbloquear los campos de texto
+        binding.etEmail.isEnabled = enabled
+        binding.etPassword.isEnabled = enabled
+
+        // Cambiar el texto del botón principal
+        binding.btnLogin.text = if (enabled) "ENTRAR" else "INICIANDO SESIÓN..."
+
+        // Mostrar u ocultar la barra de carga
         binding.progressBar.isVisible = !enabled
     }
 

@@ -444,6 +444,12 @@ class MusicianProfileFragment : Fragment() {
         isFavorite = !isFavorite
         updateFavoriteIcon()
 
+        if (isFavorite) {
+            Toast.makeText(context, "Añadido a favoritos", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(context, "Quitado de favoritos", Toast.LENGTH_SHORT).show()
+        }
+
         val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
 
         // 2. Llamada a la API

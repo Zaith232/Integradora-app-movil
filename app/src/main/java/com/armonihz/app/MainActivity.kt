@@ -104,21 +104,26 @@ class MainActivity : AppCompatActivity() {
     private fun setupBottomNavigation() {
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigation)
 
-        // 🔥 MEJORA: Usamos LifecycleCallbacks para ocultar/mostrar la barra correctamente
-        // sin depender del BackStack, lo que evita que la barra aparezca en 'CompleteProfile'
+        // 🔥 LA SOLUCIÓN DEFINITIVA: Usamos onFragmentStarted para evaluar la pantalla justo antes de que el usuario la vea.
         supportFragmentManager.registerFragmentLifecycleCallbacks(object : androidx.fragment.app.FragmentManager.FragmentLifecycleCallbacks() {
-            override fun onFragmentViewCreated(fm: androidx.fragment.app.FragmentManager, f: Fragment, v: View, savedInstanceState: Bundle?) {
-                super.onFragmentViewCreated(fm, f, v, savedInstanceState)
+            override fun onFragmentStarted(fm: androidx.fragment.app.FragmentManager, f: Fragment) {
+                super.onFragmentStarted(fm, f)
 
-                val sinNav = f is CompleteProfileFragment ||
-                        f is EditProfileFragment ||
-                        f is MusicianProfileFragment ||
-                        f is AddEventFragment ||
-                        f is EditEventFragment ||
-                        f is SettingsFragment ||
-                        f is MyReviewsFragment ||
-                        f is ChangePhotoFragment
+                // 1. Buscamos qué fragmento está ocupando actualmente tu pantalla principal
+                val currentMainFragment = fm.findFragmentById(R.id.fragmentContainer) ?: return
 
+                // 2. Evaluamos si ESE fragmento principal es de los que deben ocultar el Navbar
+                val sinNav = currentMainFragment is CompleteProfileFragment ||
+                        currentMainFragment is EditProfileFragment ||
+                        currentMainFragment is MusicianProfileFragment ||
+                        currentMainFragment is AddEventFragment ||
+                        currentMainFragment is EditEventFragment ||
+                        currentMainFragment is SettingsFragment ||
+                        currentMainFragment is MyReviewsFragment ||
+                        currentMainFragment is ChangePhotoFragment ||
+                        currentMainFragment is ChangePasswordFragment
+
+                // 3. Aplicamos la visibilidad. ¡Como el DatePicker no reemplaza al contenedor, siempre dará View.GONE!
                 bottomNav.visibility = if (sinNav) View.GONE else View.VISIBLE
             }
         }, true)

@@ -37,7 +37,6 @@
         }
 
         override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
-
             val event = eventsList[position]
 
             holder.tvEventTitle.text = event.titulo
@@ -47,27 +46,61 @@
             val expired = isExpired(event.fecha)
             val daysLeft = daysUntil(event.fecha)
 
-            // 🔴 CADUCADO
-            if (expired) {
+            // 1. 🟣 EVENTO FINALIZADO (El músico ya tocó y le dio a finalizar en su panel)
+            if (event.status == "completed") {
+                holder.viewStatusBar.setBackgroundColor(Color.parseColor("#6C3FC5")) // Morado
+                holder.chipStatus.text = "Finalizado"
+                holder.chipStatus.chipBackgroundColor = android.content.res.ColorStateList.valueOf(Color.parseColor("#F5F3FF"))
+                holder.chipStatus.setTextColor(Color.parseColor("#6C3FC5"))
+
+                holder.tvEditEvent.visibility = View.GONE
+                holder.tvEventWarning.visibility = View.GONE
+
+                // 🔥 El evento terminó, el cliente ya puede borrar el historial si quiere
+                holder.tvDeleteEvent.visibility = View.VISIBLE
+            }
+
+            // 2. ⚪ EVENTO CERRADO (Músico contratado pero NO ha finalizado el trabajo)
+            else if (event.status == "closed" || event.status == "accepted") {
+                holder.viewStatusBar.setBackgroundColor(Color.parseColor("#9E9E9E"))
+                holder.chipStatus.text = "Músico Asignado"
+                holder.chipStatus.chipBackgroundColor = android.content.res.ColorStateList.valueOf(Color.parseColor("#F5F5F5"))
+                holder.chipStatus.setTextColor(Color.parseColor("#616161"))
+
+                holder.tvEditEvent.visibility = View.GONE
+                holder.tvEventWarning.visibility = View.VISIBLE
+                holder.tvEventWarning.text = "Esperando que el músico finalice el evento"
+
+                // 🔥 OCULTO: Bloqueamos el botón de eliminar para proteger al músico
+                holder.tvDeleteEvent.visibility = View.GONE
+            }
+
+            // 3. 🔴 EVENTO CADUCADO (Estaba abierto, nadie fue contratado y se pasó la fecha)
+            else if (expired) {
                 holder.viewStatusBar.setBackgroundColor(Color.parseColor("#9E9E9E"))
                 holder.chipStatus.text = "Caducado"
-                holder.chipStatus.setChipBackgroundColorResource(android.R.color.transparent)
                 holder.chipStatus.chipBackgroundColor = android.content.res.ColorStateList.valueOf(Color.parseColor("#F5F5F5"))
                 holder.chipStatus.setTextColor(Color.parseColor("#616161"))
 
                 holder.tvEventWarning.visibility = View.VISIBLE
                 holder.tvEventWarning.text = "❌ Este evento ya caducó"
                 holder.tvEditEvent.visibility = View.GONE
+
+                // 🔥 Ya no sirve, puede eliminarlo
+                holder.tvDeleteEvent.visibility = View.VISIBLE
             }
 
-            // 🟢 DISPONIBLE
-            else if (event.status == "open") {
+            // 4. 🟢 EVENTO DISPONIBLE / OPEN (Buscando propuestas)
+            else {
                 holder.viewStatusBar.setBackgroundColor(Color.parseColor("#1565C0"))
                 holder.chipStatus.text = "Disponible"
                 holder.chipStatus.chipBackgroundColor = android.content.res.ColorStateList.valueOf(Color.parseColor("#E8F5E9"))
                 holder.chipStatus.setTextColor(Color.parseColor("#2E7D32"))
 
                 holder.tvEditEvent.visibility = View.VISIBLE
+
+                // 🔥 Puede eliminarlo si se arrepiente de crearlo
+                holder.tvDeleteEvent.visibility = View.VISIBLE
 
                 if (daysLeft in 0..2) {
                     holder.viewStatusBar.setBackgroundColor(Color.parseColor("#F9A825"))
@@ -81,45 +114,21 @@
                 }
             }
 
-            // ⚪ CERRADO
-            else {
-                holder.viewStatusBar.setBackgroundColor(Color.parseColor("#9E9E9E"))
-                holder.chipStatus.text = "Cerrado"
-                holder.chipStatus.chipBackgroundColor = android.content.res.ColorStateList.valueOf(Color.parseColor("#F5F5F5"))
-                holder.chipStatus.setTextColor(Color.parseColor("#616161"))
-
-                holder.tvEditEvent.visibility = View.GONE
-                holder.tvEventWarning.visibility = View.GONE
-            }
-
-            // Click en tarjeta (abrir propuestas)
+            // Clics
             holder.itemView.setOnClickListener {
-// Si está caducado O si no está abierto (está cerrado), no hacemos nada
-                if (expired || event.status != "open") {
-                    return@setOnClickListener
+                // Solo si está "open" (disponible) puede entrar a ver propuestas
+                if (event.status == "open" && !expired) {
+                    onEventClick(event.id)
                 }
-
-                onEventClick(event.id)
             }
 
-            // Click editar
             holder.tvEditEvent.setOnClickListener {
-
-                if (!expired) {
-                    onEditClick(event)
-                }
-
+                onEditClick(event)
             }
 
             holder.tvDeleteEvent.setOnClickListener {
                 onDeleteClick(event)
             }
-
-            holder.tvDeleteEvent.visibility = View.VISIBLE
-
-            Log.d("EVENT_DEBUG", "Dias restantes: $daysLeft")
-            Log.d("EVENT_DEBUG", "Fecha recibida: ${event.fecha}")
-
         }
 
         override fun getItemCount() = eventsList.size

@@ -238,13 +238,24 @@ class RegisterActivity : AppCompatActivity() {
 
     // ── UI helpers ────────────────────────────────────────────────────────────
 
+    // ── UI helpers ────────────────────────────────────────────────────────────
+
     private fun setUiEnabled(enabled: Boolean) {
         binding.btnRegister.isEnabled = enabled
+
+        // Bloquear/Desbloquear los campos de texto para que no escriban mientras carga
+        binding.etName.isEnabled = enabled
+        binding.etLName.isEnabled = enabled
+        binding.etEmail.isEnabled = enabled
+        binding.etPassword.isEnabled = enabled
+        binding.etConfirmPassword.isEnabled = enabled
+        binding.cbTerms.isEnabled = enabled
+
+        // Cambiar el texto del botón principal
+        binding.btnRegister.text = if (enabled) "REGISTRARSE" else "REGISTRANDO..."
+
+        // Mostrar u ocultar la barra de carga
         binding.progressBar.isVisible = !enabled
-        binding.btnRegister.text = if (enabled)
-            getString(R.string.register_button)
-        else
-            getString(R.string.registering)
     }
 
     private fun verificarSalida() {

@@ -287,9 +287,7 @@ class AddEventFragment : Fragment() {
                     }
 
                     // Escribir en el EditText en formato 24h tal como lo tenías antes
-                    binding.etDuracion.setText(
-                        "%02d:%02d – %02d:%02d".format(h1, m1, h2, m2)
-                    )
+                    binding.etDuracion.setText("%02d:%02d - %02d:%02d".format(h1, m1,h2,m2))
                 }
 
                 endPicker.show(parentFragmentManager, "END_TIME_PICKER")

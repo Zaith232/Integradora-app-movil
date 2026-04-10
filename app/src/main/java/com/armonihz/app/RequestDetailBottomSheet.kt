@@ -95,12 +95,22 @@ class RequestDetailBottomSheet(
     private fun responderContraoferta(requestId: Int, status: String) {
         val api = RetrofitClient.getInstance(requireContext()).create(ApiService::class.java)
 
+        // Referencias a los botones
+        val btnAccept = view?.findViewById<MaterialButton>(R.id.btnAcceptOffer)
+        val btnReject = view?.findViewById<MaterialButton>(R.id.btnRejectOffer)
+
+        // 👇 1. BLOQUEAMOS BOTONES Y CAMBIAMOS EL TEXTO AL INSTANTE
+        btnAccept?.isEnabled = false
+        btnReject?.isEnabled = false
+
+        if (status == "accepted") {
+            btnAccept?.text = "Aceptando..."
+        } else {
+            btnReject?.text = "Rechazando..."
+        }
+
         lifecycleScope.launch {
             try {
-                // Deshabilitar botones para evitar doble clic
-                view?.findViewById<MaterialButton>(R.id.btnAcceptOffer)?.isEnabled = false
-                view?.findViewById<MaterialButton>(R.id.btnRejectOffer)?.isEnabled = false
-
                 val response = api.respondToHiringRequest(requestId, mapOf("status" to status))
 
                 if (response.isSuccessful) {
@@ -109,14 +119,22 @@ class RequestDetailBottomSheet(
                     dismiss()
                 } else {
                     Toast.makeText(requireContext(), "Error al guardar respuesta", Toast.LENGTH_SHORT).show()
-                    view?.findViewById<MaterialButton>(R.id.btnAcceptOffer)?.isEnabled = true
-                    view?.findViewById<MaterialButton>(R.id.btnRejectOffer)?.isEnabled = true
+                    // Si hay error en el servidor, restauramos los botones
+                    restaurarBotones(btnAccept, btnReject)
                 }
             } catch (e: Exception) {
                 Toast.makeText(requireContext(), "Problema de conexión", Toast.LENGTH_SHORT).show()
-                view?.findViewById<MaterialButton>(R.id.btnAcceptOffer)?.isEnabled = true
-                view?.findViewById<MaterialButton>(R.id.btnRejectOffer)?.isEnabled = true
+                // Si se va el internet, restauramos los botones
+                restaurarBotones(btnAccept, btnReject)
             }
         }
+    }
+
+    // 👇 2. FUNCIÓN AUXILIAR PARA RESTAURAR TODO SI FALLA
+    private fun restaurarBotones(btnAccept: MaterialButton?, btnReject: MaterialButton?) {
+        btnAccept?.isEnabled = true
+        btnReject?.isEnabled = true
+        btnAccept?.text = "Aceptar"
+        btnReject?.text = "Rechazar"
     }
 }

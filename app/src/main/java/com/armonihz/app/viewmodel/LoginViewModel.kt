@@ -102,7 +102,13 @@ class LoginViewModel(
 
                 val token = user.getIdToken(true).await().token
                 if (token != null) {
-                    launch { syncClient(esGoogle = false) }
+                    // 🔥 LA SOLUCIÓN ESTÁ AQUÍ:
+                    // Guardamos el trabajo en una variable y usamos .join() para ESPERAR a que termine
+                    val syncJob = launch { syncClient(esGoogle = false) }
+                    syncJob.join() // <-- ¡Este es el freno mágico!
+
+                    // Como el registro por email ya obliga a aceptar términos en la primera pantalla,
+                    // podemos asumir directamente que no necesita completar el perfil.
                     _uiState.value = LoginUiState.Success(irACompletarPerfil = false)
                 } else {
                     _uiState.value = LoginUiState.Error("Token inválido")
@@ -220,7 +226,9 @@ class LoginViewModel(
                         "email"    to email,
                         "nombre"   to nombre,
                         "apellido" to apellido,
-                        "photoUrl" to photoUrl
+                        "photoUrl" to photoUrl,
+                        // 🔥 NUEVO: Le avisamos a Laravel que este usuario ya aceptó los términos
+                        "terminos_aceptados" to "true"
                     ))
                 } else {
                     api.syncClient(mapOf(
