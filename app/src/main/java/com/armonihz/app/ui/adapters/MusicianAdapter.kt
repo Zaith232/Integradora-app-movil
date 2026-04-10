@@ -5,11 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.armonihz.app.R
 import com.armonihz.app.network.model.MusicianProfileDetailResponse
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 
@@ -19,12 +21,16 @@ class MusicianAdapter(
 ) : RecyclerView.Adapter<MusicianAdapter.MusicianViewHolder>() {
 
     class MusicianViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val rootCard: MaterialCardView = view as MaterialCardView
         val ivCoverPhoto: ImageView = view.findViewById(R.id.ivCoverPhoto)
         val tvStageName: TextView = view.findViewById(R.id.tvStageName)
         val tvLocation: TextView = view.findViewById(R.id.tvLocation)
         val tvPriceHint: TextView = view.findViewById(R.id.tvPriceHint)
         val tvRating: TextView = view.findViewById(R.id.tvRating)
         val chipGroupGenres: ChipGroup = view.findViewById(R.id.chipGroupGenres)
+
+        // La nueva insignia de destacado
+        val badgePromoted: View = view.findViewById(R.id.badgePromoted)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicianViewHolder {
@@ -50,15 +56,30 @@ class MusicianAdapter(
             holder.tvPriceHint.text = "A convenir"
         }
 
+        // Calificación
         if (musician.rating_average != null && musician.rating_average > 0.0) {
             // Formateamos para que siempre muestre 1 decimal (ej. "4.0", "4.8")
             holder.tvRating.text = String.format(java.util.Locale.US, "%.1f", musician.rating_average)
         } else {
-            // Si es 0 o nulo, le ponemos "Nuevo" para que se vea mejor
+            // Si es 0 o nulo, le ponemos "Nuevo"
             holder.tvRating.text = "Nuevo"
         }
 
-        // Chips de géneros — limpiar primero para evitar duplicados al reciclar
+ 
+        // --- LÓGICA DE DESTACADOS (PROMOCIONES) ---
+        if (musician.has_active_promotion) {
+            holder.badgePromoted.visibility = View.VISIBLE
+            // Usamos el morado principal de tu tema para el borde
+            holder.rootCard.strokeColor = ContextCompat.getColor(holder.itemView.context, R.color.md_primary)
+            holder.rootCard.strokeWidth = 4
+        } else {
+            holder.badgePromoted.visibility = View.GONE
+            // Regresamos el borde al color gris sutil por defecto
+            holder.rootCard.strokeColor = ContextCompat.getColor(holder.itemView.context, R.color.md_glass_stroke)
+            holder.rootCard.strokeWidth = 2
+        }
+
+        // Chips de géneros — limpiar primero para evitar duplicados al reciclar vistas
         holder.chipGroupGenres.removeAllViews()
         musician.genres?.take(2)?.forEach { genre ->
             val chip = Chip(holder.itemView.context).apply {
@@ -73,7 +94,7 @@ class MusicianAdapter(
             holder.chipGroupGenres.addView(chip)
         }
 
-        // Foto con Glide
+        // Foto de perfil con Glide
         if (musician.profile_picture.isNullOrEmpty()) {
             Glide.with(holder.itemView.context).clear(holder.ivCoverPhoto)
             holder.ivCoverPhoto.setImageResource(R.drawable.ic_user_placeholder)

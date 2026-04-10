@@ -131,7 +131,8 @@ data class MusicianProfileDetailResponse(
     val genres: List<GenreResponse>?, // Por si quieres mostrar los géneros después
     val media: MediaDataResponse? = null,
     val is_favorite: Boolean? = false,
-    val rating_average: Double?
+    val rating_average: Double?,
+    val has_active_promotion: Boolean = false,
 )
 
 data class MultimediaItem(

@@ -16,7 +16,6 @@
         android:layout_height="wrap_content"
         android:minHeight="140dp">
 
-        <!-- Foto Ocupando Todo el Lado Izquierdo -->
         <ImageView
             android:id="@+id/ivCoverPhoto"
             android:layout_width="125dp"
@@ -33,7 +32,6 @@
             android:background="@color/md_outline"
             app:layout_constraintStart_toEndOf="@id/ivCoverPhoto" />
 
-        <!-- Badge de Calificación Moderno (Flotando sobre la foto top-right relativo foto) -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -71,7 +69,6 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Bloque de Información a la Derecha -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -82,6 +79,33 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent">
+
+            <LinearLayout
+                android:id="@+id/badgePromoted"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_promoted_badge"
+                android:orientation="horizontal"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="4dp"
+                android:gravity="center_vertical"
+                android:visibility="gone"
+                android:layout_marginBottom="6dp"> <ImageView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:src="@drawable/ic_star"
+                app:tint="#FFFFFF" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="Destacado"
+                    android:textColor="#FFFFFF"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:textAllCaps="true"/>
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tvStageName"
@@ -108,7 +132,6 @@
                 app:drawableTint="@color/md_onSurfaceVariant"
                 android:drawablePadding="4dp"/>
 
-            <!-- Chips de Género limitados y esbeltos -->
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -128,7 +151,6 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"/>
 
-            <!-- Píldora de Precio -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

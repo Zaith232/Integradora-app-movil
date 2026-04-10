@@ -42,4 +42,6 @@
     <color name="hint_default">#9E9E9E</color>
     <color name="error_red">#F44336</color>
     <color name="success_green">#00897B</color>
+
+    <color name="md_promoted_gold">#F59E0B</color>
 </resources>
