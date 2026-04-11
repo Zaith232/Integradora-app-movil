@@ -304,6 +304,14 @@ class EditEventFragment : Fragment() {
 
     private fun setupTimePicker() {
         binding.etDuracion.setOnClickListener {
+            val dateText = binding.etFecha.text.toString()
+
+            // 1. Validar que haya fecha
+            if (dateText.isBlank()) {
+                Toast.makeText(context, "Por favor, selecciona una fecha primero.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             // Extraer la hora de inicio que ya está en el campo (Ej: "14:00")
             var h1 = 12
             var m1 = 0
@@ -333,6 +341,18 @@ class EditEventFragment : Fragment() {
                 val newH1 = startPicker.hour
                 val newM1 = startPicker.minute
 
+                // 2. Validar contra el pasado si es hoy
+                if (isSelectedDateToday(dateText)) {
+                    val cal = Calendar.getInstance()
+                    val currentTotalMinutes = cal.get(Calendar.HOUR_OF_DAY) * 60 + cal.get(Calendar.MINUTE)
+                    val selectedTotalMinutes = newH1 * 60 + newM1
+
+                    if (selectedTotalMinutes < currentTotalMinutes) {
+                        Toast.makeText(context, "No puedes seleccionar una hora en el pasado.", Toast.LENGTH_SHORT).show()
+                        return@addOnPositiveButtonClickListener
+                    }
+                }
+
                 val finHoraInicial = if (newM1 == 59) (newH1 + 1).coerceAtMost(23) else newH1
                 val finMinInicial = if (newM1 == 59) 0 else newM1 + 1
 
@@ -360,6 +380,33 @@ class EditEventFragment : Fragment() {
                 endPicker.show(parentFragmentManager, "END_TIME_PICKER")
             }
             startPicker.show(parentFragmentManager, "START_TIME_PICKER")
+        }
+    }
+
+    private fun isSelectedDateToday(dateText: String): Boolean {
+        if (dateText.isBlank()) return false
+        return try {
+            val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            val selectedDate = sdf.parse(dateText) ?: return false
+
+            val calToday = Calendar.getInstance().apply {
+                set(Calendar.HOUR_OF_DAY, 0)
+                set(Calendar.MINUTE, 0)
+                set(Calendar.SECOND, 0)
+                set(Calendar.MILLISECOND, 0)
+            }
+
+            val calSelected = Calendar.getInstance().apply {
+                time = selectedDate
+                set(Calendar.HOUR_OF_DAY, 0)
+                set(Calendar.MINUTE, 0)
+                set(Calendar.SECOND, 0)
+                set(Calendar.MILLISECOND, 0)
+            }
+
+            calSelected.timeInMillis == calToday.timeInMillis
+        } catch (e: Exception) {
+            false
         }
     }
 

@@ -105,7 +105,7 @@ class SettingsFragment : Fragment() {
                     .commit()
             }
         }
-        
+
 
         tvThemeSelector.setOnClickListener {
             mostrarSelectorTema()

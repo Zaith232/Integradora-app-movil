@@ -240,28 +240,46 @@ class AddEventFragment : Fragment() {
 
     private fun setupTimePicker() {
         binding.etDuracion.setOnClickListener {
+            val dateText = binding.etFecha.text.toString()
+
+            // 1. Validar que primero se haya elegido una fecha
+            if (dateText.isBlank()) {
+                Toast.makeText(context, "Por favor, selecciona una fecha primero.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             val cal = Calendar.getInstance()
             val horaActual = cal.get(Calendar.HOUR_OF_DAY)
             val minActual = cal.get(Calendar.MINUTE)
 
-            // 1. Crear el reloj para la Hora de Inicio
+            // Crear el reloj para la Hora de Inicio
             val startPicker = MaterialTimePicker.Builder()
-                .setTimeFormat(TimeFormat.CLOCK_12H) // 12H para que muestre AM/PM como en tu foto
+                .setTimeFormat(TimeFormat.CLOCK_12H)
                 .setHour(horaActual)
                 .setMinute(minActual)
                 .setTitleText("Hora de inicio")
                 .build()
 
             startPicker.addOnPositiveButtonClickListener {
-                // startPicker.hour siempre devuelve formato 24h (0-23) sin importar si la UI es 12h
                 val h1 = startPicker.hour
                 val m1 = startPicker.minute
+
+                // 2. Validar que la hora no sea en el pasado si el evento es hoy
+                if (isSelectedDateToday(dateText)) {
+                    val currentTotalMinutes = horaActual * 60 + minActual
+                    val selectedTotalMinutes = h1 * 60 + m1
+
+                    if (selectedTotalMinutes < currentTotalMinutes) {
+                        Toast.makeText(context, "No puedes seleccionar una hora en el pasado.", Toast.LENGTH_SHORT).show()
+                        return@addOnPositiveButtonClickListener // Detiene el flujo
+                    }
+                }
 
                 // Calcular hora inicial sugerida para el fin (+1 minuto)
                 val finHoraInicial = if (m1 == 59) (h1 + 1).coerceAtMost(23) else h1
                 val finMinInicial = if (m1 == 59) 0 else m1 + 1
 
-                // 2. Crear el reloj para la Hora de Fin
+                // Crear el reloj para la Hora de Fin
                 val endPicker = MaterialTimePicker.Builder()
                     .setTimeFormat(TimeFormat.CLOCK_12H)
                     .setHour(finHoraInicial)
@@ -280,20 +298,47 @@ class AddEventFragment : Fragment() {
                     if (finTotal <= inicioTotal) {
                         Toast.makeText(
                             context,
-                            getString(R.string.invalid_end_time), // "La hora de fin debe ser mayor..."
+                            getString(R.string.invalid_end_time),
                             Toast.LENGTH_SHORT
                         ).show()
                         return@addOnPositiveButtonClickListener
                     }
 
-                    // Escribir en el EditText en formato 24h tal como lo tenías antes
-                    binding.etDuracion.setText("%02d:%02d - %02d:%02d".format(h1, m1,h2,m2))
+                    // Escribir en el EditText
+                    binding.etDuracion.setText("%02d:%02d - %02d:%02d".format(h1, m1, h2, m2))
                 }
 
                 endPicker.show(parentFragmentManager, "END_TIME_PICKER")
             }
 
             startPicker.show(parentFragmentManager, "START_TIME_PICKER")
+        }
+    }
+
+    private fun isSelectedDateToday(dateText: String): Boolean {
+        if (dateText.isBlank()) return false
+        return try {
+            val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            val selectedDate = sdf.parse(dateText) ?: return false
+
+            val calToday = Calendar.getInstance().apply {
+                set(Calendar.HOUR_OF_DAY, 0)
+                set(Calendar.MINUTE, 0)
+                set(Calendar.SECOND, 0)
+                set(Calendar.MILLISECOND, 0)
+            }
+
+            val calSelected = Calendar.getInstance().apply {
+                time = selectedDate
+                set(Calendar.HOUR_OF_DAY, 0)
+                set(Calendar.MINUTE, 0)
+                set(Calendar.SECOND, 0)
+                set(Calendar.MILLISECOND, 0)
+            }
+
+            calSelected.timeInMillis == calToday.timeInMillis
+        } catch (e: Exception) {
+            false
         }
     }
 

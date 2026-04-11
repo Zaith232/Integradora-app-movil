@@ -55,6 +55,8 @@ class HiringBottomSheetFragment(private val musicianId: Int) : BottomSheetDialog
         val etBudget = view.findViewById<TextInputEditText>(R.id.etBudget)
         val btnSubmit = view.findViewById<MaterialButton>(R.id.btnSubmitHiring)
 
+        etBudget.filters = arrayOf<android.text.InputFilter>(android.text.InputFilter.LengthFilter(5))
+
         cargarDisponibilidad()
 
         btnPickDate.setOnClickListener {
@@ -77,13 +79,36 @@ class HiringBottomSheetFragment(private val musicianId: Int) : BottomSheetDialog
         }
 
         btnStartTime.setOnClickListener {
+            // 1. Candado: Exigir fecha primero
+            if (selectedDate.isEmpty()) {
+                Toast.makeText(context, "Por favor, selecciona la fecha primero.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val calActual = Calendar.getInstance()
+            val horaActual = calActual.get(Calendar.HOUR_OF_DAY)
+            val minActual = calActual.get(Calendar.MINUTE)
+
             val timePicker = MaterialTimePicker.Builder()
-                .setTimeFormat(TimeFormat.CLOCK_12H) // 🔥 CAMBIADO A 12H
+                .setTimeFormat(TimeFormat.CLOCK_12H)
+                .setHour(horaActual) // Sugerir la hora actual
+                .setMinute(minActual)
                 .setTitleText("Hora de inicio")
                 .build()
 
             timePicker.addOnPositiveButtonClickListener {
-                // 1. Guardamos formato 24H para Laravel
+                // 2. Candado: Validar hora pasada si el evento es hoy
+                if (isSelectedDateToday(selectedDate)) {
+                    val currentTotalMinutes = horaActual * 60 + minActual
+                    val selectedTotalMinutes = timePicker.hour * 60 + timePicker.minute
+
+                    if (selectedTotalMinutes < currentTotalMinutes) {
+                        Toast.makeText(context, "No puedes seleccionar una hora en el pasado.", Toast.LENGTH_SHORT).show()
+                        return@addOnPositiveButtonClickListener
+                    }
+                }
+
+                // 3. Guardamos formato 24H para Laravel si pasó la validación
                 selectedStartTime = String.format(
                     Locale.getDefault(),
                     "%02d:%02d:00",
@@ -91,7 +116,7 @@ class HiringBottomSheetFragment(private val musicianId: Int) : BottomSheetDialog
                     timePicker.minute
                 )
 
-                // 2. Formateamos a AM/PM para el botón
+                // 4. Formateamos a AM/PM para el botón
                 val cal = Calendar.getInstance()
                 cal.set(Calendar.HOUR_OF_DAY, timePicker.hour)
                 cal.set(Calendar.MINUTE, timePicker.minute)
@@ -302,6 +327,12 @@ class HiringBottomSheetFragment(private val musicianId: Int) : BottomSheetDialog
                 Toast.makeText(context, "Error de conexión", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+    private fun isSelectedDateToday(dateText: String): Boolean {
+        if (dateText.isBlank()) return false
+        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val todayDate = sdf.format(Calendar.getInstance().time)
+        return dateText == todayDate
     }
 }
 
