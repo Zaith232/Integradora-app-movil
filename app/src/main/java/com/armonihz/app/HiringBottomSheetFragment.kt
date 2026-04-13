@@ -1,9 +1,11 @@
 package com.armonihz.app
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.armonihz.app.network.ApiService
@@ -11,19 +13,19 @@ import com.armonihz.app.network.RetrofitClient
 import com.armonihz.app.network.model.HiringRequestPayload
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import kotlinx.coroutines.launch
+import org.json.JSONObject
 import java.text.SimpleDateFormat
-import java.util.Calendar // Añadimos Calendar para manejar la conversión de AM/PM
+import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
-import com.google.android.material.datepicker.CalendarConstraints
-import com.google.android.material.datepicker.DateValidatorPointForward
-import org.json.JSONObject
 
 class HiringBottomSheetFragment(private val musicianId: Int) : BottomSheetDialogFragment() {
 
@@ -37,6 +39,13 @@ class HiringBottomSheetFragment(private val musicianId: Int) : BottomSheetDialog
     private var displayEndTime: String = ""
 
     private var ocupados: List<RangoOcupado> = emptyList()
+
+    // Este es el método nuevo que fuerza el ajuste del teclado
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val dialog = super.onCreateDialog(savedInstanceState)
+        dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+        return dialog
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -60,13 +69,12 @@ class HiringBottomSheetFragment(private val musicianId: Int) : BottomSheetDialog
         cargarDisponibilidad()
 
         btnPickDate.setOnClickListener {
-            // Creamos una restricción para que solo se puedan seleccionar fechas de hoy en adelante
             val constraintsBuilder = CalendarConstraints.Builder()
-                .setValidator(DateValidatorPointForward.now()) // 🔥 Esta es la clave
+                .setValidator(DateValidatorPointForward.now())
 
             val datePicker = MaterialDatePicker.Builder.datePicker()
                 .setTitleText("Selecciona la fecha")
-                .setCalendarConstraints(constraintsBuilder.build()) // Aplicamos la restricción al DatePicker
+                .setCalendarConstraints(constraintsBuilder.build())
                 .build()
 
             datePicker.addOnPositiveButtonClickListener { selection ->
@@ -79,7 +87,6 @@ class HiringBottomSheetFragment(private val musicianId: Int) : BottomSheetDialog
         }
 
         btnStartTime.setOnClickListener {
-            // 1. Candado: Exigir fecha primero
             if (selectedDate.isEmpty()) {
                 Toast.makeText(context, "Por favor, selecciona la fecha primero.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
@@ -91,13 +98,12 @@ class HiringBottomSheetFragment(private val musicianId: Int) : BottomSheetDialog
 
             val timePicker = MaterialTimePicker.Builder()
                 .setTimeFormat(TimeFormat.CLOCK_12H)
-                .setHour(horaActual) // Sugerir la hora actual
+                .setHour(horaActual)
                 .setMinute(minActual)
                 .setTitleText("Hora de inicio")
                 .build()
 
             timePicker.addOnPositiveButtonClickListener {
-                // 2. Candado: Validar hora pasada si el evento es hoy
                 if (isSelectedDateToday(selectedDate)) {
                     val currentTotalMinutes = horaActual * 60 + minActual
                     val selectedTotalMinutes = timePicker.hour * 60 + timePicker.minute
@@ -108,7 +114,6 @@ class HiringBottomSheetFragment(private val musicianId: Int) : BottomSheetDialog
                     }
                 }
 
-                // 3. Guardamos formato 24H para Laravel si pasó la validación
                 selectedStartTime = String.format(
                     Locale.getDefault(),
                     "%02d:%02d:00",
@@ -116,7 +121,6 @@ class HiringBottomSheetFragment(private val musicianId: Int) : BottomSheetDialog
                     timePicker.minute
                 )
 
-                // 4. Formateamos a AM/PM para el botón
                 val cal = Calendar.getInstance()
                 cal.set(Calendar.HOUR_OF_DAY, timePicker.hour)
                 cal.set(Calendar.MINUTE, timePicker.minute)
@@ -129,12 +133,11 @@ class HiringBottomSheetFragment(private val musicianId: Int) : BottomSheetDialog
 
         btnEndTime.setOnClickListener {
             val timePicker = MaterialTimePicker.Builder()
-                .setTimeFormat(TimeFormat.CLOCK_12H) // 🔥 CAMBIADO A 12H
+                .setTimeFormat(TimeFormat.CLOCK_12H)
                 .setTitleText("Hora de fin")
                 .build()
 
             timePicker.addOnPositiveButtonClickListener {
-                // 1. Guardamos formato 24H para Laravel
                 selectedEndTime = String.format(
                     Locale.getDefault(),
                     "%02d:%02d:00",
@@ -142,7 +145,6 @@ class HiringBottomSheetFragment(private val musicianId: Int) : BottomSheetDialog
                     timePicker.minute
                 )
 
-                // 2. Formateamos a AM/PM para el botón
                 val cal = Calendar.getInstance()
                 cal.set(Calendar.HOUR_OF_DAY, timePicker.hour)
                 cal.set(Calendar.MINUTE, timePicker.minute)
@@ -191,7 +193,6 @@ class HiringBottomSheetFragment(private val musicianId: Int) : BottomSheetDialog
             val choque = revisarSiHayChoque(usuarioInicioStr, usuarioFinStr)
 
             if (choque != null) {
-                // 🔥 El mensaje de error ahora usa horaInicio y horaFin con AM/PM
                 Toast.makeText(
                     context,
                     "El músico ya tiene un evento ese día de ${choque.horaInicio} a ${choque.horaFin}. Por favor, elige otro horario.",
@@ -200,7 +201,6 @@ class HiringBottomSheetFragment(private val musicianId: Int) : BottomSheetDialog
                 return@setOnClickListener
             }
 
-            // 🔥 La descripción que verá el músico ahora incluye AM/PM
             val finalDescription =
                 "⏰ Horario: $displayStartTime a $displayEndTime\n\n" + etLocation.text.toString() + "\n\n" + etDescription.text.toString()
 
@@ -227,16 +227,13 @@ class HiringBottomSheetFragment(private val musicianId: Int) : BottomSheetDialog
                     val listaOcupados = mutableListOf<RangoOcupado>()
 
                     val sdfBackend = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-                    // 🔥 NUEVO: Dile a Android que no reste ni sume horas por la zona horaria UTC
                     sdfBackend.timeZone = TimeZone.getTimeZone("UTC")
 
                     val sdfSoloHoraAmPm = SimpleDateFormat("hh:mm a", Locale.getDefault())
-                    // Y también le decimos al de salida que use la misma referencia
                     sdfSoloHoraAmPm.timeZone = TimeZone.getTimeZone("UTC")
 
                     for (busy in busyDatesFromApi) {
                         try {
-                            // 🔥 CORRECCIÓN: Limpiamos la 'T' para que siempre sea un espacio y no rompa el parser
                             val startStr = busy.start.replace("T", " ")
                             val endStr = (busy.end ?: busy.start).replace("T", " ")
 
@@ -271,7 +268,6 @@ class HiringBottomSheetFragment(private val musicianId: Int) : BottomSheetDialog
     private fun revisarSiHayChoque(usuarioInicioStr: String, usuarioFinStr: String): RangoOcupado? {
         try {
             val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-            // 🔥 NUEVO: Añadimos esto para igualarlo a lo que lee del backend
             sdf.timeZone = TimeZone.getTimeZone("UTC")
 
             val usuarioInicioTime = sdf.parse(usuarioInicioStr)?.time ?: return null
@@ -304,8 +300,7 @@ class HiringBottomSheetFragment(private val musicianId: Int) : BottomSheetDialog
                     btn.isEnabled = true
                     btn.text = "Enviar Solicitud"
 
-                    // 🔥 NUEVO: Extraer el mensaje exacto del backend
-                    var errorMessage = "Error al enviar solicitud" // Mensaje por defecto
+                    var errorMessage = "Error al enviar solicitud"
                     try {
                         val errorString = response.errorBody()?.string()
                         if (errorString != null) {
@@ -318,7 +313,6 @@ class HiringBottomSheetFragment(private val musicianId: Int) : BottomSheetDialog
                         e.printStackTrace()
                     }
 
-                    // Mostrar el mensaje exacto que vino de Laravel
                     Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
                 }
             } catch (e: Exception) {
@@ -328,6 +322,7 @@ class HiringBottomSheetFragment(private val musicianId: Int) : BottomSheetDialog
             }
         }
     }
+
     private fun isSelectedDateToday(dateText: String): Boolean {
         if (dateText.isBlank()) return false
         val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
